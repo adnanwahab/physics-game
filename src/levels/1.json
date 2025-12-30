@@ -1,0 +1,37 @@
+
+
+    [{
+    "mode": "2d Platformer",
+    "win-condition": { 
+        "type": "proximity",
+        "target": "player",
+        "distance": 1.0
+    },
+    "objects": [
+        {
+            "type": "cuboid",
+            "position": [0.618, 0.5, 1.902],
+            "size": [1, 1, 1],
+            "rotation": [0, 0, 0]
+                    },
+        {
+            "type": "cuboid",
+            "position": [-1.618, 0.5, 1.175],
+            "size": [1, 1, 1],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "cuboid",
+            "position": [-1.618, 0.5, -1.175],
+            "size": [1, 1, 1],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "cuboid",
+            "position": [0.618, 0.5, -1.902],
+            "size": [1, 1, 1],
+            "rotation": [0, 0, 0]
+        }
+    ]
+}
+]
