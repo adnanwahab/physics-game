@@ -1,5 +1,6 @@
 import React, { useRef, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import WASDControls from '../components/WASDControls';
 
 //playgame
 
@@ -127,6 +128,14 @@ export default function Game() {
     const { game_id } = useParams();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
+    const inputStateRef = useRef({
+        forwardPressed: false,
+        backwardPressed: false,
+        leftPressed: false,
+        rightPressed: false,
+        jump: false,
+        crouched: false,
+    });
     const gameStateRef = useRef({
         renderer: null,
         scene: null,
@@ -161,14 +170,6 @@ export default function Game() {
 
         setupLighting(scene);
 
-        const inputState = {
-            forwardPressed: false,
-            backwardPressed: false,
-            leftPressed: false,
-            rightPressed: false,
-            jump: false,
-            crouched: false,
-        };
         const clock = new Clock();
         const onExampleUpdateRef = { fn: null };
 
@@ -178,7 +179,7 @@ export default function Game() {
         gameStateRef.current.camera = camera;
         gameStateRef.current.controls = controls;
         gameStateRef.current.clock = clock;
-        gameStateRef.current.inputState = inputState;
+        gameStateRef.current.inputState = inputStateRef.current;
         gameStateRef.current.onExampleUpdateRef = onExampleUpdateRef;
 
         let cleanupFunctions = [];
@@ -241,13 +242,13 @@ export default function Game() {
             });
 
             // Prepare user input
-            handleUserInput(inputState);
+            handleUserInput(inputStateRef.current);
 
             // Provide a custom update function that calls the function from onExampleUpdateRef
             function onExampleUpdate(time, deltaTime) {
                 // If setupExample assigned a function, call it
                 if (onExampleUpdateRef.fn) {
-                    onExampleUpdateRef.fn(time, deltaTime, inputState);
+                    onExampleUpdateRef.fn(time, deltaTime, inputStateRef.current);
                 }
             }
 
@@ -329,6 +330,7 @@ export default function Game() {
             >
                 <canvas ref={canvasRef} id="canvas"></canvas>
             </div>
+            <WASDControls inputState={inputStateRef.current} />
         </div>
     );
 }

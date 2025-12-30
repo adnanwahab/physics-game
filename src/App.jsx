@@ -35,6 +35,10 @@ function App() {
         <Route path="/game/:game_id" element={<Game />} />
         <Route path="/settings" element={<Settings />} />
       </Routes>
+      <div id="footer">
+        <p>Footer</p>
+        <p><a href="https://github.com/adnanwahab/physics-game">Made in texas</a></p>
+      </div>
     </div>
   )
 }
