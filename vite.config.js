@@ -6,7 +6,7 @@ import react from '@vitejs/plugin-react'
 
 
 export default defineConfig ({
-	root: 'src/',
+	root: '',
 	publicDir:'../public/',
 // 	resolve: {
 // 		alias: {
