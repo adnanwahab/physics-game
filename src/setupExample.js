@@ -2,6 +2,7 @@ import { createFloor } from './createFloor.js';
 import { createBox } from './createBox.js';
 import { addToScene } from './addToScene.js';
 import { getThreeObjectForBody } from './getThreeObjectForBody.js';
+import { createPenguin } from './createPenguin.js';
 import * as THREE from 'three';
 /**
  * Sets up your environment and character logic. Creates floors, walls, 
@@ -118,13 +119,35 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
 
   );
 
-  // 3) Simple character
-  //    This is a placeholder “character,” just a dynamic box so you can see some object that moves/spawns.
+  // 3) Simple character - Penguin!
+  //    Create a dynamic box for physics, then replace the visual with a penguin
   const halfExtentChar = new Jolt.Vec3(0.5, 0.75, 0.5);
   const charBody = createBox(
     Jolt,
     bodyInterface,
-    (body) => addToScene(body, Jolt, bodyInterface, scene, dynamicObjects, getThreeObjectForBody),
+    (body) => {
+      const charThreeObject = addToScene(body, Jolt, bodyInterface, scene, dynamicObjects, getThreeObjectForBody);
+      
+      // Replace the green cube with a penguin
+      const penguin = createPenguin(1.0);
+      
+      // Copy position and rotation from the original cube
+      penguin.position.copy(charThreeObject.position);
+      penguin.quaternion.copy(charThreeObject.quaternion);
+      
+      // Transfer the body reference to the penguin group
+      penguin.userData.body = charThreeObject.userData.body;
+      
+      // Remove the old cube from scene and dynamicObjects
+      scene.remove(charThreeObject);
+      const index = dynamicObjects.indexOf(charThreeObject);
+      if (index > -1) {
+        dynamicObjects[index] = penguin;
+      }
+      
+      // Add the penguin to the scene
+      scene.add(penguin);
+    },
     new Jolt.RVec3(0, 5, 0),
     rotationIdentity,
     halfExtentChar,

@@ -31,6 +31,7 @@ import { addToScene } from "../addToScene.js";
 import { getThreeObjectForBody } from "../getThreeObjectForBody.js";
 
 import initGenerateObject from "../mutateScene.ts";
+import { SelectionSystem } from "../selectionSystem.js";
 
 // Function to load level data and create cuboids with Jolt physics
 async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObjects) {
@@ -210,14 +211,69 @@ export default function Game() {
             if (!isMounted) return;
             
             // Store physics objects
-            gameStateRef.current.joltInterface = joltInterface;
-            gameStateRef.current.physicsSystem = physicsSystem;
-            gameStateRef.current.bodyInterface = bodyInterface;
-            gameStateRef.current.Jolt = Jolt;
+        gameStateRef.current.joltInterface = joltInterface;
+        gameStateRef.current.physicsSystem = physicsSystem;
+        gameStateRef.current.bodyInterface = bodyInterface;
+        gameStateRef.current.Jolt = Jolt;
 
-            // Collect dynamic objects in array
-            const dynamicObjects = [];
-            gameStateRef.current.dynamicObjects = dynamicObjects;
+        // Collect dynamic objects in array
+        const dynamicObjects = [];
+        gameStateRef.current.dynamicObjects = dynamicObjects;
+
+        // Set up selection system for clicking on objects
+        const selectionSystem = new SelectionSystem(scene, camera, canvas);
+        gameStateRef.current.selectionSystem = selectionSystem;
+        
+        // Track mouse state to distinguish clicks from drags
+        let mouseDownTime = 0;
+        let mouseDownX = 0;
+        let mouseDownY = 0;
+        let hasMoved = false;
+        let cameraPositionBefore = camera.position.clone();
+        let cameraTargetBefore = controls.target.clone();
+        
+        // Track if we should allow selection (not dragging)
+        let allowSelection = true;
+        let mouseDownPos = null;
+        
+        const handlePointerDown = (event) => {
+            if (event.button === 0) { // Left mouse button
+                mouseDownPos = { x: event.clientX, y: event.clientY };
+                allowSelection = true;
+            }
+        };
+        
+        const handlePointerMove = (event) => {
+            if (mouseDownPos && event.buttons === 1) {
+                const dx = Math.abs(event.clientX - mouseDownPos.x);
+                const dy = Math.abs(event.clientY - mouseDownPos.y);
+                if (dx > 5 || dy > 5) {
+                    allowSelection = false; // User is dragging
+                }
+            }
+        };
+        
+        const handlePointerUp = (event) => {
+            if (event.button === 0 && allowSelection && mouseDownPos) {
+                // Small delay to let OrbitControls finish
+                setTimeout(() => {
+                    selectionSystem.handleClick(event);
+                }, 10);
+            }
+            mouseDownPos = null;
+            allowSelection = true;
+        };
+        
+        // Use pointer events for better compatibility
+        canvas.addEventListener('pointerdown', handlePointerDown);
+        canvas.addEventListener('pointermove', handlePointerMove);
+        canvas.addEventListener('pointerup', handlePointerUp);
+        cleanupFunctions.push(() => {
+            canvas.removeEventListener('pointerdown', handlePointerDown);
+            canvas.removeEventListener('pointermove', handlePointerMove);
+            canvas.removeEventListener('pointerup', handlePointerUp);
+            selectionSystem.dispose();
+        });
 
             // Set up your environment, spawn character, define onExampleUpdate
             setupExample(
