@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "bun run server.ts",
+    "server_dev": "bun run --watch server.ts",
     "build": "vite build",
     "deploy": "vite build && npx wrangler pages deploy dist",
     "server_start": "bun run server.js --watch",
