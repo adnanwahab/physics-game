@@ -32,6 +32,7 @@ import { getThreeObjectForBody } from "../getThreeObjectForBody.js";
 
 import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
+import { WebSocketClient } from "../utils/websocket.js";
 
 // Function to load level data and create cuboids with Jolt physics
 async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObjects) {
@@ -220,6 +221,32 @@ export default function Game() {
         const dynamicObjects = [];
         gameStateRef.current.dynamicObjects = dynamicObjects;
 
+        // Set up WebSocket connection
+        const wsUrl = `ws://localhost:3000`;
+        const wsClient = new WebSocketClient(wsUrl);
+        
+        // Set up WebSocket event handlers
+        wsClient.on('open', () => {
+            console.log('WebSocket connected successfully');
+        });
+        
+        wsClient.on('message', (data) => {
+            console.log('WebSocket message received:', data);
+            // Handle incoming messages here
+        });
+        
+        wsClient.on('error', (error) => {
+            console.error('WebSocket error:', error);
+        });
+        
+        wsClient.on('close', () => {
+            console.log('WebSocket connection closed');
+        });
+        
+        // Connect to WebSocket server
+        wsClient.connect();
+        gameStateRef.current.wsClient = wsClient;
+
         // Set up selection system for clicking on objects
         const selectionSystem = new SelectionSystem(scene, camera, canvas);
         gameStateRef.current.selectionSystem = selectionSystem;
@@ -344,6 +371,12 @@ export default function Game() {
         return () => {
             isMounted = false;
             cleanupFunctions.forEach(fn => fn());
+            
+            // Disconnect WebSocket
+            if (gameStateRef.current.wsClient) {
+                gameStateRef.current.wsClient.disconnect();
+                gameStateRef.current.wsClient = null;
+            }
             
             // Cleanup renderer if it exists
             const renderer = gameStateRef.current.renderer;
