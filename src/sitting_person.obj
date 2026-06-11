@@ -1,4 +1,4 @@
-siting_person = `# Sitting Person (simple low-poly)
+# Sitting Person (simple low-poly)
 
 o SittingPerson
 
@@ -144,4 +144,4 @@ f 61 64 63 62
 f 57 61 62 58
 f 58 62 63 59
 f 59 63 64 60
-f 61 57 60 64`
+f 61 57 60 64

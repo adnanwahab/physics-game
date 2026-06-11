@@ -13,6 +13,7 @@ import WASDControls from '../components/WASDControls';
 import { loadGLTFModel } from "../utils/gltf-loader.js";
 import { loadOBJModel } from "../utils/obj-loader.js";
 import deskObjUrl from "../desk.obj?url";
+import sittingPersonObjUrl from "../sitting_person.obj?url";
 import { Clock } from "three";
 import { initGraphics } from "../initGraphics.js";
 import { onWindowResize as handleWindowResize } from "../onWindowResize.js";
@@ -72,6 +73,12 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                 color: 0x8b4513,
                 metalness: 0.1,
                 roughness: 0.8
+            });
+
+            const personMaterial = new THREE.MeshStandardMaterial({
+                color: 0x4a6fa5,
+                metalness: 0.1,
+                roughness: 0.7
             });
             
             // Collision layer for static platforms (same as walls/floor)
@@ -148,6 +155,16 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                                 desk.add(soundWaves.group);
                                 effectUpdaters.push(soundWaves.update);
                                 effectDisposers.push(soundWaves.dispose);
+
+                                const person = await loadOBJModel(sittingPersonObjUrl);
+                                person.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material = personMaterial;
+                                    }
+                                });
+                                // Seat height in model is y=0.75; desk tabletop is at local y=size/2
+                                person.position.set(0, obj.size[1] / 2 - 0.75, -0.15);
+                                desk.add(person);
 
                                 scene.add(desk);
                             } catch (error) {
@@ -471,8 +488,8 @@ export default function Game() {
                     }
                 }
                 
-                // Check win condition (only for level 1 and if cheese exists)
-                if (game_id === '1' && !showWinMessage) {
+                // Check win condition if cheese exists in this level
+                if (!showWinMessage) {
                     const cheesePos = gameStateRef.current.cheesePosition;
                     const charBodyRef = gameStateRef.current.charBody;
                     
