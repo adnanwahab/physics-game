@@ -191,4 +191,6 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
     }
 
   };
+
+  return charBody;
 } 

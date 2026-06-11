@@ -1,5 +1,5 @@
-import React, { useRef, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useRef, useEffect, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import WASDControls from '../components/WASDControls';
 
 //playgame
@@ -11,6 +11,8 @@ import WASDControls from '../components/WASDControls';
 ///tsl_test();
 
 import { loadGLTFModel } from "../utils/gltf-loader.js";
+import { loadOBJModel } from "../utils/obj-loader.js";
+import deskObjUrl from "../desk.obj?url";
 import { Clock } from "three";
 import { initGraphics } from "../initGraphics.js";
 import { onWindowResize as handleWindowResize } from "../onWindowResize.js";
@@ -33,9 +35,13 @@ import { getThreeObjectForBody } from "../getThreeObjectForBody.js";
 import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";
+import { createSoundWaveRings } from "../createSoundWaveRings.js";
 
 // Function to load level data and create cuboids with Jolt physics
 async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObjects) {
+    let cheesePosition = null;
+    const effectUpdaters = [];
+    const effectDisposers = [];
     try {
         // Dynamically import the level JSON file
         const levelModule = await import(`../levels/${levelId}.json`);
@@ -53,12 +59,113 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                 roughness: 0.7
             });
             
+            // Create yellow material for cheese
+            const cheeseMaterial = new THREE.MeshStandardMaterial({ 
+                color: 0xffd700,
+                metalness: 0.5,
+                roughness: 0.3,
+                emissive: 0xffaa00,
+                emissiveIntensity: 0.3
+            });
+
+            const deskMaterial = new THREE.MeshStandardMaterial({
+                color: 0x8b4513,
+                metalness: 0.1,
+                roughness: 0.8
+            });
+            
             // Collision layer for static platforms (same as walls/floor)
             const LAYER_NON_MOVING = 0;
             
-            // Create a physics-enabled cuboid for each object
-            objects.forEach((obj, index) => {
-                if (obj.type === 'cuboid') {
+            // Create a physics-enabled object for each level entry
+            for (let index = 0; index < objects.length; index++) {
+                const obj = objects[index];
+
+                if (obj.type === 'desk') {
+                    const halfExtent = new Jolt.Vec3(
+                        obj.size[0] / 2,
+                        obj.size[1] / 2,
+                        obj.size[2] / 2
+                    );
+
+                    const position = new Jolt.RVec3(
+                        obj.position[0],
+                        obj.position[1],
+                        obj.position[2]
+                    );
+
+                    let rotation;
+                    if (obj.rotation[0] === 0 && obj.rotation[1] === 0 && obj.rotation[2] === 0) {
+                        rotation = Jolt.Quat.prototype.sIdentity();
+                    } else {
+                        const euler = new THREE.Euler(
+                            obj.rotation[0],
+                            obj.rotation[1],
+                            obj.rotation[2],
+                            'XYZ'
+                        );
+                        const quat = new THREE.Quaternion();
+                        quat.setFromEuler(euler);
+                        rotation = new Jolt.Quat(quat.x, quat.y, quat.z, quat.w);
+                    }
+
+                    createBox(
+                        Jolt,
+                        bodyInterface,
+                        async (body) => {
+                            const placeholder = addToScene(
+                                body,
+                                Jolt,
+                                bodyInterface,
+                                scene,
+                                dynamicObjects,
+                                getThreeObjectForBody
+                            );
+
+                            try {
+                                const desk = await loadOBJModel(deskObjUrl);
+                                desk.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material = deskMaterial;
+                                        child.geometry.translate(0, -obj.size[1] / 2, 0);
+                                    }
+                                });
+
+                                desk.position.copy(placeholder.position);
+                                desk.quaternion.copy(placeholder.quaternion);
+                                desk.userData.body = body;
+
+                                scene.remove(placeholder);
+                                const placeholderIndex = dynamicObjects.indexOf(placeholder);
+                                if (placeholderIndex > -1) {
+                                    dynamicObjects[placeholderIndex] = desk;
+                                }
+                                const soundWaves = createSoundWaveRings({
+                                    position: new THREE.Vector3(0, obj.size[1] / 2 + 0.02, 0),
+                                    maxRadius: 3.5,
+                                    speed: 1.5,
+                                });
+                                desk.add(soundWaves.group);
+                                effectUpdaters.push(soundWaves.update);
+                                effectDisposers.push(soundWaves.dispose);
+
+                                scene.add(desk);
+                            } catch (error) {
+                                console.error('Error loading desk model:', error);
+                            }
+                        },
+                        position,
+                        rotation,
+                        halfExtent,
+                        Jolt.EMotionType_Static,
+                        LAYER_NON_MOVING
+                    );
+
+                    console.log(`Created desk ${index + 1} at position:`, obj.position);
+                    continue;
+                }
+
+                if (obj.type === 'cuboid' || obj.type === 'cheese') {
                     // Convert size to half-extent for Jolt (half of each dimension)
                     const halfExtent = new Jolt.Vec3(
                         obj.size[0] / 2,
@@ -97,6 +204,18 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                         );
                     }
                     
+                    // Choose material based on type
+                    const material = obj.type === 'cheese' ? cheeseMaterial : redMaterial;
+                    
+                    // Store cheese position for win condition
+                    if (obj.type === 'cheese') {
+                        cheesePosition = new THREE.Vector3(
+                            obj.position[0],
+                            obj.position[1],
+                            obj.position[2]
+                        );
+                    }
+                    
                     // Create static physics body (so player can jump on it)
                     const cuboidBody = createBox(
                         Jolt,
@@ -108,7 +227,7 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                             scene, 
                             dynamicObjects, 
                             getThreeObjectForBody, 
-                            redMaterial
+                            material
                         ),
                         position,
                         rotation,
@@ -117,19 +236,23 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                         LAYER_NON_MOVING
                     );
                     
-                    console.log(`Created physics cuboid ${index + 1} at position:`, obj.position);
+                    console.log(`Created physics ${obj.type} ${index + 1} at position:`, obj.position);
                 }
-            });
+            }
         }
     } catch (error) {
         console.error('Error loading level cuboids:', error);
     }
+    
+    return { cheesePosition, effectUpdaters, effectDisposers };
 }
 
 export default function Game() {
     const { game_id } = useParams();
+    const navigate = useNavigate();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
+    const [showWinMessage, setShowWinMessage] = useState(false);
     const inputStateRef = useRef({
         forwardPressed: false,
         backwardPressed: false,
@@ -303,7 +426,7 @@ export default function Game() {
         });
 
             // Set up your environment, spawn character, define onExampleUpdate
-            setupExample(
+            const charBody = setupExample(
                 Jolt,
                 bodyInterface,
                 scene,
@@ -311,16 +434,23 @@ export default function Game() {
                 onExampleUpdateRef,
                 game_id
             );
+            gameStateRef.current.charBody = charBody;
             //editScene(scene);
 
             // Load level data and create cuboids with physics
+            let cheesePosition = null;
             loadLevelCuboids(
                 game_id, 
                 Jolt, 
                 bodyInterface, 
                 scene, 
                 dynamicObjects
-            ).catch((error) => {
+            ).then(({ cheesePosition: cheesePos, effectUpdaters, effectDisposers }) => {
+                cheesePosition = cheesePos;
+                gameStateRef.current.cheesePosition = cheesePos;
+                gameStateRef.current.effectUpdaters = effectUpdaters;
+                gameStateRef.current.effectDisposers = effectDisposers;
+            }).catch((error) => {
                 console.error('Error loading level cuboids:', error);
             });
 
@@ -332,6 +462,39 @@ export default function Game() {
                 // If setupExample assigned a function, call it
                 if (onExampleUpdateRef.fn) {
                     onExampleUpdateRef.fn(time, deltaTime, inputStateRef.current);
+                }
+
+                const effectUpdaters = gameStateRef.current.effectUpdaters;
+                if (effectUpdaters) {
+                    for (const updateEffect of effectUpdaters) {
+                        updateEffect(deltaTime);
+                    }
+                }
+                
+                // Check win condition (only for level 1 and if cheese exists)
+                if (game_id === '1' && !showWinMessage) {
+                    const cheesePos = gameStateRef.current.cheesePosition;
+                    const charBodyRef = gameStateRef.current.charBody;
+                    
+                    if (cheesePos && charBodyRef) {
+                        const playerPos = bodyInterface.GetPosition(charBodyRef.GetID());
+                        const playerVec = new THREE.Vector3(
+                            playerPos.GetX(),
+                            playerPos.GetY(),
+                            playerPos.GetZ()
+                        );
+                        
+                        const distance = playerVec.distanceTo(cheesePos);
+                        const winDistance = 1.5; // Win if within 1.5 units
+                        
+                        if (distance < winDistance) {
+                            setShowWinMessage(true);
+                            // Navigate back to level list after 2 seconds
+                            setTimeout(() => {
+                                navigate('/level-list');
+                            }, 2000);
+                        }
+                    }
                 }
             }
 
@@ -370,6 +533,9 @@ export default function Game() {
         // Cleanup on unmount
         return () => {
             isMounted = false;
+            if (gameStateRef.current.effectDisposers) {
+                gameStateRef.current.effectDisposers.forEach((dispose) => dispose());
+            }
             cleanupFunctions.forEach(fn => fn());
             
             // Disconnect WebSocket
@@ -420,6 +586,55 @@ export default function Game() {
                 <canvas ref={canvasRef} id="canvas"></canvas>
             </div>
             <WASDControls inputState={inputStateRef.current} />
+            
+            {/* Congratulations Modal */}
+            {showWinMessage && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    zIndex: 10000,
+                    flexDirection: 'column'
+                }}>
+                    <div style={{
+                        backgroundColor: '#1a1a1a',
+                        padding: '40px 60px',
+                        borderRadius: '16px',
+                        border: '2px solid #ffd700',
+                        boxShadow: '0 0 30px rgba(255, 215, 0, 0.5)',
+                        textAlign: 'center'
+                    }}>
+                        <h2 style={{
+                            color: '#ffd700',
+                            fontSize: '3rem',
+                            margin: '0 0 20px 0',
+                            textShadow: '0 0 20px rgba(255, 215, 0, 0.8)'
+                        }}>
+                            🎉 Congratulations! 🎉
+                        </h2>
+                        <p style={{
+                            color: '#fff',
+                            fontSize: '1.5rem',
+                            margin: 0
+                        }}>
+                            You found the cheese!
+                        </p>
+                        <p style={{
+                            color: '#aaa',
+                            fontSize: '1rem',
+                            marginTop: '10px'
+                        }}>
+                            Returning to level select...
+                        </p>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
