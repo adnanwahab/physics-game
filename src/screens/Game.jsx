@@ -598,7 +598,7 @@ export default function Game() {
             <div 
                 ref={containerRef} 
                 id="container"
-                style={{ width: '100%', height: '90vh' }}
+                style={{ width: '50%', height: '90vh' }}
             >
                 <canvas ref={canvasRef} id="canvas"></canvas>
             </div>
