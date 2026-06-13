@@ -37,8 +37,38 @@ function App() {
       </Routes>
 
       <div className="footer">
-        <p>Footer</p>
-        <p><a href="https://github.com/adnanwahab/physics-game">Made in texas</a></p>
+        <p
+          style={{
+            animation: "rainbow 2s linear infinite",
+            background: "-webkit-linear-gradient(left, red, orange, yellow, green, cyan, blue, violet, red)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            color: "transparent"
+          }}
+        >
+          Email me at <a href="mailto:mail@madnanwahab.com">mail@madnanwahab.com</a> to join!
+        </p>
+        <style>
+          {`
+            @keyframes rainbow {
+              0% { filter: hue-rotate(0deg); }
+              100% { filter: hue-rotate(360deg); }
+            }
+            .footer p {
+              display: inline-block;
+            }
+            .footer p {
+              will-change: filter;
+            }
+            .footer p[style] {
+              /* override so parent doesn't mess with animation */
+              animation: rainbow 2s linear infinite;
+            }
+          `}
+        </style>
+  
+        {/* <p><a href="https://github.com/adnanwahab/physics-game">Made in texas</a></p> */}
       </div>
     </div>
   )
