@@ -270,6 +270,7 @@ export default function Game() {
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const [showWinMessage, setShowWinMessage] = useState(false);
+    const canvasRef2 = useRef(null);
     const inputStateRef = useRef({
         forwardPressed: false,
         backwardPressed: false,
@@ -300,6 +301,21 @@ export default function Game() {
 
         const container = containerRef.current;
         const canvas = canvasRef.current;
+        const canvas2 = canvasRef2.current;
+
+        //console.log('canvas2', canvas2);
+
+
+
+        // const { renderer2, scene2, camera2, controls2 } = initGraphics(
+        //     canvas2,
+        //     container,
+        //     size,
+        // );
+
+
+        
+
         
         const size = { width: window.innerWidth * 0.9, height: window.innerHeight * 0.9 };
         
@@ -601,6 +617,8 @@ export default function Game() {
                 style={{ width: '50%', height: '90vh' }}
             >
                 <canvas ref={canvasRef} id="canvas"></canvas>
+                <canvas ref={canvasRef2} id="canvas2"></canvas>
+
             </div>
             <WASDControls inputState={inputStateRef.current} />
             
@@ -652,6 +670,20 @@ export default function Game() {
                     </div>
                 </div>
             )}
+
+    <canvas
+        ref={canvasRef2}
+        id="canvas2"
+        style={{
+            width: '50%',
+            height: '100%',
+            border: '10px dashed white',
+            position: 'absolute',
+            top: '50px',
+            left: '500px',
+            zIndex: 1000,
+        }}
+    />
         </div>
     );
 }
