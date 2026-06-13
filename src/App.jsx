@@ -47,7 +47,7 @@ function App() {
             color: "transparent"
           }}
         >
-          Email me at <a href="mailto:mail@madnanwahab.com">mail@madnanwahab.com</a> to join!
+          Email me at <a href="mailto:mail@dnanwahab.com">mail@madnanwahab.com</a> to join!
         </p>
         <style>
           {`
