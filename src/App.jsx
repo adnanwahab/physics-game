@@ -49,6 +49,7 @@ function App() {
         >
           Email me at <a href="mailto:mail@dnanwahab.com">mail@madnanwahab.com</a> to join!
         </p>
+        {/* <p className="text-white">here go annotations</p> */}
         <style>
           {`
             @keyframes rainbow {
