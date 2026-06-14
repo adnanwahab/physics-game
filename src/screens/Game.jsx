@@ -267,16 +267,17 @@ export default function Game() {
 
             positions[i] = r * Math.sin(phi) * Math.cos(theta);
             positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
-            positions[i + 2] = r * Math.cos(phi);
+            positions[i + 2] = r;
         }
 
         geometry2.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
         // Basic points material (no external asset dependencies)
         const material2 = new THREE.PointsMaterial({
-            color: 0x00ffcc,
+            color: new THREE.Color('red'),
             size: 0.25,
-            sizeAttenuation: true
+            //sizeAttenuation: true,
+            opacity: 0.1
         });
 
         const pointCloud = new THREE.Points(geometry2, material2);
@@ -291,6 +292,7 @@ export default function Game() {
             // Spin the pointcloud slightly
             pointCloud.rotation.x += 0.003;
             pointCloud.rotation.y += 0.005;
+            //material2.opacity += 0.01;
 
             renderer2.render(scene2, camera2);
         };
