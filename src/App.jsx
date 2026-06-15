@@ -18,12 +18,15 @@ import LevelList from './screens/LevelList'
 
 import Settings from './screens/Settings'
 
+//import VideoSeekBar from './components/VideoSeekBar'
+
+
 function App() {
   return (
     <div>
       <nav>
         {/* <Link to="/">Home</Link> */}
-        <Link to="/game">Game</Link>
+        {/* <Link to="/game">Game</Link> */}
         <br />
         <Link to="/level-list">Level List</Link>
         {/* <Link to="/settings">Settings</Link> */}
@@ -47,7 +50,7 @@ function App() {
             color: "transparent"
           }}
         >
-          Email me at <a href="mailto:mail@dnanwahab.com">mail@madnanwahab.com</a> to join!
+          Email me at <a href="mailto:mail@adnanwahab.com">mail@adnanwahab.com</a> to join!
         </p>
         {/* <p className="text-white">here go annotations</p> */}
         <style>

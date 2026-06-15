@@ -25,7 +25,16 @@ import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
-
+function GameVideoSeekBar() {
+    //const [isPlaying, setIsPlaying] = useState(false);
+    return (
+      <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}>
+        <button>Play</button>
+        <input type="range" min="0" max="100" value="50" />
+      </div>
+    )
+  }
+  
 // Function to load level data and create cuboids with Jolt physics
 async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObjects) {
     let cheesePosition = null;
@@ -495,8 +504,12 @@ export default function Game() {
                 />
             </div>
             
-            <WASDControls inputState={inputStateRef.current} />
+            <WASDControls 
             
+            inputState={inputStateRef.current} />
+            <GameVideoSeekBar 
+            
+            />
             {showWinMessage && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
