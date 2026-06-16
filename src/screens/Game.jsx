@@ -47,7 +47,11 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
         
         if (levelData && levelData.length > 0 && levelData[0].objects) {
             const objects = levelData[0].objects;
-            
+
+            for (let i = 0; i < objects.length; i++) {
+                const obj = objects[i];
+                console.log('Object:', obj);
+            }
             const redMaterial = new THREE.MeshStandardMaterial({ 
                 color: 0xff0000,
                 metalness: 0.3,
@@ -267,6 +271,7 @@ export default function Game() {
         const geometry2 = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
 
+
         for (let i = 0; i < particleCount * 3; i += 3) {
             positions[i] = Math.random() * 10;
             positions[i + 1] = Math.random() * 10;
@@ -278,6 +283,7 @@ export default function Game() {
         // Load the OBJ file, parse vertices, and make a particle per vertex
         // We'll load using the loadOBJModel utility, which resolves to a THREE.Group
 
+        console.log('Loading desk OBJ file', deskObjUrl);
         loadOBJModel(deskObjUrl).then(async (objGroup) => {
             let vPositions = [];
             objGroup.traverse(child => {
@@ -292,6 +298,7 @@ export default function Game() {
                     }
                 }
             });
+            
 
             // Clamp to particleCount, or fill only as many as are present
             const useCount = Math.min(particleCount, vPositions.length);
