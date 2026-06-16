@@ -17,8 +17,8 @@ import initJolt from "../utils/jolt-physics.wasm-compat.js";
 import * as THREE from "three";
 import editScene from "../utils/edit_scene.js";
 import { setupLighting } from "../lighting.js";
-import { createBox } from "../createBox.js";
-import { addToScene } from "../addToScene.js";
+import { createBox } from "../utils/createBox.js";
+import { addToScene } from "../utils/addToScene.js";
 import { getThreeObjectForBody } from "../getThreeObjectForBody.js";
 
 import initGenerateObject from "../mutateScene.ts";
@@ -27,10 +27,50 @@ import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
 function GameVideoSeekBar() {
     //const [isPlaying, setIsPlaying] = useState(false);
+    const [value, setValue] = useState(0);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const intervalRef = useRef(null);
+
+    useEffect(() => {
+      if (isPlaying) {
+        intervalRef.current = setInterval(() => {
+          setValue(prev => {
+            if (prev < 100) {
+              return prev + 1;
+            } else {
+              setIsPlaying(false);
+              return 0;
+            }
+          });
+        }, 50);
+      } else if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+        intervalRef.current = null;
+      }
+
+      return () => {
+        if (intervalRef.current) {
+          clearInterval(intervalRef.current);
+        }
+      };
+    }, [isPlaying]);
+
+    const handlePlayClick = () => {
+      if (!isPlaying) {
+        setIsPlaying(true);
+      }
+    };
+
     return (
-      <div style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1000 }}>
-        <button>Play</button>
-        <input type="range" min="0" max="100" value="50" />
+      <div style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 1000 }}>
+        <button onClick={handlePlayClick}>Play</button>
+        <input
+          type="range"
+          min="0"
+          max="100"
+          value={value}
+          onChange={e => setValue(Number(e.target.value))}
+        />
       </div>
     )
   }
@@ -272,32 +312,37 @@ export default function Game() {
         const positions = new Float32Array(particleCount * 3);
 
 
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            positions[i] = Math.random() * 10;
-            positions[i + 1] = Math.random() * 10;
-            positions[i + 2] = Math.random() * 10;
-        }
-
         // INSERT_YOUR_CODE
 
         // Load the OBJ file, parse vertices, and make a particle per vertex
         // We'll load using the loadOBJModel utility, which resolves to a THREE.Group
 
         console.log('Loading desk OBJ file', deskObjUrl);
+        for (let i = 0; i < particleCount * 3; i += 3) {
+            positions[i] = Math.random() * 10;
+            positions[i + 1] = Math.random() * 10;
+            positions[i + 2] = Math.random() * 10;
+        }
         loadOBJModel(deskObjUrl).then(async (objGroup) => {
             let vPositions = [];
             objGroup.traverse(child => {
+                console.log('Child:', child);
                 if (child.isMesh && child.geometry && child.geometry.attributes.position) {
                     const pos = child.geometry.attributes.position;
+                    console.log('Position:', pos);
                     for (let i = 0; i < pos.count; i++) {
-                        vPositions.push([
-                            pos.getX(i),
-                            pos.getY(i),
-                            pos.getZ(i)
-                        ]);
+                        // vPositions.push([
+                        //     pos.getX(i),
+                        //     pos.getY(i),
+                        //     pos.getZ(i)
+                        // ]);
                     }
                 }
             });
+
+
+  
+
             
 
             // Clamp to particleCount, or fill only as many as are present
@@ -331,7 +376,7 @@ export default function Game() {
 
         // Basic points material (no external asset dependencies)
         const material2 = new THREE.PointsMaterial({
-            color: new THREE.Color('red'),
+            color: new THREE.Color('blue'),
             size: 0.25,
             //sizeAttenuation: true,
             opacity: 0.1

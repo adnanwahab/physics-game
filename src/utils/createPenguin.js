@@ -15,6 +15,10 @@ export function createPenguin(scale = 1) {
   const yellowMaterial = new THREE.MeshPhongMaterial({ color: 0xffd700 });
 
   // Body (main torso - ellipsoid using scaled sphere)
+  // This code does not cause a 404 error. 
+  // If you are seeing a '404 Not Found' error in your devtools (see image), 
+  // it is usually caused by a missing file (e.g., an image, script, or resource your app tries to load).
+  // This code is fine for defining and adding the penguin's body:
   const bodyGeometry = new THREE.SphereGeometry(0.4 * scale, 16, 16);
   bodyGeometry.scale(1, 1.2, 0.8); // Make it more penguin-shaped
   const body = new THREE.Mesh(bodyGeometry, blackMaterial);
