@@ -268,16 +268,57 @@ export default function Game() {
         const positions = new Float32Array(particleCount * 3);
 
         for (let i = 0; i < particleCount * 3; i += 3) {
-            const u = Math.random();
-            const v = Math.random();
-            const theta = u * 2.0 * Math.PI;
-            const phi = Math.acos(2.0 * v - 1.0);
-            const r = 8; // Sphere radius
-
-            positions[i] = r * Math.sin(phi) * Math.cos(theta);
-            positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
-            positions[i + 2] = r;
+            positions[i] = Math.random() * 10;
+            positions[i + 1] = Math.random() * 10;
+            positions[i + 2] = Math.random() * 10;
         }
+
+        // INSERT_YOUR_CODE
+
+        // Load the OBJ file, parse vertices, and make a particle per vertex
+        // We'll load using the loadOBJModel utility, which resolves to a THREE.Group
+
+        loadOBJModel(deskObjUrl).then(async (objGroup) => {
+            let vPositions = [];
+            objGroup.traverse(child => {
+                if (child.isMesh && child.geometry && child.geometry.attributes.position) {
+                    const pos = child.geometry.attributes.position;
+                    for (let i = 0; i < pos.count; i++) {
+                        vPositions.push([
+                            pos.getX(i),
+                            pos.getY(i),
+                            pos.getZ(i)
+                        ]);
+                    }
+                }
+            });
+
+            // Clamp to particleCount, or fill only as many as are present
+            const useCount = Math.min(particleCount, vPositions.length);
+            // for (let i = 0; i < useCount; i++) {
+            //     positions[i * 3 + 0] = vPositions[i][0];
+            //     positions[i * 3 + 1] = vPositions[i][1];
+            //     positions[i * 3 + 2] = vPositions[i][2];
+            // }
+            // If fewer vertices than particleCount, scatter rest randomly
+            // for (let i = useCount * 3; i < particleCount * 3; i += 3) {
+            //     positions[i + 0] = (Math.random() - 0.5) * 10;
+            //     positions[i + 1] = (Math.random() - 0.5) * 10;
+            //     positions[i + 2] = (Math.random() - 0.5) * 10;
+            // }
+            geometry2.attributes.position.needsUpdate = true;
+        });
+        // for (let i = 0; i < particleCount * 3; i += 3) {
+        //     const u = Math.random();
+        //     const v = Math.random();
+        //     const theta = u * 2.0 * Math.PI;
+        //     const phi = Math.acos(2.0 * v - 1.0);
+        //     const r = 8; // Sphere radius
+
+        //     positions[i] = r * Math.sin(phi) * Math.cos(theta);
+        //     positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
+        //     positions[i + 2] = r;
+        // }
 
         geometry2.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
