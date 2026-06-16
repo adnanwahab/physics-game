@@ -263,7 +263,7 @@ export default function Game() {
         camera2.position.z = 30;
 
         // Create Point Cloud Data (1000 points arranged in a sphere)
-        const particleCount = 1000;
+        const particleCount = 10000;
         const geometry2 = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
 
