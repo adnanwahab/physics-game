@@ -4,8 +4,8 @@ import WASDControls from '../components/WASDControls';
 
 import { loadGLTFModel } from "../utils/gltf-loader.js";
 import { loadOBJModel } from "../utils/obj-loader.js";
-import deskObjUrl from "../desk.obj?url";
-import sittingPersonObjUrl from "../sitting_person.obj?url";
+import deskObjUrl from "../obj/desk.obj?url";
+import sittingPersonObjUrl from "../obj/sitting_person.obj?url";
 import { Clock } from "three";
 import { initGraphics } from "../initGraphics.js";
 import { onWindowResize as handleWindowResize } from "../onWindowResize.js";

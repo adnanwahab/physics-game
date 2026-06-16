@@ -1,0 +1,18 @@
+
+{
+  "name": "warsong_gulch",
+  "description": "This level presents the classic Warsong Gulch battleground as an explorable 3D scene.",
+  "obj": "../obj/warsong_gulch.obj",
+  "startPosition": { "x": 0, "y": 2, "z": 10 },
+  "startRotation": { "x": 0, "y": 0, "z": 0 },
+  "scale": 1.0,
+  "floor": {
+    "size": 150,
+    "position": { "x": 0, "y": -0.5, "z": 0 }
+  },
+  "spawnPenguin": true,
+
+  "extras": {
+    "note": "Experiment with the Warsong Gulch OBJ model. You may want to adjust scale or startPosition for improved matches."
+  }
+}

@@ -1,15 +1,14 @@
-# GameKit for Dynabot - learn robotics by playing and editing games english-language diagram generation
-
-### 183 mini games
+# 10 mini games
 
 1. mario kart
 2. mario party
 3. pensieve
 4. clean up code
-# physics-game
 
 Level 1. jump on cube
 Level 2. simulation rewind
 
 
 edit - select object -> move object 
+
+#  learn robotics and physics by playing and editing games 
