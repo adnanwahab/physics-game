@@ -11,8 +11,6 @@
 
 Level 1. jump on cube
 Level 2. simulation rewind
-
-
 edit - select object -> move object 
 
 #  learn robotics and physics by playing and editing games 
@@ -22,3 +20,12 @@ edit - select object -> move object
 //levels
 //play/id
 //edit/id
+
+
+components - buttons
+dist - code smell
+levells - jsons 
+obj - 3d models
+
+
+simplify and debug until 10 am 
