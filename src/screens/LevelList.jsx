@@ -7,7 +7,7 @@ const levels = [
     { id: '2', name: 'Level 2', difficulty: 'Medium', description: 'Intermediate challenge' },
     { id: '3', name: 'Level 3', difficulty: 'Hard', description: 'Cross the cuboid bridge' },
     { id: '4', name: 'Level 4', difficulty: 'Expert', description: 'Warsong Gulch' },
-    // { id: '5', name: 'Level 5', difficulty: 'Easy', description: 'Another beginner level' },
+    { id: '5', name: 'Level 5', difficulty: 'Easy', description: 'Another beginner level' },
 ];
 
 export default function LevelList() {

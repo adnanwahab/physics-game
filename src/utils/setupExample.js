@@ -1,8 +1,8 @@
-import { createFloor } from './utils/createFloor.js';
-import { createBox } from './utils/createBox.js';
-import { addToScene } from './utils/addToScene.js';
-import { getThreeObjectForBody } from './utils/getThreeObjectForBody.js';
-import { createPenguin } from './utils/createPenguin.js';
+import { createFloor } from './createFloor.js';
+import { createBox } from './createBox.js';
+import { addToScene } from './addToScene.js';
+import { getThreeObjectForBody } from './getThreeObjectForBody.js';
+import { createPenguin } from './createPenguin.js';
 import * as THREE from 'three';
 /**
  * Sets up your environment and character logic. Creates floors, walls, 

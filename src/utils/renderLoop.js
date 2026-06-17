@@ -1,5 +1,5 @@
 import * as THREE from 'three';
-import { updatePhysics } from './updatePhysics.js';
+import { updatePhysics } from '../updatePhysics.js';
 
 /**
  * The main render loop that updates physics, animations, and renders the scene.

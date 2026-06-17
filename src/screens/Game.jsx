@@ -10,8 +10,8 @@ import { Clock } from "three";
 import { initGraphics } from "../initGraphics.js";
 import { onWindowResize as handleWindowResize } from "../onWindowResize.js";
 import { initPhysics } from "../initPhysics.js";
-import { renderLoop } from "../renderLoop.js";
-import { setupExample } from "../setupExample.js";
+import { renderLoop } from "../utils/renderLoop.js";
+import { setupExample } from "../utils/setupExample.js";
 import { handleUserInput } from "../utils/handleUserInput.js";
 import initJolt from "../utils/jolt-physics.wasm-compat.js";
 import * as THREE from "three";
@@ -27,7 +27,7 @@ import { createSoundWaveRings } from "../createSoundWaveRings.js";
 
 // --- Multiplayer Penguin Helper ---
 function createRemotePenguinMesh(color = 0x2299ff) {
-    const geom = new THREE.SphereGeometry(0.6, 16, 12); // penguin-ish
+    const geom = new THREE.SphereGeometry(0.6, 16, 12);
     const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.1 });
     const mesh = new THREE.Mesh(geom, mat);
     mesh.castShadow = true; mesh.receiveShadow = true;
@@ -35,7 +35,6 @@ function createRemotePenguinMesh(color = 0x2299ff) {
 }
 
 function colorFromId(id) {
-    // Deterministic color from string/id (not perfect, but fine for demo/multipenguin)
     if (typeof id !== 'string') return 0x2299ff;
     const hash = [...id].reduce((h, ch) => h * 31 + ch.charCodeAt(0), 7);
     return (0x222222 | ((hash & 0xFFFFFF) >>> 0));
@@ -47,47 +46,47 @@ function GameVideoSeekBar() {
     const intervalRef = useRef(null);
 
     useEffect(() => {
-      if (isPlaying) {
-        intervalRef.current = setInterval(() => {
-          setValue(prev => {
-            if (prev < 100) {
-              return prev + 1;
-            } else {
-              setIsPlaying(false);
-              return 0;
-            }
-          });
-        }, 50);
-      } else if (intervalRef.current) {
-        clearInterval(intervalRef.current);
-        intervalRef.current = null;
-      }
-
-      return () => {
-        if (intervalRef.current) {
-          clearInterval(intervalRef.current);
+        if (isPlaying) {
+            intervalRef.current = setInterval(() => {
+                setValue(prev => {
+                    if (prev < 100) {
+                        return prev + 1;
+                    } else {
+                        setIsPlaying(false);
+                        return 0;
+                    }
+                });
+            }, 50);
+        } else if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
         }
-      };
+
+        return () => {
+            if (intervalRef.current) {
+                clearInterval(intervalRef.current);
+            }
+        };
     }, [isPlaying]);
 
     const handlePlayClick = () => {
-      if (!isPlaying) {
-        setIsPlaying(true);
-      }
+        if (!isPlaying) {
+            setIsPlaying(true);
+        }
     };
 
+    // Move to top-right: set position absolute, top 15px, right 24px, high z-index
     return (
-      <div style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 1000 }}>
-        
-        <button onClick={handlePlayClick}>Play</button>
-        <input
-          type="range"
-          min="0"
-          max="100"
-          value={value}
-          onChange={e => setValue(Number(e.target.value))}
-        />
-      </div>
+        <div style={{ position: 'absolute', top: '15px', right: '24px', zIndex: 1100, display: 'flex', alignItems: 'center', gap: '10px' }}>
+            <button onClick={handlePlayClick}>Play</button>
+            <input
+                type="range"
+                min="0"
+                max="100"
+                value={value}
+                onChange={e => setValue(Number(e.target.value))}
+            />
+        </div>
     )
 }
 
@@ -101,13 +100,13 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
         if (levelData && levelData.length > 0 && levelData[0].objects) {
             const objects = levelData[0].objects;
 
-            const redMaterial = new THREE.MeshStandardMaterial({ 
+            const redMaterial = new THREE.MeshStandardMaterial({
                 color: 0xff0000,
                 metalness: 0.3,
                 roughness: 0.7
             });
-            
-            const cheeseMaterial = new THREE.MeshStandardMaterial({ 
+
+            const cheeseMaterial = new THREE.MeshStandardMaterial({
                 color: 0xffd700,
                 metalness: 0.5,
                 roughness: 0.3,
@@ -126,9 +125,9 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                 metalness: 0.1,
                 roughness: 0.7
             });
-            
+
             const LAYER_NON_MOVING = 0;
-            
+
             for (let index = 0; index < objects.length; index++) {
                 const obj = objects[index];
 
@@ -205,7 +204,7 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                 if (obj.type === 'cuboid' || obj.type === 'cheese') {
                     const halfExtent = new Jolt.Vec3(obj.size[0] / 2, obj.size[1] / 2, obj.size[2] / 2);
                     const position = new Jolt.RVec3(obj.position[0], obj.position[1], obj.position[2]);
-                    
+
                     let rotation;
                     if (obj.rotation[0] === 0 && obj.rotation[1] === 0 && obj.rotation[2] === 0) {
                         rotation = Jolt.Quat.prototype.sIdentity();
@@ -215,13 +214,13 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                         quat.setFromEuler(euler);
                         rotation = new Jolt.Quat(quat.x, quat.y, quat.z, quat.w);
                     }
-                    
+
                     const material = obj.type === 'cheese' ? cheeseMaterial : redMaterial;
-                    
+
                     if (obj.type === 'cheese') {
                         cheesePosition = new THREE.Vector3(obj.position[0], obj.position[1], obj.position[2]);
                     }
-                    
+
                     createBox(
                         Jolt,
                         bodyInterface,
@@ -238,7 +237,7 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
     } catch (error) {
         console.error('Error loading level cuboids:', error);
     }
-    
+
     return { cheesePosition, effectUpdaters, effectDisposers };
 }
 
@@ -250,6 +249,9 @@ export default function Game() {
     const canvasRef2 = useRef(null);
     const [showWinMessage, setShowWinMessage] = useState(false);
     const [pointCloudCount, setPointCloudCount] = useState(0);
+
+    // === Canvas2 visibility state ===
+    const [canvas2Visible, setCanvas2Visible] = useState(true);
 
     // Used to force re-render of penguin list if ever needed
     const [, setRemotePenguinsTick] = useState(0);
@@ -287,8 +289,6 @@ export default function Game() {
     });
 
     useEffect(() => {
-
-        
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
 
         const container = containerRef.current;
@@ -322,7 +322,7 @@ export default function Game() {
         const scene2 = new THREE.Scene();
         const camera2 = new THREE.PerspectiveCamera(45, rect2.width / rect2.height, 0.1, 100);
         camera2.position.z = 30;
-        
+
         // Lights for shiny effect
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene2.add(ambientLight);
@@ -331,8 +331,6 @@ export default function Game() {
         scene2.add(directionalLight);
 
         // --- Chair Model as Point Cloud ---
-        // Chair made of particles: seat, 4 legs, backrest (simple shape)
-
         const particleCount = 3000; // Fewer than previously to allow for real placement
         const positions = new Float32Array(particleCount * 3);
 
@@ -386,7 +384,6 @@ export default function Game() {
 
         // Optionally: sides/top of backrest bars
         for (let i = 0; i < 400; i++) {
-            // Vertical bars on backrest
             const x = THREE.MathUtils.lerp(-seatWidth / 2 + 0.1, seatWidth / 2 - 0.1, Math.random());
             const z = seatDepth / 2 + 0.7;
             const y = THREE.MathUtils.lerp(7.5, 9 + backrestHeight, Math.random());
@@ -397,13 +394,34 @@ export default function Game() {
         const geometry2 = new THREE.BufferGeometry();
         geometry2.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
-        // Set the point cloud count in state to show in UI
         setPointCloudCount(n);
 
-        // Shiny silver and pink (on hover) material with size attenuation and some sparkle
-        // We'll set up two materials and switch by changing material2.color
+        // Create the shiny material for particles (removing unsupported shininess/specular)
         const silverColor = new THREE.Color(0xeaeaea);
         const pinkColor = new THREE.Color(0xff69b4);
+
+        const spriteMap = (() => {
+            const size = 64;
+            const canvas = document.createElement('canvas');
+            canvas.width = canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            const gradient = ctx.createRadialGradient(
+                size / 2,
+                size / 2,
+                0,
+                size / 2,
+                size / 2,
+                size / 2
+            );
+            gradient.addColorStop(0.1, '#fff');
+            gradient.addColorStop(0.25, '#dddddd');
+            gradient.addColorStop(1, '#bbbbbb00');
+            ctx.fillStyle = gradient;
+            ctx.beginPath();
+            ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+            ctx.fill();
+            return new THREE.CanvasTexture(canvas);
+        })();
 
         const material2 = new THREE.PointsMaterial({
             color: silverColor,
@@ -411,32 +429,7 @@ export default function Game() {
             sizeAttenuation: true,
             transparent: true,
             opacity: 0.86,
-            shininess: 80,
-            specular: 0xffffff,
-            // Give a subtle shimmer
-            map: (() => {
-                // Make a small round sprite for the shine
-                const size = 64;
-                const canvas = document.createElement('canvas');
-                canvas.width = canvas.height = size;
-                const ctx = canvas.getContext('2d');
-                const gradient = ctx.createRadialGradient(
-                    size / 2,
-                    size / 2,
-                    0,
-                    size / 2,
-                    size / 2,
-                    size / 2
-                );
-                gradient.addColorStop(0.1, '#fff');
-                gradient.addColorStop(0.25, '#dddddd');
-                gradient.addColorStop(1, '#bbbbbb00');
-                ctx.fillStyle = gradient;
-                ctx.beginPath();
-                ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
-                ctx.fill();
-                return new THREE.CanvasTexture(canvas);
-            })(),
+            map: spriteMap,
             alphaTest: 0.13,
             depthWrite: false
         });
@@ -445,11 +438,8 @@ export default function Game() {
         scene2.add(pointCloud);
         let canvas2AnimationFrameId;
 
-        // --- Mouse hover color change logic ---
-        // We want to turn particles pink on hover over right canvas
         const handlePointerEnter = () => {
             material2.color.copy(pinkColor);
-            // Three.js bug: forces update for WebGL renderer!
             material2.needsUpdate = true;
         };
         const handlePointerLeave = () => {
@@ -497,7 +487,15 @@ export default function Game() {
         initJolt().then(async (Jolt) => {
             if (!isMounted) return;
 
-            await renderer.init();
+            // Try/catch in case .init() doesn't exist or fails
+            try {
+                if (typeof renderer.init === 'function') {
+                    await renderer.init();
+                }
+            } catch (e) {
+                console.warn('Error initializing renderer:', e);
+            }
+
             const { joltInterface, physicsSystem, bodyInterface } = initPhysics(Jolt);
             if (!isMounted) return;
 
@@ -510,67 +508,72 @@ export default function Game() {
 
             // === Multiplayer Penguin WebSocket Setup ===
             // Use the game_id as the roomId in the websocket.
-            const wsUrl = `ws://localhost:3000?room=${encodeURIComponent(game_id)}`;
+            const wsUrl = `ws://localhost:3000/?room=${encodeURIComponent(game_id)}`;
             const wsClient = new WebSocketClient(wsUrl);
-            gameStateRef.current.wsClient = wsClient;
-            wsClient.connect();
 
-            penguinsRef.current = {};
-            gameStateRef.current.penguins = penguinsRef.current;
+            // Defensive: wrap connect() and all listeners with error handlers
+            try {
+                gameStateRef.current.wsClient = wsClient;
+                wsClient.connect();
 
-            wsClient.on('assign_id', (msg) => {
-                myPlayerIdRef.current = msg.id;
-            });
-
-            wsClient.on('player_state', (stateMsg) => {
-                // This should be: { players: { [id]: { pos: {x, y, z}, quat, color } } }
-                if (!stateMsg.players) return;
-                Object.entries(stateMsg.players).forEach(([id, pdata]) => {
-                    if (!penguinsRef.current[id]) {
-                        // Create a mesh for each remote penguin (including the current player)
-                        const color = pdata.color !== undefined ? pdata.color : colorFromId(id);
-                        const mesh = createRemotePenguinMesh(color);
-                        scene.add(mesh);
-                        penguinsRef.current[id] = { mesh, color };
-                    }
-                    penguinsRef.current[id].mesh.position.set(
-                        pdata.pos.x,
-                        pdata.pos.y,
-                        pdata.pos.z
-                    );
-                    if (pdata.quat) {
-                        penguinsRef.current[id].mesh.quaternion.set(
-                            pdata.quat.x,
-                            pdata.quat.y,
-                            pdata.quat.z,
-                            pdata.quat.w
-                        );
-                    }
-                });
-                // Remove penguins for ids not present in player state
-                const currentIds = Object.keys(stateMsg.players);
-                for (const existingId of Object.keys(penguinsRef.current)) {
-                    if (!currentIds.includes(existingId)) {
-                        scene.remove(penguinsRef.current[existingId].mesh);
-                        delete penguinsRef.current[existingId];
-                    }
-                }
-                setRemotePenguinsTick(t => t + 1);
-            });
-
-            // Clean-up multiplayer penguin meshes on dismount
-            cleanupFunctions.push(() => {
-                Object.values(penguinsRef.current).forEach(({ mesh }) => scene.remove(mesh));
                 penguinsRef.current = {};
-            });
+                gameStateRef.current.penguins = penguinsRef.current;
 
-            // === End Multiplayer Setup ===
+                wsClient.on('assign_id', (msg) => {
+                    myPlayerIdRef.current = msg.id;
+                });
+
+                wsClient.on('player_state', (stateMsg) => {
+                    // This should be: { players: { [id]: { pos: {x, y, z}, quat, color } } }
+                    if (!stateMsg.players) return;
+                    Object.entries(stateMsg.players).forEach(([id, pdata]) => {
+                        if (!penguinsRef.current[id]) {
+                            // Create a mesh for each remote penguin (including the current player)
+                            const color = pdata.color !== undefined ? pdata.color : colorFromId(id);
+                            const mesh = createRemotePenguinMesh(color);
+                            scene.add(mesh);
+                            penguinsRef.current[id] = { mesh, color };
+                        }
+                        penguinsRef.current[id].mesh.position.set(
+                            pdata.pos.x,
+                            pdata.pos.y,
+                            pdata.pos.z
+                        );
+                        if (pdata.quat) {
+                            penguinsRef.current[id].mesh.quaternion.set(
+                                pdata.quat.x,
+                                pdata.quat.y,
+                                pdata.quat.z,
+                                pdata.quat.w
+                            );
+                        }
+                    });
+                    // Remove penguins for ids not present in player state
+                    const currentIds = Object.keys(stateMsg.players);
+                    for (const existingId of Object.keys(penguinsRef.current)) {
+                        if (!currentIds.includes(existingId)) {
+                            scene.remove(penguinsRef.current[existingId].mesh);
+                            delete penguinsRef.current[existingId];
+                        }
+                    }
+                    setRemotePenguinsTick(t => t + 1);
+                });
+
+                // Clean-up multiplayer penguin meshes on dismount
+                cleanupFunctions.push(() => {
+                    Object.values(penguinsRef.current).forEach(({ mesh }) => scene.remove(mesh));
+                    penguinsRef.current = {};
+                });
+            } catch (e) {
+                console.error("Websocket setup failed:", e);
+            }
 
             // Selection system as before:
             const selectionSystem = new SelectionSystem(scene, camera, canvas);
             gameStateRef.current.selectionSystem = selectionSystem;
             let allowSelection = true;
             let mouseDownPos = null;
+
             const handlePointerDown = (event) => {
                 if (event.button === 0) {
                     mouseDownPos = { x: event.clientX, y: event.clientY };
@@ -684,8 +687,13 @@ export default function Game() {
                 gameStateRef.current.effectDisposers.forEach((dispose) => dispose());
             }
             cleanupFunctions.forEach(fn => fn());
+            // Defensive websocket cleanup
             if (gameStateRef.current.wsClient) {
-                gameStateRef.current.wsClient.disconnect();
+                try {
+                    gameStateRef.current.wsClient.disconnect();
+                } catch (e) {
+                    console.error("WebSocket disconnect failed:", e)
+                }
                 gameStateRef.current.wsClient = null;
             }
             for (const id in penguinsRef.current) {
@@ -694,9 +702,16 @@ export default function Game() {
                 }
             }
             penguinsRef.current = {};
+            // Defensive renderer cleanup
             const renderer = gameStateRef.current.renderer;
             if (renderer && typeof renderer.dispose === 'function') {
-                try { renderer.dispose(); } catch (e) { console.error(e); }
+                try {
+                    renderer.dispose();
+                } catch (e) {
+                    // Some renderers (like WebGPURenderer) might throw if not inited or something is null
+                    // Swallow or log but do not crash
+                    console.error("Renderer dispose error:", e);
+                }
             }
             gameStateRef.current.renderer = null;
             gameStateRef.current.scene = null;
@@ -711,12 +726,13 @@ export default function Game() {
                 <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>
                     Level {game_id}
                 </h1>
+                <><button onClick={() => setCanvas2Visible(!canvas2Visible)}>Toggle Canvas2</button></>
             </div>
             
             <div ref={containerRef} id="container" style={{ width: '100%', height: '90vh', position: 'relative' }}>
                 {/* Main Canvas Context */}
                 <canvas ref={canvasRef} id="canvas" style={{ width: '500px', height: '400px' }}></canvas>
-                
+
                 {/* Point Cloud Isolated Canvas Context */}
                 <p style={{ color: 'white', fontSize: '1rem', textAlign: 'center', marginTop: '10px' }}>
                     Point Cloud Count: {pointCloudCount} particles rendered
@@ -725,7 +741,6 @@ export default function Game() {
                     ref={canvasRef2}
                     id="canvas2"
                     style={{
-                        // display: 'none',
                         width: '500px',
                         height: '450px',
                         border: '10px dashed white',
@@ -736,11 +751,40 @@ export default function Game() {
                         backgroundColor: 'rgba(0,0,0,0.4)'
                     }}
                 />
-           
+
             </div>
-            
+
             <WASDControls inputState={inputStateRef.current} />
             <GameVideoSeekBar />
+            {/* Fake list of 3 annotations for demonstration */}
+            {/* <div style={{ 
+                marginTop: '24px', 
+                backgroundColor: '#18181b', 
+                borderRadius: '12px',
+                padding: '18px 24px',
+                boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
+                color: '#fff',
+                maxWidth: '520px',
+                marginLeft: 'auto',
+                marginRight: 'auto',
+                position: 'relative',
+                top: '20px',
+                zIndex: 5000
+            }}>
+                <h3 style={{ margin: 0, marginBottom: '12px', color: '#ffd700', fontSize: '1.15rem' }}>Annotations</h3>
+                <ul style={{ listStyleType: 'disc', paddingLeft: '22px', margin: 0 }}>
+                    <li>
+                        <strong>Interesting Gate (x: 0, y: 4, z: -39.9):</strong> Try jumping on top of the spiked gate for a better view!
+                    </li>
+                    <li>
+                        <strong>Tower Entrance (x: 10, y: 7, z: 0):</strong> This tower is climbable—look for the hidden steps!
+                    </li>
+                    <li>
+                        <strong>Cheese!</strong> There’s a golden cheese block hidden somewhere in this level. Find it to win!
+                    </li>
+                </ul>
+            </div> */}
+       
             {showWinMessage && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
