@@ -20,13 +20,28 @@ import { setupLighting } from "../lighting.js";
 import { createBox } from "../utils/createBox.js";
 import { addToScene } from "../utils/addToScene.js";
 import { getThreeObjectForBody } from "../getThreeObjectForBody.js";
-
 import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
+
+// --- Multiplayer Penguin Helper ---
+function createRemotePenguinMesh(color = 0x2299ff) {
+    const geom = new THREE.SphereGeometry(0.6, 16, 12); // penguin-ish
+    const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.1 });
+    const mesh = new THREE.Mesh(geom, mat);
+    mesh.castShadow = true; mesh.receiveShadow = true;
+    return mesh;
+}
+
+function colorFromId(id) {
+    // Deterministic color from string/id (not perfect, but fine for demo/multipenguin)
+    if (typeof id !== 'string') return 0x2299ff;
+    const hash = [...id].reduce((h, ch) => h * 31 + ch.charCodeAt(0), 7);
+    return (0x222222 | ((hash & 0xFFFFFF) >>> 0));
+}
+
 function GameVideoSeekBar() {
-    //const [isPlaying, setIsPlaying] = useState(false);
     const [value, setValue] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const intervalRef = useRef(null);
@@ -73,9 +88,8 @@ function GameVideoSeekBar() {
         />
       </div>
     )
-  }
-  
-// Function to load level data and create cuboids with Jolt physics
+}
+
 async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObjects) {
     let cheesePosition = null;
     const effectUpdaters = [];
@@ -83,15 +97,9 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
     try {
         const levelModule = await import(`../levels/${levelId}.json`);
         const levelData = levelModule.default || levelModule;
-        console.log('Loaded level data:', levelData);
-        
         if (levelData && levelData.length > 0 && levelData[0].objects) {
             const objects = levelData[0].objects;
 
-            for (let i = 0; i < objects.length; i++) {
-                const obj = objects[i];
-                console.log('Object:', obj);
-            }
             const redMaterial = new THREE.MeshStandardMaterial({ 
                 color: 0xff0000,
                 metalness: 0.3,
@@ -240,7 +248,14 @@ export default function Game() {
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
     const [showWinMessage, setShowWinMessage] = useState(false);
-    
+
+    // Used to force re-render of penguin list if ever needed
+    const [, setRemotePenguinsTick] = useState(0);
+
+    // Multiplayer penguin references
+    const penguinsRef = useRef({}); // { [id]: { mesh: THREE.Mesh, color: string } }
+    const myPlayerIdRef = useRef(null);
+
     const inputStateRef = useRef({
         forwardPressed: false,
         backwardPressed: false,
@@ -249,7 +264,7 @@ export default function Game() {
         jump: false,
         crouched: false,
     });
-    
+
     const gameStateRef = useRef({
         renderer: null,
         scene: null,
@@ -264,7 +279,9 @@ export default function Game() {
         dynamicObjects: null,
         Jolt: null,
         generateObject: null,
-        cleanup: null
+        cleanup: null,
+        wsClient: null,
+        penguins: penguinsRef.current,
     });
 
     useEffect(() => {
@@ -273,10 +290,9 @@ export default function Game() {
         const container = containerRef.current;
         const canvas = canvasRef.current;
         const canvas2 = canvasRef2.current;
-
         const size = { width: window.innerWidth * 0.9, height: window.innerHeight * 0.9 };
-        
-        // 1. Initialize Main Graphics
+
+        // === Init Main Graphics ===
         const { renderer, scene, camera, controls } = initGraphics(canvas, container, size);
         setupLighting(scene);
 
@@ -294,139 +310,51 @@ export default function Game() {
         let cleanupFunctions = [];
         let isMounted = true;
 
-        // ==========================================
-        // GUARANTEED CANVAS2 POINT CLOUD SETUP
-        // ==========================================
+        // === Canvas2 code (not related to penguins, unchanged) ===
         const rect2 = canvas2.getBoundingClientRect();
         const renderer2 = new THREE.WebGLRenderer({ canvas: canvas2, alpha: true, antialias: true });
-
-
-
-
-
-
-
         renderer2.setSize(rect2.width, rect2.height, false);
         renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
         const scene2 = new THREE.Scene();
         const camera2 = new THREE.PerspectiveCamera(45, rect2.width / rect2.height, 0.1, 100);
         camera2.position.z = 30;
-
-        // Create Point Cloud Data (1000 points arranged in a sphere)
         const particleCount = 10000;
         const geometry2 = new THREE.BufferGeometry();
         const positions = new Float32Array(particleCount * 3);
-
-
-        // INSERT_YOUR_CODE
-
-        // Load the OBJ file, parse vertices, and make a particle per vertex
-        // We'll load using the loadOBJModel utility, which resolves to a THREE.Group
-
-        //console.log('Loading desk OBJ file', deskObjUrl);
         for (let i = 0; i < particleCount * 3; i += 3) {
             positions[i] = Math.random() * 10;
             positions[i + 1] = Math.random() * 10;
             positions[i + 2] = Math.random() * 10;
         }
-
-
-
-        loadOBJModel(deskObjUrl).then(async (objGroup) => {
-            let vPositions = [];
-            objGroup.traverse(child => {
-                console.log('Child:', child);
-                if (child.isMesh && child.geometry && child.geometry.attributes.position) {
-                    const pos = child.geometry.attributes.position;
-                    console.log('Position:', pos);
-                    for (let i = 0; i < pos.count; i++) {
-                        // vPositions.push([
-                        //     pos.getX(i),
-                        //     pos.getY(i),
-                        //     pos.getZ(i)
-                        // ]);
-                    }
-                }
-            });
-
-
-  
-
-            
-
-            // Clamp to particleCount, or fill only as many as are present
-            const useCount = Math.min(particleCount, vPositions.length);
-            // for (let i = 0; i < useCount; i++) {
-            //     positions[i * 3 + 0] = vPositions[i][0];
-            //     positions[i * 3 + 1] = vPositions[i][1];
-            //     positions[i * 3 + 2] = vPositions[i][2];
-            // }
-            // If fewer vertices than particleCount, scatter rest randomly
-            // for (let i = useCount * 3; i < particleCount * 3; i += 3) {
-            //     positions[i + 0] = (Math.random() - 0.5) * 10;
-            //     positions[i + 1] = (Math.random() - 0.5) * 10;
-            //     positions[i + 2] = (Math.random() - 0.5) * 10;
-            // }
-            geometry2.attributes.position.needsUpdate = true;
-        });
-        // for (let i = 0; i < particleCount * 3; i += 3) {
-        //     const u = Math.random();
-        //     const v = Math.random();
-        //     const theta = u * 2.0 * Math.PI;
-        //     const phi = Math.acos(2.0 * v - 1.0);
-        //     const r = 8; // Sphere radius
-
-        //     positions[i] = r * Math.sin(phi) * Math.cos(theta);
-        //     positions[i + 1] = r * Math.sin(phi) * Math.sin(theta);
-        //     positions[i + 2] = r;
-        // }
-
         geometry2.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-
-        // Basic points material (no external asset dependencies)
         const material2 = new THREE.PointsMaterial({
             color: new THREE.Color('blue'),
             size: 0.25,
-            //sizeAttenuation: true,
             opacity: 0.1
         });
-
         const pointCloud = new THREE.Points(geometry2, material2);
         scene2.add(pointCloud);
-
-        // Independent animation loop for Canvas 2
         let canvas2AnimationFrameId;
         const animateCanvas2 = () => {
             if (!isMounted) return;
             canvas2AnimationFrameId = requestAnimationFrame(animateCanvas2);
-
-            // Spin the pointcloud slightly
             pointCloud.rotation.x += 0.003;
             pointCloud.rotation.y += 0.005;
-            //material2.opacity += 0.01;
-
             renderer2.render(scene2, camera2);
         };
         animateCanvas2();
-
         cleanupFunctions.push(() => {
             cancelAnimationFrame(canvas2AnimationFrameId);
             geometry2.dispose();
             material2.dispose();
             renderer2.dispose();
         });
-        // ==========================================
 
-        // Handle resize for both contexts
+        // === Resize for both contexts ===
         const handleResize = () => {
             if (!isMounted) return;
-            
-            // Resize main canvas
             const newSize = { width: window.innerWidth * 0.9, height: window.innerHeight * 0.9 };
             handleWindowResize(newSize, camera, renderer);
-
-            // Resize canvas2
             const r2 = canvas2.getBoundingClientRect();
             camera2.aspect = r2.width / r2.height;
             camera2.updateProjectionMatrix();
@@ -435,43 +363,90 @@ export default function Game() {
         window.addEventListener('resize', handleResize);
         cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 
-        // 2. Initialize Physics and Assets (Jolt)
+        // === Physics & Jolt Init ===
         initJolt().then(async (Jolt) => {
             if (!isMounted) return;
 
             await renderer.init();
             const { joltInterface, physicsSystem, bodyInterface } = initPhysics(Jolt);
-            
             if (!isMounted) return;
-            
+
             gameStateRef.current.joltInterface = joltInterface;
             gameStateRef.current.physicsSystem = physicsSystem;
             gameStateRef.current.bodyInterface = bodyInterface;
             gameStateRef.current.Jolt = Jolt;
-
             const dynamicObjects = [];
             gameStateRef.current.dynamicObjects = dynamicObjects;
 
-            // WebSocket setup
-            const wsUrl = `ws://localhost:3000`;
+            // === Multiplayer Penguin WebSocket Setup ===
+            // Use the game_id as the roomId in the websocket.
+            const wsUrl = `ws://localhost:3000?room=${encodeURIComponent(game_id)}`;
             const wsClient = new WebSocketClient(wsUrl);
-            wsClient.connect();
             gameStateRef.current.wsClient = wsClient;
+            wsClient.connect();
 
-            // Selection system
+            penguinsRef.current = {};
+            gameStateRef.current.penguins = penguinsRef.current;
+
+            wsClient.on('assign_id', (msg) => {
+                myPlayerIdRef.current = msg.id;
+            });
+
+            wsClient.on('player_state', (stateMsg) => {
+                // This should be: { players: { [id]: { pos: {x, y, z}, quat, color } } }
+                if (!stateMsg.players) return;
+                Object.entries(stateMsg.players).forEach(([id, pdata]) => {
+                    if (!penguinsRef.current[id]) {
+                        // Create a mesh for each remote penguin (including the current player)
+                        const color = pdata.color !== undefined ? pdata.color : colorFromId(id);
+                        const mesh = createRemotePenguinMesh(color);
+                        scene.add(mesh);
+                        penguinsRef.current[id] = { mesh, color };
+                    }
+                    penguinsRef.current[id].mesh.position.set(
+                        pdata.pos.x,
+                        pdata.pos.y,
+                        pdata.pos.z
+                    );
+                    if (pdata.quat) {
+                        penguinsRef.current[id].mesh.quaternion.set(
+                            pdata.quat.x,
+                            pdata.quat.y,
+                            pdata.quat.z,
+                            pdata.quat.w
+                        );
+                    }
+                });
+                // Remove penguins for ids not present in player state
+                const currentIds = Object.keys(stateMsg.players);
+                for (const existingId of Object.keys(penguinsRef.current)) {
+                    if (!currentIds.includes(existingId)) {
+                        scene.remove(penguinsRef.current[existingId].mesh);
+                        delete penguinsRef.current[existingId];
+                    }
+                }
+                setRemotePenguinsTick(t => t + 1);
+            });
+
+            // Clean-up multiplayer penguin meshes on dismount
+            cleanupFunctions.push(() => {
+                Object.values(penguinsRef.current).forEach(({ mesh }) => scene.remove(mesh));
+                penguinsRef.current = {};
+            });
+
+            // === End Multiplayer Setup ===
+
+            // Selection system as before:
             const selectionSystem = new SelectionSystem(scene, camera, canvas);
             gameStateRef.current.selectionSystem = selectionSystem;
-            
             let allowSelection = true;
             let mouseDownPos = null;
-            
             const handlePointerDown = (event) => {
                 if (event.button === 0) {
                     mouseDownPos = { x: event.clientX, y: event.clientY };
                     allowSelection = true;
                 }
             };
-            
             const handlePointerMove = (event) => {
                 if (mouseDownPos && event.buttons === 1) {
                     const dx = Math.abs(event.clientX - mouseDownPos.x);
@@ -479,7 +454,6 @@ export default function Game() {
                     if (dx > 5 || dy > 5) allowSelection = false;
                 }
             };
-            
             const handlePointerUp = (event) => {
                 if (event.button === 0 && allowSelection && mouseDownPos) {
                     setTimeout(() => selectionSystem.handleClick(event), 10);
@@ -487,7 +461,6 @@ export default function Game() {
                 mouseDownPos = null;
                 allowSelection = true;
             };
-            
             canvas.addEventListener('pointerdown', handlePointerDown);
             canvas.addEventListener('pointermove', handlePointerMove);
             canvas.addEventListener('pointerup', handlePointerUp);
@@ -498,6 +471,7 @@ export default function Game() {
                 selectionSystem.dispose();
             });
 
+            // Main player character
             const charBody = setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExampleUpdateRef, game_id);
             gameStateRef.current.charBody = charBody;
 
@@ -512,6 +486,23 @@ export default function Game() {
 
             handleUserInput(inputStateRef.current);
 
+            // === Send *your* penguin position and orientation to server over websocket ===
+            function sendPenguinPositionToServer() {
+                if (!wsClient || !wsClient.connected) return;
+                if (!(charBody && bodyInterface)) return;
+                const bodyId = charBody.GetID();
+                const pos = bodyInterface.GetPosition(bodyId);
+                const quat = bodyInterface.GetRotation(bodyId);
+                wsClient.sendJson({
+                    type: 'player_update',
+                    game_id, // for server to know which room
+                    pos: { x: pos.GetX(), y: pos.GetY(), z: pos.GetZ() },
+                    quat: { x: quat.GetX(), y: quat.GetY(), z: quat.GetZ(), w: quat.GetW() }
+                });
+            }
+
+            // Render loop hook: update our position to server, update effects, and check win
+            let netSyncTick = 0, netSyncEvery = 2;
             function onExampleUpdate(time, deltaTime) {
                 if (onExampleUpdateRef.fn) {
                     onExampleUpdateRef.fn(time, deltaTime, inputStateRef.current);
@@ -523,15 +514,18 @@ export default function Game() {
                         updateEffect(deltaTime);
                     }
                 }
-                
+
+                // Multiplayer: send our pos every Nth frame for smoothness w/o spamming server
+                netSyncTick = (netSyncTick + 1) % netSyncEvery;
+                if (netSyncTick === 0) sendPenguinPositionToServer();
+
+                // Check for cheese win
                 if (!showWinMessage) {
                     const cheesePos = gameStateRef.current.cheesePosition;
                     const charBodyRef = gameStateRef.current.charBody;
-                    
                     if (cheesePos && charBodyRef) {
                         const playerPos = bodyInterface.GetPosition(charBodyRef.GetID());
                         const playerVec = new THREE.Vector3(playerPos.GetX(), playerPos.GetY(), playerPos.GetZ());
-                        
                         const distance = playerVec.distanceTo(cheesePos);
                         if (distance < 1.5) {
                             setShowWinMessage(true);
@@ -541,9 +535,9 @@ export default function Game() {
                 }
             }
 
+            // Object creation mutation
             const generateObject = initGenerateObject(Jolt, physicsSystem, scene);
             gameStateRef.current.generateObject = generateObject;
-
             const addObjectsButton = document.getElementById('add-objects');
             if (addObjectsButton) {
                 const handleClick = () => generateObject();
@@ -560,17 +554,20 @@ export default function Game() {
                 gameStateRef.current.effectDisposers.forEach((dispose) => dispose());
             }
             cleanupFunctions.forEach(fn => fn());
-            
             if (gameStateRef.current.wsClient) {
                 gameStateRef.current.wsClient.disconnect();
                 gameStateRef.current.wsClient = null;
             }
-            
+            for (const id in penguinsRef.current) {
+                if (penguinsRef.current[id] && penguinsRef.current[id].mesh && gameStateRef.current.scene) {
+                    gameStateRef.current.scene.remove(penguinsRef.current[id].mesh);
+                }
+            }
+            penguinsRef.current = {};
             const renderer = gameStateRef.current.renderer;
             if (renderer && typeof renderer.dispose === 'function') {
                 try { renderer.dispose(); } catch (e) { console.error(e); }
             }
-            
             gameStateRef.current.renderer = null;
             gameStateRef.current.scene = null;
             gameStateRef.current.camera = null;
@@ -595,6 +592,7 @@ export default function Game() {
                     ref={canvasRef2}
                     id="canvas2"
                     style={{
+                        display: 'none',
                         width: '45%',
                         height: '100%',
                         border: '10px dashed white',
@@ -607,12 +605,8 @@ export default function Game() {
                 />
             </div>
             
-            <WASDControls 
-            
-            inputState={inputStateRef.current} />
-            <GameVideoSeekBar 
-            
-            />
+            <WASDControls inputState={inputStateRef.current} />
+            <GameVideoSeekBar />
             {showWinMessage && (
                 <div style={{
                     position: 'fixed', top: 0, left: 0, right: 0, bottom: 0,
@@ -634,4 +628,3 @@ export default function Game() {
         </div>
     );
 }
-
