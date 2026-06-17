@@ -78,6 +78,7 @@ function GameVideoSeekBar() {
 
     return (
       <div style={{ position: 'absolute', bottom: '10px', right: '10px', zIndex: 1000 }}>
+        
         <button onClick={handlePlayClick}>Play</button>
         <input
           type="range"
@@ -248,6 +249,7 @@ export default function Game() {
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
     const [showWinMessage, setShowWinMessage] = useState(false);
+    const [pointCloudCount, setPointCloudCount] = useState(0);
 
     // Used to force re-render of penguin list if ever needed
     const [, setRemotePenguinsTick] = useState(0);
@@ -285,6 +287,8 @@ export default function Game() {
     });
 
     useEffect(() => {
+
+        
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
 
         const container = containerRef.current;
@@ -310,7 +314,7 @@ export default function Game() {
         let cleanupFunctions = [];
         let isMounted = true;
 
-        // === Canvas2 code (not related to penguins, unchanged) ===
+        // === Canvas2 code: render a chair made of shiny silver particles ===
         const rect2 = canvas2.getBoundingClientRect();
         const renderer2 = new THREE.WebGLRenderer({ canvas: canvas2, alpha: true, antialias: true });
         renderer2.setSize(rect2.width, rect2.height, false);
@@ -318,23 +322,149 @@ export default function Game() {
         const scene2 = new THREE.Scene();
         const camera2 = new THREE.PerspectiveCamera(45, rect2.width / rect2.height, 0.1, 100);
         camera2.position.z = 30;
-        const particleCount = 10000;
-        const geometry2 = new THREE.BufferGeometry();
+        
+        // Lights for shiny effect
+        const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+        scene2.add(ambientLight);
+        const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
+        directionalLight.position.set(10, 20, 20);
+        scene2.add(directionalLight);
+
+        // --- Chair Model as Point Cloud ---
+        // Chair made of particles: seat, 4 legs, backrest (simple shape)
+
+        const particleCount = 3000; // Fewer than previously to allow for real placement
         const positions = new Float32Array(particleCount * 3);
-        for (let i = 0; i < particleCount * 3; i += 3) {
-            positions[i] = Math.random() * 10;
-            positions[i + 1] = Math.random() * 10;
-            positions[i + 2] = Math.random() * 10;
+
+        // Chair dimensions (in arbitrary units)
+        const seatWidth = 8, seatDepth = 8, seatHeight = 8;
+        const legHeight = 10, legRadius = 0.5;
+        const backrestHeight = 10, backrestThickness = 0.7;
+
+        // Distribute particles
+        let n = 0;
+
+        // Helper to place a particle
+        function place(x, y, z) {
+            if (n >= particleCount) return;
+            positions[n * 3] = x;
+            positions[n * 3 + 1] = y;
+            positions[n * 3 + 2] = z;
+            n++;
         }
+
+        // Seat (flat square, some thickness)
+        for (let i = 0; i < 1100; i++) {
+            const x = THREE.MathUtils.lerp(-seatWidth / 2, seatWidth / 2, Math.random());
+            const z = THREE.MathUtils.lerp(-seatDepth / 2, seatDepth / 2, Math.random());
+            const y = 0;
+            const t = THREE.MathUtils.lerp(-0.7, 0.7, Math.random());
+            place(x, y + t, z);
+        }
+
+        // Four legs - simple vertical cylinders at the corners
+        for (let leg = 0; leg < 4; leg++) {
+            const lx = leg < 2 ? -seatWidth / 2 + 0.8 : seatWidth / 2 - 0.8;
+            const lz = (leg % 2 === 0) ? -seatDepth / 2 + 0.8 : seatDepth / 2 - 0.8;
+            for (let i = 0; i < 300; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const radius = legRadius * Math.sqrt(Math.random());
+                const x = lx + Math.cos(angle) * radius;
+                const z = lz + Math.sin(angle) * radius;
+                const y = -1.5 - Math.random() * legHeight;
+                place(x, y, z);
+            }
+        }
+
+        // Backrest (upright plane, some thickness at the seat's back)
+        for (let i = 0; i < 800; i++) {
+            const x = THREE.MathUtils.lerp(-seatWidth / 2, seatWidth / 2, Math.random());
+            const z = seatDepth / 2 + backrestThickness * THREE.MathUtils.randFloat(-0.2, 1.2);
+            const y = THREE.MathUtils.lerp(1.5, 1.5 + backrestHeight, Math.random());
+            place(x, y, z);
+        }
+
+        // Optionally: sides/top of backrest bars
+        for (let i = 0; i < 400; i++) {
+            // Vertical bars on backrest
+            const x = THREE.MathUtils.lerp(-seatWidth / 2 + 0.1, seatWidth / 2 - 0.1, Math.random());
+            const z = seatDepth / 2 + 0.7;
+            const y = THREE.MathUtils.lerp(7.5, 9 + backrestHeight, Math.random());
+            place(x, y, z);
+        }
+
+        // Create geometry
+        const geometry2 = new THREE.BufferGeometry();
         geometry2.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+
+        // Set the point cloud count in state to show in UI
+        setPointCloudCount(n);
+
+        // Shiny silver and pink (on hover) material with size attenuation and some sparkle
+        // We'll set up two materials and switch by changing material2.color
+        const silverColor = new THREE.Color(0xeaeaea);
+        const pinkColor = new THREE.Color(0xff69b4);
+
         const material2 = new THREE.PointsMaterial({
-            color: new THREE.Color('blue'),
-            size: 0.25,
-            opacity: 0.1
+            color: silverColor,
+            size: 0.55,
+            sizeAttenuation: true,
+            transparent: true,
+            opacity: 0.86,
+            shininess: 80,
+            specular: 0xffffff,
+            // Give a subtle shimmer
+            map: (() => {
+                // Make a small round sprite for the shine
+                const size = 64;
+                const canvas = document.createElement('canvas');
+                canvas.width = canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                const gradient = ctx.createRadialGradient(
+                    size / 2,
+                    size / 2,
+                    0,
+                    size / 2,
+                    size / 2,
+                    size / 2
+                );
+                gradient.addColorStop(0.1, '#fff');
+                gradient.addColorStop(0.25, '#dddddd');
+                gradient.addColorStop(1, '#bbbbbb00');
+                ctx.fillStyle = gradient;
+                ctx.beginPath();
+                ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+                ctx.fill();
+                return new THREE.CanvasTexture(canvas);
+            })(),
+            alphaTest: 0.13,
+            depthWrite: false
         });
+
         const pointCloud = new THREE.Points(geometry2, material2);
         scene2.add(pointCloud);
         let canvas2AnimationFrameId;
+
+        // --- Mouse hover color change logic ---
+        // We want to turn particles pink on hover over right canvas
+        const handlePointerEnter = () => {
+            material2.color.copy(pinkColor);
+            // Three.js bug: forces update for WebGL renderer!
+            material2.needsUpdate = true;
+        };
+        const handlePointerLeave = () => {
+            material2.color.copy(silverColor);
+            material2.needsUpdate = true;
+        };
+
+        // Attach native DOM events for hover tracking
+        canvas2.addEventListener('mouseenter', handlePointerEnter);
+        canvas2.addEventListener('mouseleave', handlePointerLeave);
+        cleanupFunctions.push(() => {
+            canvas2.removeEventListener('mouseenter', handlePointerEnter);
+            canvas2.removeEventListener('mouseleave', handlePointerLeave);
+        });
+
         const animateCanvas2 = () => {
             if (!isMounted) return;
             canvas2AnimationFrameId = requestAnimationFrame(animateCanvas2);
@@ -585,24 +715,28 @@ export default function Game() {
             
             <div ref={containerRef} id="container" style={{ width: '100%', height: '90vh', position: 'relative' }}>
                 {/* Main Canvas Context */}
-                <canvas ref={canvasRef} id="canvas" style={{ width: '50%', height: '100%' }}></canvas>
+                <canvas ref={canvasRef} id="canvas" style={{ width: '500px', height: '400px' }}></canvas>
                 
                 {/* Point Cloud Isolated Canvas Context */}
+                <p style={{ color: 'white', fontSize: '1rem', textAlign: 'center', marginTop: '10px' }}>
+                    Point Cloud Count: {pointCloudCount} particles rendered
+                </p>
                 <canvas
                     ref={canvasRef2}
                     id="canvas2"
                     style={{
-                        display: 'none',
-                        width: '45%',
-                        height: '100%',
+                        // display: 'none',
+                        width: '500px',
+                        height: '450px',
                         border: '10px dashed white',
-                        position: 'absolute',
+                        position: '',
                         top: '0',
                         right: '0',
                         zIndex: 1000,
                         backgroundColor: 'rgba(0,0,0,0.4)'
                     }}
                 />
+           
             </div>
             
             <WASDControls inputState={inputStateRef.current} />

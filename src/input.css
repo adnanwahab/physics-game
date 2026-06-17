@@ -223,9 +223,3 @@ body {
 
 
 
-canvas {
-    /* width: 500px; */
-    width: 500px !important;
-    height: 100%;
-    border: 10px dashed white;
-}
