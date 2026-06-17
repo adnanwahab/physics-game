@@ -299,6 +299,13 @@ export default function Game() {
         // ==========================================
         const rect2 = canvas2.getBoundingClientRect();
         const renderer2 = new THREE.WebGLRenderer({ canvas: canvas2, alpha: true, antialias: true });
+
+
+
+
+
+
+
         renderer2.setSize(rect2.width, rect2.height, false);
         renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -317,12 +324,15 @@ export default function Game() {
         // Load the OBJ file, parse vertices, and make a particle per vertex
         // We'll load using the loadOBJModel utility, which resolves to a THREE.Group
 
-        console.log('Loading desk OBJ file', deskObjUrl);
+        //console.log('Loading desk OBJ file', deskObjUrl);
         for (let i = 0; i < particleCount * 3; i += 3) {
             positions[i] = Math.random() * 10;
             positions[i + 1] = Math.random() * 10;
             positions[i + 2] = Math.random() * 10;
         }
+
+
+
         loadOBJModel(deskObjUrl).then(async (objGroup) => {
             let vPositions = [];
             objGroup.traverse(child => {

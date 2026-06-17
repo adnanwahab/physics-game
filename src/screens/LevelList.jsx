@@ -26,29 +26,40 @@ export default function LevelList() {
                 marginTop: '20px'
             }}>
                 <thead>
-                    <tr style={{ 
-                        backgroundColor: '#f3f4f6',
-                        borderBottom: '2px solid #e5e7eb'
-                    }}>
+                    <tr
+                        style={{ 
+                            // Remove distinct background to blend with tbody
+                            backgroundColor: 'transparent', // No special header bg
+                            borderBottom: '2px solid #e5e7eb'
+                        }}
+                    >
                         <th style={{ 
                             padding: '12px', 
                             textAlign: 'left',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: 'inherit', // inherit table color
+                            backgroundColor: 'transparent'
                         }}>ID</th>
                         <th style={{ 
                             padding: '12px', 
                             textAlign: 'left',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: 'inherit',
+                            backgroundColor: 'transparent'
                         }}>Name</th>
                         <th style={{ 
                             padding: '12px', 
                             textAlign: 'left',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: 'inherit',
+                            backgroundColor: 'transparent'
                         }}>Difficulty</th>
                         <th style={{ 
                             padding: '12px', 
                             textAlign: 'left',
-                            fontWeight: 'bold'
+                            fontWeight: 'bold',
+                            color: 'inherit',
+                            backgroundColor: 'transparent'
                         }}>Description</th>
                     </tr>
                 </thead>
@@ -60,7 +71,8 @@ export default function LevelList() {
                             style={{
                                 cursor: 'pointer',
                                 borderBottom: '1px solid #e5e7eb',
-                                transition: 'background-color 0.2s'
+                                transition: 'background-color 0.2s',
+                                backgroundColor: 'transparent'
                             }}
                             onMouseEnter={(e) => {
                                 e.currentTarget.style.backgroundColor = '#f9fafb';
@@ -79,4 +91,4 @@ export default function LevelList() {
             </table>
         </div>
     );
-} 
+}
