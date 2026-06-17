@@ -1,6 +1,6 @@
 import { MeshPhongMaterial, Mesh, BoxGeometry, SphereGeometry, CapsuleGeometry, CylinderGeometry } from 'three';
-import { createMeshForShape } from './createMeshForShape.js';
-import { getSoftBodyMesh } from './getSoftBodyMesh.js';
+import { createMeshForShape } from '../createMeshForShape.js';
+import { getSoftBodyMesh } from '../getSoftBodyMesh.js';
 
 /**
  * Creates a Three.js mesh based on the Jolt body shape type.

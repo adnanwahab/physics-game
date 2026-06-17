@@ -1,7 +1,7 @@
 import { createFloor } from './utils/createFloor.js';
 import { createBox } from './utils/createBox.js';
 import { addToScene } from './utils/addToScene.js';
-import { getThreeObjectForBody } from './getThreeObjectForBody.js';
+import { getThreeObjectForBody } from './utils/getThreeObjectForBody.js';
 import { createPenguin } from './utils/createPenguin.js';
 import * as THREE from 'three';
 /**

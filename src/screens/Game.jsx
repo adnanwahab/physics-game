@@ -19,7 +19,7 @@ import editScene from "../utils/edit_scene.js";
 import { setupLighting } from "../lighting.js";
 import { createBox } from "../utils/createBox.js";
 import { addToScene } from "../utils/addToScene.js";
-import { getThreeObjectForBody } from "../getThreeObjectForBody.js";
+import { getThreeObjectForBody } from "../utils/getThreeObjectForBody.js";
 import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";

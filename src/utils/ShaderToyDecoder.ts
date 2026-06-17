@@ -1,5 +1,5 @@
 import { Return, VariableDeclaration, Accessor } from './AST.js';
-import GLSLDecoder from '../GLSLDecoder.js';
+import GLSLDecoder from './GLSLDecoder.js';
 
 class ShaderToyDecoder extends GLSLDecoder {
 

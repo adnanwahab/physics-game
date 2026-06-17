@@ -1,6 +1,6 @@
 
 {
-  "name": "warsong_gulch",
+  "name": "capture the flag",
   "description": "This level presents the classic Warsong Gulch battleground as an explorable 3D scene.",
   "obj": "../obj/warsong_gulch.obj",
   "startPosition": { "x": 0, "y": 2, "z": 10 },
