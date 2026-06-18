@@ -27,10 +27,12 @@ import { createSoundWaveRings } from "../createSoundWaveRings.js";
 
 const players = [];
 
-function GameVideoSeekBar() {
+// REWRITTEN: Props now accepts annotations array, and shows annotation markers
+function GameVideoSeekBar({ annotations = [] }) {
     const [value, setValue] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
     const intervalRef = useRef(null);
+    const sliderRef = useRef(null); // reference to the input[type=range] for marker placement
 
     useEffect(() => {
         if (isPlaying) {
@@ -62,6 +64,35 @@ function GameVideoSeekBar() {
         }
     };
 
+    // For marker placement: get annotation marker percent in [0, 100]
+    // We'll sort by location.x for fun, map min/max location.x to 0/100
+    let markers = [];
+    if (annotations && annotations.length > 0) {
+        // Use location.x, or fallback to even division if not present
+        const useEven = annotations.some(a => !a.location || typeof a.location.x !== 'number');
+        if (!useEven) {
+            // Find min & max x to map to 0-100
+            const xs = annotations.map(a => a.location.x);
+            const minX = Math.min(...xs);
+            const maxX = Math.max(...xs);
+            const span = maxX - minX || 1; // Avoid div/0
+            markers = annotations.map((a, idx) => ({
+                percent: ((a.location.x - minX) / span) * 100,
+                color: a.color || '#ffd700',
+                idx,
+                title: a.title,
+            }));
+        } else {
+            // Evenly spaced if no valid x
+            markers = annotations.map((a, idx) => ({
+                percent: (idx + 1) * (100 / (annotations.length + 1)),
+                color: a.color || '#ffd700',
+                idx,
+                title: a.title,
+            }));
+        }
+    }
+
     return (
         <div style={{
             display: 'flex',
@@ -76,6 +107,7 @@ function GameVideoSeekBar() {
             minWidth: 175,
             marginTop: 0,
             marginBottom: 0,
+            position: 'relative', // for markers layering
         }}>
             <button
                 onClick={handlePlayClick}
@@ -93,20 +125,75 @@ function GameVideoSeekBar() {
                     transition: 'background 0.16s'
                 }}
             >Play</button>
-            <input
-                type="range"
-                min="0"
-                max="100"
-                value={value}
-                onChange={e => setValue(Number(e.target.value))}
-                style={{
-                    flex: 1,
-                    margin: '0 8px',
-                    accentColor: '#ffd700',
-                    cursor: 'pointer',
-                    height: 4,
-                }}
-            />
+            <div style={{flex: 1, position: "relative", margin: '0 8px', minWidth: 35,}}>
+                {/* Slider */}
+                <input
+                    ref={sliderRef}
+                    type="range"
+                    min="0"
+                    max="100"
+                    value={value}
+                    onChange={e => setValue(Number(e.target.value))}
+                    style={{
+                        width: '100%',
+                        accentColor: '#ffd700',
+                        cursor: 'pointer',
+                        height: 4,
+                        position: 'relative',
+                        zIndex: 1,
+                    }}
+                />
+                {/* Markers */}
+                {(markers && markers.length > 0) && (
+                    <div
+                        style={{
+                            pointerEvents: 'none',
+                            position: 'absolute',
+                            left: 0,
+                            right: 0,
+                            top: 0,
+                            bottom: 0,
+                            height: 0,
+                            zIndex: 3,
+                        }}
+                    >
+                        {markers.map((m, i) => (
+                            <div
+                                key={m.idx}
+                                title={m.title}
+                                style={{
+                                    position: 'absolute',
+                                    top: '-9px',
+                                    left: `calc(${m.percent}% - 7px)`,
+                                    width: 14,
+                                    height: 14,
+                                    borderRadius: 7,
+                                    // Background color with outline and slight shadow:
+                                    border: `2.5px solid #222`,
+                                    background: m.color,
+                                    boxShadow: `0 2px 7px ${m.color}88, 0 0 2px #0007`,
+                                    // above the slider
+                                    zIndex: 10,
+                                    pointerEvents: 'auto',
+                                    transition: 'transform 0.13s',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    fontWeight: 'bold',
+                                    fontSize: '11px',
+                                    cursor: 'pointer'
+                                }}
+                            >
+                                {/* Optional: a flag/mini-dot/★ */}
+                                <span role="img" aria-label="annotation" style={{fontSize: 11, textShadow:"0 0 2px #fff"}}>
+                                    {/* Could use a filled ● or star */}
+                                    &#9733;
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+                )}
+            </div>
         </div>
     )
 }
@@ -953,7 +1040,7 @@ export default function Game() {
                 <button onClick={() => setCanvas2Visible(v => !v)}>
                     {canvas2Visible ? "Hide" : "Show"} Canvas2
                 </button>
-                <GameVideoSeekBar />
+                <GameVideoSeekBar annotations={annotations} />
 
                 <button
                     style={{
