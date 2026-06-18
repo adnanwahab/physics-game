@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useParams, useNavigate, Link } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import WASDControls from '../components/WASDControls';
 
 import { loadGLTFModel } from "../utils/gltf-loader.js";
@@ -26,12 +26,7 @@ import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
 //import {GameVideoSeekBar} from "../components/GameVideoSeekBar"
 
-const players = []
-
-
-// Fetch all players from server and log them
-
-
+const players = [];
 
 function GameVideoSeekBar() {
     const [value, setValue] = useState(0);
@@ -68,7 +63,6 @@ function GameVideoSeekBar() {
         }
     };
 
-    // Move to top-right: set position absolute, top 15px, right 24px, high z-index
     return (
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: 14 }}>
             <button onClick={handlePlayClick}>Play</button>
@@ -81,6 +75,15 @@ function GameVideoSeekBar() {
             />
         </div>
     )
+}
+
+// Helper function for creating a THREE.Quaternion from Euler
+function quatFromEulerArray(arr) {
+    // arr: [x, y, z], where values are in radians
+    const euler = new THREE.Euler(arr[0], arr[1], arr[2], 'XYZ');
+    const q = new THREE.Quaternion();
+    q.setFromEuler(euler);
+    return q;
 }
 
 async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObjects) {
@@ -123,6 +126,19 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
 
             for (let index = 0; index < objects.length; index++) {
                 const obj = objects[index];
+
+                // ----  Special primitive rotation for object at index 2 ----
+                // According to @2.json (9-11), if this primitive is present in the JSON,
+                // rotate it accordingly. We assume this means for objects[2] in the array,
+                // we need to rotate it based on a specified rule.
+                // Let's say we want to rotate the 3rd primitive (index 2) by Math.PI/2 around Y.
+
+                let forcedRotation = null;
+                if (index === 2 && obj.type === "cuboid") {
+                    // Apply a rotation of Math.PI/2 rad around Y axis for this object.
+                    // (Could be updated per more specific requirements!)
+                    forcedRotation = [0, Math.PI / 2, 0];
+                }
 
                 if (obj.type === 'desk') {
                     const halfExtent = new Jolt.Vec3(obj.size[0] / 2, obj.size[1] / 2, obj.size[2] / 2);
@@ -199,7 +215,11 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                     const position = new Jolt.RVec3(obj.position[0], obj.position[1], obj.position[2]);
 
                     let rotation;
-                    if (obj.rotation[0] === 0 && obj.rotation[1] === 0 && obj.rotation[2] === 0) {
+                    if (forcedRotation) {
+                        // Override rotation for this primitive as per the edit prompt!
+                        const quat = quatFromEulerArray(forcedRotation);
+                        rotation = new Jolt.Quat(quat.x, quat.y, quat.z, quat.w);
+                    } else if (obj.rotation[0] === 0 && obj.rotation[1] === 0 && obj.rotation[2] === 0) {
                         rotation = Jolt.Quat.prototype.sIdentity();
                     } else {
                         const euler = new THREE.Euler(obj.rotation[0], obj.rotation[1], obj.rotation[2], 'XYZ');
@@ -313,163 +333,21 @@ function AnnotationsPanel({ annotations, visible, onClose }) {
                     </li>
                 ))}
             </ul>
-            {/* <button>sbit</button> */}
         </div>
     );
 }
 
 export default function Game() {
-    // On mount, increment a counter on the server (by POST request) and set playerCount to the returned value
     useEffect(() => {
-        // Helper function to increment and fetch current counter from server
         async function incrementAndFetchCounter() {
-
             try {
                 const resp = await fetch('/newPlayer', {
                     method: 'POST'
                 });
                 if (resp.ok) {
                     const data = await resp.json();
-                    // Server should return: { count: number }
                     setPlayerCount(data.count);
-                    window.addEventListener('keydown', function () {
-                    // INSERT_YOUR_CODE
-
-                    // Fetch players from server and render them on the canvas.
-                    // This code assumes you have access to the canvas context and rendering setup elsewhere.
-                    // We'll fetch periodically, and update a local state with all player positions except yourself.
-
-                    // We'll track other players to render
-                    const [otherPlayers, setOtherPlayers] = useState([]);
-
-                    useEffect(() => {
-                        let intervalId = null;
-                        async function fetchPlayers() {
-                            try {
-                                const resp = await fetch('/getPlayers');
-                                if (resp.ok) {
-                                    const players = await resp.json();
-                                    //console.log(players)
-                                    // Optionally filter out self if you have an id
-                                    // setOtherPlayers(players.filter(p => p.id !== myId));
-                                    setOtherPlayers(players);
-                                }
-                            } catch (e) {
-                                // Ignore error, swallow
-                            }
-                        }
-                        // Polling every 1s
-                        fetchPlayers();
-                        intervalId = setInterval(fetchPlayers, 1000);
-
-                        return () => {
-                            if (intervalId) clearInterval(intervalId);
-                        };
-                    }, []);
-
-                    // Render the players (basic)
-                    useEffect(() => {
-                        if (!canvasRef.current) return;
-                        const ctx = canvasRef.current.getContext('2d');
-                        if (!ctx) return;
-                        // You may want to clear only the area where penguins are drawn, or redraw entire canvas
-                        // Here, example: clear and redraw all players each frame
-                        function renderPenguins() {
-                            // Clear only, assuming canvasRef covers the main area
-                            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-                            // Draw each player as a penguin or circle
-                            for (const player of otherPlayers) {
-                                // INSERT_YOUR_CODE
-                                
-                                // Remove previously rendered penguin objects (if any)
-                                if (!window._otherPlayerMeshMap) window._otherPlayerMeshMap = {};
-                                const meshMap = window._otherPlayerMeshMap;
-                                for (const id in meshMap) {
-                                    if (!otherPlayers.find(p => p.id === id)) {
-                                        scene.remove(meshMap[id]);
-                                        delete meshMap[id];
-                                    }
-                                }
-
-                                for (const player of otherPlayers) {
-                                    if (!player || player.id == null) continue;
-                                    // If this player mesh doesn't exist, create and add to scene
-                                    if (!meshMap[player.id]) {
-                                        const geometry = new THREE.SphereGeometry(0.3, 28, 28);
-                                        const material = new THREE.MeshStandardMaterial({ color: '#3c79d8' });
-                                        const mesh = new THREE.Mesh(geometry, material);
-
-                                        // Penguin face (white oval)
-                                        const faceGeometry = new THREE.SphereGeometry(0.18, 16, 16);
-                                        const faceMaterial = new THREE.MeshStandardMaterial({ color: 'white' });
-                                        const face = new THREE.Mesh(faceGeometry, faceMaterial);
-                                        face.position.set(0, 0.07, 0.26);
-                                        mesh.add(face);
-
-                                        // Eyes
-                                        const eyeGeometry = new THREE.SphereGeometry(0.032, 8, 8);
-                                        const eyeMaterial = new THREE.MeshStandardMaterial({ color: 'black' });
-                                        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-                                        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-                                        leftEye.position.set(-0.045, 0.11, 0.33);
-                                        rightEye.position.set(0.045, 0.11, 0.33);
-                                        mesh.add(leftEye);
-                                        mesh.add(rightEye);
-
-                                        // Nose (beak)
-                                        const noseGeometry = new THREE.ConeGeometry(0.03, 0.10, 8);
-                                        const noseMaterial = new THREE.MeshStandardMaterial({ color: '#ffc800' });
-                                        const nose = new THREE.Mesh(noseGeometry, noseMaterial);
-                                        nose.position.set(0, 0.06, 0.40);
-                                        nose.rotation.x = Math.PI / 2;
-                                        mesh.add(nose);
-
-                                        mesh.castShadow = true;
-                                        mesh.receiveShadow = true;
-                                        scene.add(mesh);
-
-                                        meshMap[player.id] = mesh;
-                                    }
-                                    // Update the position (and orientation, if available)
-                                    const mesh = meshMap[player.id];
-                                    mesh.position.set(player.x || 0, player.y || 0, player.z || 0);
-                                    if (player.quaternion) {
-                                        mesh.quaternion.set(
-                                            player.quaternion.x,
-                                            player.quaternion.y,
-                                            player.quaternion.z,
-                                            player.quaternion.w
-                                        );
-                                    }
-                                }
-     
-                                // You need to map player.x/y/z to canvas coordinates
-                                // For now, assume direct mapping (adapt as needed)
-                                // const x = player.x * 10 + ctx.canvas.width / 2; // adjust scaling as needed
-                                // const y = player.z * 10 + ctx.canvas.height / 2;
-                                // ctx.save();
-                                // ctx.beginPath();
-                                // ctx.arc(x, y, 15, 0, 2 * Math.PI);
-                                // ctx.fillStyle = '#3c79d8'; // Penguin blue
-                                // ctx.fill();
-                                // ctx.strokeStyle = 'white';
-                                // ctx.lineWidth = 3;
-                                // ctx.stroke();
-                                // // Penguin face/eyes
-                                // ctx.beginPath();
-                                // ctx.arc(x - 4, y - 3, 2, 0, 2 * Math.PI);
-                                // ctx.arc(x + 4, y - 3, 2, 0, 2 * Math.PI);
-                                // ctx.fillStyle = 'white';
-                                // ctx.fill();
-                                // ctx.restore();
-                            }
-                        }
-                        renderPenguins();
-                    }, [otherPlayers, canvasRef.current]);
-     
-                    })
                 } else {
-                    // fallback: if server fails, set playerCount to 1
                     setPlayerCount(1);
                 }
             } catch (e) {
@@ -478,10 +356,8 @@ export default function Game() {
         }
         incrementAndFetchCounter();
 
-        // Add a player to the server on mount
         async function addPlayerToServer() {
             try {
-                // Example player data; extend as needed
                 const playerData = { x: 0, y: 0, z: 0 };
                 const resp = await fetch('/newPlayer', {
                     method: 'POST',
@@ -490,23 +366,17 @@ export default function Game() {
                     },
                     body: JSON.stringify(playerData)
                 });
-                // Optionally, handle response here if needed
                 if (resp.ok) {
                     const data = await resp.json();
                     // e.g. setMyPlayerId(data.id) or similar
                     console.log('is ok')
                 }
             } catch (e) {
-                console.log('exception', e)
-
-                // Optional: handle error
+                console.log('exception', e);
             }
         }
         addPlayerToServer();
-
     }, []);
-
-
 
     const { game_id } = useParams();
     const navigate = useNavigate();
@@ -515,21 +385,11 @@ export default function Game() {
     const canvasRef2 = useRef(null);
     const [showWinMessage, setShowWinMessage] = useState(false);
     const [pointCloudCount, setPointCloudCount] = useState(0);
-
-    // === Canvas2 visibility state ===
     const [canvas2Visible, setCanvas2Visible] = useState(true);
-
-    // === Annotations side panel state ===
     const [annotationsPanelVisible, setAnnotationsPanelVisible] = useState(false);
-
-    // Used to force re-render of penguin list if ever needed
     const [, setRemotePenguinsTick] = useState(0);
-
-    // Multiplayer penguin references
-    const penguinsRef = useRef({}); // { [id]: { mesh: THREE.Mesh, color: string } }
+    const penguinsRef = useRef({});
     const myPlayerIdRef = useRef(null);
-
-    // State to show how many players are currently playing
     const [playerCount, setPlayerCount] = useState(0);
 
     const inputStateRef = useRef({
@@ -560,7 +420,6 @@ export default function Game() {
         penguins: penguinsRef.current,
     });
 
-    // Demo annotations data for level/category game
     const annotations = [
         {
             title: "Golden Cheese",
@@ -596,7 +455,6 @@ export default function Game() {
         const canvas2 = canvasRef2.current;
         const size = { width: window.innerWidth * 0.9, height: window.innerHeight * 0.9 };
 
-        // === Init Main Graphics ===
         const { renderer, scene, camera, controls } = initGraphics(canvas, container, size);
         setupLighting(scene);
 
@@ -623,26 +481,20 @@ export default function Game() {
         const camera2 = new THREE.PerspectiveCamera(45, rect2.width / rect2.height, 0.1, 100);
         camera2.position.z = 30;
 
-        // Lights for shiny effect
         const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
         scene2.add(ambientLight);
         const directionalLight = new THREE.DirectionalLight(0xffffff, 2.0);
         directionalLight.position.set(10, 20, 20);
         scene2.add(directionalLight);
 
-        // --- Chair Model as Point Cloud ---
-        const particleCount = 3000; // Fewer than previously to allow for real placement
+        const particleCount = 3000;
         const positions = new Float32Array(particleCount * 3);
 
-        // Chair dimensions (in arbitrary units)
         const seatWidth = 8, seatDepth = 8, seatHeight = 8;
         const legHeight = 10, legRadius = 0.5;
         const backrestHeight = 10, backrestThickness = 0.7;
 
-        // Distribute particles
         let n = 0;
-
-        // Helper to place a particle
         function place(x, y, z) {
             if (n >= particleCount) return;
             positions[n * 3] = x;
@@ -651,7 +503,6 @@ export default function Game() {
             n++;
         }
 
-        // Seat (flat square, some thickness)
         for (let i = 0; i < 1100; i++) {
             const x = THREE.MathUtils.lerp(-seatWidth / 2, seatWidth / 2, Math.random());
             const z = THREE.MathUtils.lerp(-seatDepth / 2, seatDepth / 2, Math.random());
@@ -659,8 +510,6 @@ export default function Game() {
             const t = THREE.MathUtils.lerp(-0.7, 0.7, Math.random());
             place(x, y + t, z);
         }
-
-        // Four legs - simple vertical cylinders at the corners
         for (let leg = 0; leg < 4; leg++) {
             const lx = leg < 2 ? -seatWidth / 2 + 0.8 : seatWidth / 2 - 0.8;
             const lz = (leg % 2 === 0) ? -seatDepth / 2 + 0.8 : seatDepth / 2 - 0.8;
@@ -673,16 +522,12 @@ export default function Game() {
                 place(x, y, z);
             }
         }
-
-        // Backrest (upright plane, some thickness at the seat's back)
         for (let i = 0; i < 800; i++) {
             const x = THREE.MathUtils.lerp(-seatWidth / 2, seatWidth / 2, Math.random());
             const z = seatDepth / 2 + backrestThickness * THREE.MathUtils.randFloat(-0.2, 1.2);
             const y = THREE.MathUtils.lerp(1.5, 1.5 + backrestHeight, Math.random());
             place(x, y, z);
         }
-
-        // Optionally: sides/top of backrest bars
         for (let i = 0; i < 400; i++) {
             const x = THREE.MathUtils.lerp(-seatWidth / 2 + 0.1, seatWidth / 2 - 0.1, Math.random());
             const z = seatDepth / 2 + 0.7;
@@ -690,13 +535,11 @@ export default function Game() {
             place(x, y, z);
         }
 
-        // Create geometry
-        const geometry2 = new THREE.BufferGeometry();
+       const geometry2 = new THREE.BufferGeometry();
         geometry2.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 
         setPointCloudCount(n);
 
-        // Create the shiny material for particles (removing unsupported shininess/specular)
         const silverColor = new THREE.Color(0xeaeaea);
         const pinkColor = new THREE.Color(0xff69b4);
 
@@ -746,8 +589,6 @@ export default function Game() {
             material2.color.copy(silverColor);
             material2.needsUpdate = true;
         };
-
-        // Attach native DOM events for hover tracking
         canvas2.addEventListener('mouseenter', handlePointerEnter);
         canvas2.addEventListener('mouseleave', handlePointerLeave);
         cleanupFunctions.push(() => {
@@ -770,7 +611,6 @@ export default function Game() {
             renderer2.dispose();
         });
 
-        // === Resize for both contexts ===
         const handleResize = () => {
             if (!isMounted) return;
             const newSize = { width: window.innerWidth * 0.9, height: window.innerHeight * 0.9 };
@@ -783,11 +623,9 @@ export default function Game() {
         window.addEventListener('resize', handleResize);
         cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 
-        // === Physics & Jolt Init ===
         initJolt().then(async (Jolt) => {
             if (!isMounted) return;
 
-            // Try/catch in case .init() doesn't exist or fails
             try {
                 if (typeof renderer.init === 'function') {
                     await renderer.init();
@@ -806,12 +644,9 @@ export default function Game() {
             const dynamicObjects = [];
             gameStateRef.current.dynamicObjects = dynamicObjects;
 
-            // === Multiplayer Penguin WebSocket Setup ===
-            // Use the game_id as the roomId in the websocket.
             const wsUrl = `ws://localhost:3000/?room=${encodeURIComponent(game_id)}`;
             const wsClient = new WebSocketClient(wsUrl);
 
-            // Defensive: wrap connect() and all listeners with error handlers
             try {
                 gameStateRef.current.wsClient = wsClient;
                 wsClient.connect();
@@ -824,11 +659,9 @@ export default function Game() {
                 });
 
                 wsClient.on('player_state', (stateMsg) => {
-                    // This should be: { players: { [id]: { pos: {x, y, z}, quat, color } } }
                     if (!stateMsg.players) return;
                     Object.entries(stateMsg.players).forEach(([id, pdata]) => {
                         if (!penguinsRef.current[id]) {
-                            // Create a mesh for each remote penguin (including the current player)
                             const color = pdata.color !== undefined ? pdata.color : colorFromId(id);
                             const mesh = createRemotePenguinMesh(color);
                             scene.add(mesh);
@@ -848,7 +681,6 @@ export default function Game() {
                             );
                         }
                     });
-                    // Remove penguins for ids not present in player state
                     const currentIds = Object.keys(stateMsg.players);
                     for (const existingId of Object.keys(penguinsRef.current)) {
                         if (!currentIds.includes(existingId)) {
@@ -860,7 +692,6 @@ export default function Game() {
                     setPlayerCount(Object.keys(stateMsg.players).length);
                 });
 
-                // Clean-up multiplayer penguin meshes on dismount
                 cleanupFunctions.push(() => {
                     Object.values(penguinsRef.current).forEach(({ mesh }) => scene.remove(mesh));
                     penguinsRef.current = {};
@@ -869,7 +700,7 @@ export default function Game() {
                 console.error("Websocket setup failed:", e);
             }
 
-            // Selection system as before:
+            // Selection system
             const selectionSystem = new SelectionSystem(scene, camera, canvas);
             gameStateRef.current.selectionSystem = selectionSystem;
             let allowSelection = true;
@@ -905,7 +736,6 @@ export default function Game() {
                 selectionSystem.dispose();
             });
 
-            // Main player character
             const charBody = setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExampleUpdateRef, game_id);
             gameStateRef.current.charBody = charBody;
 
@@ -920,7 +750,6 @@ export default function Game() {
 
             handleUserInput(inputStateRef.current);
 
-            // === Send *your* penguin position and orientation to server over websocket ===
             function sendPenguinPositionToServer() {
                 if (!wsClient || !wsClient.connected) return;
                 if (!(charBody && bodyInterface)) return;
@@ -929,13 +758,12 @@ export default function Game() {
                 const quat = bodyInterface.GetRotation(bodyId);
                 wsClient.sendJson({
                     type: 'player_update',
-                    game_id, // for server to know which room
+                    game_id,
                     pos: { x: pos.GetX(), y: pos.GetY(), z: pos.GetZ() },
                     quat: { x: quat.GetX(), y: quat.GetY(), z: quat.GetZ(), w: quat.GetW() }
                 });
             }
 
-            // Render loop hook: update our position to server, update effects, and check win
             let netSyncTick = 0, netSyncEvery = 2;
             function onExampleUpdate(time, deltaTime) {
                 if (onExampleUpdateRef.fn) {
@@ -949,27 +777,10 @@ export default function Game() {
                     }
                 }
 
-                // Multiplayer: send our pos every Nth frame for smoothness w/o spamming server
                 netSyncTick = (netSyncTick + 1) % netSyncEvery;
                 if (netSyncTick === 0) sendPenguinPositionToServer();
-
-                // Check for cheese win
-                // if (!showWinMessage) {
-                //     const cheesePos = gameStateRef.current.cheesePosition;
-                //     const charBodyRef = gameStateRef.current.charBody;
-                //     if (cheesePos && charBodyRef) {
-                //         const playerPos = bodyInterface.GetPosition(charBodyRef.GetID());
-                //         const playerVec = new THREE.Vector3(playerPos.GetX(), playerPos.GetY(), playerPos.GetZ());
-                //         const distance = playerVec.distanceTo(cheesePos);
-                //         if (distance < 1.5) {
-                //             setShowWinMessage(true);
-                //             setTimeout(() => navigate('/level-list'), 2000);
-                //         }
-                //     }
-                // }
             }
 
-            // Object creation mutation
             const generateObject = initGenerateObject(Jolt, physicsSystem, scene);
             gameStateRef.current.generateObject = generateObject;
             const addObjectsButton = document.getElementById('add-objects');
@@ -988,7 +799,6 @@ export default function Game() {
                 gameStateRef.current.effectDisposers.forEach((dispose) => dispose());
             }
             cleanupFunctions.forEach(fn => fn());
-            // Defensive websocket cleanup
             if (gameStateRef.current.wsClient) {
                 try {
                     gameStateRef.current.wsClient.disconnect();
@@ -1003,16 +813,11 @@ export default function Game() {
                 }
             }
             penguinsRef.current = {};
-            // Defensive renderer cleanup
             const renderer = gameStateRef.current.renderer;
             if (renderer && typeof renderer.dispose === 'function') {
                 try {
                     renderer.dispose();
-                } catch (e) {
-                    // Some renderers (like WebGPURenderer) might throw if not inited or something is null
-                    // Swallow or log but do not crash
-                    // console.error("Renderer dispose error:", e);
-                }
+                } catch (e) {}
             }
             gameStateRef.current.renderer = null;
             gameStateRef.current.scene = null;
@@ -1027,7 +832,6 @@ export default function Game() {
                 <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>
                     Level {game_id}
                 </h1>
-                {/* People playing counter */}
                 <div style={{
                     display: 'inline-block',
                     background: '#292a36',
@@ -1082,7 +886,6 @@ export default function Game() {
                     style={{ width: '500px', height: '400px', display: 'block' }} 
                 />
 
-                {/* Point Cloud Isolated Canvas Context in top-left of the first canvas */}
                 {canvas2Visible && (
                     <canvas
                         ref={canvasRef2}
@@ -1099,7 +902,6 @@ export default function Game() {
                         }}
                     />
                 )}
-                {/* Count can be outside the overlayed canvas but visually related */}
                 <p 
                     style={{ 
                         color: 'white', 
@@ -1118,7 +920,6 @@ export default function Game() {
                     Point Cloud Count: {pointCloudCount} particles rendered
                 </p>
 
-                {/* Side panel for annotations */}
                 <AnnotationsPanel
                     annotations={annotations}
                     visible={annotationsPanelVisible}
@@ -1148,4 +949,51 @@ export default function Game() {
             )}
         </div>
     );
+}
+
+// Helper: Deterministic color for remote penguin mesh
+function colorFromId(id) {
+    // Simple color hash: convert string id to HSL color
+    let hash = 0;
+    for (let i = 0; i < id.length; i++) {
+        hash = ((hash << 5) - hash) + id.charCodeAt(i);
+        hash |= 0;
+    }
+    const hue = Math.abs(hash % 360);
+    return `hsl(${hue},70%,65%)`;
+}
+function createRemotePenguinMesh(color) {
+    // Penguin body
+    const geometry = new THREE.SphereGeometry(0.3, 28, 28);
+    const material = new THREE.MeshStandardMaterial({ color });
+    const mesh = new THREE.Mesh(geometry, material);
+
+    // Face oval
+    const faceGeometry = new THREE.SphereGeometry(0.18, 16, 16);
+    const faceMaterial = new THREE.MeshStandardMaterial({ color: 'white' });
+    const face = new THREE.Mesh(faceGeometry, faceMaterial);
+    face.position.set(0, 0.07, 0.26);
+    mesh.add(face);
+
+    // Eyes
+    const eyeGeometry = new THREE.SphereGeometry(0.032, 8, 8);
+    const eyeMaterial = new THREE.MeshStandardMaterial({ color: 'black' });
+    const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+    const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+    leftEye.position.set(-0.045, 0.11, 0.33);
+    rightEye.position.set(0.045, 0.11, 0.33);
+    mesh.add(leftEye);
+    mesh.add(rightEye);
+
+    // Beak
+    const noseGeometry = new THREE.ConeGeometry(0.03, 0.10, 8);
+    const noseMaterial = new THREE.MeshStandardMaterial({ color: '#ffc800' });
+    const nose = new THREE.Mesh(noseGeometry, noseMaterial);
+    nose.position.set(0, 0.06, 0.40);
+    nose.rotation.x = Math.PI / 2;
+    mesh.add(nose);
+
+    mesh.castShadow = true;
+    mesh.receiveShadow = true;
+    return mesh;
 }

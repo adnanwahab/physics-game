@@ -3,12 +3,12 @@ import { useNavigate } from 'react-router-dom';
 
 // Mock levels data - replace with your actual data source
 const levels = [
-    { id: '1', name: 'knowledge worker', difficulty: 'Easy', description: 'Improving productivity' },
+    // { id: '1', name: 'knowledge worker', difficulty: 'Easy', description: 'Improving productivity' },
     { id: '2', name: 'knowledge worker', difficulty: 'Medium', description: 'Impoving productivity' },
     { id: '3', name: 'bridge building', difficulty: 'Hard', description: 'Cross the cuboid bridge' },
     // { id: '4', name: 'Level 4', difficulty: 'Expert', description: 'Warsong Gulch' },
     // { id: '5', name: 'Level 5', difficulty: 'Easy', description: 'Another beginner level' },
-    { id: '4', name: 'protecting daedalus', description: 'politics, cooperative, '}
+    // { id: '4', name: 'protecting daedalus', description: 'politics, cooperative, '}
 ];
 
 export default function LevelList() {

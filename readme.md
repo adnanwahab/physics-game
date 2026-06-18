@@ -10,10 +10,6 @@
 3. pointcloud to join two apps
 
 # 10 mini games
-
-1. mario kart
-2. mario party
-3. pensieve
 4. clean up code
 
 Level 1. jump on cube
@@ -43,3 +39,14 @@ inventions
 1. mario editor (hover cursor over pixels and returns lines)
 2. deus ex machina
 3. world of warcraft
+
+
+
+
+# 64 mini games 
+1. everyone votes on a shared destiny by dr katz (helios / daedalus)
+4. 
+61. 
+62. yoga assist tutor
+63. cooking tutor
+64. knowledge worker productivity improver ( why did i not complete jira ticket ??)
