@@ -77,7 +77,7 @@ function GameVideoSeekBar() {
 
     // Move to top-right: set position absolute, top 15px, right 24px, high z-index
     return (
-        <div style={{ position: 'absolute', top: '15px', left: '24px', zIndex: 1100, display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ position: '', top: '', left: '2px', zIndex: 1100, display: 'flex', alignItems: 'center', gap: '10px' }}>
             <button onClick={handlePlayClick}>Play</button>
             <input
                 type="range"
@@ -344,6 +344,9 @@ export default function Game() {
     // Multiplayer penguin references
     const penguinsRef = useRef({}); // { [id]: { mesh: THREE.Mesh, color: string } }
     const myPlayerIdRef = useRef(null);
+
+    // State to show how many players are currently playing
+    const [playerCount, setPlayerCount] = useState(0);
 
     const inputStateRef = useRef({
         forwardPressed: false,
@@ -670,6 +673,7 @@ export default function Game() {
                         }
                     }
                     setRemotePenguinsTick(t => t + 1);
+                    setPlayerCount(Object.keys(stateMsg.players).length);
                 });
 
                 // Clean-up multiplayer penguin meshes on dismount
@@ -839,9 +843,28 @@ export default function Game() {
                 <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>
                     Level {game_id}
                 </h1>
+                {/* People playing counter */}
+                <div style={{
+                    display: 'inline-block',
+                    background: '#292a36',
+                    color: '#ffd700',
+                    fontWeight: '600',
+                    fontSize: '1.03rem',
+                    borderRadius: 7,
+                    padding: '4px 15px',
+                    marginBottom: '8px',
+                    marginRight: '14px',
+                    marginLeft: '8px',
+                    letterSpacing: '0.5px',
+                    border: '2px solid #ffd700',
+                }}>
+                    🐧 {playerCount} playing
+                </div>
                 <button onClick={() => setCanvas2Visible(v => !v)}>
                     {canvas2Visible ? "Hide" : "Show"} Canvas2
                 </button>
+                <GameVideoSeekBar />
+
                 <button
                     style={{
                         marginLeft: 10,
@@ -920,7 +943,6 @@ export default function Game() {
             </div>
 
             <WASDControls inputState={inputStateRef.current} />
-            <GameVideoSeekBar />
        
             {showWinMessage && (
                 <div style={{
