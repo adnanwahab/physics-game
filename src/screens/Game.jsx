@@ -26,18 +26,10 @@ import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
 //import {GameVideoSeekBar} from "../components/GameVideoSeekBar"
 
-
+const players = []
 
 
 // Fetch all players from server and log them
-// fetch("/getPlayers")
-//     .then(response => response.json())
-//     .then(players => {
-//         console.log("Players:", players);
-//     })
-//     .catch(error => {
-//         console.error("Error fetching players:", error);
-//     });
 
 
 
@@ -232,6 +224,8 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                         Jolt.EMotionType_Static,
                         LAYER_NON_MOVING
                     );
+
+                    console.log('players', players)
                 }
             }
         }
@@ -329,14 +323,151 @@ export default function Game() {
     useEffect(() => {
         // Helper function to increment and fetch current counter from server
         async function incrementAndFetchCounter() {
+
             try {
-                const resp = await fetch('/incrementPlayerCount', {
+                const resp = await fetch('/newPlayer', {
                     method: 'POST'
                 });
                 if (resp.ok) {
                     const data = await resp.json();
                     // Server should return: { count: number }
                     setPlayerCount(data.count);
+                    window.addEventListener('keydown', function () {
+                    // INSERT_YOUR_CODE
+
+                    // Fetch players from server and render them on the canvas.
+                    // This code assumes you have access to the canvas context and rendering setup elsewhere.
+                    // We'll fetch periodically, and update a local state with all player positions except yourself.
+
+                    // We'll track other players to render
+                    const [otherPlayers, setOtherPlayers] = useState([]);
+
+                    useEffect(() => {
+                        let intervalId = null;
+                        async function fetchPlayers() {
+                            try {
+                                const resp = await fetch('/getPlayers');
+                                if (resp.ok) {
+                                    const players = await resp.json();
+                                    //console.log(players)
+                                    // Optionally filter out self if you have an id
+                                    // setOtherPlayers(players.filter(p => p.id !== myId));
+                                    setOtherPlayers(players);
+                                }
+                            } catch (e) {
+                                // Ignore error, swallow
+                            }
+                        }
+                        // Polling every 1s
+                        fetchPlayers();
+                        intervalId = setInterval(fetchPlayers, 1000);
+
+                        return () => {
+                            if (intervalId) clearInterval(intervalId);
+                        };
+                    }, []);
+
+                    // Render the players (basic)
+                    useEffect(() => {
+                        if (!canvasRef.current) return;
+                        const ctx = canvasRef.current.getContext('2d');
+                        if (!ctx) return;
+                        // You may want to clear only the area where penguins are drawn, or redraw entire canvas
+                        // Here, example: clear and redraw all players each frame
+                        function renderPenguins() {
+                            // Clear only, assuming canvasRef covers the main area
+                            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+                            // Draw each player as a penguin or circle
+                            for (const player of otherPlayers) {
+                                // INSERT_YOUR_CODE
+                                
+                                // Remove previously rendered penguin objects (if any)
+                                if (!window._otherPlayerMeshMap) window._otherPlayerMeshMap = {};
+                                const meshMap = window._otherPlayerMeshMap;
+                                for (const id in meshMap) {
+                                    if (!otherPlayers.find(p => p.id === id)) {
+                                        scene.remove(meshMap[id]);
+                                        delete meshMap[id];
+                                    }
+                                }
+
+                                for (const player of otherPlayers) {
+                                    if (!player || player.id == null) continue;
+                                    // If this player mesh doesn't exist, create and add to scene
+                                    if (!meshMap[player.id]) {
+                                        const geometry = new THREE.SphereGeometry(0.3, 28, 28);
+                                        const material = new THREE.MeshStandardMaterial({ color: '#3c79d8' });
+                                        const mesh = new THREE.Mesh(geometry, material);
+
+                                        // Penguin face (white oval)
+                                        const faceGeometry = new THREE.SphereGeometry(0.18, 16, 16);
+                                        const faceMaterial = new THREE.MeshStandardMaterial({ color: 'white' });
+                                        const face = new THREE.Mesh(faceGeometry, faceMaterial);
+                                        face.position.set(0, 0.07, 0.26);
+                                        mesh.add(face);
+
+                                        // Eyes
+                                        const eyeGeometry = new THREE.SphereGeometry(0.032, 8, 8);
+                                        const eyeMaterial = new THREE.MeshStandardMaterial({ color: 'black' });
+                                        const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+                                        const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+                                        leftEye.position.set(-0.045, 0.11, 0.33);
+                                        rightEye.position.set(0.045, 0.11, 0.33);
+                                        mesh.add(leftEye);
+                                        mesh.add(rightEye);
+
+                                        // Nose (beak)
+                                        const noseGeometry = new THREE.ConeGeometry(0.03, 0.10, 8);
+                                        const noseMaterial = new THREE.MeshStandardMaterial({ color: '#ffc800' });
+                                        const nose = new THREE.Mesh(noseGeometry, noseMaterial);
+                                        nose.position.set(0, 0.06, 0.40);
+                                        nose.rotation.x = Math.PI / 2;
+                                        mesh.add(nose);
+
+                                        mesh.castShadow = true;
+                                        mesh.receiveShadow = true;
+                                        scene.add(mesh);
+
+                                        meshMap[player.id] = mesh;
+                                    }
+                                    // Update the position (and orientation, if available)
+                                    const mesh = meshMap[player.id];
+                                    mesh.position.set(player.x || 0, player.y || 0, player.z || 0);
+                                    if (player.quaternion) {
+                                        mesh.quaternion.set(
+                                            player.quaternion.x,
+                                            player.quaternion.y,
+                                            player.quaternion.z,
+                                            player.quaternion.w
+                                        );
+                                    }
+                                }
+     
+                                // You need to map player.x/y/z to canvas coordinates
+                                // For now, assume direct mapping (adapt as needed)
+                                // const x = player.x * 10 + ctx.canvas.width / 2; // adjust scaling as needed
+                                // const y = player.z * 10 + ctx.canvas.height / 2;
+                                // ctx.save();
+                                // ctx.beginPath();
+                                // ctx.arc(x, y, 15, 0, 2 * Math.PI);
+                                // ctx.fillStyle = '#3c79d8'; // Penguin blue
+                                // ctx.fill();
+                                // ctx.strokeStyle = 'white';
+                                // ctx.lineWidth = 3;
+                                // ctx.stroke();
+                                // // Penguin face/eyes
+                                // ctx.beginPath();
+                                // ctx.arc(x - 4, y - 3, 2, 0, 2 * Math.PI);
+                                // ctx.arc(x + 4, y - 3, 2, 0, 2 * Math.PI);
+                                // ctx.fillStyle = 'white';
+                                // ctx.fill();
+                                // ctx.restore();
+                            }
+                        }
+                        renderPenguins();
+                    }, [otherPlayers, canvasRef.current]);
+     
+                    })
                 } else {
                     // fallback: if server fails, set playerCount to 1
                     setPlayerCount(1);
@@ -346,6 +477,33 @@ export default function Game() {
             }
         }
         incrementAndFetchCounter();
+
+        // Add a player to the server on mount
+        async function addPlayerToServer() {
+            try {
+                // Example player data; extend as needed
+                const playerData = { x: 0, y: 0, z: 0 };
+                const resp = await fetch('/newPlayer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(playerData)
+                });
+                // Optionally, handle response here if needed
+                if (resp.ok) {
+                    const data = await resp.json();
+                    // e.g. setMyPlayerId(data.id) or similar
+                    console.log('is ok')
+                }
+            } catch (e) {
+                console.log('exception', e)
+
+                // Optional: handle error
+            }
+        }
+        addPlayerToServer();
+
     }, []);
 
 
