@@ -38,7 +38,7 @@ import { PointLight, HemisphereLight } from 'three';
 
 
 export function setupLighting(scene) {
-    console.log('setupLighting');
+    //console.log('setupLighting');
     const bulbLight = new PointLight( 0xffee88, 10, 100, 2 );
 
 bulbLight.position.set( 0, 2, 0 );

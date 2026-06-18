@@ -24,8 +24,20 @@ import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
+//import {GameVideoSeekBar} from "../components/GameVideoSeekBar"
 
 
+
+
+// Fetch all players from server and log them
+// fetch("/getPlayers")
+//     .then(response => response.json())
+//     .then(players => {
+//         console.log("Players:", players);
+//     })
+//     .catch(error => {
+//         console.error("Error fetching players:", error);
+//     });
 
 
 
@@ -71,7 +83,7 @@ function GameVideoSeekBar() {
             <input
                 type="range"
                 min="0"
-                ma x="100"
+                max="100"
                 value={value}
                 onChange={e => setValue(Number(e.target.value))}
             />
@@ -313,6 +325,31 @@ function AnnotationsPanel({ annotations, visible, onClose }) {
 }
 
 export default function Game() {
+    // On mount, increment a counter on the server (by POST request) and set playerCount to the returned value
+    useEffect(() => {
+        // Helper function to increment and fetch current counter from server
+        async function incrementAndFetchCounter() {
+            try {
+                const resp = await fetch('/incrementPlayerCount', {
+                    method: 'POST'
+                });
+                if (resp.ok) {
+                    const data = await resp.json();
+                    // Server should return: { count: number }
+                    setPlayerCount(data.count);
+                } else {
+                    // fallback: if server fails, set playerCount to 1
+                    setPlayerCount(1);
+                }
+            } catch (e) {
+                setPlayerCount(1);
+            }
+        }
+        incrementAndFetchCounter();
+    }, []);
+
+
+
     const { game_id } = useParams();
     const navigate = useNavigate();
     const containerRef = useRef(null);
@@ -759,19 +796,19 @@ export default function Game() {
                 if (netSyncTick === 0) sendPenguinPositionToServer();
 
                 // Check for cheese win
-                if (!showWinMessage) {
-                    const cheesePos = gameStateRef.current.cheesePosition;
-                    const charBodyRef = gameStateRef.current.charBody;
-                    if (cheesePos && charBodyRef) {
-                        const playerPos = bodyInterface.GetPosition(charBodyRef.GetID());
-                        const playerVec = new THREE.Vector3(playerPos.GetX(), playerPos.GetY(), playerPos.GetZ());
-                        const distance = playerVec.distanceTo(cheesePos);
-                        if (distance < 1.5) {
-                            setShowWinMessage(true);
-                            setTimeout(() => navigate('/level-list'), 2000);
-                        }
-                    }
-                }
+                // if (!showWinMessage) {
+                //     const cheesePos = gameStateRef.current.cheesePosition;
+                //     const charBodyRef = gameStateRef.current.charBody;
+                //     if (cheesePos && charBodyRef) {
+                //         const playerPos = bodyInterface.GetPosition(charBodyRef.GetID());
+                //         const playerVec = new THREE.Vector3(playerPos.GetX(), playerPos.GetY(), playerPos.GetZ());
+                //         const distance = playerVec.distanceTo(cheesePos);
+                //         if (distance < 1.5) {
+                //             setShowWinMessage(true);
+                //             setTimeout(() => navigate('/level-list'), 2000);
+                //         }
+                //     }
+                // }
             }
 
             // Object creation mutation
@@ -816,7 +853,7 @@ export default function Game() {
                 } catch (e) {
                     // Some renderers (like WebGPURenderer) might throw if not inited or something is null
                     // Swallow or log but do not crash
-                    console.error("Renderer dispose error:", e);
+                    // console.error("Renderer dispose error:", e);
                 }
             }
             gameStateRef.current.renderer = null;

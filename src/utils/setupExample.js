@@ -17,7 +17,7 @@ import * as THREE from 'three';
  * @param {string} levelID - The ID of the current level
  */
 export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExampleUpdateRef, levelID) {
-  console.log('Setting up level with ID:', levelID);
+  //console.log('Setting up level with ID:', levelID);
   
   // For collision layers
   const LAYER_NON_MOVING = 0;
@@ -48,7 +48,7 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
     },
     undefined, // onProgress
     function ( error ) {
-      console.error('Error loading diffuse texture:', error);
+      //console.error('Error loading diffuse texture:', error);
     }
   );
   
@@ -66,7 +66,7 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
     },
     undefined, // onProgress
     function ( error ) {
-      console.error('Error loading bump texture:', error);
+      //console.error('Error loading bump texture:', error);
     }
   );
   
@@ -84,7 +84,7 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
     },
     undefined, // onProgress
     function ( error ) {
-      console.error('Error loading roughness texture:', error);
+      //console.error('Error loading roughness texture:', error);
     }
   );
 

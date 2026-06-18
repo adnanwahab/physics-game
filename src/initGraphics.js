@@ -2,7 +2,7 @@ import * as THREE from 'three/webgpu';
 import { WebGPURenderer, PerspectiveCamera, Scene, DirectionalLight } from 'three/webgpu';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-console.log(THREE);
+//console.log(THREE);
 
 
 // import postprocessing from './postprocessing.js';
@@ -52,7 +52,7 @@ export function initGraphics(canvas, container, size) {
     undefined, // onLoad
     undefined, // onProgress
     function ( error ) {
-      console.error('Error loading cube texture:', error);
+      //console.error('Error loading cube texture:', error);
       // Set a fallback background color if texture fails to load
       scene.background = new THREE.Color(0x87CEEB); // Sky blue
     }

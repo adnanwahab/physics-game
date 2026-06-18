@@ -2,6 +2,8 @@
 # https://physics-game-five.vercel.app/
 - [] networking websocket 
 
+# educational science games using magic
+1. multiplayer
 
 
 
