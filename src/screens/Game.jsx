@@ -25,20 +25,9 @@ import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
 
-// --- Multiplayer Penguin Helper ---
-function createRemotePenguinMesh(color = 0x2299ff) {
-    const geom = new THREE.SphereGeometry(0.6, 16, 12);
-    const mat = new THREE.MeshStandardMaterial({ color, roughness: 0.7, metalness: 0.1 });
-    const mesh = new THREE.Mesh(geom, mat);
-    mesh.castShadow = true; mesh.receiveShadow = true;
-    return mesh;
-}
 
-function colorFromId(id) {
-    if (typeof id !== 'string') return 0x2299ff;
-    const hash = [...id].reduce((h, ch) => h * 31 + ch.charCodeAt(0), 7);
-    return (0x222222 | ((hash & 0xFFFFFF) >>> 0));
-}
+
+
 
 function GameVideoSeekBar() {
     const [value, setValue] = useState(0);
