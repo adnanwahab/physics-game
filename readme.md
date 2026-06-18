@@ -44,6 +44,7 @@ inventions
 
 
 # 64 mini games 
+0. hub for all other games - list view or an animal crossing style hub
 1. everyone votes on a shared destiny by dr katz (helios / daedalus)
 4. 
 61. 
