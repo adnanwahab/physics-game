@@ -28,7 +28,6 @@ edit - select object -> move object
 //play/id
 //edit/id
 
-
 components - buttons
 dist - code smell
 levells - jsons 
