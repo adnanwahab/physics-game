@@ -37,8 +37,6 @@ obj - 3d models
 
 simplify and debug until 10 am 
 
-inventions
-
 1. transparent 311 logging 
 2. pensieve improves all laws 
 
