@@ -726,32 +726,59 @@ export default function Game() {
                 <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>
                     Level {game_id}
                 </h1>
-                <><button onClick={() => setCanvas2Visible(!canvas2Visible)}>Toggle Canvas2</button></>
+                <button onClick={() => setCanvas2Visible(v => !v)}>
+                    {canvas2Visible ? "Hide" : "Show"} Canvas2
+                </button>
+           
             </div>
             
-            <div ref={containerRef} id="container" style={{ width: '100%', height: '90vh', position: 'relative' }}>
+            <div 
+                ref={containerRef} 
+                id="container" 
+                style={{ width: '100%', height: '90vh', position: 'relative' }}
+            >
                 {/* Main Canvas Context */}
-                <canvas ref={canvasRef} id="canvas" style={{ width: '500px', height: '400px' }}></canvas>
-
-                {/* Point Cloud Isolated Canvas Context */}
-                <p style={{ color: 'white', fontSize: '1rem', textAlign: 'center', marginTop: '10px' }}>
-                    Point Cloud Count: {pointCloudCount} particles rendered
-                </p>
-                <canvas
-                    ref={canvasRef2}
-                    id="canvas2"
-                    style={{
-                        width: '500px',
-                        height: '450px',
-                        border: '10px dashed white',
-                        position: '',
-                        top: '0',
-                        right: '0',
-                        zIndex: 1000,
-                        backgroundColor: 'rgba(0,0,0,0.4)'
-                    }}
+                <canvas 
+                    ref={canvasRef} 
+                    id="canvas" 
+                    style={{ width: '500px', height: '400px', display: 'block' }} 
                 />
 
+                {/* Point Cloud Isolated Canvas Context in top-left of the first canvas */}
+                {canvas2Visible && (
+                    <canvas
+                        ref={canvasRef2}
+                        id="canvas2"
+                        style={{
+                            width: '250px',
+                            height: '220px',
+                            border: '6px dashed white',
+                            position: 'absolute',
+                            top: '12px',
+                            left: '12px',
+                            zIndex: 1010,
+                            backgroundColor: 'rgba(0,0,0,0.42)'
+                        }}
+                    />
+                )}
+                {/* Count can be outside the overlayed canvas but visually related */}
+                <p 
+                    style={{ 
+                        color: 'white', 
+                        fontSize: '1rem', 
+                        textAlign: 'left', 
+                        marginTop: '10px', 
+                        position: 'absolute', 
+                        top: '242px', left: '18px', 
+                        zIndex: 1012,
+                        pointerEvents: 'none',
+                        background: 'rgba(0,0,0,0.28)',
+                        borderRadius: '6px',
+                        padding: '4px 10px'
+                    }}
+                >
+                    Point Cloud Count: {pointCloudCount} particles rendered
+                </p>
             </div>
 
             <WASDControls inputState={inputStateRef.current} />
