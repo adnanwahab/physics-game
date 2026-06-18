@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import WASDControls from '../components/WASDControls';
 
@@ -378,6 +378,52 @@ export default function Game() {
         addPlayerToServer();
     }, []);
 
+
+
+    // Listen for global 'w' key presses to send playerMove request
+    useEffect(() => {
+        function handleWDown(e) {
+                fetch('/newPlayer', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ x: 0, y: 0, z: 0 })
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                    // You can use 'data' as the new player object (with id, x, y, z)
+                    // e.g. myPlayerIdRef.current = data.id;
+                    // console.log('Fetched newPlayer:', data);
+                })
+                .catch(err => {
+                    // Handle failure if desired
+                });
+       
+  
+                fetch('/playerMove', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ action: 'moveForward' }) // You can send more useful info if wanted
+                })
+                .then(resp => resp.json())
+                .then(data => {
+                    // Optionally update local state, show feedback, etc.
+                    //console.log("Player moved:", data);
+                })
+                .catch(err => {
+                    //console.error("Failed to send playerMove", err);
+                });
+            //}
+        }
+        window.addEventListener('keydown', handleWDown);
+        return () => {
+            window.removeEventListener('keydown', handleWDown);
+        };
+    }, []);
+
     const { game_id } = useParams();
     const navigate = useNavigate();
     const containerRef = useRef(null);
@@ -391,6 +437,34 @@ export default function Game() {
     const penguinsRef = useRef({});
     const myPlayerIdRef = useRef(null);
     const [playerCount, setPlayerCount] = useState(0);
+
+    // NEW: Make annotations a state variable to enable updates
+    const [annotations, setAnnotations] = useState([
+        {
+            title: "Golden Cheese",
+            text: "Find and touch the golden cheese block to complete the level!",
+            location: { x: 6, y: 4, z: 17 },
+            color: "#ffd700"
+        },
+        {
+            title: "Physics Tower",
+            text: "This tower can be climbed. Try jumping from ledge to ledge. Good test of your parkour skills.",
+            location: { x: -5, y: 0, z: 38 },
+            color: "#12d9fb"
+        },
+        {
+            title: "Desk Zone",
+            text: "NPCs sitting at this desk. Maybe they are working on the next puzzle!",
+            location: { x: -12, y: 0, z: -22 },
+            color: "#a5a9ff"
+        },
+        {
+            title: "Gate Platform",
+            text: "Try jumping on the spiked gate for a better view—you might spot secret paths.",
+            location: { x: 0, y: 4, z: -39.9 },
+            color: "#ff69b4"
+        }
+    ]);
 
     const inputStateRef = useRef({
         forwardPressed: false,
@@ -419,33 +493,6 @@ export default function Game() {
         wsClient: null,
         penguins: penguinsRef.current,
     });
-
-    const annotations = [
-        {
-            title: "Golden Cheese",
-            text: "Find and touch the golden cheese block to complete the level!",
-            location: { x: 6, y: 4, z: 17 },
-            color: "#ffd700"
-        },
-        {
-            title: "Physics Tower",
-            text: "This tower can be climbed. Try jumping from ledge to ledge. Good test of your parkour skills.",
-            location: { x: -5, y: 0, z: 38 },
-            color: "#12d9fb"
-        },
-        {
-            title: "Desk Zone",
-            text: "NPCs sitting at this desk. Maybe they are working on the next puzzle!",
-            location: { x: -12, y: 0, z: -22 },
-            color: "#a5a9ff"
-        },
-        {
-            title: "Gate Platform",
-            text: "Try jumping on the spiked gate for a better view—you might spot secret paths.",
-            location: { x: 0, y: 4, z: -39.9 },
-            color: "#ff69b4"
-        }
-    ];
 
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
@@ -826,6 +873,27 @@ export default function Game() {
         };
     }, [game_id]);
 
+    // Create a stable callback for adding an annotation so it doesn't recreate unnecessarily
+    const handleAddAnnotation = useCallback(() => {
+        const note = prompt('What would you like to note?');
+        if (note && note.trim()) {
+            // Guess location (center of chair as example, since canvas2 is chair viz)
+            const guessedLocation = { x: 0, y: 5, z: 0 };
+            // Random pastel color for annotation
+            const pastelColors = ["#ffd700", "#12d9fb", "#a5a9ff", "#ff69b4", "#baffc9", "#bdb2ff", "#f7a8b8"];
+            const guessColor = pastelColors[Math.floor(Math.random() * pastelColors.length)];
+            const newAnnotation = {
+                title: "Custom Note",
+                text: note,
+                location: guessedLocation,
+                color: guessColor,
+            };
+            // Add annotation to state
+            setAnnotations(prev => [...prev, newAnnotation]);
+            setAnnotationsPanelVisible(true);
+        }
+    }, []);
+
     return (
         <div style={{ padding: '20px' }}>
             <div style={{ marginBottom: '20px', borderBottom: '2px solid #e5e7eb', paddingBottom: '10px' }}>
@@ -889,6 +957,8 @@ export default function Game() {
                 {canvas2Visible && (
                     <canvas
                         ref={canvasRef2}
+                        onClick={() => {}}
+                        onMouseDown={handleAddAnnotation}
                         id="canvas2"
                         style={{
                             width: '250px',

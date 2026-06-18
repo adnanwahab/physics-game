@@ -5,9 +5,10 @@ let players: { id: number, x: number, y: number, z: number }[] = [];
 let playerCount = 0;
 
 const server = Bun.serve({
-  port: process.env.PORT || 3000,
+  // Make sure to listen on 5173 since the frontend is posting to localhost:5173
+  port: Number(process.env.PORT) || 5173, // Changed default port to 5173 to match expected client port
   fetch(req, server) {
-    const url = new URL(req.url);
+    const url = new URL(req.url, `http://${req.headers.get("host") || "localhost:5173"}`);
     const pathname = url.pathname;
 
     // Endpoint: GET /getPlayers - Return list of players
@@ -33,6 +34,29 @@ const server = Bun.serve({
       });
     }
 
+    // Endpoint: POST /playerMove - Move a player (example logic)
+    if (pathname === "/playerMove" && req.method === "POST") {
+      return req.json().then((data) => {
+        // Expect data to include player id and movement deltas
+        const { id, dx = 1, dy = 1, dz = 0 } = data;
+        const player = players.find(p => p.id === id);
+        if (player) {
+          player.x += dx;
+          player.y += dy;
+          player.z += dz;
+          return new Response(JSON.stringify(player), {
+            status: 200,
+            headers: { "Content-Type": "application/json" }
+          });
+        } else {
+          return new Response(JSON.stringify({ error: "Player not found" }), {
+            status: 404,
+            headers: { "Content-Type": "application/json" }
+          });
+        }
+      });
+    }
+
     // Endpoint: POST /incrementPlayerCount - Increment and return count
     if (pathname === "/incrementPlayerCount" && req.method === "POST") {
       playerCount += 1;
@@ -47,5 +71,4 @@ const server = Bun.serve({
   },
 });
 
-//console.log(`Server running on port ${server.port}`);
 console.log(`Server running on port ${server.port}`);
