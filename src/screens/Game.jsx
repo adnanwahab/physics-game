@@ -951,7 +951,7 @@ export default function Game() {
                 <canvas 
                     ref={canvasRef} 
                     id="canvas" 
-                    style={{ width: '500px', height: '400px', display: 'block' }} 
+                    style={{ width: '500px', height: '200px', display: 'block' }} 
                 />
 
                 {canvas2Visible && (
@@ -996,6 +996,8 @@ export default function Game() {
                     onClose={() => setAnnotationsPanelVisible(false)}
                 />
             </div>
+
+            
 
             <WASDControls inputState={inputStateRef.current} />
        
