@@ -9,7 +9,7 @@ import sittingPersonObjUrl from "../obj/sitting_person.obj?url";
 import { Clock } from "three";
 import { initGraphics } from "../initGraphics.js";
 import { onWindowResize as handleWindowResize } from "../onWindowResize.js";
-import { initPhysics } from "../initPhysics.js";
+import { initPhysics } from "../utils/initPhysics.js";
 import { renderLoop } from "../utils/renderLoop.js";
 import { setupExample } from "../utils/setupExample.js";
 import { handleUserInput } from "../utils/handleUserInput.js";
