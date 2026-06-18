@@ -241,6 +241,87 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
     return { cheesePosition, effectUpdaters, effectDisposers };
 }
 
+// --- Annotations SidePanel ---
+function AnnotationsPanel({ annotations, visible, onClose }) {
+    return (
+        <div
+            style={{
+                position: 'fixed',
+                top: 0,
+                right: visible ? 0 : '-360px',
+                height: '100vh',
+                width: '340px',
+                background: 'rgba(24,24,27,0.95)',
+                color: '#fff',
+                boxShadow: '0 0 14px rgba(0,0,0,0.17)',
+                borderLeft: '2px solid #ffd700',
+                zIndex: 10020,
+                padding: '26px 28px 20px 26px',
+                transition: 'right 0.33s cubic-bezier(0.44, 1.1, 0.78, 1)',
+                display: 'flex',
+                flexDirection: 'column',
+            }}
+        >
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: 14 }}>
+                <h3 style={{
+                    margin: 0,
+                    color: '#ffd700',
+                    fontSize: '1.45rem',
+                    fontWeight: '700',
+                    flexGrow: 1,
+                    letterSpacing: '1px'
+                }}>Annotations</h3>
+                <button
+                    aria-label="Hide Annotations"
+                    style={{
+                        border: 0,
+                        background: 'transparent',
+                        color: '#ffd700',
+                        fontWeight: 'bold',
+                        fontSize: '1.25rem',
+                        marginLeft: '8px',
+                        cursor: 'pointer',
+                        outline: 'none',
+                        borderRadius: '50%',
+                        width: '32px',
+                        height: '32px',
+                        transition: 'background 0.13s'
+                    }}
+                    onClick={onClose}
+                    onMouseOver={e => (e.currentTarget.style.background = 'rgba(255, 255, 255, 0.12)')}
+                    onMouseOut={e => (e.currentTarget.style.background = 'transparent')}
+                >×</button>
+            </div>
+            <ul style={{ listStyle: 'none', margin: 0, padding: 0, fontSize: '1rem' }}>
+                {annotations.length === 0 && (
+                    <li style={{ color: '#bbb', marginTop: 12 }}>No annotations for this level yet.</li>
+                )}
+                {annotations.map((note, idx) => (
+                    <li key={idx} style={{
+                        marginBottom: '18px',
+                        padding: '14px 12px 10px 16px',
+                        background: 'rgba(33, 33, 36, 0.78)',
+                        borderLeft: `4px solid ${note.color || '#ffd700'}`,
+                        borderRadius: '7px'
+                    }}>
+                        <div style={{ fontSize: '1.02rem', fontWeight: '600', color: note.color || '#ffd700' }}>
+                            {note.title}
+                        </div>
+                        {note.location &&
+                            <div style={{ fontSize: '0.95rem', color: '#ccc', marginBottom: 3 }}>
+                                ({note.location.x}, {note.location.y}, {note.location.z})
+                            </div>
+                        }
+                        <div style={{ color: '#fff', margin: 0, fontSize: '0.96rem' }}>
+                            {note.text}
+                        </div>
+                    </li>
+                ))}
+            </ul>
+        </div>
+    );
+}
+
 export default function Game() {
     const { game_id } = useParams();
     const navigate = useNavigate();
@@ -252,6 +333,9 @@ export default function Game() {
 
     // === Canvas2 visibility state ===
     const [canvas2Visible, setCanvas2Visible] = useState(true);
+
+    // === Annotations side panel state ===
+    const [annotationsPanelVisible, setAnnotationsPanelVisible] = useState(false);
 
     // Used to force re-render of penguin list if ever needed
     const [, setRemotePenguinsTick] = useState(0);
@@ -287,6 +371,34 @@ export default function Game() {
         wsClient: null,
         penguins: penguinsRef.current,
     });
+
+    // Demo annotations data for level/category game
+    const annotations = [
+        {
+            title: "Golden Cheese",
+            text: "Find and touch the golden cheese block to complete the level!",
+            location: { x: 6, y: 4, z: 17 },
+            color: "#ffd700"
+        },
+        {
+            title: "Physics Tower",
+            text: "This tower can be climbed. Try jumping from ledge to ledge. Good test of your parkour skills.",
+            location: { x: -5, y: 0, z: 38 },
+            color: "#12d9fb"
+        },
+        {
+            title: "Desk Zone",
+            text: "NPCs sitting at this desk. Maybe they are working on the next puzzle!",
+            location: { x: -12, y: 0, z: -22 },
+            color: "#a5a9ff"
+        },
+        {
+            title: "Gate Platform",
+            text: "Try jumping on the spiked gate for a better view—you might spot secret paths.",
+            location: { x: 0, y: 4, z: -39.9 },
+            color: "#ff69b4"
+        }
+    ];
 
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
@@ -729,7 +841,25 @@ export default function Game() {
                 <button onClick={() => setCanvas2Visible(v => !v)}>
                     {canvas2Visible ? "Hide" : "Show"} Canvas2
                 </button>
-           
+                <button
+                    style={{
+                        marginLeft: 10,
+                        background: annotationsPanelVisible ? '#ffd700' : '#353535',
+                        color: annotationsPanelVisible ? '#111' : '#ffd700',
+                        border: 'none',
+                        borderRadius: 6,
+                        padding: '7px 18px',
+                        fontWeight: 'bold',
+                        fontSize: "1.05rem",
+                        cursor: 'pointer',
+                        boxShadow: annotationsPanelVisible
+                            ? '0 0 0 3px #ffd70055'
+                            : '0 1px 3px #111'
+                    }}
+                    onClick={() => setAnnotationsPanelVisible(x => !x)}
+                >
+                    {annotationsPanelVisible ? "Hide" : "Show"} Annotations
+                </button>
             </div>
             
             <div 
@@ -779,38 +909,17 @@ export default function Game() {
                 >
                     Point Cloud Count: {pointCloudCount} particles rendered
                 </p>
+
+                {/* Side panel for annotations */}
+                <AnnotationsPanel
+                    annotations={annotations}
+                    visible={annotationsPanelVisible}
+                    onClose={() => setAnnotationsPanelVisible(false)}
+                />
             </div>
 
             <WASDControls inputState={inputStateRef.current} />
             <GameVideoSeekBar />
-            {/* Fake list of 3 annotations for demonstration */}
-            {/* <div style={{ 
-                marginTop: '24px', 
-                backgroundColor: '#18181b', 
-                borderRadius: '12px',
-                padding: '18px 24px',
-                boxShadow: '0 2px 8px rgba(0,0,0,0.10)',
-                color: '#fff',
-                maxWidth: '520px',
-                marginLeft: 'auto',
-                marginRight: 'auto',
-                position: 'relative',
-                top: '20px',
-                zIndex: 5000
-            }}>
-                <h3 style={{ margin: 0, marginBottom: '12px', color: '#ffd700', fontSize: '1.15rem' }}>Annotations</h3>
-                <ul style={{ listStyleType: 'disc', paddingLeft: '22px', margin: 0 }}>
-                    <li>
-                        <strong>Interesting Gate (x: 0, y: 4, z: -39.9):</strong> Try jumping on top of the spiked gate for a better view!
-                    </li>
-                    <li>
-                        <strong>Tower Entrance (x: 10, y: 7, z: 0):</strong> This tower is climbable—look for the hidden steps!
-                    </li>
-                    <li>
-                        <strong>Cheese!</strong> There’s a golden cheese block hidden somewhere in this level. Find it to win!
-                    </li>
-                </ul>
-            </div> */}
        
             {showWinMessage && (
                 <div style={{
