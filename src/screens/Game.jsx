@@ -24,7 +24,6 @@ import initGenerateObject from "../mutateScene.ts";
 import { SelectionSystem } from "../selectionSystem.js";
 import { WebSocketClient } from "../utils/websocket.js";
 import { createSoundWaveRings } from "../createSoundWaveRings.js";
-//import {GameVideoSeekBar} from "../components/GameVideoSeekBar"
 
 const players = [];
 
@@ -64,22 +63,55 @@ function GameVideoSeekBar() {
     };
 
     return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: 14 }}>
-            <button onClick={handlePlayClick}>Play</button>
+        <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '10px',
+            marginLeft: 16,
+            background: 'rgba(44,44,58,0.82)',
+            borderRadius: 7,
+            boxShadow: '0 2px 8px #0002',
+            border: '1px solid #39387c',
+            padding: '7px 14px 6px 14px',
+            minWidth: 175,
+            marginTop: 0,
+            marginBottom: 0,
+        }}>
+            <button
+                onClick={handlePlayClick}
+                style={{
+                    background: '#ffd700',
+                    color: '#252529',
+                    border: 0,
+                    borderRadius: 4,
+                    padding: '4px 12px',
+                    fontWeight: 600,
+                    fontSize: '1rem',
+                    cursor: 'pointer',
+                    boxShadow: '0 2px 4px #0002',
+                    outline: 'none',
+                    transition: 'background 0.16s'
+                }}
+            >Play</button>
             <input
                 type="range"
                 min="0"
                 max="100"
                 value={value}
                 onChange={e => setValue(Number(e.target.value))}
+                style={{
+                    flex: 1,
+                    margin: '0 8px',
+                    accentColor: '#ffd700',
+                    cursor: 'pointer',
+                    height: 4,
+                }}
             />
         </div>
     )
 }
 
-// Helper function for creating a THREE.Quaternion from Euler
 function quatFromEulerArray(arr) {
-    // arr: [x, y, z], where values are in radians
     const euler = new THREE.Euler(arr[0], arr[1], arr[2], 'XYZ');
     const q = new THREE.Quaternion();
     q.setFromEuler(euler);
@@ -892,6 +924,8 @@ export default function Game() {
             setAnnotations(prev => [...prev, newAnnotation]);
             setAnnotationsPanelVisible(true);
         }
+
+        //const location = prompt("where should we place note")
     }, []);
 
     return (
