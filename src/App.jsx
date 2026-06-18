@@ -2,24 +2,8 @@
 import { Routes, Route, Link } from 'react-router-dom'
 import Game from './screens/Game'
 import LevelList from './screens/LevelList'
-// import Contact from './screens/Contact'
-
-// function Home() {
-//   return <div>Home</div>
-// }
-
-// function About() {
-//   return <div>About</div>
-// }
-
-// function Contact() {
-//   return <div>Contact</div>
-// }
-
 import Settings from './screens/Settings'
-
 //import VideoSeekBar from './components/VideoSeekBar'
-
 
 function App() {
   return (
@@ -49,11 +33,7 @@ function App() {
      
         </p>  
       <nav>
-        {/* <Link to="/">Home</Link> */}
-        {/* <Link to="/game">Game</Link> */}
-        <br />
-        <Link to="/level-list">Level List</Link>
-        {/* <Link to="/settings">Settings</Link> */}
+        <Link className="border-6 border-blue-500 rounded-md p-20" to="/level-list">Level List</Link>
       </nav>
 
       <Routes>
@@ -76,7 +56,6 @@ function App() {
         >
           Email me at <a href="mailto:mail@adnanwahab.com">mail@adnanwahab.com</a> to join!
         </p>
-        {/* <p className="text-white">here go annotations</p> */}
         <style>
           {`
             @keyframes rainbow {
@@ -95,9 +74,7 @@ function App() {
             }
           `}
         </style>
-  
-        {/* <p><a href="https://github.com/adnanwahab/physics-game">Made in texas</a></p> */}
-      </div>
+        </div>
     </div>
   )
 }

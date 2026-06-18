@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, Link } from 'react-router-dom';
 import WASDControls from '../components/WASDControls';
 
 import { loadGLTFModel } from "../utils/gltf-loader.js";
@@ -77,12 +77,12 @@ function GameVideoSeekBar() {
 
     // Move to top-right: set position absolute, top 15px, right 24px, high z-index
     return (
-        <div style={{ position: '', top: '', left: '2px', zIndex: 1100, display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginLeft: 14 }}>
             <button onClick={handlePlayClick}>Play</button>
             <input
                 type="range"
                 min="0"
-                max="100"
+                ma x="100"
                 value={value}
                 onChange={e => setValue(Number(e.target.value))}
             />
