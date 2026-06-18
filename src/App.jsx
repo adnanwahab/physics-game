@@ -24,6 +24,30 @@ import Settings from './screens/Settings'
 function App() {
   return (
     <div>
+            <p
+          style={{
+            animation: "rainbow 2s linear infinite",
+            background: "-webkit-linear-gradient(left, red, orange, yellow, green, cyan, blue, violet, red)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            backgroundClip: "text",
+            color: "transparent"
+          }}
+        >
+          <a
+            href="https://physics-game-five.vercel.app/"
+            className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-[rainbow_2s_linear_infinite]"
+            style={{
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textFillColor: "transparent",
+            }}
+          >
+            Happy Bear Landia
+          </a>
+     
+        </p>  
       <nav>
         {/* <Link to="/">Home</Link> */}
         {/* <Link to="/game">Game</Link> */}
