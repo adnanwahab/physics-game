@@ -37,3 +37,11 @@ inventions
 1. transparent 311 logging 
 2. pensieve improves all laws 
 3. 
+
+
+
+# references
+1. cyberpunk
+2. deus ex machina
+3. starcraft
+4. world of warcraft

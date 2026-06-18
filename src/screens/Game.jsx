@@ -77,7 +77,7 @@ function GameVideoSeekBar() {
 
     // Move to top-right: set position absolute, top 15px, right 24px, high z-index
     return (
-        <div style={{ position: 'absolute', top: '15px', right: '24px', zIndex: 1100, display: 'flex', alignItems: 'center', gap: '10px' }}>
+        <div style={{ position: 'absolute', top: '15px', left: '24px', zIndex: 1100, display: 'flex', alignItems: 'center', gap: '10px' }}>
             <button onClick={handlePlayClick}>Play</button>
             <input
                 type="range"
@@ -318,6 +318,7 @@ function AnnotationsPanel({ annotations, visible, onClose }) {
                     </li>
                 ))}
             </ul>
+            {/* <button>sbit</button> */}
         </div>
     );
 }
