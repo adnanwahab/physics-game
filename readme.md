@@ -1,5 +1,10 @@
 
 # https://physics-game-five.vercel.app/
+- [] networking websocket 
+
+
+
+
 1. editor for optimal levels to teach educational science
 2. game to play levels
 3. pointcloud to join two apps
@@ -32,18 +37,12 @@ obj - 3d models
 
 simplify and debug until 10 am 
 
-
-
 inventions
 
 1. transparent 311 logging 
 2. pensieve improves all laws 
-3. 
-
-
 
 # references
-1. cyberpunk
+1. mario editor (hover cursor over pixels and returns lines)
 2. deus ex machina
-3. starcraft
-4. world of warcraft
+3. world of warcraft
