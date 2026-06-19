@@ -52,3 +52,4 @@ const server = Bun.serve({
 });
 
 console.log(`Game server running at ${server.url} (hostname: 0.0.0.0)`);
+      

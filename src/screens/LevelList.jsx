@@ -54,8 +54,8 @@ function App() {
 
 // Mock levels data - replace with your actual data source
 const levels = [
-    { id: '0', name: 'Hub', difficulty: 'Easy', description: 'The entry hub linking all mini-games.' },
-    { id: '1', name: 'Jump on the Cube', difficulty: 'Easy', description: 'Basic 2D platformer – jump on a cube to win.' },
+    { id: '0', name: 'knowledge worker productivity improvement', difficulty: 'Easy', description: 'replay analyzer' },
+    { id: '1', name: 'empty room', difficulty: 'Easy', description: '' },
     { id: '2', name: 'Simulation Rewind', difficulty: 'Medium', description: 'Rewind time and simulate different outcomes.' },
     { id: '3', name: 'Bridge Building', difficulty: 'Medium', description: 'Cross the cuboid bridge to reach the goal.' },
     { id: '4', name: 'Protecting Daedalus', difficulty: 'Hard', description: 'A cooperative level involving politics and teamwork.' },
@@ -268,7 +268,7 @@ export default function LevelList() {
           Forward Suggestion
         </button>
       </form>
-      <App />
+      {/* <App /> */}
       {/* <Root></Root> */}
     </div>
   );
