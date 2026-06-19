@@ -1,56 +1,13 @@
-# 64 mini games
-
-
-
-# https://physics-game-five.vercel.app/
-- [] networking websocket 
-
+# 64 multiplayer puzzle mini games
+# level editor w/ prediction 
+# https://physics-game-five.vercel.app
 # educational science games using magic
 1. multiplayer
-
 1. editor for optimal levels to teach educational science
 2. game to play levels
 3. pointcloud to join two apps
-
-# 10 mini games
-4. clean up code
-
-Level 1. jump on cube
-Level 2. simulation rewind
-edit - select object -> move object 
-
-#  learn robotics and physics by playing and editing games 
-
 //levels
 //play/id
 //edit/id
-
-components - buttons
-dist - code smell
-levells - jsons 
-obj - 3d models
-
-
-simplify and debug until 10 am 
-
-inventions
-
 1. transparent 311 logging 
 2. pensieve improves all laws 
-
-# references
-1. mario editor (hover cursor over pixels and returns lines)
-2. deus ex machina
-3. world of warcraft
-
-
-
-
-# 64 mini games 
-0. hub for all other games - list view or an animal crossing style hub
-1. everyone votes on a shared destiny by dr katz (helios / daedalus)
-4. 
-61. 
-62. yoga assist tutor
-63. cooking tutor
-64. knowledge worker productivity improver ( why did i not complete jira ticket ??)

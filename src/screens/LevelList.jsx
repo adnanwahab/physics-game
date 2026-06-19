@@ -1,5 +1,7 @@
 
 import { useNavigate } from "react-router-dom";
+import { Map } from 'react-map-gl/maplibre';
+import 'maplibre-gl/dist/maplibre-gl.css';
 
 import React from 'react';
 
@@ -11,7 +13,7 @@ import React from 'react';
 // import 'mapbox-gl/dist/mapbox-gl.css';
 
 // Remove unused AIR_PORTS and DeckGLOverlay/MAPBOX_TOKEN/MAP_STYLE/etc.
-
+let MAPBOX_TOKEN = `pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg`
 // Replace the broken data URL in the LineLayer in App below
 import DeckGL from '@deck.gl/react';
 import {LineLayer} from '@deck.gl/layers';
@@ -37,7 +39,7 @@ function App() {
       data: EXAMPLE_LINES, // Use valid local array
       getSourcePosition: (d) => d.from,
       getTargetPosition: (d) => d.to,
-      getColor: [80, 80, 200],
+      getColor: [250, 250, 200],
       getWidth: 5
     })
   ];
@@ -48,7 +50,15 @@ function App() {
       controller
       layers={layers}
       style={{height: 400}}
-    />
+    >
+ 
+
+ {/* <Map
+    mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+
+  /> */}
+
+    </DeckGL>
   );
 }
 
@@ -268,6 +278,7 @@ export default function LevelList() {
           Forward Suggestion
         </button>
       </form>
+      
       {/* <App /> */}
       {/* <Root></Root> */}
     </div>

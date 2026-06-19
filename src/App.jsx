@@ -65,6 +65,11 @@ function App() {
         >
           Email me at <a href="mailto:mail@adnanwahab.com">mail@adnanwahab.com</a> to join!
         </p>
+        <h1>Agenda of June 20</h1>
+        <div>how do we invent future things together as a game like dungeons and dragons?</div>
+        <div>everyone speaks and types together in a spiral </div>
+        <img src="/public/map.png"></img>
+        
         <style>
           {`
             @keyframes rainbow {
