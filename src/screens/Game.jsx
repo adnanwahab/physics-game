@@ -13,25 +13,15 @@ import { setupLighting } from '../lighting.js';
 import initGenerateObject from '../mutateScene.ts';
 import loadLevelCuboids from '../utils/loadLevelCuboids.js';
 import { setupCanvas2 } from '../utils/setupCanvas2.js';
-import { setupWebSocketPenguins } from '../utils/setupWebSocketPenguins.js';
 import { setupSelectionSystem } from '../utils/setupSelectionSystem.js';
-import { usePlayerSync } from '../utils/usePlayerSync.js';
+import createRemotePenguinMesh from '../utils/createRemotePenguinMesh.js';
+import { colorFromId } from '../utils/colorFromId.js';
 import GameVideoSeekBar from '../components/GameVideoSeekBar.jsx';
 import AnnotationsPanel from '../components/AnnotationsPanel.jsx';
 
-export default function Game() {
-    const players = []
+const SERVER = 'http://localhost:3000';
 
-    useEffect(function () {
-        fetch('http://localhost:5173/newPlayer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ x: 0, y: 0, z: 0 })
-        });
-   
-    }, players)
+export default function Game() {
     const { game_id } = useParams();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
@@ -40,20 +30,15 @@ export default function Game() {
     const [pointCloudCount, setPointCloudCount] = useState(0);
     const [canvas2Visible, setCanvas2Visible] = useState(true);
     const [annotationsPanelVisible, setAnnotationsPanelVisible] = useState(false);
-    const [, setRemotePenguinsTick] = useState(0);
-    const penguinsRef = useRef({});
-    const myPlayerIdRef = useRef(null);
     const [playerCount, setPlayerCount] = useState(0);
     const [annotations, setAnnotations] = useState([
         { title: 'Golden Cheese', text: 'Find and touch the golden cheese block to complete the level!', location: { x: 6, y: 4, z: 17 }, color: '#ffd700' },
         { title: 'Physics Tower', text: 'This tower can be climbed. Try jumping from ledge to ledge.', location: { x: -5, y: 0, z: 38 }, color: '#12d9fb' },
-        { title: 'Desk Zone', text: 'NPCs sitting at this desk. Maybe they are working on the next puzzle!', location: { x: -12, y: 0, z: -22 }, color: '#a5a9ff' },
-        { title: 'Gate Platform', text: 'Try jumping on the spiked gate for a better view—you might spot secret paths.', location: { x: 0, y: 4, z: -39.9 }, color: '#ff69b4' },
+        { title: 'Desk Zone', text: 'NPCs sitting at this desk.', location: { x: -12, y: 0, z: -22 }, color: '#a5a9ff' },
+        { title: 'Gate Platform', text: 'Try jumping on the spiked gate for a better view.', location: { x: 0, y: 4, z: -39.9 }, color: '#ff69b4' },
     ]);
     const inputStateRef = useRef({ forwardPressed: false, backwardPressed: false, leftPressed: false, rightPressed: false, jump: false, crouched: false });
-    const gameStateRef = useRef({ renderer: null, scene: null, camera: null, controls: null, clock: null, inputState: null, onExampleUpdateRef: null, joltInterface: null, physicsSystem: null, bodyInterface: null, dynamicObjects: null, Jolt: null, generateObject: null, wsClient: null, penguins: penguinsRef.current });
-
-    usePlayerSync(setPlayerCount);
+    const gameStateRef = useRef({ renderer: null, scene: null, camera: null, controls: null, clock: null, inputState: null, onExampleUpdateRef: null, joltInterface: null, physicsSystem: null, bodyInterface: null, dynamicObjects: null, Jolt: null, generateObject: null, charBody: null });
 
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
@@ -68,6 +53,62 @@ export default function Game() {
         let isMounted = true;
         const isMountedRef = { current: true };
 
+        // --- Register this client as a player ---
+        let myPlayerId = null;
+        fetch(`${SERVER}/addPlayerToRoom`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ game_id, x: 0, y: 0, z: 0 }),
+        }).then(r => r.json()).then(d => { myPlayerId = d.id; }).catch(() => {});
+
+        // --- Penguin mesh registry: id → THREE.Mesh ---
+        const penguinMeshes = {};
+
+        // --- Poll server every 100ms for other players in the same room ---
+
+        // Fix for ERR_CONNECTION_REFUSED:
+        // Use window.location.hostname (and protocol), so fetch will use the correct address in deployed/preview mode.
+        // This will work for localhost, IP, or remote hosts.
+
+        function getServerUrl() {
+            // Attempt to use same hostname and protocol as the page itself,
+            // but default to port 3000 (where Bun server is running)
+            const { protocol, hostname } = window.location;
+            return `${protocol}//${hostname}:3000`;
+        }
+
+        const pollInterval = setInterval(() => {
+            const serverUrl = getServerUrl();
+            fetch(`${serverUrl}/getPlayersInRoom?game_id=${encodeURIComponent(game_id)}`)
+                .then(r => r.json())
+                .then(remotePlayers => {
+                    if (!isMounted) return;
+                    const activeIds = new Set(remotePlayers.map(p => String(p.id)));
+
+                    // Create or update a penguin for every other player
+                    remotePlayers.forEach(p => {
+                        const pid = String(p.id);
+                        if (pid === String(myPlayerId)) return; // skip self
+                        if (!penguinMeshes[pid]) {
+                            penguinMeshes[pid] = createRemotePenguinMesh(colorFromId(pid));
+                            scene.add(penguinMeshes[pid]);
+                        }
+                        penguinMeshes[pid].position.set(p.x, p.y, p.z);
+                    });
+ 
+
+                    // Remove penguins for players who left
+                    for (const pid of Object.keys(penguinMeshes)) {
+                        if (!activeIds.has(pid)) {
+                            scene.remove(penguinMeshes[pid]);
+                            delete penguinMeshes[pid];
+                        }
+                    }
+                    setPlayerCount(remotePlayers.length);
+                }).catch(() => {});
+        }, 100);
+        cleanupFunctions.push(() => clearInterval(pollInterval));
+
         const { renderer2, camera2 } = setupCanvas2(canvas2, isMountedRef, cleanupFunctions, setPointCloudCount);
 
         const handleResize = () => {
@@ -78,46 +119,18 @@ export default function Game() {
             camera2.updateProjectionMatrix();
             renderer2.setSize(r2.width, r2.height, false);
         };
-
-        
-        window.addEventListener("keydown", (event) => {
-            console.log('fetch keyodwn    getplayers')
-            //console.log(event.key);  // e.g. "a", "Enter", "ArrowUp"
-          // On keydown, send a fetch to the server to move all players
-          fetch('http://localhost:5173/getPlayers')
-            .then(res => res.json())
-            .then(players => {
-                players.forEach(player => {
-                    fetch('http://localhost:5173/playerMove', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            id: player.id,   // move each player by dx=1, dy=1, dz=0 (defaults are provided server side)
-                        })
-                    });
-                });
-            })
-            .catch(e => console.error('Error moving all players:', e));
-  
-          });
-
-
         window.addEventListener('resize', handleResize);
         cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 
         initJolt().then(async (Jolt) => {
             if (!isMounted) return;
-            try { if (typeof renderer.init === 'function') await renderer.init(); } catch (e) { console.warn('Error initializing renderer:', e); }
+            try { if (typeof renderer.init === 'function') await renderer.init(); } catch (e) { console.warn(e); }
             const { joltInterface, physicsSystem, bodyInterface } = initPhysics(Jolt);
             if (!isMounted) return;
             Object.assign(gameStateRef.current, { joltInterface, physicsSystem, bodyInterface, Jolt });
             const dynamicObjects = [];
             gameStateRef.current.dynamicObjects = dynamicObjects;
 
-            const wsClient = setupWebSocketPenguins({ game_id, scene, penguinsRef, myPlayerIdRef, setRemotePenguinsTick, setPlayerCount, cleanupFunctions });
-            gameStateRef.current.wsClient = wsClient;
             gameStateRef.current.selectionSystem = setupSelectionSystem(scene, camera, canvas, cleanupFunctions);
 
             const charBody = setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExampleUpdateRef, game_id);
@@ -130,18 +143,19 @@ export default function Game() {
 
             handleUserInput(inputStateRef.current);
 
-            function sendPenguinPositionToServer() {
-                if (!wsClient?.connected || !charBody) return;
-                const pos = bodyInterface.GetPosition(charBody.GetID());
-                const quat = bodyInterface.GetRotation(charBody.GetID());
-                wsClient.sendJson({ type: 'player_update', game_id, pos: { x: pos.GetX(), y: pos.GetY(), z: pos.GetZ() }, quat: { x: quat.GetX(), y: quat.GetY(), z: quat.GetZ(), w: quat.GetW() } });
-            }
-
-            let netSyncTick = 0;
+            // Send this player's position to the server every 3 frames
+            let syncTick = 0;
             function onExampleUpdate(time, deltaTime) {
                 if (onExampleUpdateRef.fn) onExampleUpdateRef.fn(time, deltaTime, inputStateRef.current);
                 if (gameStateRef.current.effectUpdaters) gameStateRef.current.effectUpdaters.forEach(u => u(deltaTime));
-                if (++netSyncTick % 2 === 0) sendPenguinPositionToServer();
+                if (++syncTick % 3 === 0 && myPlayerId && charBody) {
+                    const pos = bodyInterface.GetPosition(charBody.GetID());
+                    fetch(`${SERVER}/playerMoveInRoom`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ id: myPlayerId, x: pos.GetX(), y: pos.GetY(), z: pos.GetZ() }),
+                    }).catch(() => {});
+                }
             }
 
             const generateObject = initGenerateObject(Jolt, physicsSystem, scene);
@@ -159,10 +173,18 @@ export default function Game() {
         return () => {
             isMounted = false;
             isMountedRef.current = false;
+            // Tell server this player is gone
+            if (myPlayerId) {
+                fetch(`${SERVER}/removePlayerFromRoom`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ id: myPlayerId }),
+                }).catch(() => {});
+            }
+            // Remove all remote penguin meshes
+            Object.values(penguinMeshes).forEach(m => scene.remove(m));
             gameStateRef.current.effectDisposers?.forEach(d => d());
             cleanupFunctions.forEach(fn => fn());
-            try { gameStateRef.current.wsClient?.disconnect(); } catch (e) { console.error('WebSocket disconnect failed:', e); }
-            gameStateRef.current.wsClient = null;
             try { gameStateRef.current.renderer?.dispose(); } catch (_) {}
             Object.assign(gameStateRef.current, { renderer: null, scene: null, camera: null, controls: null });
         };
@@ -186,7 +208,7 @@ export default function Game() {
                 </div>
                 <button onClick={() => setCanvas2Visible(v => !v)}>{canvas2Visible ? 'Hide' : 'Show'} Canvas2</button>
                 <GameVideoSeekBar annotations={annotations} />
-                <button style={{ marginLeft: 10, background: annotationsPanelVisible ? '#ffd700' : '#353535', color: annotationsPanelVisible ? '#111' : '#ffd700', border: 'none', borderRadius: 6, padding: '7px 18px', fontWeight: 'bold', fontSize: '1.05rem', cursor: 'pointer', boxShadow: annotationsPanelVisible ? '0 0 0 3px #ffd70055' : '0 1px 3px #111' }} onClick={() => setAnnotationsPanelVisible(x => !x)}>
+                <button style={{ marginLeft: 10, background: annotationsPanelVisible ? '#ffd700' : '#353535', color: annotationsPanelVisible ? '#111' : '#ffd700', border: 'none', borderRadius: 6, padding: '7px 18px', fontWeight: 'bold', fontSize: '1.05rem', cursor: 'pointer' }} onClick={() => setAnnotationsPanelVisible(x => !x)}>
                     {annotationsPanelVisible ? 'Hide' : 'Show'} Annotations
                 </button>
             </div>
@@ -203,11 +225,10 @@ export default function Game() {
             </div>
             <WASDControls inputState={inputStateRef.current} />
             {showWinMessage && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000, flexDirection: 'column' }}>
-                    <div style={{ backgroundColor: '#1a1a1a', padding: '40px 60px', borderRadius: '16px', border: '2px solid #ffd700', boxShadow: '0 0 30px rgba(255,215,0,0.5)', textAlign: 'center' }}>
-                        <h2 style={{ color: '#ffd700', fontSize: '3rem', margin: '0 0 20px 0', textShadow: '0 0 20px rgba(255,215,0,0.8)' }}>🎉 Congratulations! 🎉</h2>
+                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000 }}>
+                    <div style={{ backgroundColor: '#1a1a1a', padding: '40px 60px', borderRadius: '16px', border: '2px solid #ffd700', textAlign: 'center' }}>
+                        <h2 style={{ color: '#ffd700', fontSize: '3rem', margin: '0 0 20px 0' }}>🎉 Congratulations! 🎉</h2>
                         <p style={{ color: '#fff', fontSize: '1.5rem', margin: 0 }}>You found the cheese!</p>
-                        <p style={{ color: '#aaa', fontSize: '1rem', marginTop: '10px' }}>Returning to level select...</p>
                     </div>
                 </div>
             )}
