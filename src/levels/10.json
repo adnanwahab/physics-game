@@ -1,0 +1,498 @@
+[
+  {
+    "mode": "2d Platformer",
+    "win-condition": {
+      "type": "proximity",
+      "target": "player",
+      "distance": 1.0
+    },
+    "objects": [
+      {
+        "type": "cuboid",
+        "position": [
+          2.0,
+          0.5,
+          0.0
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          2.341,
+          0.5,
+          1.131
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          1.989,
+          0.5,
+          2.507
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0.832,
+          0.5,
+          3.708
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -1.0,
+          0.5,
+          4.285
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -3.141,
+          0.5,
+          3.89
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5.063,
+          0.5,
+          2.393
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -6.2,
+          0.5,
+          -0.052
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -6.098,
+          0.5,
+          -3.009
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -4.551,
+          0.5,
+          -5.835
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -1.686,
+          0.5,
+          -7.82
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          2.024,
+          0.5,
+          -8.358
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5.839,
+          0.5,
+          -7.109
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          8.895,
+          0.5,
+          -4.114
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          10.399,
+          0.5,
+          0.175
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          9.823,
+          0.5,
+          4.95
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          7.057,
+          0.5,
+          9.207
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          2.471,
+          0.5,
+          11.947
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -3.117,
+          0.5,
+          12.415
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -8.592,
+          0.5,
+          10.283
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          0.5,
+          0
+        ],
+        "size": [
+          2,
+          1,
+          2
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cheese",
+        "position": [
+          0,
+          1.5,
+          0
+        ],
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          3.43,
+          1.2,
+          0.695
+        ],
+        "size": [
+          0.4,
+          2.4,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -2.455,
+          1.2,
+          5.365
+        ],
+        "size": [
+          0.4,
+          2.4,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -6.565,
+          1.2,
+          -5.078
+        ],
+        "size": [
+          0.4,
+          2.4,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          8.299,
+          1.2,
+          -6.755
+        ],
+        "size": [
+          0.4,
+          2.4,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5.745,
+          1.2,
+          11.773
+        ],
+        "size": [
+          0.4,
+          2.4,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]

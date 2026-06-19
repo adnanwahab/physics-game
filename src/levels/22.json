@@ -1,0 +1,318 @@
+[
+  {
+    "mode": "3d Platformer",
+    "win-condition": {
+      "type": "proximity",
+      "target": "player",
+      "distance": 1.0
+    },
+    "objects": [
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          0.5,
+          0
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5,
+          1.5,
+          -3
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          2.5,
+          -6
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5,
+          3.5,
+          -9
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          4.5,
+          -12
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5,
+          5.5,
+          -15
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          6.5,
+          -18
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          7.5,
+          -21
+        ],
+        "size": [
+          4,
+          1,
+          4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cheese",
+        "position": [
+          0,
+          9,
+          -21
+        ],
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          0.5,
+          5
+        ],
+        "size": [
+          5,
+          1,
+          5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5,
+          0.75,
+          -3
+        ],
+        "size": [
+          0.5,
+          1.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          1.25,
+          -6
+        ],
+        "size": [
+          0.5,
+          2.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5,
+          1.75,
+          -9
+        ],
+        "size": [
+          0.5,
+          3.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          2.25,
+          -12
+        ],
+        "size": [
+          0.5,
+          4.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          5,
+          2.75,
+          -15
+        ],
+        "size": [
+          0.5,
+          5.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -5,
+          3.25,
+          -18
+        ],
+        "size": [
+          0.5,
+          6.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          3.75,
+          -21
+        ],
+        "size": [
+          0.5,
+          7.5,
+          0.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  }
+]

@@ -1,0 +1,703 @@
+[
+  {
+    "mode": "3d Platformer",
+    "win-condition": {
+      "type": "proximity",
+      "target": "player",
+      "distance": 1.0
+    },
+    "objects": [
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          0.25,
+          0
+        ],
+        "size": [
+          20,
+          0.5,
+          15
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          3,
+          -7.5
+        ],
+        "size": [
+          20,
+          6,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          3,
+          7.5
+        ],
+        "size": [
+          20,
+          6,
+          0.4
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          -10,
+          3,
+          0
+        ],
+        "size": [
+          0.4,
+          6,
+          15
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          10,
+          3,
+          0
+        ],
+        "size": [
+          0.4,
+          6,
+          15
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cuboid",
+        "position": [
+          0,
+          6.25,
+          0
+        ],
+        "size": [
+          20,
+          0.5,
+          15
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -9,
+          0.875,
+          -5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -6,
+          0.875,
+          -5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -3,
+          0.875,
+          -5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          0,
+          0.875,
+          -5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          3,
+          0.875,
+          -5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          6,
+          0.875,
+          -5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -9,
+          0.875,
+          -2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -6,
+          0.875,
+          -2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -3,
+          0.875,
+          -2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          0,
+          0.875,
+          -2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          3,
+          0.875,
+          -2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          6,
+          0.875,
+          -2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -9,
+          0.875,
+          0.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -6,
+          0.875,
+          0.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -3,
+          0.875,
+          0.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          0,
+          0.875,
+          0.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          3,
+          0.875,
+          0.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          6,
+          0.875,
+          0.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -9,
+          0.875,
+          2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -6,
+          0.875,
+          2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -3,
+          0.875,
+          2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          0,
+          0.875,
+          2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          3,
+          0.875,
+          2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          6,
+          0.875,
+          2.5
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -9,
+          0.875,
+          5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -6,
+          0.875,
+          5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          -3,
+          0.875,
+          5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          0,
+          0.875,
+          5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          3,
+          0.875,
+          5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          6,
+          0.875,
+          5.0
+        ],
+        "size": [
+          2,
+          0.75,
+          1
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "desk",
+        "position": [
+          0,
+          0.875,
+          -5.5
+        ],
+        "size": [
+          3,
+          0.75,
+          1.5
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "type": "cheese",
+        "position": [
+          0,
+          1.5,
+          -5.5
+        ],
+        "size": [
+          0.8,
+          0.8,
+          0.8
+        ],
+        "rotation": [
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "camera": {
+      "rotation": [
+        0,
+        180,
+        0
+      ]
+    }
+  }
+]
