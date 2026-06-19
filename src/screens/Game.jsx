@@ -56,7 +56,7 @@ export default function Game() {
         window.penguins = penguinMeshes
         // --- Register this client as a player ---
         let myPlayerId = null;
-        
+
         fetch(`${SERVER}/addPlayerToRoom`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
