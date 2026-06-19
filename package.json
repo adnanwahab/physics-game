@@ -37,9 +37,11 @@
     "deck.gl": "^9.3.4",
     "gsap": "^3.12.5",
     "lil-gui": "^0.19.2",
+    "mapbox-gl": "^3.25.0",
     "ollama": "^0.5.11",
     "react": "^19.2.3",
     "react-dom": "^19.2.3",
+    "react-map-gl": "^8.1.1",
     "react-router-dom": "^7.11.0",
     "three": "^0.172.0",
     "underscore": "^1.13.7"

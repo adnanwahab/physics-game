@@ -364,7 +364,7 @@ async function loadLevelCuboids(levelId, Jolt, bodyInterface, scene, dynamicObje
                         LAYER_NON_MOVING
                     );
 
-                    console.log('players', players)
+                    // console.log('players', players)
                 }
             }
         }
@@ -458,14 +458,35 @@ function AnnotationsPanel({ annotations, visible, onClose }) {
 
 export default function Game() {
     useEffect(() => {
+        // --- WHY THIS 404s: ---
+        // The call to fetch('/newPlayer', {method: 'POST'}) is sending a POST to a RELATIVE PATH '/newPlayer'.
+        // In dev, the browser will try to call `http://localhost:5173/newPlayer` (the Vite dev server),
+        // but your server that implements /newPlayer is running separately (likely on :5173 *or* another port).
+        // Unless you have a proxy set up in vite.config.js to forward /newPlayer → your backend, 
+        // requests to /newPlayer will 404.
+        //
+        // SOLUTIONS:
+        // 1. Use the full backend/server URL, e.g. `fetch('http://localhost:5173/newPlayer', ...)`
+        //    if your API is on port 5173, or change port if needed.
+        // 2. Set up a Vite proxy in vite.config.js so '/newPlayer' is forwarded to your Bun/Express server.
+        //    See: https://vitejs.dev/config/server-options.html#server-proxy
+        // 3. If deploying, make sure frontend and API paths match base URLs or adjust frontend API calls.
+        //
+        // Example (use full URL for dev demo):
         async function incrementAndFetchCounter() {
             try {
-                const resp = await fetch('/newPlayer', {
-                    method: 'POST'
+                const resp = await fetch('http://localhost:5173/newPlayer', {  // <--- explicit URL
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ x: 0, y: 0, z: 0 })
                 });
                 if (resp.ok) {
                     const data = await resp.json();
-                    setPlayerCount(data.count);
+                    // The /newPlayer API returns {id, x, y, z}, not {count}, per your server.ts
+                    // So setPlayerCount(data.id) if you want the player's id
+                    setPlayerCount(data.id);
                 } else {
                     setPlayerCount(1);
                 }
@@ -529,6 +550,7 @@ export default function Game() {
                 })
                 .then(resp => resp.json())
                 .then(data => {
+                    console.log('playermove', data)
                     // Optionally update local state, show feedback, etc.
                     //console.log("Player moved:", data);
                 })

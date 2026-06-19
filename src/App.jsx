@@ -4,6 +4,15 @@ import Game from './screens/Game'
 import LevelList from './screens/LevelList'
 import Settings from './screens/Settings'
 //import VideoSeekBar from './components/VideoSeekBar'
+import React from 'react';
+import {DeckGL} from '@deck.gl/react';
+//import {MapViewState} from '@deck.gl/core';
+import {LineLayer} from '@deck.gl/layers';
+import {ZoomWidget} from '@deck.gl/react';
+import {Map} from 'react-map-gl/mapbox';
+
+const token = 'pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg'
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 function App() {
   return (
@@ -74,6 +83,37 @@ function App() {
             }
           `}
         </style>
+        <div>
+
+        {/* Simple DeckGL world map */}
+        <div style={{ width: "100%", height: "400px", margin: "40px 0" }}>
+          {/* If DeckGL and Map components are not globally imported, users must import
+              { DeckGL } from '@deck.gl/react'
+              { Map } from 'react-map-gl'
+          */}
+          {/* <DeckGL
+            initialViewState={{
+              longitude: 0,
+              latitude: 20,
+              zoom: 1.2,
+              bearing: 0,
+              pitch: 0,
+            }}
+            controller={true}
+            style={{ width: "100%", height: "100%" }}
+            layers={[]}
+          >
+            <Map
+              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
+            />
+          </DeckGL> */}
+        </div>
+  
+
+
+
+          
+        </div>
         </div>
     </div>
   )
