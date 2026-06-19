@@ -1,22 +1,26 @@
 
 import { useNavigate } from "react-router-dom";
 
+import React from 'react';
 
-import React, {useState} from 'react';
-import {createRoot} from 'react-dom/client';
-import {Map, NavigationControl, Popup, useControl} from 'react-map-gl/mapbox';
-import {GeoJsonLayer, ArcLayer} from 'deck.gl';
-import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
-import 'mapbox-gl/dist/mapbox-gl.css';
+// Remove unused imports related to deck.gl/mapbox that aren't used here
+// import {createRoot} from 'react-dom/client';
+// import {Map, NavigationControl, Popup, useControl} from 'react-map-gl/mapbox';
+// import {GeoJsonLayer, ArcLayer} from 'deck.gl';
+// import {MapboxOverlay as DeckOverlay} from '@deck.gl/mapbox';
+// import 'mapbox-gl/dist/mapbox-gl.css';
 
-// source: Natural Earth http://www.naturalearthdata.com/ via geojson.xyz
-const AIR_PORTS =
-  'https://d2ad6b4ur7yvpq.cloudfront.net/naturalearth-3.3.0/ne_10m_airports.geojson';
+// Remove unused AIR_PORTS and DeckGLOverlay/MAPBOX_TOKEN/MAP_STYLE/etc.
 
-// Set your Mapbox token here or via environment variable
-const MAPBOX_TOKEN = 
+// Replace the broken data URL in the LineLayer in App below
+import DeckGL from '@deck.gl/react';
+import {LineLayer} from '@deck.gl/layers';
 
-'pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg'// eslint-disable-line
+// Mock demo data for line layer (needs to be an array, not an invalid URL)
+const EXAMPLE_LINES = [
+  {from: [-0.1276, 51.5074], to: [2.3522, 48.8566]}, // London -> Paris
+  {from: [-0.1276, 51.5074], to: [13.4050, 52.5200]}, // London -> Berlin
+];
 
 const INITIAL_VIEW_STATE = {
   latitude: 51.47,
@@ -26,69 +30,27 @@ const INITIAL_VIEW_STATE = {
   pitch: 30
 };
 
+function App() {
+  const layers = [
+    new LineLayer({
+      id: 'line-layer',
+      data: EXAMPLE_LINES, // Use valid local array
+      getSourcePosition: (d) => d.from,
+      getTargetPosition: (d) => d.to,
+      getColor: [80, 80, 200],
+      getWidth: 5
+    })
+  ];
 
-const MAP_STYLE = 'mapbox://styles/mapbox/light-v9';
-function DeckGLOverlay(props) {
-  const overlay = useControl(() => new DeckOverlay(props));
-  overlay.setProps(props);
-  return null;
+  return (
+    <DeckGL
+      initialViewState={INITIAL_VIEW_STATE}
+      controller
+      layers={layers}
+      style={{height: 400}}
+    />
+  );
 }
-
-function Root() {
-    const [selected, setSelected] = useState(null);
-  
-    const layers = [
-      new GeoJsonLayer({
-        id: 'airports',
-        data: AIR_PORTS,
-        // Styles
-        filled: true,
-        pointRadiusMinPixels: 2,
-        pointRadiusScale: 2000,
-        getPointRadius: f => 11 - f.properties.scalerank,
-        getFillColor: [200, 0, 80, 180],
-        // Interactive props
-        pickable: true,
-        autoHighlight: true,
-        onClick: info => setSelected(info.object)
-        // beforeId: 'waterway-label' // In interleaved mode render the layer under map labels
-      }),
-      new ArcLayer({
-        id: 'arcs',
-        data: AIR_PORTS,
-        dataTransform: d => d.features.filter(f => f.properties.scalerank < 4),
-        // Styles
-        getSourcePosition: f => [-0.4531566, 51.4709959], // London
-        getTargetPosition: f => f.geometry.coordinates,
-        getSourceColor: [0, 128, 200],
-        getTargetColor: [200, 0, 80],
-        getWidth: 1
-      })
-    ];
-  
-    return (
-      <Map
-        initialViewState={INITIAL_VIEW_STATE}
-        mapStyle={MAP_STYLE}
-        mapboxAccessToken={MAPBOX_TOKEN}
-      >
-        {selected && (
-          <Popup
-            key={selected.properties.name}
-            anchor="bottom"
-            style={{zIndex: 10}} /* position above deck.gl canvas */
-            longitude={selected.geometry.coordinates[0]}
-            latitude={selected.geometry.coordinates[1]}
-          >
-            {selected.properties.name} ({selected.properties.abbrev})
-          </Popup>
-        )}
-        <DeckGLOverlay layers={layers} /* interleaved*/ />
-        <NavigationControl position="top-left" />
-      </Map>
-    );
-  }
-  
 
 // Mock levels data - replace with your actual data source
 const levels = [
@@ -158,8 +120,6 @@ const levels = [
     { id: '63', name: 'Knowledge Worker Productivity Improver', difficulty: 'Medium', description: 'Why did I not complete a Jira ticket? Learn productivity through analysis.' }
 ];
 
-
-
 export default function LevelList() {
   const navigate = useNavigate();
 
@@ -181,8 +141,7 @@ export default function LevelList() {
         <thead>
           <tr
             style={{
-              // Remove distinct background to blend with tbody
-              backgroundColor: "transparent", // No special header bg
+              backgroundColor: "transparent",
               borderBottom: "2px solid #e5e7eb",
             }}
           >
@@ -191,7 +150,7 @@ export default function LevelList() {
                 padding: "12px",
                 textAlign: "left",
                 fontWeight: "bold",
-                color: "inherit", // inherit table color
+                color: "inherit",
                 backgroundColor: "transparent",
               }}
             >
@@ -207,17 +166,6 @@ export default function LevelList() {
               }}
             >
               Name
-            </th>
-            <th
-              style={{
-                padding: "12px",
-                textAlign: "left",
-                fontWeight: "bold",
-                color: "inherit",
-                backgroundColor: "transparent",
-              }}
-            >
-              Description
             </th>
             <th
               style={{
@@ -252,7 +200,6 @@ export default function LevelList() {
             >
               <td style={{ padding: "12px" }}>{level.id}</td>
               <td style={{ padding: "12px" }}>{level.name}</td>
-              {/* <td style={{ padding: '12px' }}>{level.difficulty}</td> */}
               <td style={{ padding: "12px" }}>{level.description}</td>
             </tr>
           ))}
@@ -264,7 +211,6 @@ export default function LevelList() {
           const formData = new FormData(e.target);
           const suggestion = formData.get("suggestion");
           if (suggestion && suggestion.trim()) {
-            // Simulate sending to Helios and Daedalus (replace this with actual submission logic if needed)
             alert("Forwarding suggestion to Helios + Daedalus: " + suggestion);
             e.target.reset();
           }
@@ -322,7 +268,8 @@ export default function LevelList() {
           Forward Suggestion
         </button>
       </form>
-      <Root></Root>
+      <App />
+      {/* <Root></Root> */}
     </div>
   );
 }
