@@ -59,10 +59,18 @@ export default function Game() {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ game_id, x: 0, y: 0, z: 0 }),
-        }).then(r => r.json()).then(d => { myPlayerId = d.id; }).catch(() => {});
+        }).then(r => r.json()).then(d => { 
+            console.log('wtf')
+            myPlayerId = d.id;
+        
+            penguinMeshes[d.id] = true
+        }).catch((e) => {
+            //debugger
+        });
 
         // --- Penguin mesh registry: id → THREE.Mesh ---
         const penguinMeshes = {};
+        window.penguins = penguinMeshes
 
         // --- Poll server every 100ms for other players in the same room ---
 
@@ -79,6 +87,16 @@ export default function Game() {
 
         const pollInterval = setInterval(() => {
             const serverUrl = getServerUrl();
+            fetch(`${SERVER}/movePlayers`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ game_id, x: 0, y: 0, z: 0 }),
+            }).then(r => r.json()).then(d => { 
+                console.log('wtf')
+                myPlayerId = d.id;
+            
+                penguinMeshes[d.id] = true
+            }).catch(() => {});
             // fetch(`${serverUrl}/getPlayersInRoom?game_id=${encodeURIComponent(game_id)}`)
             //     .then(r => r.json())
             //     .then(remotePlayers => {
