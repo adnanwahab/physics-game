@@ -1,4 +1,4 @@
-import { setupCollisionFiltering } from './setupCollisionFiltering.js';
+import { setupCollisionFiltering } from '../setupCollisionFiltering.js';
 
 /**
  * Initializes the physics system.
