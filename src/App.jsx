@@ -40,7 +40,7 @@ function App() {
         <Route path="/" element={<LevelList />} />
         <Route path="/level-list" element={<LevelList />} />
         <Route path="/game/:game_id" element={<Game />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/edit/:game_id" element={<Settings />} />
       </Routes>
 
       <div className="footer">
