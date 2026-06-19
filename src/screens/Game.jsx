@@ -20,6 +20,18 @@ import GameVideoSeekBar from '../components/GameVideoSeekBar.jsx';
 import AnnotationsPanel from '../components/AnnotationsPanel.jsx';
 
 export default function Game() {
+    const players = []
+
+    useEffect(function () {
+        fetch('http://localhost:5173/newPlayer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ x: 0, y: 0, z: 0 })
+        });
+   
+    }, players)
     const { game_id } = useParams();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
@@ -66,23 +78,6 @@ export default function Game() {
             camera2.updateProjectionMatrix();
             renderer2.setSize(r2.width, r2.height, false);
         };
-
-        // On mount, fetch to add a new player and store the returned id locally
-        fetch('http://localhost:5173/newPlayer', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ x: 0, y: 0, z: 0 }) // Optionally customize initial position
-        })
-        .then(res => res.json())
-        .then(data => {
-            if (data && typeof data.id === 'number') {
-                myPlayerIdRef.current = data.id;
-            }
-        })
-        .catch(e => console.error('Failed to create new player:', e));
-
 
         
         window.addEventListener("keydown", (event) => {
