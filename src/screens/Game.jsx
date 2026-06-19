@@ -52,9 +52,11 @@ export default function Game() {
         const cleanupFunctions = [];
         let isMounted = true;
         const isMountedRef = { current: true };
-
+        const penguinMeshes = {};
+        window.penguins = penguinMeshes
         // --- Register this client as a player ---
         let myPlayerId = null;
+        
         fetch(`${SERVER}/addPlayerToRoom`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -69,8 +71,7 @@ export default function Game() {
         });
 
         // --- Penguin mesh registry: id → THREE.Mesh ---
-        const penguinMeshes = {};
-        window.penguins = penguinMeshes
+   
 
         // --- Poll server every 100ms for other players in the same room ---
 
