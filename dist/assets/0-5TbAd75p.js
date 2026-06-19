@@ -1,0 +1,1 @@
+const t=[{mode:"hub","win-condition":{type:"proximity",target:"player",distance:1},camera:{rotation:[0,180,0]},objects:[{type:"desk",position:[0,.375,3],size:[2,.75,1],rotation:[0,0,0]}]}];export{t as default};
