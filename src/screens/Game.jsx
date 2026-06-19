@@ -66,6 +66,49 @@ export default function Game() {
             camera2.updateProjectionMatrix();
             renderer2.setSize(r2.width, r2.height, false);
         };
+
+        // On mount, fetch to add a new player and store the returned id locally
+        fetch('http://localhost:5173/newPlayer', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ x: 0, y: 0, z: 0 }) // Optionally customize initial position
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data && typeof data.id === 'number') {
+                myPlayerIdRef.current = data.id;
+            }
+        })
+        .catch(e => console.error('Failed to create new player:', e));
+
+
+        
+        window.addEventListener("keydown", (event) => {
+            console.log('fetch keyodwn    getplayers')
+            //console.log(event.key);  // e.g. "a", "Enter", "ArrowUp"
+          // On keydown, send a fetch to the server to move all players
+          fetch('http://localhost:5173/getPlayers')
+            .then(res => res.json())
+            .then(players => {
+                players.forEach(player => {
+                    fetch('http://localhost:5173/playerMove', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            id: player.id,   // move each player by dx=1, dy=1, dz=0 (defaults are provided server side)
+                        })
+                    });
+                });
+            })
+            .catch(e => console.error('Error moving all players:', e));
+  
+          });
+
+
         window.addEventListener('resize', handleResize);
         cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 

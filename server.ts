@@ -36,19 +36,19 @@ const server = http.createServer(async (req, res) => {
     let body = "";
     req.on("data", chunk => { body += chunk; });
     req.on("end", () => {
+      // Simply always send a valid JSON response.
+      let data;
       try {
-        const data = JSON.parse(body || "{}");
-        const id = players.length > 0 ? players[players.length - 1].id + 1 : 1;
-        const player = { id, x: data.x ?? 0, y: data.y ?? 0, z: data.z ?? 0 };
-        players.push(player);
-        res.setHeader("Content-Type", "application/json");
-        res.writeHead(201);
-        res.end(JSON.stringify(player));
-      } catch (e) {
-        res.setHeader("Content-Type", "application/json");
-        res.writeHead(400);
-        res.end(JSON.stringify({ error: "Invalid JSON" }));
+        data = JSON.parse(body || "{}");
+      } catch {
+        data = {};
       }
+      const id = players.length > 0 ? players[players.length - 1].id + 1 : 1;
+      const player = { id, x: data.x ?? 0, y: data.y ?? 0, z: data.z ?? 0 };
+      players.push(player);
+      res.setHeader("Content-Type", "application/json");
+      res.writeHead(201);
+      res.end(JSON.stringify(player));
     });
     return;
   }
