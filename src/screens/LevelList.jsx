@@ -3,14 +3,70 @@ import { useNavigate } from "react-router-dom";
 
 // Mock levels data - replace with your actual data source
 const levels = [
-    //  { id: '0', name: 'hub', difficulty: 'Easy', description: 'linking all minigames' },
-
-    { id: '1', name: 'creating puzzles for child education', difficulty: 'Easy', description: 'shared links to each other' },
-    { id: '2', name: 'knowledge worker', difficulty: 'Medium', description: 'Impoving productivity' },
-    { id: '3', name: 'bridge building', difficulty: 'Hard', description: 'Cross the cuboid bridge' },
-    // { id: '4', name: 'Level 4', difficulty: 'Expert', description: 'Warsong Gulch' },
-    // { id: '5', name: 'Level 5', difficulty: 'Easy', description: 'Another beginner level' },
-    // { id: '4', name: 'protecting daedalus', description: 'politics, cooperative, '}
+    { id: '0', name: 'Hub', difficulty: 'Easy', description: 'The entry hub linking all mini-games.' },
+    { id: '1', name: 'Jump on the Cube', difficulty: 'Easy', description: 'Basic 2D platformer – jump on a cube to win.' },
+    { id: '2', name: 'Simulation Rewind', difficulty: 'Medium', description: 'Rewind time and simulate different outcomes.' },
+    { id: '3', name: 'Bridge Building', difficulty: 'Medium', description: 'Cross the cuboid bridge to reach the goal.' },
+    { id: '4', name: 'Protecting Daedalus', difficulty: 'Hard', description: 'A cooperative level involving politics and teamwork.' },
+    { id: '5', name: 'Warsong Gulch', difficulty: 'Expert', description: 'Inspired by classic competitive capture-the-flag.' },
+    { id: '6', name: 'Cooking Tutor', difficulty: 'Easy', description: 'Complete recipes step-by-step in a kitchen simulation.' },
+    { id: '7', name: 'Yoga Assist Tutor', difficulty: 'Medium', description: 'Follow movement prompts to perfect yoga poses.' },
+    { id: '8', name: 'Rearrange the Room', difficulty: 'Easy', description: 'Select and move objects to redesign a room.' },
+    { id: '9', name: 'Cheese Heist', difficulty: 'Medium', description: 'Guide a mouse to steal cheese undetected.' },
+    { id: '10', name: 'Pointcloud Merge', difficulty: 'Medium', description: 'Join two apps using point cloud data.' },
+    { id: '11', name: 'Puzzle Path', difficulty: 'Easy', description: 'Solve logic puzzles to open the next path.' },
+    { id: '12', name: '317 Logging', difficulty: 'Medium', description: 'Visualize transparent city logging mechanics.' },
+    { id: '13', name: 'Pensieve Laws', difficulty: 'Medium', description: 'Use the Pensieve to alter physical laws.' },
+    { id: '14', name: 'Elevator Action', difficulty: 'Easy', description: 'Ride elevators to reach higher floors safely.' },
+    { id: '15', name: 'Ball Sorter', difficulty: 'Easy', description: 'Sort colored balls into matching bins.' },
+    { id: '16', name: 'Robotic Arms', difficulty: 'Hard', description: 'Control robotic arms to assemble components.' },
+    { id: '17', name: 'Platforming Over Lava', difficulty: 'Hard', description: 'Classic 2D platforming over dangerous lava.' },
+    { id: '18', name: 'Magnets and Motion', difficulty: 'Medium', description: 'Use magnets to move objects and solve puzzles.' },
+    { id: '19', name: 'Paint by Numbers', difficulty: 'Easy', description: 'Recreate pixel art using numbers as guides.' },
+    { id: '20', name: 'Coded Escape Room', difficulty: 'Medium', description: 'Use code snippets to escape the room.' },
+    { id: '21', name: 'Floating Islands', difficulty: 'Medium', description: 'Traverse floating platforms in 3D space.' },
+    { id: '22', name: 'Water Simulation', difficulty: 'Medium', description: 'Manipulate fluid physics to solve obstacles.' },
+    { id: '23', name: 'Rocket Science', difficulty: 'Hard', description: 'Build and launch rockets with accurate physics.' },
+    { id: '24', name: 'Electromaze', difficulty: 'Hard', description: 'Guide a charge through a maze using electromagnetic fields.' },
+    { id: '25', name: 'Deus Ex Machina', difficulty: 'Expert', description: 'Manipulate the game engine as an all-powerful player.' },
+    { id: '26', name: 'Color Match', difficulty: 'Easy', description: 'Match colors to unlock doors.' },
+    { id: '27', name: 'Gravity Flip', difficulty: 'Medium', description: 'Invert gravity to navigate tricky terrain.' },
+    { id: '28', name: 'Invisible Maze', difficulty: 'Medium', description: 'Navigate a maze you cannot see.' },
+    { id: '29', name: 'Physics Sandbox', difficulty: 'Easy', description: 'Experiment with basic physics in a sandbox environment.' },
+    { id: '30', name: 'Reaction Time Tester', difficulty: 'Easy', description: 'Test your reflexes with quick prompts.' },
+    { id: '31', name: 'Boat Builder', difficulty: 'Medium', description: 'Construct a functional boat with buoyancy.' },
+    { id: '32', name: 'Magical Forest', difficulty: 'Easy', description: 'Explore a forest with magical interactable objects.' },
+    { id: '33', name: 'Wind Power', difficulty: 'Medium', description: 'Harness wind to move objects and generate energy.' },
+    { id: '34', name: 'Solar Circuit', difficulty: 'Medium', description: 'Use solar power to complete circuitry.' },
+    { id: '35', name: 'Time Lock', difficulty: 'Hard', description: 'Manipulate time to solve locks and puzzles.' },
+    { id: '36', name: 'Mirror Room', difficulty: 'Medium', description: 'Reflect lasers using mirrors to reach targets.' },
+    { id: '37', name: 'The Big Switch', difficulty: 'Easy', description: 'Find and activate the big switch.' },
+    { id: '38', name: 'Maze Runner', difficulty: 'Medium', description: 'Race through a classic maze before the timer runs out.' },
+    { id: '39', name: 'Rocket Navigation', difficulty: 'Hard', description: 'Navigate a rocket past asteroids.' },
+    { id: '40', name: 'Hoverboard Hero', difficulty: 'Easy', description: 'Ride the hoverboard to reach the finish.' },
+    { id: '41', name: 'Balance Beam', difficulty: 'Medium', description: 'Walk across beams without falling.' },
+    { id: '42', name: 'Color Mixing', difficulty: 'Easy', description: 'Mix colors to create new ones and progress.' },
+    { id: '43', name: 'Laser Logic', difficulty: 'Hard', description: 'Arrange components so lasers activate sensors.' },
+    { id: '44', name: 'Windy Climb', difficulty: 'Medium', description: 'Climb structures while dealing with strong winds.' },
+    { id: '45', name: 'Secret Notes', difficulty: 'Easy', description: 'Find all hidden annotations in the level.' },
+    { id: '46', name: 'Jump Pads', difficulty: 'Easy', description: 'Use bounce pads to reach distant platforms.' },
+    { id: '47', name: 'Safety Inspector', difficulty: 'Medium', description: 'Analyze structures for safety violations.' },
+    { id: '48', name: 'Code Bridge', difficulty: 'Hard', description: 'Write code to construct bridges dynamically.' },
+    { id: '49', name: 'Shape Shifter', difficulty: 'Medium', description: 'Change forms to solve level-specific puzzles.' },
+    { id: '50', name: 'Interactive Editor', difficulty: 'Medium', description: 'Edit objects in the level in real time.' },
+    { id: '51', name: 'Object Teleport', difficulty: 'Easy', description: 'Teleport objects to help the player advance.' },
+    { id: '52', name: 'Two Worlds', difficulty: 'Hard', description: 'Navigate between two parallel worlds.' },
+    { id: '53', name: 'Magnet Mayhem', difficulty: 'Medium', description: 'Combine and repel magnets to climb the level.' },
+    { id: '54', name: 'Mechanical Mouse', difficulty: 'Medium', description: 'Guide a robot mouse through a maze.' },
+    { id: '55', name: 'Giant Dominoes', difficulty: 'Easy', description: 'Tip dominoes to trigger chain reactions.' },
+    { id: '56', name: 'Energy Flow', difficulty: 'Medium', description: 'Direct energy streams to power devices.' },
+    { id: '57', name: 'Open the Gate', difficulty: 'Easy', description: 'Unlock gates by solving mini-puzzles.' },
+    { id: '58', name: 'Pressure Plates', difficulty: 'Medium', description: 'Step on pressure plates to open new paths.' },
+    { id: '59', name: 'Teleport Maze', difficulty: 'Hard', description: 'Use teleporters to reach the exit.' },
+    { id: '60', name: 'Moving Platforms', difficulty: 'Medium', description: 'Jump across platforms that move on their own.' },
+    { id: '61', name: 'Everyone Votes', difficulty: 'Easy', description: 'Players vote on a shared outcome.' },
+    { id: '62', name: 'Creative Sandbox', difficulty: 'Easy', description: 'Build or destroy anything, freely experiment.' },
+    { id: '63', name: 'Knowledge Worker Productivity Improver', difficulty: 'Medium', description: 'Why did I not complete a Jira ticket? Learn productivity through analysis.' }
 ];
 
 
@@ -23,7 +79,7 @@ export default function LevelList() {
   };
 
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>
       <h1>Levels</h1>
       <table
         style={{
