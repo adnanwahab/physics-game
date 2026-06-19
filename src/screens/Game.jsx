@@ -79,33 +79,33 @@ export default function Game() {
 
         const pollInterval = setInterval(() => {
             const serverUrl = getServerUrl();
-            fetch(`${serverUrl}/getPlayersInRoom?game_id=${encodeURIComponent(game_id)}`)
-                .then(r => r.json())
-                .then(remotePlayers => {
-                    if (!isMounted) return;
-                    const activeIds = new Set(remotePlayers.map(p => String(p.id)));
+            // fetch(`${serverUrl}/getPlayersInRoom?game_id=${encodeURIComponent(game_id)}`)
+            //     .then(r => r.json())
+            //     .then(remotePlayers => {
+            //         if (!isMounted) return;
+            //         const activeIds = new Set(remotePlayers.map(p => String(p.id)));
 
-                    // Create or update a penguin for every other player
-                    remotePlayers.forEach(p => {
-                        const pid = String(p.id);
-                        if (pid === String(myPlayerId)) return; // skip self
-                        if (!penguinMeshes[pid]) {
-                            penguinMeshes[pid] = createRemotePenguinMesh(colorFromId(pid));
-                            scene.add(penguinMeshes[pid]);
-                        }
-                        penguinMeshes[pid].position.set(p.x, p.y, p.z);
-                    });
+            //         // Create or update a penguin for every other player
+            //         remotePlayers.forEach(p => {
+            //             const pid = String(p.id);
+            //             if (pid === String(myPlayerId)) return; // skip self
+            //             if (!penguinMeshes[pid]) {
+            //                 penguinMeshes[pid] = createRemotePenguinMesh(colorFromId(pid));
+            //                 scene.add(penguinMeshes[pid]);
+            //             }
+            //             penguinMeshes[pid].position.set(p.x, p.y, p.z);
+            //         });
  
 
-                    // Remove penguins for players who left
-                    for (const pid of Object.keys(penguinMeshes)) {
-                        if (!activeIds.has(pid)) {
-                            scene.remove(penguinMeshes[pid]);
-                            delete penguinMeshes[pid];
-                        }
-                    }
-                    setPlayerCount(remotePlayers.length);
-                }).catch(() => {});
+            //         // Remove penguins for players who left
+            //         for (const pid of Object.keys(penguinMeshes)) {
+            //             if (!activeIds.has(pid)) {
+            //                 scene.remove(penguinMeshes[pid]);
+            //                 delete penguinMeshes[pid];
+            //             }
+            //         }
+            //         setPlayerCount(remotePlayers.length);
+            //     }).catch(() => {});
         }, 100);
         cleanupFunctions.push(() => clearInterval(pollInterval));
 
