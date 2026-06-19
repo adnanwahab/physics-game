@@ -22,7 +22,7 @@ import AnnotationsPanel from '../components/AnnotationsPanel.jsx';
 const SERVER = 'http://localhost:3000';
 
 export default function Game() {
-    const { game_id } = useParams();
+const { game_id } = useParams();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
@@ -54,6 +54,8 @@ export default function Game() {
         const isMountedRef = { current: true };
         const penguinMeshes = {};
         window.penguins = penguinMeshes
+        //debugger
+        //console.log(scene)
         // --- Register this client as a player ---
         let myPlayerId = null;
 
@@ -88,16 +90,7 @@ export default function Game() {
 
         const pollInterval = setInterval(() => {
             const serverUrl = getServerUrl();
-            fetch(`${SERVER}/movePlayers`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ game_id, x: 0, y: 0, z: 0 }),
-            }).then(r => r.json()).then(d => { 
-                console.log('wtf')
-                myPlayerId = d.id;
-            
-                penguinMeshes[d.id] = true
-            }).catch(() => {});
+         
             // fetch(`${serverUrl}/getPlayersInRoom?game_id=${encodeURIComponent(game_id)}`)
             //     .then(r => r.json())
             //     .then(remotePlayers => {
@@ -153,6 +146,7 @@ export default function Game() {
             gameStateRef.current.selectionSystem = setupSelectionSystem(scene, camera, canvas, cleanupFunctions);
 
             const charBody = setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExampleUpdateRef, game_id);
+            
             gameStateRef.current.charBody = charBody;
 
             loadLevelCuboids(game_id, Jolt, bodyInterface, scene, dynamicObjects)

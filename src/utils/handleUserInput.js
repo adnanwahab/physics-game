@@ -5,6 +5,9 @@
  * @param {Object} inputState - An object with shape:
  *   { forwardPressed: false, backwardPressed: false, leftPressed: false, rightPressed: false, jump: false, crouched: false }
  */
+
+
+
 export function handleUserInput(inputState) {
   function onKeyDown(event) {
     console.log('Key down:', event.code);  // Debug: log which key is pressed
@@ -24,6 +27,7 @@ export function handleUserInput(inputState) {
       case 'ShiftLeft':  inputState.crouched        = true;  break;
       default: break;
     }
+
   }
 
   function onKeyUp(event) {
