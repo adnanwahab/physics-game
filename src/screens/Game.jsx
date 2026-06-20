@@ -190,6 +190,8 @@ export default function Game() {
                 body: JSON.stringify({
                     roomId: game_id,
                     playerId: myPlayerId,
+                    pos: pos,
+                    quat: quat
                     // You may want to send additional data here, such as position/quaternion
                 }),
             }).catch(() => {});
