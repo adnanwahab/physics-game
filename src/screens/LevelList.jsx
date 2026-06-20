@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Map } from 'react-map-gl/maplibre';
 import 'maplibre-gl/dist/maplibre-gl.css';
 
-import React from 'react';
+import React, { useState } from 'react';
 
 // Remove unused imports related to deck.gl/mapbox that aren't used here
 // import {createRoot} from 'react-dom/client';
@@ -133,6 +133,77 @@ const levels = [
     { id: '63', name: 'Knowledge Worker Productivity Improver', difficulty: 'Medium', description: 'Why did I not complete a Jira ticket? Learn productivity through analysis.' }
 ];
 
+function VoteRadio() {
+  const [selected, setSelected] = useState("red");
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: "24px",
+        right: "24px",
+        zIndex: 1000,
+        background: "#fff",
+        padding: "22px 32px",
+        borderRadius: "14px",
+        boxShadow: "0 2px 17px 0 rgba(44,43,110,0.16)",
+        minWidth: 230,
+      }}
+    >
+      <div style={{ fontWeight: 700, marginBottom: 14, fontSize: "1.12rem", color: "#23214d" }}>
+        What vote do you want
+      </div>
+      <form>
+        <div style={{ display: "flex", flexDirection: "column", gap: "10px" }}>
+          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 6 }}>
+            <input
+              type="radio"
+              name="vote"
+              value="red"
+              checked={selected === "red"}
+              onChange={() => setSelected("red")}
+              style={{ accentColor: "#dc2626" }}
+            />
+            <span>red</span>
+          </label>
+          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 6 }}>
+            <input
+              type="radio"
+              name="vote"
+              value="blue"
+              checked={selected === "blue"}
+              onChange={() => setSelected("blue")}
+              style={{ accentColor: "#2563eb" }}
+            />
+            <span>blue</span>
+          </label>
+          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 6 }}>
+            <input
+              type="radio"
+              name="vote"
+              value="green"
+              checked={selected === "green"}
+              onChange={() => setSelected("green")}
+              style={{ accentColor: "#16a34a" }}
+            />
+            <span>green</span>
+          </label>
+          <label style={{ display: "flex", alignItems: "center", cursor: "pointer", gap: 6 }}>
+            <input
+              type="radio"
+              name="vote"
+              value="onions"
+              checked={selected === "onions"}
+              onChange={() => setSelected("onions")}
+              style={{ accentColor: "#b45309" }}
+            />
+            <span>onions</span>
+          </label>
+        </div>
+      </form>
+    </div>
+  );
+}
+
 export default function LevelList() {
   const navigate = useNavigate();
 
@@ -141,15 +212,14 @@ export default function LevelList() {
   };
 
   return (
-    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>    
-     
+    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>
       <table
         style={{
           width: "100%",
           borderCollapse: "collapse",
           marginTop: "20px",
         }}
-      >     
+      >
         <thead>
           <tr
             style={{
@@ -280,7 +350,9 @@ export default function LevelList() {
           Forward Suggestion
         </button>
       </form>
-      
+
+      <VoteRadio />
+
       {/* <App /> */}
       {/* <Root></Root> */}
     </div>
