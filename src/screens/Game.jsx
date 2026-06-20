@@ -21,6 +21,34 @@ import AnnotationsPanel from '../components/AnnotationsPanel.jsx';
 
 const SERVER = 'http://localhost:3000';
 
+// Define SlotButton here to avoid inline function in JSX
+function SlotButton({ slot }) {
+    return (
+        <button
+            className="
+                w-14 h-14 md:w-16 md:h-16
+                rounded-lg border-4 border-yellow-600
+                bg-gradient-to-br from-[#18181b] to-[#36362c]
+                shadow-[0_2px_8px_#000a]
+                relative transition hover:scale-105 hover:border-yellow-400
+                flex items-center justify-center
+                overflow-hidden
+            "
+            style={{
+                boxShadow:
+                    "0 0 10px 2px #d6ad60, 0 1px 1px #000a, inset 0 1px 4px #fff5",
+                borderImage:
+                    "linear-gradient(35deg, #d6ad60 50%, #9c7b16 100%) 1",
+            }}
+        >
+            {/* Replace with icon if available */}
+            <span className="text-yellow-300 font-extrabold text-xl md:text-2xl pointer-events-none select-none drop-shadow">
+                {slot}
+            </span>
+        </button>
+    );
+}
+
 export default function Game() {
     const { game_id } = useParams();
     const containerRef = useRef(null);
@@ -286,6 +314,24 @@ export default function Game() {
             </div>
             <div className="mt-6">
                 <WASDControls inputState={inputStateRef.current} />
+            </div>
+            <div>
+                {/* WoW-style 2x3 slot bar */}
+                <div
+                    className="fixed bottom-6 left-1/2 transform -translate-x-1/2 z-[1100] flex flex-col items-center justify-center w-auto"
+                >
+                    <div className="flex flex-row gap-2 mb-2">
+                        <SlotButton slot={1} />
+                        <SlotButton slot={2} />
+                        <SlotButton slot={3} />
+                    </div>
+                    <div className="flex flex-row gap-2">
+                        <SlotButton slot={4} />
+                        <SlotButton slot={5} />
+                        <SlotButton slot={6} />
+                    </div>
+                </div>
+           
             </div>
             {showWinMessage && (
                 <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[10000]">
