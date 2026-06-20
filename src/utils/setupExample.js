@@ -130,11 +130,16 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
       
       // Replace the green cube with a penguin
       const penguin = createPenguin(1.0);
+
+      //penguin.position.x += 100
+
       
       // Copy position and rotation from the original cube
       penguin.position.copy(charThreeObject.position);
       penguin.quaternion.copy(charThreeObject.quaternion);
-      
+            //penguin.position.z -= 50;
+       
+
       // Transfer the body reference to the penguin group
       penguin.userData.body = charThreeObject.userData.body;
       
@@ -145,10 +150,15 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
         dynamicObjects[index] = penguin;
       }
       
+      
       // Add the penguin to the scene
       scene.add(penguin);
+
+
+
+      
     },
-    new Jolt.RVec3(0, 5, 0),
+        new Jolt.RVec3(0, 5, 0),
     rotationIdentity,
     halfExtentChar,
     Jolt.EMotionType_Dynamic,

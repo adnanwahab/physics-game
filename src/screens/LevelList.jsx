@@ -48,10 +48,13 @@ function App() {
     <DeckGL
       initialViewState={INITIAL_VIEW_STATE}
       controller
-      layers={layers}
+    //   layers={layers}
       style={{height: 400}}
+      
     >
- 
+     {/* <MapView id="map" width="50%" controller >
+        <Map mapStyle="mapbox://styles/mapbox/light-v9" />
+      </MapView> */}
 
  {/* <Map
     mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
@@ -138,9 +141,7 @@ export default function LevelList() {
   };
 
   return (
-    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>
-      <h1>Levels</h1>
-      <button>edit </button>
+    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>     
       <table
         style={{
           width: "100%",

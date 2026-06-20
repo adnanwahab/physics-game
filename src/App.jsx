@@ -29,7 +29,7 @@ function App() {
         >
           <a
             href="https://physics-game-five.vercel.app/"
-            className="text-4xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-[rainbow_2s_linear_infinite]"
+            className="text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-[rainbow_2s_linear_infinite]"
             style={{
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
@@ -53,21 +53,7 @@ function App() {
       </Routes>
 
       <div className="footer">
-        <p
-          style={{
-            animation: "rainbow 2s linear infinite",
-            background: "-webkit-linear-gradient(left, red, orange, yellow, green, cyan, blue, violet, red)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            backgroundClip: "text",
-            color: "transparent"
-          }}
-        >
-          Email me at <a href="mailto:mail@adnanwahab.com">mail@adnanwahab.com</a> to join!
-        </p>
-        <h1>Agenda of June 20</h1>
-        <div>how do we invent future things together as a game like dungeons and dragons?</div>
-        <div>everyone speaks and types together in a spiral </div>
+
         <img src="/public/map.png"></img>
         
         <style>
@@ -92,10 +78,7 @@ function App() {
 
         {/* Simple DeckGL world map */}
         <div style={{ width: "100%", height: "400px", margin: "40px 0" }}>
-          {/* If DeckGL and Map components are not globally imported, users must import
-              { DeckGL } from '@deck.gl/react'
-              { Map } from 'react-map-gl'
-          */}
+     
           {/* <DeckGL
             initialViewState={{
               longitude: 0,

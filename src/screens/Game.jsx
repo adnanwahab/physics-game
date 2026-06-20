@@ -22,7 +22,7 @@ import AnnotationsPanel from '../components/AnnotationsPanel.jsx';
 const SERVER = 'http://localhost:3000';
 
 export default function Game() {
-const { game_id } = useParams();
+    const { game_id } = useParams();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
     const canvasRef2 = useRef(null);
@@ -38,13 +38,31 @@ const { game_id } = useParams();
         { title: 'Gate Platform', text: 'Try jumping on the spiked gate for a better view.', location: { x: 0, y: 4, z: -39.9 }, color: '#ff69b4' },
     ]);
     const inputStateRef = useRef({ forwardPressed: false, backwardPressed: false, leftPressed: false, rightPressed: false, jump: false, crouched: false });
-    const gameStateRef = useRef({ renderer: null, scene: null, camera: null, controls: null, clock: null, inputState: null, onExampleUpdateRef: null, joltInterface: null, physicsSystem: null, bodyInterface: null, dynamicObjects: null, Jolt: null, generateObject: null, charBody: null });
+    const gameStateRef = useRef({
+        renderer: null,
+        scene: null,
+        camera: null,
+        controls: null,
+        clock: null,
+        inputState: null,
+        onExampleUpdateRef: null,
+        joltInterface: null,
+        physicsSystem: null,
+        bodyInterface: null,
+        dynamicObjects: null,
+        Jolt: null,
+        generateObject: null,
+        charBody: null
+    });
 
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
         const canvas = canvasRef.current;
         const canvas2 = canvasRef2.current;
-        const { renderer, scene, camera, controls } = initGraphics(canvas, containerRef.current, { width: window.innerWidth * 0.9, height: window.innerHeight * 0.9 });
+        const { renderer, scene, camera, controls } = initGraphics(canvas, containerRef.current, {
+            width: window.innerWidth * 0.9,
+            height: window.innerHeight * 0.9
+        });
         setupLighting(scene);
         const clock = new Clock();
         const onExampleUpdateRef = { fn: null };
@@ -53,71 +71,26 @@ const { game_id } = useParams();
         let isMounted = true;
         const isMountedRef = { current: true };
         const penguinMeshes = {};
-        window.penguins = penguinMeshes
-        //debugger
-        //console.log(scene)
-        // --- Register this client as a player ---
+        window.penguins = penguinMeshes;
         let myPlayerId = null;
 
         fetch(`${SERVER}/addPlayerToRoom`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ game_id, x: 0, y: 0, z: 0 }),
-        }).then(r => r.json()).then(d => { 
-            console.log('wtf')
+        }).then(r => r.json()).then(d => {
             myPlayerId = d.id;
-        
             penguinMeshes[d.id] = true
-        }).catch((e) => {
-            //debugger
-        });
-
-        // --- Penguin mesh registry: id → THREE.Mesh ---
-   
-
-        // --- Poll server every 100ms for other players in the same room ---
-
-        // Fix for ERR_CONNECTION_REFUSED:
-        // Use window.location.hostname (and protocol), so fetch will use the correct address in deployed/preview mode.
-        // This will work for localhost, IP, or remote hosts.
+        }).catch(() => {});
 
         function getServerUrl() {
-            // Attempt to use same hostname and protocol as the page itself,
-            // but default to port 3000 (where Bun server is running)
             const { protocol, hostname } = window.location;
             return `${protocol}//${hostname}:3000`;
         }
 
         const pollInterval = setInterval(() => {
             const serverUrl = getServerUrl();
-         
-            // fetch(`${serverUrl}/getPlayersInRoom?game_id=${encodeURIComponent(game_id)}`)
-            //     .then(r => r.json())
-            //     .then(remotePlayers => {
-            //         if (!isMounted) return;
-            //         const activeIds = new Set(remotePlayers.map(p => String(p.id)));
-
-            //         // Create or update a penguin for every other player
-            //         remotePlayers.forEach(p => {
-            //             const pid = String(p.id);
-            //             if (pid === String(myPlayerId)) return; // skip self
-            //             if (!penguinMeshes[pid]) {
-            //                 penguinMeshes[pid] = createRemotePenguinMesh(colorFromId(pid));
-            //                 scene.add(penguinMeshes[pid]);
-            //             }
-            //             penguinMeshes[pid].position.set(p.x, p.y, p.z);
-            //         });
- 
-
-            //         // Remove penguins for players who left
-            //         for (const pid of Object.keys(penguinMeshes)) {
-            //             if (!activeIds.has(pid)) {
-            //                 scene.remove(penguinMeshes[pid]);
-            //                 delete penguinMeshes[pid];
-            //             }
-            //         }
-            //         setPlayerCount(remotePlayers.length);
-            //     }).catch(() => {});
+            // fetch logic commented out
         }, 100);
         cleanupFunctions.push(() => clearInterval(pollInterval));
 
@@ -146,7 +119,6 @@ const { game_id } = useParams();
             gameStateRef.current.selectionSystem = setupSelectionSystem(scene, camera, canvas, cleanupFunctions);
 
             const charBody = setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExampleUpdateRef, game_id);
-            
             gameStateRef.current.charBody = charBody;
 
             loadLevelCuboids(game_id, Jolt, bodyInterface, scene, dynamicObjects)
@@ -186,7 +158,6 @@ const { game_id } = useParams();
         return () => {
             isMounted = false;
             isMountedRef.current = false;
-            // Tell server this player is gone
             if (myPlayerId) {
                 fetch(`${SERVER}/removePlayerFromRoom`, {
                     method: 'POST',
@@ -194,11 +165,10 @@ const { game_id } = useParams();
                     body: JSON.stringify({ id: myPlayerId }),
                 }).catch(() => {});
             }
-            // Remove all remote penguin meshes
-            Object.values(penguinMeshes).forEach(m => scene.remove(m));
+            Object.values(penguinMeshes).forEach(m => gameStateRef.current.scene && gameStateRef.current.scene.remove(m));
             gameStateRef.current.effectDisposers?.forEach(d => d());
             cleanupFunctions.forEach(fn => fn());
-            try { gameStateRef.current.renderer?.dispose(); } catch (_) {}
+            try { gameStateRef.current.renderer?.dispose(); } catch (_) { }
             Object.assign(gameStateRef.current, { renderer: null, scene: null, camera: null, controls: null });
         };
     }, [game_id]);
@@ -207,41 +177,102 @@ const { game_id } = useParams();
         const note = prompt('What would you like to note?');
         if (note?.trim()) {
             const pastelColors = ['#ffd700', '#12d9fb', '#a5a9ff', '#ff69b4', '#baffc9', '#bdb2ff', '#f7a8b8'];
-            setAnnotations(prev => [...prev, { title: 'Custom Note', text: note.trim(), location: { x: 0, y: 5, z: 0 }, color: pastelColors[Math.floor(Math.random() * pastelColors.length)] }]);
+            setAnnotations(prev => [...prev, {
+                title: 'Custom Note',
+                text: note.trim(),
+                location: { x: 0, y: 5, z: 0 },
+                color: pastelColors[Math.floor(Math.random() * pastelColors.length)]
+            }]);
             setAnnotationsPanelVisible(true);
         }
     }, []);
 
     return (
-        <div style={{ padding: '20px' }}>
-            <div style={{ marginBottom: '20px', borderBottom: '2px solid #e5e7eb', paddingBottom: '10px' }}>
-                <h1 style={{ margin: 0, fontSize: '2rem', fontWeight: 'bold', color: 'white' }}>Level {game_id}</h1>
-                <div style={{ display: 'inline-block', background: '#292a36', color: '#ffd700', fontWeight: '600', fontSize: '1.03rem', borderRadius: 7, padding: '4px 15px', marginBottom: '8px', marginRight: '14px', marginLeft: '8px', letterSpacing: '0.5px', border: '2px solid #ffd700' }}>
-                    🐧 {playerCount} playing
+        <div className="px-2 py-4 md:p-8 bg-black min-h-screen">
+            <div className="mb-5 border-b-2 border-gray-200 pb-2 flex flex-col md:flex-row md:items-end md:justify-between gap-2">
+                <div>
+                    <h1 className="m-0 text-2xl md:text-4xl font-bold text-white">Level {game_id}</h1>
+                    <div className="inline-block bg-[#292a36] text-[#ffd700] font-semibold text-base md:text-lg rounded-lg px-4 py-1 mb-2 mr-4 ml-2 tracking-wide border-2 border-[#ffd700]">
+                        🐧 {playerCount} playing
+                    </div>
                 </div>
-                <button onClick={() => setCanvas2Visible(v => !v)}>{canvas2Visible ? 'Hide' : 'Show'} Canvas2</button>
-                <GameVideoSeekBar annotations={annotations} />
-                <button style={{ marginLeft: 10, background: annotationsPanelVisible ? '#ffd700' : '#353535', color: annotationsPanelVisible ? '#111' : '#ffd700', border: 'none', borderRadius: 6, padding: '7px 18px', fontWeight: 'bold', fontSize: '1.05rem', cursor: 'pointer' }} onClick={() => setAnnotationsPanelVisible(x => !x)}>
-                    {annotationsPanelVisible ? 'Hide' : 'Show'} Annotations
-                </button>
+                
+                <div className="flex flex-wrap gap-2 items-center">
+                    <button
+                        className="bg-[#353535] hover:bg-[#ffd700]/80 text-[#ffd700] font-bold rounded-lg px-4 py-2 text-sm md:text-base transition-colors"
+                        onClick={() => setCanvas2Visible(v => !v)}
+                    >
+                        {canvas2Visible ? 'Hide' : 'Show'} Canvas2
+                    </button>
+                    <GameVideoSeekBar annotations={annotations} />
+                    <button
+                        className={`ml-0 md:ml-2 ${annotationsPanelVisible ? 'bg-[#ffd700] text-[#111]' : 'bg-[#353535] text-[#ffd700]'} border-none rounded-lg px-4 py-2 font-bold text-sm md:text-base transition-colors`}
+                        onClick={() => setAnnotationsPanelVisible(x => !x)}
+                    >
+                        {annotationsPanelVisible ? 'Hide' : 'Show'} Annotations
+                    </button>
+                </div>
             </div>
-            <div ref={containerRef} id="container" style={{ width: '100%', height: '90vh', position: 'relative' }}>
-                <canvas ref={canvasRef} id="canvas" style={{ width: '500px', height: '200px', display: 'block' }} />
+            <div
+                ref={containerRef}
+                id="container"
+                className="relative w-full h-[60vh] sm:h-[80vh] md:h-[90vh] max-w-full overflow-hidden bg-[#181820] rounded-lg"
+            >
+                <canvas
+                    ref={canvasRef}
+                    id="canvas"
+                    className="
+                        block w-full h-full
+                        max-h-[200px] sm:max-h-[240px] md:max-h-[380px] lg:max-h-[80vh]
+                        aspect-video
+                    "
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                    }}
+                />
                 {canvas2Visible && (
-                    <canvas ref={canvasRef2} onClick={() => {}} onMouseDown={handleAddAnnotation} id="canvas2"
-                        style={{ width: '250px', height: '220px', border: '6px dashed white', position: 'absolute', top: '12px', left: '12px', zIndex: 1010, backgroundColor: 'rgba(0,0,0,0.42)' }} />
+                    <canvas
+                        ref={canvasRef2}
+                        onClick={() => { }}
+                        onMouseDown={handleAddAnnotation}
+                        id="canvas2"
+                        className="
+                            absolute bg-black/50 border-4 md:border-6 border-dashed border-white 
+                            top-3 left-3 z-[1010] rounded-xl
+                            w-[120px] h-[100px]
+                            sm:w-[180px] sm:h-[120px]
+                            md:w-[250px] md:h-[220px]
+                            transition-all
+                        "
+                        style={{
+                            backgroundColor: 'rgba(0,0,0,0.42)',
+                        }}
+                    />
                 )}
-                <p style={{ color: 'white', fontSize: '1rem', position: 'absolute', top: '242px', left: '18px', zIndex: 1012, pointerEvents: 'none', background: 'rgba(0,0,0,0.28)', borderRadius: '6px', padding: '4px 10px' }}>
+                <p
+                    className="
+                        absolute text-white text-xs sm:text-base rounded-md px-2 py-1
+                        top-[115px] left-4 sm:top-[140px] md:top-[242px] md:left-5
+                        z-[1012] pointer-events-none bg-black/30
+                    "
+                >
                     Point Cloud Count: {pointCloudCount} particles rendered
                 </p>
-                <AnnotationsPanel annotations={annotations} visible={annotationsPanelVisible} onClose={() => setAnnotationsPanelVisible(false)} />
+                <AnnotationsPanel
+                    annotations={annotations}
+                    visible={annotationsPanelVisible}
+                    onClose={() => setAnnotationsPanelVisible(false)}
+                />
             </div>
-            <WASDControls inputState={inputStateRef.current} />
+            <div className="mt-6">
+                <WASDControls inputState={inputStateRef.current} />
+            </div>
             {showWinMessage && (
-                <div style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, backgroundColor: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 10000 }}>
-                    <div style={{ backgroundColor: '#1a1a1a', padding: '40px 60px', borderRadius: '16px', border: '2px solid #ffd700', textAlign: 'center' }}>
-                        <h2 style={{ color: '#ffd700', fontSize: '3rem', margin: '0 0 20px 0' }}>🎉 Congratulations! 🎉</h2>
-                        <p style={{ color: '#fff', fontSize: '1.5rem', margin: 0 }}>You found the cheese!</p>
+                <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-[10000]">
+                    <div className="bg-[#1a1a1a] px-6 py-10 md:px-16 md:py-16 rounded-2xl border-2 border-[#ffd700] text-center">
+                        <h2 className="text-[#ffd700] text-2xl md:text-4xl mb-4 font-bold">🎉 Congratulations! 🎉</h2>
+                        <p className="text-white text-base md:text-2xl m-0">You found the cheese!</p>
                     </div>
                 </div>
             )}

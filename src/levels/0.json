@@ -15,6 +15,22 @@
             "position": [0, 0.375, 3],
             "size": [2, 0.75, 1],
             "rotation": [0, 0, 0]
+        },
+        {
+            "type": "sensor",
+            "position": [0.85, 0.375, 2.15],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "sensor",
+            "position": [-0.85, 0.375, 2.15],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "sensor",
+            "position": [0, 0.375, 3.85],
+            "rotation": [0, 0, 0]
         }
+   
     ]
 }]

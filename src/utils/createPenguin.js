@@ -5,7 +5,15 @@ import * as THREE from 'three';
  * @param {number} scale - Scale factor for the penguin (default: 1)
  * @returns {THREE.Group} - A group containing all penguin parts
  */
+
+
+
+
 export function createPenguin(scale = 1) {
+  
+  
+  //window.addEventListener('')
+
   const penguin = new THREE.Group();
 
   // Materials
