@@ -141,14 +141,15 @@ export default function LevelList() {
   };
 
   return (
-    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>     
+    <div style={{ padding: "20px", height: "50vh", overflowY: "auto" }}>    
+     
       <table
         style={{
           width: "100%",
           borderCollapse: "collapse",
           marginTop: "20px",
         }}
-      >
+      >     
         <thead>
           <tr
             style={{

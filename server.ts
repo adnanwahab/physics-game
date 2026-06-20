@@ -1,76 +1,85 @@
-const penguins = {}
-//binary space partitinoingin to update less times
-Bun.serve({
-  routes: {
-    "/addPlayerToRoom": (req) => {
-      penguins[req.params.id] = req.params;
-      return Response.json({'happy': 'bear'});
-    },
-    "/getPlayersInRoom": (req) => { Response.json(penguins) } ,
-    "/playerMoveInRoom": (req) => {
-      penguins[req.params.id].pos = req.pos
+import { GameRoom } from './Game.ts'
+
+const CORS = {
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+    'Access-Control-Allow-Headers': 'Content-Type',
+};
+
+function json(data: unknown, status = 200) {
+    return new Response(JSON.stringify(data), {
+        status,
+        headers: { ...CORS, 'Content-Type': 'application/json' },
+    });
+}
+
+const rooms = new Map<string, GameRoom>();
+
+// Clean up empty rooms periodically
+setInterval(() => {
+    for (const [id, room] of rooms) {
+        if (room.isEmpty()) rooms.delete(id);
     }
+}, 10_000);
+
+const server = Bun.serve({
+    port: 3000,
+    hostname: '0.0.0.0',
+
+    async fetch(req) {
+        const url = new URL(req.url);
+
+        if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
+
+        // Add a player to a room (creates the room if it doesn't exist)
+        if (url.pathname === '/addPlayerToRoom' && req.method === 'POST') {
+            const body = await req.json().catch(() => ({})) as any;
+            const { roomId, playerId } = body;
+            if (!roomId || !playerId) return json({ error: 'missing roomId or playerId' }, 400);
+            let room = rooms.get(roomId);
+            if (!room) {
+                room = new GameRoom(roomId);
+                rooms.set(roomId, room);
+            }
+            const color = room.addPlayer(playerId);
+            return json({ color });
+        }
+
+        // Get all players in a room
+        if (url.pathname === '/getPlayersInRoom' && req.method === 'GET') {
+            const roomId = url.searchParams.get('roomId');
+            if (!roomId) return json({ error: 'missing roomId' }, 400);
+            const room = rooms.get(roomId);
+            if (!room) return json({ error: 'room not found' }, 404);
+            return json(room.getState());
+        }
+
+        // Move a player in a room (update position/quat)
+        if (url.pathname === '/playerMoveInRoom' && req.method === 'POST') {
+            const body = await req.json().catch(() => ({})) as any;
+            const { roomId, playerId, pos, quat } = body;
+            if (!roomId || !playerId || !pos || !quat)
+                return json({ error: 'missing parameters' }, 400);
+            const room = rooms.get(roomId);
+            if (!room) return json({ error: 'room not found' }, 404);
+            room.updatePlayer(playerId, pos, quat);
+            return json({ ok: true });
+        }
+
+        // Remove a player from a room
+        if (url.pathname === '/removePlayerFromRoom' && req.method === 'POST') {
+            const body = await req.json().catch(() => ({})) as any;
+            const { roomId, playerId } = body;
+            if (!roomId || !playerId)
+                return json({ error: 'missing parameters' }, 400);
+            const room = rooms.get(roomId);
+            if (!room) return json({ error: 'room not found' }, 404);
+            room.removePlayer(playerId);
+            return json({ ok: true });
+        }
+
+        return new Response('Not Found', { status: 404, headers: CORS });
+    },
 });
-// type Player = { id: number; game_id: string; x: number; y: number; z: number; lastSeen: number };
 
-// let players: Player[] = [];
-// let nextId = 1;
-
-// setInterval(() => {
-//     players = players.filter(p => Date.now() - p.lastSeen < 10_000);
-// }, 5_000);
-
-// const CORS = {
-//     'Access-Control-Allow-Origin': '*',
-//     'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
-//     'Access-Control-Allow-Headers': 'Content-Type',
-// };
-
-// function json(data: unknown, status = 200) {
-//     return new Response(JSON.stringify(data), {
-//         status,
-//         headers: { ...CORS, 'Content-Type': 'application/json' },
-//     });
-// }
-
-// const server = Bun.serve({
-//     port: 3000,
-//     hostname: '0.0.0.0',
-
-//     async fetch(req) {
-//         const url = new URL(req.url);
-
-//         if (req.method === 'OPTIONS') return new Response(null, { status: 204, headers: CORS });
-
-//         if (url.pathname === '/addPlayerToRoom' && req.method === 'POST') {
-//             const body = await req.json().catch(() => ({})) as any;
-//             const id = nextId++;
-//             players.push({ id, game_id: body.game_id ?? 'default', x: 0, y: 0, z: 0, lastSeen: Date.now() });
-//             return json({ id });
-//         }
-
-//         if (url.pathname === '/getPlayersInRoom' && req.method === 'GET') {
-//             const game_id = url.searchParams.get('game_id') ?? 'default';
-//             return json(players.filter(p => p.game_id === game_id).map(({ id, x, y, z }) => ({ id, x, y, z })));
-//         }
-
-//         if (url.pathname === '/playerMoveInRoom' && req.method === 'POST') {
-//             const { id, x = 0, y = 0, z = 0 } = await req.json().catch(() => ({})) as any;
-//             const player = players.find(p => p.id === id);
-//             if (!player) return json({ error: 'not found' }, 404);
-//             player.x = x; player.y = y; player.z = z; player.lastSeen = Date.now();
-//             return json({ ok: true });
-//         }
-
-//         if (url.pathname === '/removePlayerFromRoom' && req.method === 'POST') {
-//             const { id } = await req.json().catch(() => ({})) as any;
-//             players = players.filter(p => p.id !== id);
-//             return json({ ok: true });
-//         }
-
-//         return new Response('Not Found', { status: 404, headers: CORS });
-//     },
-// });
-
-// console.log(`Game server running at ${server.url}`);
-
+console.log(`Game server running at ${server.url}`);

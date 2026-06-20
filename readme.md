@@ -11,3 +11,7 @@
 //edit/id
 1. transparent 311 logging 
 2. pensieve improves all laws 
+
+
+3. starcraft mode plans building appartments and offices for daedalus
+   
