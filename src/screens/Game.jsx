@@ -104,6 +104,7 @@ export default function Game() {
             camera2.updateProjectionMatrix();
             renderer2.setSize(r2.width, r2.height, false);
         };
+
         window.addEventListener('resize', handleResize);
         cleanupFunctions.push(() => window.removeEventListener('resize', handleResize));
 
@@ -154,6 +155,18 @@ export default function Game() {
 
             renderLoop(clock, onExampleUpdate, renderer, scene, camera, joltInterface, dynamicObjects, Jolt, controls, {});
         }).catch(e => console.error('Error initializing game:', e));
+        window.addEventListener('keydown', () => {
+            fetch(`${SERVER}/playerMoveInRoom`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    roomId: game_id,
+                    playerId: myPlayerId,
+                    // You may want to send additional data here, such as position/quaternion
+                }),
+            }).catch(() => {});
+    
+        })
 
         return () => {
             isMounted = false;

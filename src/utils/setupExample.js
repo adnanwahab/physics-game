@@ -129,7 +129,25 @@ export function setupExample(Jolt, bodyInterface, scene, dynamicObjects, onExamp
       const charThreeObject = addToScene(body, Jolt, bodyInterface, scene, dynamicObjects, getThreeObjectForBody);
       
       // Replace the green cube with a penguin
+   
+
       const penguin = createPenguin(1.0);
+
+      // INSERT_YOUR_CODE
+      // Fetch to add player to room
+      fetch('http://localhost:3000/addPlayerToRoom', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ game_id: typeof window !== 'undefined' && window.game_id ? window.game_id : null, x: penguin.position.x, y: penguin.position.y, z: penguin.position.z })
+      }).then(response => response.json())
+        .then(data => {
+          penguin.userData.playerId = data.id;
+        })
+        .catch(error => {
+          //console.error('Error adding player to room:', error);
+        });
+      //send penguin to server
+      //on everry keypress broadcast to all clients
 
       //penguin.position.x += 100
 
