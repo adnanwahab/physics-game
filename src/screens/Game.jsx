@@ -198,6 +198,12 @@ export default function Game() {
                 </div>
                 
                 <div className="flex flex-wrap gap-2 items-center">
+                <button
+                        className="bg-[#353535] hover:bg-[#ffd700]/80 text-[#ffd700] font-bold rounded-lg px-4 py-2 text-sm md:text-base transition-colors"
+                        onClick={() => setCanvas2Visible(v => !v)}
+                    >
+                       Edit World
+                    </button>
                     <button
                         className="bg-[#353535] hover:bg-[#ffd700]/80 text-[#ffd700] font-bold rounded-lg px-4 py-2 text-sm md:text-base transition-colors"
                         onClick={() => setCanvas2Visible(v => !v)}
