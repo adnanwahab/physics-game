@@ -16,10 +16,21 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 import {GameRoom} from '../Game'
 
+
+function addPenguin() {
+  //Three.import
+}
+
 function App() {
   let _game = new GameRoom()
-  _game.addPlayer(0)
-
+  _game.addPlayer("0")
+  
+  //let p = new THREE.Vector3( 0, 1, 0 );
+  //let q = new THREE.Vector3( 0, 1, 0 );
+  //_updatePlayer("0", p, q)
+  
+  
+  //_game.getState().forEach Render Pegen
   //when other penguin moves, gameROom updatse
 
   return (
