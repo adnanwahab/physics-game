@@ -18,5 +18,5 @@ inputElement.addEventListener('input', (e) => {
     const app = Multiplex(multiplexCanvas);
     app.init(e.target.value);
 });
-console.log(inputElement);
+//console.log(inputElement);
 }
