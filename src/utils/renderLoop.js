@@ -24,7 +24,8 @@ export function renderLoop(
   dynamicObjects,
   Jolt,
   controls,
-  sharedState
+  sharedState,
+  otherPenguins
 ) {
   if (!sharedState.time) sharedState.time = 0;
 

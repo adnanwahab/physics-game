@@ -14,7 +14,14 @@ import {Map} from 'react-map-gl/mapbox';
 const token = 'pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg'
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
+import {GameRoom} from '../Game'
+
 function App() {
+  let _game = new GameRoom()
+  _game.addPlayer(0)
+
+  //when other penguin moves, gameROom updatse
+
   return (
     <div>
             <p
