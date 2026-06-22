@@ -7,11 +7,11 @@ import * as THREE from 'three';
  */
 
 
-
+window.penguins = []
 
 export function createPenguin(scale = 1) {
   
-  
+  //window.penguins.push(penguins)
   //window.addEventListener('')
 
   const penguin = new THREE.Group();

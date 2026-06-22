@@ -1,4 +1,4 @@
-const ws = new WebSocket("ws://localhost:8080");
+const ws = new WebSocket("ws://localhost:8000");
 
 ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
 ws.onmessage = (e) => console.log(JSON.parse(e.data));
