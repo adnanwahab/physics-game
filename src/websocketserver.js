@@ -6,5 +6,7 @@ Bun.serve({
     }
     return new Response("Upgrade failed", { status: 500 });
   },
-  websocket: {}, // handlers
+  websocket: {
+    
+  }, // handlers
 });
