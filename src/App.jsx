@@ -25,6 +25,32 @@ function App() {
   let _game = new GameRoom()
   _game.addPlayer("0")
   
+
+  setInterval(function () {
+    fetch('/getPlayersInRoom',{
+
+    }).then()
+  }, 50)
+
+
+
+  /**
+   * Sends a request to update a player's position and rotation in a room.
+   * @param {string} roomId - Room id
+   * @param {string} playerId - Player's id
+   * @param {object} pos - {x, y, z}
+   * @param {object} quat - {x, y, z, w}
+   * @returns {Promise<Response>}
+   */
+ 
+
+
+
+
+
+
+
+
   //let p = new THREE.Vector3( 0, 1, 0 );
   //let q = new THREE.Vector3( 0, 1, 0 );
   //_updatePlayer("0", p, q)

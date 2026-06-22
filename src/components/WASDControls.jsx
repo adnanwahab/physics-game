@@ -4,6 +4,8 @@ import React, { useState, useEffect, useRef } from 'react';
  * WASDControls component - displays on-screen WASD buttons that highlight when pressed
  * Works with both keyboard and touch events for mobile devices
  */
+
+
 export default function WASDControls({ inputState }) {
   const [pressedKeys, setPressedKeys] = useState({
     W: false,
