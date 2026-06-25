@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import WASDControls from '../components/WASDControls';
-import { Clock } from 'three';
+import { Clock, Scene } from 'three';
 import { initGraphics } from '../initGraphics.js';
 import { onWindowResize as handleWindowResize } from '../onWindowResize.js';
 import { initPhysics } from '../utils/initPhysics.js';
@@ -20,6 +20,8 @@ import GameVideoSeekBar from '../components/GameVideoSeekBar.jsx';
 import AnnotationsPanel from '../components/AnnotationsPanel.jsx';
 
 const SERVER = 'http://localhost:3000';
+
+import { createPenguin } from '../utils/createPenguin.js';
 
 // Define SlotButton here to avoid inline function in JSX
 function SlotButton({ slot }) {
@@ -49,7 +51,18 @@ function SlotButton({ slot }) {
     );
 }
 
-export default function Game(websocket) {
+//
+
+export default function Game() {
+
+    const ws = new WebSocket("ws://localhost:8000");
+
+    ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
+    ws.onmessage = (e) => console.log(JSON.parse(e.data));
+    ws.onclose = () => console.log("closed");
+    ws.onerror = (e) => console.error(e);
+    
+
     const { game_id } = useParams();
     const containerRef = useRef(null);
     const canvasRef = useRef(null);
@@ -82,18 +95,7 @@ export default function Game(websocket) {
         generateObject: null,
         charBody: null
     });
-
-
-    //
-    //setupMultiplayer(allPenguins)
-
-
-
-
-
-
-
-
+    
     useEffect(() => {
         if (!containerRef.current || !canvasRef.current || !canvasRef2.current) return;
         const canvas = canvasRef.current;
@@ -102,6 +104,25 @@ export default function Game(websocket) {
             width: window.innerWidth * 0.9,
             height: window.innerHeight * 0.9
         });
+
+
+        let p2 = createPenguin(1, 2, 3)
+        scene.add(p2)
+        window.scene = scene
+
+        const ws = new WebSocket("ws://localhost:8000");
+        ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
+        // ws.onmessage = (e) => { 
+        //   console.log(JSON.parse(e.data)); 
+        //   scene.traverse()
+        // }
+        
+        ws.onclose = () => console.log("closed");
+        ws.onerror = (e) => console.error(e);
+
+        
+    
+    
         setupLighting(scene);
         const clock = new Clock();
         const onExampleUpdateRef = { fn: null };

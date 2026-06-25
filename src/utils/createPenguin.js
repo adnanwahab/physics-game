@@ -9,7 +9,7 @@ import * as THREE from 'three';
 
 window.penguins = []
 
-export function createPenguin(scale = 1) {
+export function createPenguin(scale, x,y,z) {
   
   //window.penguins.push(penguins)
   //window.addEventListener('')
