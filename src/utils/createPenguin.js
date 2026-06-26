@@ -7,9 +7,9 @@ import * as THREE from 'three';
  */
 
 
-window.penguins = []
 
-export function createPenguin(scale, x,y,z) {
+
+export function createPenguin(scale, x,y,z, ws) {
   
   //window.penguins.push(penguins)
   //window.addEventListener('')
@@ -105,6 +105,11 @@ export function createPenguin(scale, x,y,z) {
       child.receiveShadow = true;
     }
   });
+  // ws.onmessage('penguinMove', (e) => {
+  //   let {x,y,z} = e.data.pos
+  //   penguin.position.set(x,y,z);
+  // })
+  
 
   return penguin;
 }

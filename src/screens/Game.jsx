@@ -106,21 +106,34 @@ export default function Game() {
         });
 
 
-        let p2 = createPenguin(1, 2, 3)
-        scene.add(p2)
+        
         window.scene = scene
-
         const ws = new WebSocket("ws://localhost:8000");
         ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
-        // ws.onmessage = (e) => { 
-        //   console.log(JSON.parse(e.data)); 
-        //   scene.traverse()
-        // }
+        ws.addEventListener("message", (e) => { 
+          let message = e.data.message
+
+          console.log(JSON.parse(e.data)); 
+          
+          if (message.data.type === 'penguinAdded') {
+            scene.add(createPenguin())
+          }
+          if (message.data.type === 'penguinMoved') {
+            
+            scene.traverse((object) => {
+              let {x,y,z} = message.data
+              object.setPosition(x,y,z)
+            })
+          }
+          //addpenguin movepenguin
+        });
         
         ws.onclose = () => console.log("closed");
         ws.onerror = (e) => console.error(e);
 
-        
+        let p2 = createPenguin(1, 1, 2, 3, ws)
+        scene.add(p2)
+        window.scene = scene
     
     
         setupLighting(scene);
