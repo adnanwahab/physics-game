@@ -1,6 +1,13 @@
-import { MeshPhongMaterial, Mesh, BoxGeometry, SphereGeometry, CapsuleGeometry, CylinderGeometry } from 'three';
-import { createMeshForShape } from '../createMeshForShape.js';
-import { getSoftBodyMesh } from '../getSoftBodyMesh.js';
+import {
+  MeshPhongMaterial,
+  Mesh,
+  BoxGeometry,
+  SphereGeometry,
+  CapsuleGeometry,
+  CylinderGeometry,
+} from "three";
+import { createMeshForShape } from "../modules/graphics/createMeshForShape.js";
+import { getSoftBodyMesh } from "../modules/graphics/getSoftBodyMesh.js";
 
 /**
  * Creates a Three.js mesh based on the Jolt body shape type.
@@ -13,17 +20,16 @@ export function getThreeObjectForBody(body, Jolt, optionalMaterial = null) {
   const shape = body.GetShape();
   let threeObject;
   //console.log('getThreeObjectForBody', shape)
-  
 
   switch (shape.GetSubType()) {
     case Jolt.EShapeSubType_Box: {
-
       const boxShape = Jolt.castObject(shape, Jolt.BoxShape);
       const halfExtent = boxShape.GetHalfExtent();
       const sizeX = halfExtent.GetX() * 2;
       const sizeY = halfExtent.GetY() * 2;
       const sizeZ = halfExtent.GetZ() * 2;
-      const material = optionalMaterial || new MeshPhongMaterial({ color: 0x00ff00 });
+      const material =
+        optionalMaterial || new MeshPhongMaterial({ color: 0x00ff00 });
       threeObject = new Mesh(new BoxGeometry(sizeX, sizeY, sizeZ), material);
       break;
     }
@@ -41,7 +47,10 @@ export function getThreeObjectForBody(body, Jolt, optionalMaterial = null) {
       const capHeight = capsuleShape.GetHalfHeightOfCylinder() * 2;
       const material = new MeshPhongMaterial({ color: 0x00ff00 });
 
-      threeObject = new Mesh(new CapsuleGeometry(capRadius, capHeight, 20, 10), material);
+      threeObject = new Mesh(
+        new CapsuleGeometry(capRadius, capHeight, 20, 10),
+        material,
+      );
       break;
     }
     case Jolt.EShapeSubType_Cylinder: {
@@ -50,11 +59,14 @@ export function getThreeObjectForBody(body, Jolt, optionalMaterial = null) {
       const cHeight = cylinderShape.GetHalfHeight() * 2;
       const material = new MeshPhongMaterial({ color: 0x00ff00 });
 
-      threeObject = new Mesh(new CylinderGeometry(cRadius, cRadius, cHeight, 20, 1), material);
+      threeObject = new Mesh(
+        new CylinderGeometry(cRadius, cRadius, cHeight, 20, 1),
+        material,
+      );
       break;
     }
     default: {
-      console.log('should not happen')
+      console.log("should not happen");
     }
   }
 
@@ -62,14 +74,14 @@ export function getThreeObjectForBody(body, Jolt, optionalMaterial = null) {
   threeObject.position.set(
     body.GetPosition().GetX(),
     body.GetPosition().GetY(),
-    body.GetPosition().GetZ()
+    body.GetPosition().GetZ(),
   );
   threeObject.quaternion.set(
     body.GetRotation().GetX(),
     body.GetRotation().GetY(),
     body.GetRotation().GetZ(),
-    body.GetRotation().GetW()
+    body.GetRotation().GetW(),
   );
 
   return threeObject;
-} 
+}

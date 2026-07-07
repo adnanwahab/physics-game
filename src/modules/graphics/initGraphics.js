@@ -1,9 +1,13 @@
-import * as THREE from 'three/webgpu';
-import { WebGPURenderer, PerspectiveCamera, Scene, DirectionalLight } from 'three/webgpu';
-import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import * as THREE from "three/webgpu";
+import {
+  WebGPURenderer,
+  PerspectiveCamera,
+  Scene,
+  DirectionalLight,
+} from "three/webgpu";
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 //console.log(THREE);
-
 
 // import postprocessing from './postprocessing.js';
 /**
@@ -11,7 +15,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
  * @param {HTMLCanvasElement} canvas - The canvas to render on.
  * @param {HTMLElement} container - The container that will hold the renderer’s DOM.
  * @param {Object} size - { width, height } of the desired render area.
- * @return {Object} - { renderer, scene, camera, controls } 
+ * @return {Object} - { renderer, scene, camera, controls }
  */
 export function initGraphics(canvas, container, size) {
   const renderer = new WebGPURenderer({ canvas });
@@ -41,24 +45,20 @@ export function initGraphics(canvas, container, size) {
 
   // Load cube texture for background
   const cubeTextureLoader = new THREE.CubeTextureLoader();
-  cubeTextureLoader.setPath( '/textures/cube/Park2/' );
+  cubeTextureLoader.setPath("/textures/cube/Park2/");
 
-  const cubeTexture = cubeTextureLoader.load( 
-    [
-      'posx.jpg', 'negx.jpg',
-      'posy.jpg', 'negy.jpg',
-      'posz.jpg', 'negz.jpg'
-    ],
+  const cubeTexture = cubeTextureLoader.load(
+    ["posx.jpg", "negx.jpg", "posy.jpg", "negy.jpg", "posz.jpg", "negz.jpg"],
     undefined, // onLoad
     undefined, // onProgress
-    function ( error ) {
+    function (error) {
       //console.error('Error loading cube texture:', error);
       // Set a fallback background color if texture fails to load
-      scene.background = new THREE.Color(0x87CEEB); // Sky blue
-    }
+      scene.background = new THREE.Color(0x87ceeb); // Sky blue
+    },
   );
 
   scene.background = cubeTexture;
 
   return { renderer, scene, camera, controls };
-} 
+}

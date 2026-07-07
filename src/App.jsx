@@ -1,6 +1,6 @@
 // src/App.jsx
 import { Routes, Route, Link } from "react-router-dom";
-import Game from "./screens/Game";
+import Game from "./components/Game";
 import LevelList from "./screens/LevelList";
 import Settings from "./screens/Settings";
 //import VideoSeekBar from './components/VideoSeekBar'

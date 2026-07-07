@@ -1,9 +1,9 @@
-import { setupCollisionFiltering } from '../setupCollisionFiltering.js';
+import { setupCollisionFiltering } from "./setupCollisionFiltering.js";
 
 /**
  * Initializes the physics system.
  * @param {Object} Jolt - The Jolt object from jolt-physics.wasm-compat.
- * @return {Object} - { joltInterface, physicsSystem, bodyInterface } 
+ * @return {Object} - { joltInterface, physicsSystem, bodyInterface }
  */
 export function initPhysics(Jolt) {
   const settings = new Jolt.JoltSettings();
@@ -16,4 +16,4 @@ export function initPhysics(Jolt) {
   const bodyInterface = physicsSystem.GetBodyInterface();
 
   return { joltInterface, physicsSystem, bodyInterface };
-} 
+}
