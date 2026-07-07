@@ -17,10 +17,6 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 import { LogViewer } from "./components/LogViewer";
 
-function addPenguin() {
-  //Three.import
-}
-
 function App() {
   setInterval(function () {
     fetch("/getPlayersInRoom", {}).then();
