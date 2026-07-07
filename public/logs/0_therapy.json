@@ -1,0 +1,12 @@
+{
+    "objects": [
+        {
+            "type": "person",
+            "location": [0, 0, 0, 0],
+            "obj_path": "/public/obj/person.obj"
+        }
+    ],
+
+    "transcript": "/public/transcripts/0_therapy.txt",
+    "audio": "/public/audio/0_therapy.txt"
+}

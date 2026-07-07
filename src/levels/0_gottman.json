@@ -1,0 +1,36 @@
+
+[{
+    "mode": "hub",
+    "win-condition": { 
+        "type": "proximity",
+        "target": "player",
+        "distance": 1.0
+    },
+    "camera": {
+        "rotation": [0, 180, 0]
+    },
+    "objects": [
+        {
+            "type": "couch",
+            "position": [0, 0.375, 3],
+            "size": [2, 0.75, 1],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "husband",
+            "position": [0.85, 0.375, 2.15],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "wife",
+            "position": [-0.85, 0.375, 2.15],
+            "rotation": [0, 0, 0]
+        },
+        {
+            "type": "discussion",
+            "position": [0, 0.375, 3.85],
+            "rotation": [0, 0, 0]
+        }
+   
+    ]
+}]

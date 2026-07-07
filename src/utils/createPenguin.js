@@ -1,4 +1,4 @@
-import * as THREE from 'three';
+import * as THREE from "three";
 
 /**
  * Creates a penguin group using Three.js primitives
@@ -6,15 +6,12 @@ import * as THREE from 'three';
  * @returns {THREE.Group} - A group containing all penguin parts
  */
 
-
-
-
-export function createPenguin(scale, x,y,z, ws) {
-  
+export function createPenguin(name, scale, x, y, z) {
   //window.penguins.push(penguins)
   //window.addEventListener('')
 
   const penguin = new THREE.Group();
+  penguin.name = name;
 
   // Materials
   const blackMaterial = new THREE.MeshPhongMaterial({ color: 0x1a1a1a });
@@ -23,8 +20,8 @@ export function createPenguin(scale, x,y,z, ws) {
   const yellowMaterial = new THREE.MeshPhongMaterial({ color: 0xffd700 });
 
   // Body (main torso - ellipsoid using scaled sphere)
-  // This code does not cause a 404 error. 
-  // If you are seeing a '404 Not Found' error in your devtools (see image), 
+  // This code does not cause a 404 error.
+  // If you are seeing a '404 Not Found' error in your devtools (see image),
   // it is usually caused by a missing file (e.g., an image, script, or resource your app tries to load).
   // This code is fine for defining and adding the penguin's body:
   const bodyGeometry = new THREE.SphereGeometry(0.4 * scale, 16, 16);
@@ -60,7 +57,12 @@ export function createPenguin(scale, x,y,z, ws) {
   penguin.add(beak);
 
   // Left wing
-  const wingGeometry = new THREE.CylinderGeometry(0.15 * scale, 0.2 * scale, 0.5 * scale, 8);
+  const wingGeometry = new THREE.CylinderGeometry(
+    0.15 * scale,
+    0.2 * scale,
+    0.5 * scale,
+    8,
+  );
   const leftWing = new THREE.Mesh(wingGeometry, blackMaterial);
   leftWing.rotation.z = Math.PI / 2;
   leftWing.rotation.y = -Math.PI / 6;
@@ -75,7 +77,12 @@ export function createPenguin(scale, x,y,z, ws) {
   penguin.add(rightWing);
 
   // Left foot
-  const footGeometry = new THREE.CylinderGeometry(0.1 * scale, 0.12 * scale, 0.15 * scale, 8);
+  const footGeometry = new THREE.CylinderGeometry(
+    0.1 * scale,
+    0.12 * scale,
+    0.15 * scale,
+    8,
+  );
   const leftFoot = new THREE.Mesh(footGeometry, orangeMaterial);
   leftFoot.rotation.x = Math.PI / 2;
   leftFoot.position.set(-0.15 * scale, -0.1 * scale, 0.1 * scale);
@@ -109,8 +116,9 @@ export function createPenguin(scale, x,y,z, ws) {
   //   let {x,y,z} = e.data.pos
   //   penguin.position.set(x,y,z);
   // })
-  
+  window.addEventListener("keydown", function () {
+    //console.log('pengu', penguin.position)
+  });
 
   return penguin;
 }
-

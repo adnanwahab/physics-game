@@ -16,6 +16,8 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 import {GameRoom} from '../Game'
 
+import {LogViewer} from './components/LogViewer'
+
 
 function addPenguin() {
   //Three.import
@@ -28,12 +30,8 @@ function App() {
 
   setInterval(function () {
     fetch('/getPlayersInRoom',{
-
     }).then()
   }, 50)
-
-
-
   /**
    * Sends a request to update a player's position and rotation in a room.
    * @param {string} roomId - Room id
@@ -43,19 +41,9 @@ function App() {
    * @returns {Promise<Response>}
    */
  
-
-
-
-
-
-
-
-
   //let p = new THREE.Vector3( 0, 1, 0 );
   //let q = new THREE.Vector3( 0, 1, 0 );
   //_updatePlayer("0", p, q)
-  
-  
   //_game.getState().forEach Render Pegen
   //when other penguin moves, gameROom updatse
 
@@ -93,6 +81,7 @@ function App() {
         <Route path="/" element={<LevelList />} />
         <Route path="/level-list" element={<LevelList />} />
         <Route path="/game/:game_id" element={<Game />} />
+        <Route path="/view/:game_id" element={<LogViewer />} />
         <Route path="/edit/:game_id" element={<Settings />} />
       </Routes>
 
