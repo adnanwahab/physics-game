@@ -10,7 +10,6 @@ import { setupExample } from "../utils/setupExample.js";
 import { handleUserInput } from "../utils/handleUserInput.js";
 import initJolt from "../utils/jolt-physics.wasm-compat.js";
 import { setupLighting } from "../lighting.js";
-import initGenerateObject from "../mutateScene.ts";
 import loadLevelCuboids from "../utils/loadLevelCuboids.js";
 import { setupCanvas2 } from "../utils/setupCanvas2.js";
 import { setupSelectionSystem } from "../utils/setupSelectionSystem.js";
@@ -324,17 +323,6 @@ export default function Game() {
               }),
             }).catch(() => {});
           }
-        }
-
-        const generateObject = initGenerateObject(Jolt, physicsSystem, scene);
-        gameStateRef.current.generateObject = generateObject;
-        const addBtn = document.getElementById("add-objects");
-        if (addBtn) {
-          const onClick = () => generateObject();
-          addBtn.addEventListener("click", onClick);
-          cleanupFunctions.push(() =>
-            addBtn.removeEventListener("click", onClick),
-          );
         }
 
         renderLoop(
