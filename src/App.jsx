@@ -11,6 +11,8 @@ import { LineLayer } from "@deck.gl/layers";
 import { ZoomWidget } from "@deck.gl/react";
 import { Map } from "react-map-gl/mapbox";
 
+import Game_Editor from "./components/Game_Editor";
+
 const token =
   "pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg";
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -76,7 +78,7 @@ function App() {
         <Route path="/level-list" element={<LevelList />} />
         <Route path="/game/:game_id" element={<Game />} />
         <Route path="/view/:game_id" element={<LogViewer />} />
-        <Route path="/edit/:game_id" element={<Settings />} />
+        <Route path="/edit/:game_id" element={<Game_Editor />} />
       </Routes>
 
       <div className="footer">
