@@ -12,6 +12,7 @@ const server = Bun.serve({
     if (server.upgrade(req, { data: { playerId, room } })) {
       return;
     }
+
     return new Response("WebSocket only", { status: 426 });
   },
   websocket: {

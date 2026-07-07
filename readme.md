@@ -1,7 +1,7 @@
-- [ ] cleanup
-- [ ] multiplayer
-- [ ] mock data for stories
-
+- [x] chipper-cupcake-d46f08.netlify.app = iframe of presentation and game
+- [ ] Complete networking so demo makes logs which we can use to understand Fantasy->reality
+- [ ] mock data of therapy session - ask for notes from previous session
+- [x] cleanup
 
 
 

@@ -63,6 +63,22 @@ function Dashboard(penguinList) {
 }
 
 export default function Game() {
+  let websocket_system = new WebSocket("ws://localhost:8000");
+  let lobby = [];
+  websocket_system.onopen = () =>
+    websocket_system.send(JSON.stringify({ type: "join", room: "lobby" }));
+  websocket_system.onmessage = (e) => {
+    console.log("onmessage", e);
+    penguinList.push({
+      id: Math.random() * 100,
+      x: 0,
+      y: 1,
+      z: 0,
+    });
+  };
+  websocket_system.onclose = () => console.log("closed");
+  websocket_system.onerror = (e) => console.error(e);
+
   let penguinList = [];
   window.false_idol = penguinList;
 
@@ -158,27 +174,6 @@ export default function Game() {
       scene.add(penguin);
     }
 
-    const ws = new WebSocket("ws://localhost:8000");
-    let lobby = [];
-    ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
-    ws.onmessage = (e) => {
-      //assign
-      // move
-      // scene.add(
-      //   createPenguin(
-      //     1,
-      //     1,
-      //     Math.random() * 10,
-      //     Math.random() * 10,
-      //     Math.random() * 10,
-      //   ),
-      // );
-    };
-    ws.onclose = () => console.log("closed");
-    ws.onerror = (e) => console.error(e);
-
-    // const ws = new WebSocket("ws://localhost:8000");
-    // ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
     // ws.addEventListener('message', (event) => {
     //   const data = JSON.parse(event.data);
 
@@ -193,6 +188,9 @@ export default function Game() {
     //     })
     //   }
     // });
+
+    // const ws = new WebSocket("ws://localhost:8000");
+    // ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
 
     // ws.onclose = () => console.log("closed");
     // ws.onerror = (e) => console.error(e);
@@ -466,16 +464,6 @@ export default function Game() {
         )}
 
         <Dashboard penguinList={penguinList}></Dashboard>
-
-        <p
-          className="
-                        absolute text-white text-xs sm:text-base rounded-md px-2 py-1
-                        top-[115px] left-4 sm:top-[140px] md:top-[242px] md:left-5
-                        z-[1012] pointer-events-none bg-black/30
-                    "
-        >
-          Point Cloud Count: {pointCloudCount} particles rendered
-        </p>
         <AnnotationsPanel
           annotations={annotations}
           visible={annotationsPanelVisible}
@@ -483,7 +471,10 @@ export default function Game() {
         />
       </div>
       <div className="mt-6">
-        <WASDControls inputState={inputStateRef.current} />
+        <WASDControls
+          ws={websocket_system}
+          inputState={inputStateRef.current}
+        />
       </div>
       <div>
         {/* WoW-style 2x3 slot bar */}
