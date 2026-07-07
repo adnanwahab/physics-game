@@ -1,5 +1,14 @@
+- [ ] cleanup
+- [ ] multiplayer
+- [ ] mock data for stories
+
+
+
+
+
+
 # 64 multiplayer puzzle mini games
-# level editor w/ prediction 
+# level editor w/ prediction
 # https://physics-game-five.vercel.app
 # educational science games using magic
 1. multiplayer
@@ -9,9 +18,8 @@
 //levels
 //play/id
 //edit/id
-1. transparent 311 logging 
-2. sceene reconstruction improves all laws 
+1. transparent 311 logging
+2. sceene reconstruction improves all laws
 
 
 3. starcraft mode plans building appartments and offices for daedalus
-   
