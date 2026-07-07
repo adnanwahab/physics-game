@@ -165,14 +165,15 @@ export default function Game() {
     ws.onmessage = (e) => {
       //assign
       // move
-      scene.add(
-        createPenguin(
-          1,
-          Math.random() * 10,
-          Math.random() * 10,
-          Math.random() * 10,
-        ),
-      );
+      // scene.add(
+      //   createPenguin(
+      //     1,
+      //     1,
+      //     Math.random() * 10,
+      //     Math.random() * 10,
+      //     Math.random() * 10,
+      //   ),
+      // );
     };
     ws.onclose = () => console.log("closed");
     ws.onerror = (e) => console.error(e);
@@ -197,8 +198,6 @@ export default function Game() {
     // ws.onclose = () => console.log("closed");
     // ws.onerror = (e) => console.error(e);
 
-    let p2 = createPenguin(1, 1, 2, 3, ws);
-    scene.add(p2);
     window.scene = scene;
 
     setupLighting(scene);
