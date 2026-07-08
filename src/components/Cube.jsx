@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./CubeMenu.css";
+import Game_Grid from "./Game_Grid";
 
 const CubeMenu = () => {
   // Store absolute X and Y rotation values
@@ -74,7 +75,7 @@ const CubeMenu = () => {
             SYSTEM_DASHBOARD(MAP_OF_MEANING)<iframe></iframe>
           </div>
           <div className="face bottom">
-            DATA_GRID<iframe></iframe>
+            <Game_Grid></Game_Grid>
           </div>
         </div>
       </div>
