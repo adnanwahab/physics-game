@@ -25,56 +25,39 @@ function App() {
   setInterval(function () {
     fetch("/getPlayersInRoom", {}).then();
   }, 50);
-  /**
-   * Sends a request to update a player's position and rotation in a room.
-   * @param {string} roomId - Room id
-   * @param {string} playerId - Player's id
-   * @param {object} pos - {x, y, z}
-   * @param {object} quat - {x, y, z, w}
-   * @returns {Promise<Response>}
-   */
-
-  //let p = new THREE.Vector3( 0, 1, 0 );
-  //let q = new THREE.Vector3( 0, 1, 0 );
-  //_updatePlayer("0", p, q)
-  //_game.getState().forEach Render Pegen
-  //when other penguin moves, gameROom updatse
 
   return (
-    <div>
-      <p
-        style={{
-          animation: "rainbow 2s linear infinite",
-          background:
-            "-webkit-linear-gradient(left, red, orange, yellow, green, cyan, blue, violet, red)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          backgroundClip: "text",
-          color: "transparent",
-        }}
-      >
-        <a
-          href="https://physics-game-five.vercel.app/"
-          className="text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-[rainbow_2s_linear_infinite]"
+    <div className="pt-24">
+      {" "}
+      {/* Added padding-top so content doesn't get hidden behind the fixed title */}
+      {/* Pinned Title Container */}
+      <div className="fixed top-0 left-0 w-full text-center py-4 z-50  backdrop-blur-sm">
+        <p
           style={{
+            display: "inline-block",
+            animation: "rainbow 2s linear infinite",
+            background:
+              "-webkit-linear-gradient(left, red, orange, yellow, green, cyan, blue, violet, red)",
             WebkitBackgroundClip: "text",
-            backgroundClip: "text",
             WebkitTextFillColor: "transparent",
-            textFillColor: "transparent",
+            backgroundClip: "text",
+            color: "transparent",
           }}
         >
-          Happy Bear Landia
-        </a>
-      </p>
-      <nav>
-        <Link
-          className="border-6 border-blue-500 rounded-md p-20"
-          to="/level-list"
-        >
-          Level List
-        </Link>
-      </nav>
-
+          <a
+            href="https://physics-game-five.vercel.app/"
+            className="text-5xl md:text-7xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-red-500 via-yellow-400 to-blue-500 animate-[rainbow_2s_linear_infinite]"
+            style={{
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              textFillColor: "transparent",
+            }}
+          >
+            Happy Bear Landia
+          </a>
+        </p>
+      </div>
       <Routes>
         <Route path="/" element={<LevelList />} />
         <Route path="/level-list" element={<LevelList />} />
@@ -83,10 +66,7 @@ function App() {
         <Route path="/edit/:game_id" element={<Game_Editor />} />
         <Route path="/cube" element={<Cube />} />
       </Routes>
-
       <div className="footer">
-        <img src="/public/map.png"></img>
-
         <style>
           {`
             @keyframes rainbow {
@@ -100,31 +80,14 @@ function App() {
               will-change: filter;
             }
             .footer p[style] {
-              /* override so parent doesn't mess with animation */
               animation: rainbow 2s linear infinite;
             }
           `}
         </style>
         <div>
-          {/* Simple DeckGL world map */}
-          <div style={{ width: "100%", height: "400px", margin: "40px 0" }}>
-            {/* <DeckGL
-            initialViewState={{
-              longitude: 0,
-              latitude: 20,
-              zoom: 1.2,
-              bearing: 0,
-              pitch: 0,
-            }}
-            controller={true}
-            style={{ width: "100%", height: "100%" }}
-            layers={[]}
-          >
-            <Map
-              mapStyle="https://basemaps.cartocdn.com/gl/positron-gl-style/style.json"
-            />
-          </DeckGL> */}
-          </div>
+          <div
+            style={{ width: "100%", height: "400px", margin: "40px 0" }}
+          ></div>
         </div>
       </div>
     </div>
