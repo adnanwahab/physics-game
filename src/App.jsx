@@ -3,12 +3,14 @@ import { Routes, Route, Link } from "react-router-dom";
 import Game from "./components/Game";
 import LevelList from "./screens/LevelList";
 import Settings from "./screens/Settings";
-import React from "react";
+import React, { useRef } from "react";
 import { DeckGL } from "@deck.gl/react";
 
 import Game_Editor from "./components/Game_Editor";
 
 import Cube from "./components/Cube";
+
+import { useParams } from "react-router-dom";
 
 const token =
   "pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg";
@@ -16,10 +18,47 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 import { LogViewer } from "./components/LogViewer";
 
+async function getLogs(game_id) {
+  const levelModule = await import(`./logs/${game_id}.json`);
+  console.log(levelModule);
+}
+
+function renderWorld() {}
+function Debugging() {
+  const { game_id } = useParams();
+  const canvasRef = useRef(null);
+  console.log("game_id", game_id);
+
+  getLogs(game_id).then((data) => {
+    renderWorld(data, canvasRef);
+  });
+  //once we have scene + braindance
+  // people vote ->
+  // therapist wont want to use it
+  // prove it works
+  return (
+    <>
+      <canvas
+        ref={canvasRef}
+        id="canvas"
+        className="
+                    block w-full h-full
+                    max-h-[200px] sm:max-h-[240px] md:max-h-[380px] lg:max-h-[80vh]
+                    aspect-video border-s-stone-100 border border-2
+                "
+        style={{
+          width: "100%",
+          height: "100%",
+        }}
+      />
+    </>
+  );
+}
+
 function App() {
-  setInterval(function () {
-    fetch("/getPlayersInRoom", {}).then();
-  }, 50);
+  // setInterval(function () {
+  //   fetch("/getPlayersInRoom", {}).then();
+  // }, 50);
 
   return (
     <div className="pt-2 ">
@@ -53,7 +92,7 @@ function App() {
           </a>
         </p>
       </div>
-      <div className="w-screen h-screen">
+      <div className="w-full h-[80vh] flex flex-col items-center justify-center relative overflow-hidden">
         <Routes>
           <Route path="/" element={<LevelList />} />
           <Route path="/level-list" element={<LevelList />} />
@@ -61,6 +100,7 @@ function App() {
           <Route path="/view/:game_id" element={<LogViewer />} />
           <Route path="/edit/:game_id" element={<Game_Editor />} />
           <Route path="/cube" element={<Cube />} />
+          <Route path="/debug/:game_id" element={<Debugging />} />
         </Routes>
       </div>
     </div>
