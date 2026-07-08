@@ -1,6 +1,6 @@
 // src/App.jsx
 import { Routes, Route, Link, useParams } from "react-router-dom";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three"; // 1. Import Three.js
 
 import Game from "./components/Game";
@@ -20,6 +20,262 @@ const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 async function getLogs(game_id) {
   const levelModule = await import(`./logs/${game_id}.json`);
   return levelModule.default;
+}
+
+const DEUS_EX_DATA = {
+  game: "Deus Ex",
+  year: 2000,
+  scene: "The Future of Augmentation",
+  location: "UNATCO HQ - Medical Level Breakroom",
+  characters: {
+    alex_jacobson: {
+      name: "Alex Jacobson",
+      color: "#38bdf8", // Cyan
+      avatar: "📡",
+    },
+    jaime_reyes: {
+      name: "Dr. Jaime Reyes",
+      color: "#34d399", // Emerald
+      avatar: "🥼",
+    },
+  },
+  steps: {
+    1: {
+      speaker: "alex_jacobson",
+      text: "Jaime, you have to look at the telemetry data from JC's last run. The nano-constructs are adapting to his neural pathways twice as fast as the initial models predicted.",
+      choices: [
+        {
+          text: "[Agree with Alex] 'It's revolutionary technology, Doc. You can't deny the results.'",
+          leadsTo: 2,
+        },
+        {
+          text: "[Side with Jaime] 'Alex is missing the point. Rapid adaptation could mean rapid instability.'",
+          leadsTo: 3,
+        },
+        {
+          text: "[Deflect] 'As long as the augs keep me alive in the field, I don't care how fast they adapt.'",
+          leadsTo: 4,
+        },
+      ],
+    },
+    2: {
+      speaker: "jaime_reyes",
+      text: "I've seen it, Alex. It's impressive, yes, but it worries me. We are rewriting human biology on the fly here.",
+      choices: [
+        {
+          text: "[Argue optimization] 'Rewriting? Come on, we're optimizing! Nano-tech is clean compared to old mech-augs.'",
+          leadsTo: 5,
+        },
+        {
+          text: "[Validate his caution] 'You're right to be cautious, Jaime. What are the long-term biological risks?'",
+          leadsTo: 6,
+        },
+      ],
+    },
+    3: {
+      speaker: "alex_jacobson",
+      text: "Instability? Look at the graphs! The error rates are practically zero. You're treating a masterpiece of engineering like a localized infection.",
+      choices: [
+        {
+          text: "[De-escalate] 'Engineering is one thing, Alex. Human tissue is another.'",
+          leadsTo: 5,
+        },
+        {
+          text: "[Press Alex on safety] 'And what happens when those error rates spike out in the field?'",
+          leadsTo: 7,
+        },
+      ],
+    },
+    4: {
+      speaker: "jaime_reyes",
+      text: "Spoken like a true field agent. But survival today doesn't guarantee your body won't reject its own nervous system tomorrow.",
+      choices: [
+        {
+          text: "[Ask about side effects] 'What kind of side effects are we talking about, Jaime?'",
+          leadsTo: 6,
+        },
+      ],
+    },
+    5: {
+      speaker: "jaime_reyes",
+      text: "Clean? Tell that to the cell cultures. If those nanites misinterpret a signal from the hypothalamus, they could trigger a massive autoimmune response. We don't even have a proper kill-switch if the system goes rogue.",
+      choices: [
+        {
+          text: "[Reassure via software] 'That's what the infolink monitoring is for. My system flags spikes before symptoms show.'",
+          leadsTo: 8,
+        },
+        {
+          text: "[Express concern over the kill-switch] 'Wait, UNATCO doesn't have a kill-switch for these augs?'",
+          leadsTo: 9,
+        },
+      ],
+    },
+    6: {
+      speaker: "alex_jacobson",
+      text: "The risks are calculated, Jaime! We've simulated decades of wear and tear. JC's body treats the nanites like synthetic platelets, not a foreign threat.",
+      choices: [
+        {
+          text: "[Challenge the simulation] 'Simulations can't account for every environmental variable, Alex.'",
+          leadsTo: 7,
+        },
+      ],
+    },
+    7: {
+      speaker: "jaime_reyes",
+      text: "Exactly. A cellular glitch under extreme stress could lead to organ failure in minutes. That's a massive design flaw.",
+      choices: [
+        {
+          text: "[Pivot to monitoring solution] 'Which is why we keep a real-time data link open during missions.'",
+          leadsTo: 8,
+        },
+      ],
+    },
+    8: {
+      speaker: "jaime_reyes",
+      text: "Maybe so. But in the 20th century, a doctor could look a patient in the eye and know what was wrong. Now I'm looking at a monitor, trying to figure out if a man's fever is caused by a virus or a software glitch.",
+      choices: [
+        {
+          text: "[Dismiss the nostalgia] 'Just trust the data, Jaime. The tech works.'",
+          leadsTo: 10,
+        },
+        {
+          text: "[Empathize with the human element] 'It must be frustrating to feel replaced by an algorithm.'",
+          leadsTo: 11,
+        },
+      ],
+    },
+    9: {
+      speaker: "alex_jacobson",
+      text: "Well... legally, we aren't allowed to build an internal biological override. But theoretically, a high-frequency EMP or a specific mainframe virus could lock the system down. Not that we'd ever need to.",
+      choices: [
+        {
+          text: "[Note the vulnerability] 'Good to know. Let's hope nobody else figures out that frequency.'",
+          leadsTo: 8,
+        },
+      ],
+    },
+    10: {
+      speaker: "jaime_reyes",
+      text: "The data tells me what the machine is doing, Alex. It doesn't tell me what it's doing to the soul of the man inside it.",
+      choices: [], // Terminal node
+    },
+    11: {
+      speaker: "jaime_reyes",
+      text: "It's not about my ego, JC. It's about humanity losing its baseline. When the machine becomes part of you, you start looking at the rest of the world like it's obsolete.",
+      choices: [], // Terminal node
+    },
+  },
+};
+
+export function DeusExSimulator() {
+  const [currentStepId, setCurrentStepId] = useState(1);
+  const [history, setHistory] = useState([]);
+
+  const currentStep = DEUS_EX_DATA.steps[currentStepId];
+  const currentSpeaker = DEUS_EX_DATA.characters[currentStep.speaker];
+
+  const handleChoiceClick = (leadsTo, choiceText) => {
+    // Save current state to history array for back-tracking capabilities
+    setHistory([
+      ...history,
+      { stepId: currentStepId, selectedChoice: choiceText },
+    ]);
+    setCurrentStepId(leadsTo);
+  };
+
+  const handleReset = () => {
+    setCurrentStepId(1);
+    setHistory([]);
+  };
+
+  const handleBack = () => {
+    if (history.length === 0) return;
+    const previous = history[history.length - 1];
+    setCurrentStepId(previous.stepId);
+    setHistory(history.slice(0, -1));
+  };
+
+  return (
+    <div className="w-full max-w-2xl mx-auto bg-slate-950 border border-amber-500/40 rounded-lg p-6 font-mono text-amber-200/90 shadow-2xl shadow-amber-950/20">
+      {/* Header Meta */}
+      <div className="flex justify-between items-center border-b border-amber-500/20 pb-3 mb-6 text-xs text-amber-500/60 uppercase tracking-widest">
+        <div>{DEUS_EX_DATA.game} // CONV_TREE_SUBROUTINE</div>
+        <div>LOC: {DEUS_EX_DATA.location}</div>
+      </div>
+
+      {/* Main Screen Display */}
+      <div className="min-h-[200px] bg-black/40 border border-amber-500/10 rounded p-4 mb-6 relative overflow-hidden">
+        {/* Decorative Grid Lines */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(18,16,16,0)_50%,rgba(0,0,0,0.25)_50%),linear-gradient(90deg,rgba(255,0,0,0.06),rgba(0,255,0,0.02),rgba(0,0,255,0.06))] bg-[length:100%_4px,3px_100%] pointer-events-none" />
+
+        {/* Dynamic Speaker Tag */}
+        <div className="flex items-center gap-2 mb-3">
+          <span className="text-xl">{currentSpeaker.avatar}</span>
+          <span
+            className="font-bold uppercase tracking-wider text-sm"
+            style={{ color: currentSpeaker.color }}
+          >
+            {currentSpeaker.name}:
+          </span>
+        </div>
+
+        {/* Speaker Text */}
+        <p className="text-lg leading-relaxed text-amber-100 selection:bg-amber-500 selection:text-black">
+          "{currentStep.text}"
+        </p>
+      </div>
+
+      {/* Choice Interface */}
+      <div className="space-y-3">
+        <div className="text-xs text-amber-500/50 uppercase tracking-wider mb-1">
+          {currentStep.choices.length > 0
+            ? "Select Response Intercept:"
+            : "Dialogue Subroutine Concluded"}
+        </div>
+
+        {currentStep.choices.length > 0 ? (
+          currentStep.choices.map((choice, idx) => (
+            <button
+              key={idx}
+              onClick={() => handleChoiceClick(choice.leadsTo, choice.text)}
+              className="w-full text-left p-3 rounded border border-amber-500/20 bg-amber-500/5 hover:bg-amber-500/15 hover:border-amber-500/60 text-sm transition-all duration-150 group flex items-start gap-3"
+            >
+              <span className="text-amber-500/40 group-hover:text-amber-500 font-bold">
+                0{idx + 1}.
+              </span>
+              <span className="group-hover:text-amber-100">{choice.text}</span>
+            </button>
+          ))
+        ) : (
+          <div className="p-4 bg-red-950/20 border border-red-500/30 rounded text-center text-red-400 text-sm">
+            [TRANSMISSION ENDED] You have reached a terminal logical node.
+          </div>
+        )}
+      </div>
+
+      {/* Control Utility Footer */}
+      <div className="flex justify-between items-center mt-8 pt-4 border-t border-amber-500/10 text-xs">
+        <button
+          onClick={handleBack}
+          disabled={history.length === 0}
+          className={`px-3 py-1 rounded transition-colors ${
+            history.length === 0
+              ? "text-amber-500/20 cursor-not-allowed"
+              : "text-amber-500/60 hover:bg-amber-500/10 hover:text-amber-400"
+          }`}
+        >
+          &lt; REWIND NODE
+        </button>
+
+        <button
+          onClick={handleReset}
+          className="px-3 py-1 rounded text-amber-500/60 hover:bg-amber-500/10 hover:text-amber-400 transition-colors"
+        >
+          INITIALIZE SEQUENCE ↻
+        </button>
+      </div>
+    </div>
+  );
 }
 
 // Helper to generate simple placeholder meshes based on type
@@ -167,9 +423,12 @@ function Debugging() {
   return (
     <>
       <div
+        id="css3d"
         ref={containerRef}
         style={{ width: "100vw", height: "100vh", position: "relative" }}
-      />
+      >
+        hello world
+      </div>
       <canvas
         ref={canvasRef}
         id="canvas"
@@ -183,6 +442,10 @@ function Debugging() {
           height: "100%",
         }}
       />
+      <div>
+        <div className="text-blue-500 cursor-pointer">hello world</div>
+        <DeusExSimulator />
+      </div>
     </>
   );
 }
@@ -209,6 +472,7 @@ function App() {
           >
             Happy Bear Landia
           </a>
+          <a href="/blog">/blog</a>
         </p>
       </div>
       <div className="w-full h-[80vh] flex flex-col items-center justify-center relative overflow-hidden">
@@ -220,6 +484,7 @@ function App() {
           <Route path="/edit/:game_id" element={<Game_Editor />} />
           <Route path="/cube" element={<Cube />} />
           <Route path="/debug/:game_id" element={<Debugging />} />
+          <Route path="/blog" element={<Blog />} />
         </Routes>
       </div>
     </div>
@@ -227,3 +492,16 @@ function App() {
 }
 
 export default App;
+
+function Blog() {
+  return (
+    <div>
+      <iframe
+        width="800"
+        height="450"
+        src="https://embed.figma.com/slides/m32R1HooMTzoAIrW3mn0ZS/Creating-an-optimal-world-with-data-presentation?node-id=160-97&embed-host=share"
+        allowFullScreen
+      ></iframe>
+    </div>
+  );
+}
