@@ -3,13 +3,8 @@ import { Routes, Route, Link } from "react-router-dom";
 import Game from "./components/Game";
 import LevelList from "./screens/LevelList";
 import Settings from "./screens/Settings";
-//import VideoSeekBar from './components/VideoSeekBar'
 import React from "react";
 import { DeckGL } from "@deck.gl/react";
-//import {MapViewState} from '@deck.gl/core';
-import { LineLayer } from "@deck.gl/layers";
-import { ZoomWidget } from "@deck.gl/react";
-import { Map } from "react-map-gl/mapbox";
 
 import Game_Editor from "./components/Game_Editor";
 
@@ -27,7 +22,7 @@ function App() {
   }, 50);
 
   return (
-    <div className="pt-24">
+    <div className="pt-2 ">
       {" "}
       {/* Added padding-top so content doesn't get hidden behind the fixed title */}
       {/* Pinned Title Container */}
@@ -58,37 +53,15 @@ function App() {
           </a>
         </p>
       </div>
-      <Routes>
-        <Route path="/" element={<LevelList />} />
-        <Route path="/level-list" element={<LevelList />} />
-        <Route path="/game/:game_id" element={<Game />} />
-        <Route path="/view/:game_id" element={<LogViewer />} />
-        <Route path="/edit/:game_id" element={<Game_Editor />} />
-        <Route path="/cube" element={<Cube />} />
-      </Routes>
-      <div className="footer">
-        <style>
-          {`
-            @keyframes rainbow {
-              0% { filter: hue-rotate(0deg); }
-              100% { filter: hue-rotate(360deg); }
-            }
-            .footer p {
-              display: inline-block;
-            }
-            .footer p {
-              will-change: filter;
-            }
-            .footer p[style] {
-              animation: rainbow 2s linear infinite;
-            }
-          `}
-        </style>
-        <div>
-          <div
-            style={{ width: "100%", height: "400px", margin: "40px 0" }}
-          ></div>
-        </div>
+      <div className="w-screen h-screen">
+        <Routes>
+          <Route path="/" element={<LevelList />} />
+          <Route path="/level-list" element={<LevelList />} />
+          <Route path="/game/:game_id" element={<Game />} />
+          <Route path="/view/:game_id" element={<LogViewer />} />
+          <Route path="/edit/:game_id" element={<Game_Editor />} />
+          <Route path="/cube" element={<Cube />} />
+        </Routes>
       </div>
     </div>
   );

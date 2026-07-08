@@ -13,8 +13,8 @@ body {
 
 /* 3D Viewport */
 .scene {
-    width: 200px;
-    height: 200px;
+    width: 100%;
+    height: 100%;
     perspective: 600px; /* Gives the 3D depth effect */
     margin-bottom: 40px;
 }
