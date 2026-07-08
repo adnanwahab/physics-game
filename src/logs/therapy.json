@@ -7,7 +7,13 @@
       "distance": 1.0
     },
     "camera": {
-      "rotation": [0, 180, 0]
+      "rotation": [0, 180, 0],
+      "interaction": {
+        "type": "drag-to-rotate",
+        "enabled": true,
+        "sensitivity": 0.25,
+        "target-canvas": true
+      }
     },
     "objects": [
       {
@@ -18,11 +24,13 @@
       },
       {
         "type": "sensor",
+        "id": "sensor_right",
         "position": [0.85, 0.375, 2.15],
         "rotation": [0, 0, 0]
       },
       {
         "type": "sensor",
+        "id": "sensor_left",
         "position": [-0.85, 0.375, 2.15],
         "rotation": [0, 0, 0]
       },
@@ -34,6 +42,66 @@
       {
         "type": "couch",
         "position": [0.1, 0.1, 0]
+      },
+      {
+        "type": "css3d-chat-bubble",
+        "target_anchor": "sensor_left",
+        "position": [-0.85, 0.9, 2.15],
+        "size": [1.2, 0.6],
+        "style": {
+          "background": "rgba(255, 255, 255, 0.9)",
+          "border-radius": "10px",
+          "padding": "8px",
+          "border": "2px solid #55efc4",
+          "font-family": "sans-serif",
+          "overflow-y": "scroll"
+        },
+        "behavior": {
+          "type": "scrolling-text",
+          "speed": "auto",
+          "sync-time": true
+        }
+      },
+      {
+        "type": "css3d-chat-bubble",
+        "target_anchor": "sensor_right",
+        "position": [0.85, 0.9, 2.15],
+        "size": [1.2, 0.6],
+        "style": {
+          "background": "rgba(255, 255, 255, 0.9)",
+          "border-radius": "10px",
+          "padding": "8px",
+          "border": "2px solid #55efc4",
+          "font-family": "sans-serif",
+          "overflow-y": "scroll"
+        },
+        "behavior": {
+          "type": "scrolling-text",
+          "speed": "auto",
+          "sync-time": true
+        }
+      }
+    ],
+    "transcript": [
+      {
+        "speaker": "sensor_left",
+        "time": "0:00",
+        "text": "Welcome to 'Things You Can Say About Your Car, But Not Your Partner.' I'll start: 'She leaks a little fluid, but man, she's got a spacious trunk.'"
+      },
+      {
+        "speaker": "sensor_right",
+        "time": "0:08",
+        "text": "*(Buzz!)* 'I had to kick the back bumper just to get it started this morning, and frankly, the exhaust smells terrible.'"
+      },
+      {
+        "speaker": "sensor_left",
+        "time": "0:15",
+        "text": "*(Buzz!)* Moving on to 'Scenes From a Hat'! Next prompt: 'Unfortunate times to break into an upbeat, improvised Hoedown.'"
+      },
+      {
+        "speaker": "sensor_right",
+        "time": "0:22",
+        "text": "Oh, that's easy. Right after the doctor says, 'I've got your test results back...' (Singing) *Oh, your appendix is exploding and your white blood cells are high...*"
       }
     ]
   }
