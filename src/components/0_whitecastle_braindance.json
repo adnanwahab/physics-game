@@ -201,5 +201,35 @@
         "rotation": [0, 0, 0]
       }
     ]
+  },
+  {
+    "title": "braindance mode",
+    "mode": "Braindance Editor",
+    "win-condition": {
+      "type": "proximity",
+      "target": "player",
+      "distance": 1.0
+    },
+    "metadata": {
+      "timestamp": "15:30",
+      "location_context": "Autumn Shore Dr",
+      "status": "Eating a burrito, heading to HEB for White Castle"
+    },
+    "objects": [
+      {
+        "type": "sensor_dropzone",
+        "description": "drag your recording of the sensor to the editor",
+        "position": [0, 1.0, 0],
+        "size": [3, 0.2, 3],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "quest_generator",
+        "description": "auto generates quests which are tasks powered by vision boards",
+        "position": [0, 2.5, -5],
+        "size": [4, 2.0, 0.5],
+        "rotation": [0, 0, 0]
+      }
+    ]
   }
 ]

@@ -1,9 +1,9 @@
 - [x] merry-squirrel-91b45d.netlify.app = iframe of presentation and game
 - [ ] Complete networking so demo makes logs which we can use to understand Fantasy->reality
 - [ ] mock data of therapy session - ask for notes from previous session
-- [x] cleanup
+- [ ] cleanup - rename levels to scene
 
-
+happybearlandia augments all systems by adding specific expert information which empowers them to help everyone create each others dreams
 
 
 
@@ -23,3 +23,6 @@
 
 
 3. starcraft mode plans building appartments and offices for daedalus
+
+
+I play games and I look at logs

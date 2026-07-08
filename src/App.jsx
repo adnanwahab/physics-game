@@ -13,6 +13,8 @@ import { Map } from "react-map-gl/mapbox";
 
 import Game_Editor from "./components/Game_Editor";
 
+import Cube from "./components/Cube";
+
 const token =
   "pk.eyJ1IjoiYXdhaGFiIiwiYSI6ImNrdjc3NW11aTJncmIzMXExcXRiNDNxZWYifQ.tqFU7uVd6mbhHtjYsjtvlg";
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
@@ -79,6 +81,7 @@ function App() {
         <Route path="/game/:game_id" element={<Game />} />
         <Route path="/view/:game_id" element={<LogViewer />} />
         <Route path="/edit/:game_id" element={<Game_Editor />} />
+        <Route path="/cube" element={<Cube />} />
       </Routes>
 
       <div className="footer">
