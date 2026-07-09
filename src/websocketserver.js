@@ -65,3 +65,100 @@ const server = Bun.serve({
 });
 
 console.log(`ws://localhost:${server.port}`);
+console.log("folder watcher online");
+
+import { watch } from "fs"; // Bun supports native fs watch, or Bun.watch
+import { readdir, stat } from "fs/promises";
+import { join } from "path";
+
+const WATCH_DIR = "/Users/shelbernstein/presentations"; // Change this to your folder path
+
+// Keep track of known file sizes: { filename: sizeInBytes }
+const fileRegistry = new Map();
+
+// Initialize the registry with existing files so we don't treat them as "new"
+async function initRegistry() {
+  try {
+    const files = await readdir(WATCH_DIR);
+    for (const file of files) {
+      const filePath = join(WATCH_DIR, file);
+      const fileStat = await stat(filePath).catch(() => null);
+      if (fileStat && fileStat.isFile()) {
+        fileRegistry.set(file, fileStat.size);
+      }
+    }
+    console.log(
+      `✨ Initialized. Watching ${fileRegistry.size} existing files in '${WATCH_DIR}'...`,
+    );
+  } catch (err) {
+    console.error("Error initializing directory:", err.message);
+  }
+}
+
+// Function that handles the analysis and generates the JSON
+function analyzeNewFile(newFileName, newSize) {
+  const diffs = {};
+
+  // Compare the new file's size to every other existing file
+  for (const [existingFile, existingSize] of fileRegistry.entries()) {
+    if (existingFile === newFileName) continue;
+
+    const diffInBytes = newSize - existingSize;
+    diffs[existingFile] = {
+      compared_file_size_bytes: existingSize,
+      difference_bytes: diffInBytes,
+      status:
+        diffInBytes > 0 ? "larger" : diffInBytes < 0 ? "smaller" : "equal",
+    };
+  }
+
+  const result = {
+    event: "file_added",
+    timestamp: new Date().toISOString(),
+    new_file: {
+      name: newFileName,
+      size_bytes: newSize,
+    },
+    comparisons: diffs,
+  };
+
+  // Print or save the JSON
+  console.log("\n📊 [NEW FILE ANALYSIS] Generated JSON:");
+  console.log(JSON.stringify(result, null, 2));
+}
+
+// Start watching the directory
+async function startWatching() {
+  await initRegistry();
+
+  // Bun optimizes standard fs.watch under the hood
+  watch(WATCH_DIR, async (eventType, filename) => {
+    if (!filename || eventType !== "rename") return;
+    // 'rename' triggers when files are added, deleted, or renamed
+
+    const filePath = join(WATCH_DIR, filename);
+
+    try {
+      const fileStat = await stat(filePath);
+
+      // Check if it's a file and it's actually NEW (not just modified or deleted)
+      if (fileStat.isFile() && !fileRegistry.has(filename)) {
+        const newSize = fileStat.size;
+
+        // 1. Run the function to generate the JSON comparison
+        analyzeNewFile(filename, newSize);
+
+        // 2. Add the new file to our registry so we can compare future files against it
+        fileRegistry.set(filename, newSize);
+      }
+    } catch (error) {
+      // If stat fails, the file was likely deleted or moved out, so we clean it up
+      if (fileRegistry.has(filename)) {
+        fileRegistry.delete(filename);
+        console.log(`❌ Removed ${filename} from registry.`);
+      }
+    }
+  });
+}
+
+startWatching();
