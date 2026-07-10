@@ -1,0 +1,1384 @@
+[
+  {
+    "objects": [
+      {
+        "type": "desk",
+        "size": [2.415, 1.1, 1.1],
+        "position": [-5.46, 0.55, -9.5],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [-5.749, 1.45, -9.78],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [-5.171, 1.45, -9.78],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-5.749, 0.45, -8.45],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-5.171, 0.45, -8.37],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.415, 1.1, 1.1],
+        "position": [-2.73, 0.55, -9.217],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [-3.308, 1.45, -9.497],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [-2.73, 1.45, -9.497],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [-2.153, 1.45, -9.497],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-3.308, 0.45, -8.167],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-3.308, 1.05, -8.317],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-3.308, 1.48, -8.317],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-2.73, 0.45, -8.087],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-2.73, 1.05, -8.237],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-2.73, 1.48, -8.237],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-2.153, 0.45, -8.167],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-2.153, 1.05, -8.317],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-2.153, 1.48, -8.317],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.415, 1.1, 1.1],
+        "position": [0, 0.55, -9.1],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [-0.289, 1.45, -9.38],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [0.289, 1.45, -9.38],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-0.289, 0.45, -8.05],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-0.289, 1.05, -8.2],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-0.289, 1.48, -8.2],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [0.289, 0.45, -7.97],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [0.289, 1.05, -8.12],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [0.289, 1.48, -8.12],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.415, 1.1, 1.1],
+        "position": [2.73, 0.55, -9.217],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [2.153, 1.45, -9.497],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [2.73, 1.45, -9.497],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [3.308, 1.45, -9.497],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [2.153, 0.45, -8.167],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [2.73, 0.45, -8.087],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [3.308, 0.45, -8.167],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.415, 1.1, 1.1],
+        "position": [5.46, 0.55, -9.5],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [5.171, 1.45, -9.78],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.525, 0.55, 0.08],
+        "position": [5.749, 1.45, -9.78],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [5.171, 0.45, -8.45],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [5.171, 1.05, -8.6],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [5.171, 1.48, -8.6],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [5.749, 0.45, -8.37],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [5.749, 1.05, -8.52],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [5.749, 1.48, -8.52],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.53, 1.1, 1.1],
+        "position": [-7.15, 0.55, -6.3],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-7.453, 1.45, -6.58],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-6.847, 1.45, -6.58],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-7.453, 0.45, -5.25],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-7.453, 1.05, -5.4],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-7.453, 1.48, -5.4],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-6.847, 0.45, -5.17],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-6.847, 1.05, -5.32],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-6.847, 1.48, -5.32],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.53, 1.1, 1.1],
+        "position": [-4.29, 0.55, -5.977],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-4.895, 1.45, -6.257],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-4.29, 1.45, -6.257],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-3.685, 1.45, -6.257],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-4.895, 0.45, -4.927],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-4.895, 1.05, -5.077],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-4.895, 1.48, -5.077],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-4.29, 0.45, -4.847],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-4.29, 1.05, -4.997],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-4.29, 1.48, -4.997],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-3.685, 0.45, -4.927],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-3.685, 1.05, -5.077],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-3.685, 1.48, -5.077],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.53, 1.1, 1.1],
+        "position": [-1.43, 0.55, -5.777],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-1.732, 1.45, -6.057],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [-1.127, 1.45, -6.057],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-1.732, 0.45, -4.727],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-1.127, 0.45, -4.647],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.53, 1.1, 1.1],
+        "position": [1.43, 0.55, -5.777],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [0.825, 1.45, -6.057],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [1.43, 1.45, -6.057],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [2.035, 1.45, -6.057],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [0.825, 0.45, -4.727],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [0.825, 1.05, -4.877],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [0.825, 1.48, -4.877],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [1.43, 0.45, -4.647],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [1.43, 1.05, -4.797],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [1.43, 1.48, -4.797],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [2.035, 0.45, -4.727],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [2.035, 1.05, -4.877],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [2.035, 1.48, -4.877],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.53, 1.1, 1.1],
+        "position": [4.29, 0.55, -5.977],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [3.988, 1.45, -6.257],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [4.593, 1.45, -6.257],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [3.988, 0.45, -4.927],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [3.988, 1.05, -5.077],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [3.988, 1.48, -5.077],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [4.593, 0.45, -4.847],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [4.593, 1.05, -4.997],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [4.593, 1.48, -4.997],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.53, 1.1, 1.1],
+        "position": [7.15, 0.55, -6.3],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [6.545, 1.45, -6.58],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [7.15, 1.45, -6.58],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.55, 0.55, 0.08],
+        "position": [7.755, 1.45, -6.58],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [6.545, 0.45, -5.25],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [7.15, 0.45, -5.17],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [7.755, 0.45, -5.25],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.6449999999999996, 1.1, 1.1],
+        "position": [-7.475, 0.55, -2.6],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-7.791, 1.45, -2.88],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-7.159, 1.45, -2.88],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-7.791, 0.45, -1.55],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-7.791, 1.05, -1.7],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-7.791, 1.48, -1.7],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-7.159, 0.45, -1.47],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-7.159, 1.05, -1.62],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-7.159, 1.48, -1.62],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.6449999999999996, 1.1, 1.1],
+        "position": [-4.485, 0.55, -2.247],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-5.117, 1.45, -2.527],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-4.485, 1.45, -2.527],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-3.852, 1.45, -2.527],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-5.117, 0.45, -1.197],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-4.485, 0.45, -1.117],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-3.852, 0.45, -1.197],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.6449999999999996, 1.1, 1.1],
+        "position": [-1.495, 0.55, -2.029],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-1.811, 1.45, -2.309],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [-1.179, 1.45, -2.309],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-1.811, 0.45, -0.979],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-1.811, 1.05, -1.129],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-1.811, 1.48, -1.129],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-1.179, 0.45, -0.899],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-1.179, 1.05, -1.049],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-1.179, 1.48, -1.049],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.6449999999999996, 1.1, 1.1],
+        "position": [1.495, 0.55, -2.029],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [0.862, 1.45, -2.309],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [1.495, 1.45, -2.309],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [2.127, 1.45, -2.309],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [0.862, 0.45, -0.979],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [0.862, 1.05, -1.129],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [0.862, 1.48, -1.129],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [1.495, 0.45, -0.899],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [1.495, 1.05, -1.049],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [1.495, 1.48, -1.049],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [2.127, 0.45, -0.979],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [2.127, 1.05, -1.129],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [2.127, 1.48, -1.129],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.6449999999999996, 1.1, 1.1],
+        "position": [4.485, 0.55, -2.247],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [4.169, 1.45, -2.527],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [4.801, 1.45, -2.527],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [4.169, 0.45, -1.197],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [4.801, 0.45, -1.117],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.6449999999999996, 1.1, 1.1],
+        "position": [7.475, 0.55, -2.6],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [6.842, 1.45, -2.88],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [7.475, 1.45, -2.88],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.575, 0.55, 0.08],
+        "position": [8.108, 1.45, -2.88],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [6.842, 0.45, -1.55],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [6.842, 1.05, -1.7],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [6.842, 1.48, -1.7],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [7.475, 0.45, -1.47],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [7.475, 1.05, -1.62],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [7.475, 1.48, -1.62],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [8.108, 0.45, -1.55],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [8.108, 1.05, -1.7],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [8.108, 1.48, -1.7],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.76, 1.1, 1.1],
+        "position": [-6.24, 0.55, 1.4],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [-6.57, 1.45, 1.12],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [-5.91, 1.45, 1.12],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-6.57, 0.45, 2.45],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-5.91, 0.45, 2.53],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.76, 1.1, 1.1],
+        "position": [-3.12, 0.55, 1.754],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [-3.78, 1.45, 1.474],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [-3.12, 1.45, 1.474],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [-2.46, 1.45, 1.474],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-3.78, 0.45, 2.804],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-3.78, 1.05, 2.654],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-3.78, 1.48, 2.654],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-3.12, 0.45, 2.884],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-3.12, 1.05, 2.734],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-3.12, 1.48, 2.734],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-2.46, 0.45, 2.804],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-2.46, 1.05, 2.654],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-2.46, 1.48, 2.654],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.76, 1.1, 1.1],
+        "position": [0, 0.55, 1.9],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [-0.33, 1.45, 1.62],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [0.33, 1.45, 1.62],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [-0.33, 0.45, 2.95],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-0.33, 1.05, 2.8],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-0.33, 1.48, 2.8],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [0.33, 0.45, 3.03],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [0.33, 1.05, 2.88],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [0.33, 1.48, 2.88],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.76, 1.1, 1.1],
+        "position": [3.12, 0.55, 1.754],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [2.46, 1.45, 1.474],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [3.12, 1.45, 1.474],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [3.78, 1.45, 1.474],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [2.46, 0.45, 2.804],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [3.12, 0.45, 2.884],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [3.78, 0.45, 2.804],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "desk",
+        "size": [2.76, 1.1, 1.1],
+        "position": [6.24, 0.55, 1.4],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [5.91, 1.45, 1.12],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "monitor",
+        "size": [0.6, 0.55, 0.08],
+        "position": [6.57, 1.45, 1.12],
+        "rotation": [-8.59, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [5.91, 0.45, 2.45],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [5.91, 1.05, 2.3],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [5.91, 1.48, 2.3],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "chair",
+        "size": [0.5, 0.9, 0.5],
+        "position": [6.57, 0.45, 2.53],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [6.57, 1.05, 2.38],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [6.57, 1.48, 2.38],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "person_body",
+        "size": [0.4, 0.55, 0.4],
+        "position": [-1.2, 1.05, -1],
+        "rotation": [0, 34.38, 0]
+      },
+      {
+        "type": "head",
+        "size": [0.14, 0.14, 0.14],
+        "position": [-1.2, 1.48, -1],
+        "rotation": [0, 34.38, 0]
+      },
+      {
+        "type": "screen",
+        "size": [4.6, 2.9, 0.05],
+        "position": [-8.6, 5.6, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "screen",
+        "size": [4.6, 2.9, 0.05],
+        "position": [-3, 5.6, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "screen",
+        "size": [3.6, 2.9, 0.05],
+        "position": [2.6, 5.6, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "screen",
+        "size": [3, 2.9, 0.05],
+        "position": [6.6, 5.6, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "panel",
+        "size": [9, 0.9, 0.05],
+        "position": [0, 7.75, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "panel",
+        "size": [3.4, 0.85, 0.05],
+        "position": [-6.4, 7.75, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "panel",
+        "size": [3.4, 0.85, 0.05],
+        "position": [6.4, 7.75, -12.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "flag",
+        "size": [1.6, 1, 0.05],
+        "position": [-12.5, 5.4, -12.9],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "panel",
+        "size": [18, 1.1, 0.05],
+        "position": [0, 7.7, -12.95],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-14, 8.45, -8],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-14, 8.45, -2],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-14, 8.45, 4],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-14, 8.45, 10],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-7, 8.45, -8],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-7, 8.45, -2],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-7, 8.45, 4],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [-7, 8.45, 10],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [0, 8.45, -8],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [0, 8.45, -2],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [0, 8.45, 4],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [0, 8.45, 10],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [7, 8.45, -8],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [7, 8.45, -2],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [7, 8.45, 4],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [7, 8.45, 10],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [14, 8.45, -8],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [14, 8.45, -2],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [14, 8.45, 4],
+        "rotation": [90, 0, 0]
+      },
+      {
+        "type": "light",
+        "size": [3.2, 0.1, 1.1],
+        "position": [14, 8.45, 10],
+        "rotation": [90, 0, 0]
+      }
+    ],
+    "camera": {
+      "position": [0, 7, 18],
+      "lookAt": [0, 3, -5]
+    }
+  }
+]
