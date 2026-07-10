@@ -8,7 +8,7 @@ import LevelList from "./screens/LevelList";
 import Settings from "./screens/Settings";
 import Game_Editor from "./components/Game_Editor";
 import Cube from "./components/Cube";
-import { LogViewer } from "./components/LogViewer";
+import LogViewer from "./components/LogViewer";
 
 import {
   CSS3DRenderer,
@@ -473,6 +473,9 @@ function App() {
             Happy Bear Landia
           </a>
           <a href="/blog">/blog</a>
+          <span> | </span>
+          <a href="/view/0">LOG VIEWER</a>
+          <a href="/edit/1">magic editor</a>
         </p>
       </div>
       <div className="w-full h-[80vh] flex flex-col items-center justify-center relative overflow-hidden">
@@ -480,6 +483,7 @@ function App() {
           <Route path="/" element={<LevelList />} />
           <Route path="/level-list" element={<LevelList />} />
           <Route path="/game/:game_id" element={<Game />} />
+          //replay anyalzer and editor
           <Route path="/view/:game_id" element={<LogViewer />} />
           <Route path="/edit/:game_id" element={<Game_Editor />} />
           <Route path="/cube" element={<Cube />} />

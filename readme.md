@@ -23,6 +23,4 @@ happybearlandia augments all systems by adding specific expert information which
 
 
 3. starcraft mode plans building appartments and offices for daedalus
-
-
 I play games and I look at logs

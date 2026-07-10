@@ -1,4 +1,8 @@
 
+https://arxiv.org/pdf/1706.03762
+
+
+
 https://soundcloud.com/i-am-sovereign/sets/kapil-gupta
 https://mentalkingmindfulness.com/
 
