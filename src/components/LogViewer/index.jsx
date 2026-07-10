@@ -14,6 +14,65 @@ async function getLogs(game_id) {
   return {};
 }
 
+// Placeholder mesh factory for static level geometry (e.g. mission_control.json's "objects" array)
+function createPlaceholder(type, size = [1, 1, 1]) {
+  let geometry;
+  let material;
+  const [w, h, d] = size;
+
+  switch (type) {
+    case "desk":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({
+        color: 0x2a3038,
+        roughness: 0.6,
+        metalness: 0.2,
+      });
+      break;
+    case "monitor":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({ color: 0x111316 });
+      break;
+    case "screen":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshBasicMaterial({ color: 0x22c7ff });
+      break;
+    case "chair":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({
+        color: 0x4a5568,
+        roughness: 0.6,
+        metalness: 0.15,
+      });
+      break;
+    case "person_body":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({ color: 0x3a5a8c });
+      break;
+    case "head":
+      geometry = new THREE.SphereGeometry(w, 12, 12); // size[0] doubles as radius
+      material = new THREE.MeshStandardMaterial({ color: 0xd8a878 });
+      break;
+    case "flag":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({ color: 0xb22234 });
+      break;
+    case "panel":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({ color: 0x161a20 });
+      break;
+    case "light":
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshBasicMaterial({ color: 0xcfe8ff });
+      break;
+    default:
+      geometry = new THREE.BoxGeometry(w, h, d);
+      material = new THREE.MeshStandardMaterial({ color: 0xcccccc });
+  }
+
+  return new THREE.Mesh(geometry, material);
+}
+
 export default function LogViewer() {
   let { log_id } = useParams();
 
@@ -63,10 +122,15 @@ export default function LogViewer() {
     // Replace with your real fallback or endpoint logic
     import(`../../logs/${logName}.json`)
       .then((logDataModule) => {
-        const data = logDataModule.default;
+        const raw = logDataModule.default;
+        const data = Array.isArray(raw) ? raw[0] : raw; // unwrap [ { objects, camera } ] shape
         setMyData(data);
         if (data.timeline && data.timeline.length > 0) {
           setMaxTime(data.timeline[data.timeline.length - 1].t + 2);
+        } else if (data.objects) {
+          // Static level scene (no dialogue timeline) - start in free-fly instead of
+          // sitting on a frozen "auto" camera waiting for cuts that will never come.
+          setCameraMode("orbit");
         }
       })
       .catch((err) => {
@@ -137,15 +201,20 @@ export default function LogViewer() {
           0.1,
           100,
         );
-        camera.position.set(0, 1.6, 4);
-        camera.lookAt(0, 1, 0);
+
+        // Respect a level-authored camera (e.g. mission_control.json's
+        // { position, lookAt }); fall back to the original hardcoded framing.
+        const initialCamPos = myData.camera?.position ?? [0, 1.6, 4];
+        const initialLookAt = myData.camera?.lookAt ?? [0, 1, 0];
+        camera.position.set(...initialCamPos);
+        camera.lookAt(...initialLookAt);
         cameraRef.current = camera;
 
         // Initialize OrbitControls (Blender style viewport rotation/pan/zoom)
         const controls = new OrbitControls(camera, renderer.domElement);
         controls.enableDamping = true;
         controls.dampingFactor = 0.05;
-        controls.target.set(0, 1, 0);
+        controls.target.set(...initialLookAt);
         controlsRef.current = controls;
 
         const { lighting } = myData.setting ?? {};
@@ -171,6 +240,20 @@ export default function LogViewer() {
           mesh.name = p.id;
           scene.add(mesh);
           participantMeshes[p.id] = mesh;
+        });
+
+        // Static level geometry, e.g. mission_control.json's "objects" array
+        (myData.objects ?? []).forEach((obj) => {
+          const mesh = createPlaceholder(obj.type, obj.size);
+          if (obj.position) mesh.position.set(...obj.position);
+          if (obj.rotation) {
+            mesh.rotation.set(
+              THREE.MathUtils.degToRad(obj.rotation[0] || 0),
+              THREE.MathUtils.degToRad(obj.rotation[1] || 0),
+              THREE.MathUtils.degToRad(obj.rotation[2] || 0),
+            );
+          }
+          scene.add(mesh);
         });
 
         targetsRef.current = scene.children.filter((obj) => obj.isMesh);
