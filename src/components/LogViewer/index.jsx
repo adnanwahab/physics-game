@@ -400,8 +400,6 @@ const KeelingCurve = () => {
 import * as THREE from "three/webgpu";
 import myData from "/Users/shelbernstein/simulation_editor/src/logs/therapy.json";
 
-// Maps abstract shot types to camera distance/height offsets.
-// Tune these once you have real avatar scale/proportions.
 const SHOT_PRESETS = {
   medium_two_shot: { distance: 4, height: 1.5, fov: 45 },
   close_up: { distance: 1.2, height: 1.6, fov: 35 },
@@ -411,6 +409,12 @@ const SHOT_PRESETS = {
 export default function LogViewer() {
   const mountRef = useRef(null);
   const [currentLine, setCurrentLine] = useState(null);
+  const [debugTarget, setDebugTarget] = useState(null);
+
+  // Refs so the debug button (outside the effect) can reach live objects
+  const sceneRef = useRef(null);
+  const cameraRef = useRef(null);
+  const targetsRef = useRef([]); // every mesh worth pointing the camera at
 
   useEffect(() => {
     const mount = mountRef.current;
@@ -422,53 +426,110 @@ export default function LogViewer() {
 
     async function init() {
       renderer = new THREE.WebGPURenderer({ antialias: true });
-
-      // IMPORTANT: WebGPURenderer must be initialized before use
       await renderer.init();
-
-      if (disposed) return; // component unmounted while initializing
+      if (disposed) return;
 
       const width = mount.clientWidth || 1;
       const height = mount.clientHeight || 1;
-
       renderer.setSize(width, height);
       renderer.setPixelRatio(window.devicePixelRatio);
       mount.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
       scene.background = new THREE.Color(0x1a1a1a);
+      sceneRef.current = scene;
 
       const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
       camera.position.set(0, 1.6, 4);
+      camera.lookAt(0, 1, 0);
+      cameraRef.current = camera;
+
+      const { lighting } = myData.setting ?? {};
+      const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+      keyLight.position.set(-3, 4, 2);
+      if (lighting?.colorTemp)
+        keyLight.color = kelvinToColor(lighting.colorTemp);
+      scene.add(keyLight);
+      scene.add(new THREE.AmbientLight(0x404040, 0.6));
+
+      // DEBUG: always-visible reference cube at origin
       const debugCube = new THREE.Mesh(
         new THREE.BoxGeometry(1, 1, 1),
-        new THREE.MeshBasicMaterial({ color: 0xff00ff }),
+        new THREE.MeshBasicMaterial({ color: 0xff0000 }),
       );
+      debugCube.name = "debug_cube";
       scene.add(debugCube);
+
+      const participantMeshes = {};
+      (myData.participants ?? []).forEach((p, i) => {
+        const geo = new THREE.CapsuleGeometry(0.3, 1.2, 4, 8);
+        const mat = new THREE.MeshStandardMaterial({
+          color: p.role === "therapist" ? 0x5577aa : 0xaa7755,
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.set(i === 0 ? -1 : 1, 0.9, 0);
+        mesh.name = p.id;
+        scene.add(mesh);
+        participantMeshes[p.id] = mesh;
+      });
+
+      // collect every named, visible object as a possible debug target
+      targetsRef.current = scene.children.filter((obj) => obj.isMesh);
+
       console.log("scene children:", scene.children.length);
-      console.log("participants loaded:", myData.participants);
-      console.log("timeline length:", myData.timeline?.length);
-      // ... lighting / participants / timeline setup unchanged ...
+      console.log(
+        "debug targets:",
+        targetsRef.current.map((o) => o.name),
+      );
+
+      const timeline = myData.timeline ?? [];
+      let startTime = performance.now();
+      let manualOverride = false; // pauses timeline-driven camera while debugging
+
+      function applyShot(entry) {
+        const preset =
+          SHOT_PRESETS[entry.camera?.shot] ?? SHOT_PRESETS.medium_two_shot;
+        const focusMesh = participantMeshes[entry.camera?.focus];
+        const focusPos = focusMesh
+          ? focusMesh.position
+          : new THREE.Vector3(0, 0.9, 0);
+        camera.fov = preset.fov;
+        camera.position.set(focusPos.x, preset.height, preset.distance);
+        camera.lookAt(focusPos.x, focusPos.y, focusPos.z);
+        camera.updateProjectionMatrix();
+      }
 
       function animate() {
-        // ... unchanged playback logic ...
-        renderer.renderAsync(scene, camera);
+        if (!manualOverride) {
+          const elapsed = (performance.now() - startTime) / 1000;
+          const active = [...timeline].reverse().find((e) => e.t <= elapsed);
+          if (active && active !== animate.lastEntry) {
+            animate.lastEntry = active;
+            applyShot(active);
+            setCurrentLine(active);
+          }
+        }
+        renderer
+          .renderAsync(scene, camera)
+          .catch((err) => console.error("render error:", err));
         frameId = requestAnimationFrame(animate);
       }
       animate();
 
-      // Use ResizeObserver instead of window resize — catches container
-      // size changes that don't come from the window itself (flex/grid reflow)
+      // expose a way for the button handler to pause auto-camera
+      init.setManualOverride = (val) => {
+        manualOverride = val;
+      };
+
       const resizeObserver = new ResizeObserver((entries) => {
         const { width, height } = entries[0].contentRect;
-        if (width === 0 || height === 0) return; // ignore transient 0-size passes
+        if (width === 0 || height === 0) return;
         camera.aspect = width / height;
         camera.updateProjectionMatrix();
         renderer.setSize(width, height);
       });
       resizeObserver.observe(mount);
 
-      // stash for cleanup
       init.cleanup = () => {
         resizeObserver.disconnect();
         cancelAnimationFrame(frameId);
@@ -487,9 +548,77 @@ export default function LogViewer() {
     };
   }, []);
 
+  function pointAtRandomObject() {
+    const camera = cameraRef.current;
+    const targets = targetsRef.current;
+    if (!camera || !targets.length) return;
+
+    const obj = targets[Math.floor(Math.random() * targets.length)];
+    const pos = obj.position;
+
+    // back the camera off a bit from the target so it's actually visible,
+    // in a random direction so you can spot occlusion/lighting issues too
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 2.5 + Math.random() * 2;
+    camera.position.set(
+      pos.x + Math.cos(angle) * distance,
+      pos.y + 1 + Math.random(),
+      pos.z + Math.sin(angle) * distance,
+    );
+    camera.lookAt(pos.x, pos.y, pos.z);
+    camera.updateProjectionMatrix();
+
+    setDebugTarget(obj.name);
+  }
+
   return (
     <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
+      <div
+        ref={mountRef}
+        style={{
+          width: "100%",
+          height: "100%",
+          minWidth: "300px",
+          minHeight: "300px",
+        }}
+      />
+
+      <button
+        onClick={pointAtRandomObject}
+        style={{
+          position: "absolute",
+          top: 16,
+          right: 16,
+          padding: "8px 14px",
+          borderRadius: 6,
+          border: "none",
+          background: "#e05555",
+          color: "white",
+          fontFamily: "sans-serif",
+          cursor: "pointer",
+        }}
+      >
+        🎯 Point at random object
+      </button>
+
+      {debugTarget && (
+        <div
+          style={{
+            position: "absolute",
+            top: 60,
+            right: 16,
+            padding: "4px 10px",
+            background: "rgba(0,0,0,0.6)",
+            color: "white",
+            fontFamily: "monospace",
+            fontSize: 12,
+            borderRadius: 4,
+          }}
+        >
+          targeting: {debugTarget}
+        </div>
+      )}
+
       {currentLine && (
         <div
           style={{
@@ -512,7 +641,6 @@ export default function LogViewer() {
 }
 
 function kelvinToColor(kelvin) {
-  // Very rough approximation, good enough for tinting a light
   const temp = kelvin / 100;
   let r, g, b;
   if (temp <= 66) {
