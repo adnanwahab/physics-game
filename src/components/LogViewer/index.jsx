@@ -2,7 +2,7 @@ import * as THREE from "three/webgpu";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js"; // Standard Three.js addon import
 import { useRef, useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-
+import { useNavigate, Outlet } from "react-router-dom";
 const SHOT_PRESETS = {
   medium_two_shot: { distance: 4, height: 1.5, fov: 45 },
   close_up: { distance: 1.2, height: 1.6, fov: 35 },
@@ -75,6 +75,7 @@ function createPlaceholder(type, size = [1, 1, 1]) {
 
 export default function LogViewer() {
   let { log_id } = useParams();
+  const navigate = useNavigate();
 
   const pathSegments = window.location.pathname.split("/");
   const logName = pathSegments[pathSegments.length - 1] || "onyxia";
@@ -388,6 +389,34 @@ export default function LogViewer() {
         display: "flex",
       }}
     >
+      <div>
+        {" "}
+        <div
+          style={{
+            width: 320,
+            background: "#1e1e1e",
+            borderLeft: "1px solid #333",
+            display: "flex",
+            flexDirection: "column",
+            fontFamily: "sans-serif",
+            color: "#e0e0e0",
+          }}
+        >
+          <div onMouseEnter={() => navigate(`/view/onyxia`)}>scene 1</div>
+          <div onMouseEnter={() => navigate(`/view/therapy`)}>scene 2</div>
+          <div onMouseEnter={() => navigate(`/view/algalon`)}>scene 3</div>
+          <div style={{ flex: 1 }}>
+            <Outlet />
+          </div>
+          <div
+            onMouseEnter={() =>
+              navigate(`/view/mission_control_initiative_space_force`)
+            }
+          >
+            scene 1
+          </div>
+        </div>
+      </div>
       {/* 3D Viewport mount area */}
       <div style={{ flex: 1, position: "relative" }}>
         <div ref={mountRef} style={{ width: "100%", height: "100%" }} />
