@@ -1,0 +1,105 @@
+{
+  "sceneId": "onyxia_raid_wipe_2006",
+  "eventType": "braindance_playback",
+  "setting": {
+    "location": "onyxias_lair_virtual_arena",
+    "timeOfDay": "00:00",
+    "lighting": {
+      "keyLight": "cavern_lava_glow_red",
+      "mood": "catastrophic_panic",
+      "colorTemp": 1800
+    },
+    "environment": {
+      "props": ["dragon_eggs_nest", "giant_dragon_boss", "whelp_swarm"],
+      "roomTone": "heavy_metal_discord_comms_screaming"
+    }
+  },
+  "participants": [
+    {
+      "id": "raid_leader_durend",
+      "role": "scroller_host",
+      "appearance": {
+        "refModel": "avatar_human_warrior_plate",
+        "outfit": "tier_2_battlegear"
+      },
+      "baselineAffect": "authoritative_stressed",
+      "posture": "frantic_keyboard_turning",
+      "biometrics": {
+        "heartRateBpm": 145,
+        "adrenalineLevel": "92%"
+      }
+    },
+    {
+      "id": "clueless_raider_01",
+      "role": "trigger_agent",
+      "appearance": {
+        "refModel": "avatar_human_rogue",
+        "outfit": "leather_miscellaneous"
+      },
+      "baselineAffect": "oblivious",
+      "posture": "running_into_egg_zone"
+    }
+  ],
+  "timeline_tracks": {
+    "visual_layer": [
+      {
+        "t": 0.0,
+        "event": "Raid start. Main tank engages Onyxia.",
+        "camera": { "shot": "third_person_overhead", "focus": "onyxia_boss" }
+      },
+      {
+        "t": 12.4,
+        "event": "Player clueless_raider_01 triggers the egg nest. Whelps begin hatching aggressively.",
+        "camera": { "shot": "wide_angle_cavern", "focus": "left_side_nest" },
+        "visualOverlay": "THERMAL_SPIKE: High density entity generation detected."
+      },
+      {
+        "t": 34.1,
+        "event": "Onyxia performs tail sweep. Raiders are physically launched into adjacent egg chambers.",
+        "camera": { "shot": "first_person_durend_point_of_view" },
+        "glitchEffect": "heavy_chromatic_abberation"
+      }
+    ],
+    "audio_layer": [
+      {
+        "t": 0.0,
+        "speaker": "raid_leader_durend",
+        "line": "Keep DPS steady. Wait for sunder armor stacks.",
+        "delivery": { "tone": "intense_controlled", "decibels": 75 },
+        "gazeTarget": "aggro_meter"
+      },
+      {
+        "t": 14.2,
+        "speaker": "raid_leader_durend",
+        "line": "MANY WHELPS! LEFT SIDE! EVEN SIDE! MANY WHELPS!",
+        "delivery": { "tone": "screaming_panic", "decibels": 110 },
+        "affectShift": {
+          "from": "authoritative_stressed",
+          "to": "unhinged_rage"
+        }
+      },
+      {
+        "t": 22.5,
+        "speaker": "raid_leader_durend",
+        "line": "MORE DOTS! MORE DOTS! STOP DOTS! HIT IT VERY HARD!",
+        "delivery": { "tone": "rhythmic_desperation", "decibels": 115 }
+      },
+      {
+        "t": 45.0,
+        "speaker": "raid_leader_durend",
+        "line": "THAT IS A FIFTY DKP MINUS FOR NESTING IN THE EGGS!",
+        "delivery": { "tone": "pure_malice", "decibels": 120 }
+      }
+    ],
+    "biometric_thermal_layer": [
+      { "t": 0.0, "cortisolLevel": "moderate", "neuralLoad": "45%" },
+      { "t": 14.2, "cortisolLevel": "CRITICAL_SPIKE", "neuralLoad": "98%" },
+      { "t": 45.0, "cortisolLevel": "SYSTEM_OVERLOAD", "neuralLoad": "100%" }
+    ]
+  },
+  "continuity": {
+    "priorSessionRef": "failed_attempt_04",
+    "relationshipState": "imminent_guild_disband",
+    "unresolvedThreads": ["who_moved_left", "dkp_debt_accounting"]
+  }
+}
