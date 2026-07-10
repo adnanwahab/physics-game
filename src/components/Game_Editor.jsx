@@ -11,7 +11,12 @@ function findLevelData(gameId) {
     const filename = path.split("/").pop().replace(".json", "");
     return filename === gameId;
   });
-  return entry ? (entry[1].default ?? entry[1]) : null;
+  if (!entry) return null;
+
+  const raw = entry[1].default ?? entry[1];
+  // Level files are arrays containing a single level object, e.g.
+  // [{ title, mode, "win-condition", objects: [...] }]
+  return Array.isArray(raw) ? raw[0] : raw;
 }
 
 function Game_Editor() {
@@ -24,6 +29,7 @@ function Game_Editor() {
   // Resolve the JSON for this game_id whenever it changes
   useEffect(() => {
     const data = findLevelData(game_id);
+    console.log(data, "data");
     if (!data) {
       setLoadError(`No level JSON found for game_id "${game_id}"`);
       setLevelData(null);
@@ -44,7 +50,8 @@ function Game_Editor() {
       0.1,
       1000,
     );
-    camera.position.z = 5;
+    camera.position.set(0, 8, 20);
+    camera.lookAt(0, 0, 0);
 
     const renderer = new THREE.WebGLRenderer({
       canvas: canvasRef.current,
@@ -57,17 +64,24 @@ function Game_Editor() {
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const meshes = [];
+    console.log("levledata", levelData);
 
     if (levelData?.objects?.length) {
       // Render each object described in the level JSON
       levelData.objects.forEach((obj) => {
-        const geometry = new THREE.BoxGeometry(...(obj.scale ?? [1, 1, 1]));
+        console.log("obj", obj);
+        // Level JSON uses "size" for box dimensions; fall back to
+        // legacy "scale" key just in case, then [1,1,1] as last resort.
+        const geometry = new THREE.BoxGeometry(
+          ...(obj.size ?? obj.scale ?? [1, 1, 1]),
+        );
         const material = new THREE.MeshBasicMaterial({
           color: obj.color ?? 0x00ff00,
           wireframe: true,
         });
         const mesh = new THREE.Mesh(geometry, material);
         mesh.position.set(...(obj.position ?? [0, 0, 0]));
+        mesh.rotation.set(...(obj.rotation ?? [0, 0, 0]));
         scene.add(mesh);
         meshes.push(mesh);
       });
@@ -83,12 +97,28 @@ function Game_Editor() {
       meshes.push(cube);
     }
 
+    // Only auto-spin meshes when we're showing the fallback cube.
+    // Real level geometry should stay static; the camera orbits instead.
+    const isFallback = !levelData?.objects?.length;
+    let angle = 0;
+
     let animationFrameId;
     const animate = () => {
-      meshes.forEach((m) => {
-        m.rotation.x += 0.01;
-        m.rotation.y += 0.01;
-      });
+      if (isFallback) {
+        meshes.forEach((m) => {
+          m.rotation.x += 0.01;
+          m.rotation.y += 0.01;
+        });
+      } else {
+        // Slowly orbit the camera around the loaded level so you can
+        // see the whole scene instead of spinning the geometry itself.
+        angle += 0.003;
+        const radius = 25;
+        camera.position.x = Math.sin(angle) * radius;
+        camera.position.z = Math.cos(angle) * radius;
+        camera.position.y = 8;
+        camera.lookAt(0, 0, 0);
+      }
       renderer.render(scene, camera);
       animationFrameId = requestAnimationFrame(animate);
     };
