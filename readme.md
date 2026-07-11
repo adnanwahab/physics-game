@@ -1,7 +1,11 @@
+# If we venture off the path, a new path is computed at keyframes.
+
+
+
 # I give up everything back to everyone
 
 ## thank you for everything
-# I'm on everyone's side
+## I'm on everyone's side
 
 - [x] merry-squirrel-91b45d.netlify.app = iframe of presentation and game
 - [ ] Complete networking so demo makes logs which we can use to understand Fantasy->reality
@@ -10,7 +14,7 @@
 
 happybearlandia augments all systems by adding specific expert information which empowers them to help everyone create each others dreams
 
-
+i want infinite shared meaning
 
 # 64 multiplayer puzzle mini games
 # level editor w/ prediction
