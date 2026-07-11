@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { useParams } from "react-router-dom";
 
+const logScenes = import.meta.glob("../logs/*.json");
+console.log("logScenes", logScenes);
+
 // Eagerly glob-import every JSON file under src/levels at build time.
 const levelModules = import.meta.glob("/src/levels/*.json", { eager: true });
 

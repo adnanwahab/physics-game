@@ -400,6 +400,7 @@ export default function LogViewer() {
             flexDirection: "column",
             fontFamily: "sans-serif",
             color: "#e0e0e0",
+            paddingTop: "100px",
           }}
         >
           <div onMouseEnter={() => navigate(`/view/onyxia`)}>scene 1</div>
