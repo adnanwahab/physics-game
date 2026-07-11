@@ -6,7 +6,6 @@ const logScenes = import.meta.glob("../logs/*.json");
 console.log("logScenes", logScenes);
 
 // Eagerly glob-import every JSON file under src/levels at build time.
-const levelModules = import.meta.glob("/src/levels/*.json", { eager: true });
 
 function findLevelData(gameId) {
   const entry = Object.entries(levelModules).find(([path]) => {

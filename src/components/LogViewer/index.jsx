@@ -422,6 +422,9 @@ export default function LogViewer() {
           >
             scene 1
           </div>
+          <div onMouseEnter={() => navigate(`/view/z__petting_cat`)}>
+            cat pet
+          </div>
         </div>
       </div>
       {/* 3D Viewport mount area */}
