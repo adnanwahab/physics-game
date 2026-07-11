@@ -1,3 +1,6 @@
+# I give up everything back to everyone
+
+## thank you for everything
 # I'm on everyone's side
 
 - [x] merry-squirrel-91b45d.netlify.app = iframe of presentation and game
