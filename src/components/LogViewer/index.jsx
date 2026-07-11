@@ -8,6 +8,7 @@ const SHOT_PRESETS = {
   close_up: { distance: 1.2, height: 1.6, fov: 35 },
   wide: { distance: 7, height: 2, fov: 50 },
 };
+const levelModules = import.meta.glob("/src/logs/*.json", { eager: true });
 
 // Mock function for missing imports in the snippet
 async function getLogs(game_id) {
@@ -403,9 +404,14 @@ export default function LogViewer() {
             paddingTop: "100px",
           }}
         >
-          <div onMouseEnter={() => navigate(`/view/onyxia`)}>scene 1</div>
+          {Object.entries(levelModules).map(([key, value]) => (
+            <div key={key} onMouseEnter={() => navigate(`/view/therapy`)}>
+              {key}
+            </div>
+          ))}
+          {/* <div onMouseEnter={() => navigate(`/view/onyxia`)}>scene 1</div>
           <div onMouseEnter={() => navigate(`/view/therapy`)}>scene 2</div>
-          <div onMouseEnter={() => navigate(`/view/algalon`)}>scene 3</div>
+          <div onMouseEnter={() => navigate(`/view/algalon`)}>scene 3</div>*/}
           <div style={{ flex: 1 }}>
             <Outlet />
           </div>
