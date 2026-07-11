@@ -1,4 +1,23 @@
-
+Crucial Conversations: Tools for Talking When Stakes Are High"
+Failure to Communicate: Why We Misunderstand What We Hear, Read, and See
+"Just Listen: Discover the Secret to Getting Through to Absolutely Anyone"
+"Digital Body Language: How to Build Trust and Connection, No Matter the Distance"
+https://www.audible.com/pd/Nonviolent-Communication-Audiobook/B00TJJNSQG?srsltid=AfmBOoqJINTTnuRNNIBMKJuVV7AHOKMh7gaxJEJku8ljZPvcgRtfsfAX
+Murderville
+The League
+Wild 'N Out
+Whose Line Is It Anyway?
+Curb Your Enthusiasm
+https://gafferongames.com/
+The Rock, Paper, Shotgun "Designers Notebook" & Gamasutra (Game Developer) Archives
+Dan Luu (danluu.com)
+Farnam Street (fs.blog) by Shane Parrish
+Nat Eliason (nateliason.com)
+gottman.com/blog
+markmanson.net
+https://www.lesswrong.com/hpmor
+AFLL: Real-time Load Stabilization for MMO Game Servers
+Based on Circular Causality Learning
 d3 protovis paper
 
 https://arxiv.org/pdf/1706.03762

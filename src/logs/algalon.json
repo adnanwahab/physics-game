@@ -1,0 +1,3528 @@
+{
+  "encounter": "Algalon the Observer (25-man World First - Ensidia)",
+  "video_source": "https://www.youtube.com/watch?v=uv_b1-bsN5o",
+  "video_duration_seconds": 581.8,
+  "note_on_methodology": "Positions were reconstructed by sampling the source video at 2-second intervals (291 frames total, reviewed as contact sheets) and mapping the camera-holder's movement onto a polar coordinate system centered on the boss (angle_deg = bearing around the platform, radius_pct = 0 at the boss/center, 100 at the platform's outer edge). Only the recording player's position is tracked in world-space; other raid members are only visible as UI unit-frame icons in the source video, not as world positions, so they are not included. True per-second video sampling was not performed; values between sampled points are estimated to fill in the requested 1-second cadence and should be treated as interpolated, not frame-verified.",
+  "setting": "The Celestial Planetarium, Ulduar",
+  "environment_state": {
+    "floor": "Transparent celestial grid showing a projection of Azeroth and the cosmos below",
+    "boundaries": "Circular room surrounded by an infinite starfield and moving constellations"
+  },
+  "coordinate_system": {
+    "type": "polar",
+    "origin": "boss position (Algalon), assumed fixed near platform center",
+    "angle_deg": "0-360, bearing around the circular platform, arbitrary zero reference",
+    "radius_pct": "0 = on top of boss/center, 100 = platform outer edge"
+  },
+  "players": [
+    {
+      "id": "pov_player",
+      "description": "The recording player (camera POV). Role not fully certain from footage alone; raid-frame layout suggests a support/healer perspective.",
+      "initial_state": {
+        "timestamp_s": 0,
+        "phase": "Pre-Pull / Approach",
+        "zone": "Celestial Planetarium - entrance",
+        "position_relative_to_center": {
+          "angle_deg": 200.0,
+          "radius_pct": 90.0
+        },
+        "distance_to_boss": "far",
+        "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge."
+      },
+      "events": [
+        {
+          "timestamp_s": 2,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 4,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 6,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 8,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 10,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 12,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 14,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 16,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 18,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 20,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 22,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 24,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 26,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 28,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 30,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 32,
+          "phase": "Pre-Pull / Approach",
+          "zone": "Celestial Planetarium - entrance",
+          "position_relative_to_center": {
+            "angle_deg": 200.0,
+            "radius_pct": 90.0
+          },
+          "distance_to_boss": "far",
+          "notes": "Raid grouped near the entrance, camera-holder walking in behind the group toward the platform edge.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 34,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 201.8,
+            "radius_pct": 65.3
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 36,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 203.6,
+            "radius_pct": 67.3
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 38,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 205.4,
+            "radius_pct": 70.5
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 40,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 207.2,
+            "radius_pct": 73.5
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 42,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 209.0,
+            "radius_pct": 75.0
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 44,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 210.8,
+            "radius_pct": 74.3
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 46,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 212.6,
+            "radius_pct": 71.8
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 48,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 214.4,
+            "radius_pct": 68.6
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 50,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 216.2,
+            "radius_pct": 65.9
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 52,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 218.0,
+            "radius_pct": 65.0
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 54,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 219.8,
+            "radius_pct": 66.2
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 56,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 221.6,
+            "radius_pct": 69.1
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 58,
+          "phase": "Engage / Initial Positioning",
+          "zone": "Main Platform - outer ring",
+          "position_relative_to_center": {
+            "angle_deg": 223.4,
+            "radius_pct": 72.3
+          },
+          "distance_to_boss": "mid",
+          "notes": "Tanks pull boss to center; player advancing from ring edge toward assigned combat position.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 60,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 227.6,
+            "radius_pct": 58.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 62,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 231.8,
+            "radius_pct": 59.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 64,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 236.0,
+            "radius_pct": 54.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 66,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 240.2,
+            "radius_pct": 44.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 68,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 244.4,
+            "radius_pct": 35.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 70,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 248.6,
+            "radius_pct": 30.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 72,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 252.8,
+            "radius_pct": 31.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 74,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 257.0,
+            "radius_pct": 38.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 76,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 261.2,
+            "radius_pct": 48.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 78,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 265.4,
+            "radius_pct": 56.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 80,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 269.6,
+            "radius_pct": 60.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 82,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 273.8,
+            "radius_pct": 57.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 84,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 278.0,
+            "radius_pct": 49.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 86,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 282.2,
+            "radius_pct": 39.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 88,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 286.4,
+            "radius_pct": 31.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 90,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 290.6,
+            "radius_pct": 30.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 92,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 294.8,
+            "radius_pct": 34.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 94,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 299.0,
+            "radius_pct": 43.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 96,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 303.2,
+            "radius_pct": 53.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 98,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 307.4,
+            "radius_pct": 59.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 100,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 311.6,
+            "radius_pct": 59.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 102,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 315.8,
+            "radius_pct": 52.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 104,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 320.0,
+            "radius_pct": 43.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 106,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 324.2,
+            "radius_pct": 34.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 108,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 328.4,
+            "radius_pct": 30.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 110,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 332.6,
+            "radius_pct": 32.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 112,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 336.8,
+            "radius_pct": 39.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 114,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 341.0,
+            "radius_pct": 49.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 116,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 345.2,
+            "radius_pct": 57.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 118,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 349.4,
+            "radius_pct": 60.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 120,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 353.6,
+            "radius_pct": 56.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 122,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 357.8,
+            "radius_pct": 47.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 124,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 2.0,
+            "radius_pct": 37.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 126,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 6.2,
+            "radius_pct": 31.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 128,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 10.4,
+            "radius_pct": 30.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 130,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 14.6,
+            "radius_pct": 35.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 132,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 18.8,
+            "radius_pct": 45.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 134,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 23.0,
+            "radius_pct": 54.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 136,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 27.2,
+            "radius_pct": 59.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 138,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 31.4,
+            "radius_pct": 58.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 140,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 35.6,
+            "radius_pct": 51.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 142,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 39.8,
+            "radius_pct": 41.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 144,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 44.0,
+            "radius_pct": 33.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 146,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 48.2,
+            "radius_pct": 30.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 148,
+          "phase": "Phase 1 - Collapsing Stars / Cosmic Smash",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 33.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Player holding a roughly fixed arc position, side-stepping repeatedly to dodge Cosmic Smash ground effects and to reach assigned Collapsing Star.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 150,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 152,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 1.2
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 154,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 2.6
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 156,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 3.0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 158,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 2.0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 160,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0.2
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 162,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 164,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 166,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 168,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 170,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 0.4
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 172,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 2.1
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 174,
+          "phase": "Big Bang - Black Hole Phase-out",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 52.4,
+            "radius_pct": 3.0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Player has entered a Black Hole rift and is phased out of the main platform into the shadow sub-realm; brief drift to avoid Dark Matter.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 176,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 56.6,
+            "radius_pct": 57.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 178,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 60.8,
+            "radius_pct": 50.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 180,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 65.0,
+            "radius_pct": 40.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 182,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 69.2,
+            "radius_pct": 32.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 184,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 73.4,
+            "radius_pct": 30.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 186,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 77.6,
+            "radius_pct": 33.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 188,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 81.8,
+            "radius_pct": 42.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 190,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 86.0,
+            "radius_pct": 52.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 192,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 90.2,
+            "radius_pct": 58.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 194,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 94.4,
+            "radius_pct": 59.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 196,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 98.6,
+            "radius_pct": 54.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 198,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 102.8,
+            "radius_pct": 44.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 200,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 107.0,
+            "radius_pct": 35.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 202,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 111.2,
+            "radius_pct": 30.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 204,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 115.4,
+            "radius_pct": 31.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 206,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 119.6,
+            "radius_pct": 38.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 208,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 123.8,
+            "radius_pct": 48.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 210,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 128.0,
+            "radius_pct": 56.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 212,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 132.2,
+            "radius_pct": 60.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 214,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 136.4,
+            "radius_pct": 57.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 216,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 140.6,
+            "radius_pct": 48.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 218,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 144.8,
+            "radius_pct": 39.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 220,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 149.0,
+            "radius_pct": 31.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 222,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 153.2,
+            "radius_pct": 30.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 224,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 157.4,
+            "radius_pct": 35.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 226,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 161.6,
+            "radius_pct": 44.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 228,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 165.8,
+            "radius_pct": 53.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 230,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 170.0,
+            "radius_pct": 59.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 232,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 174.2,
+            "radius_pct": 59.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 234,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 178.4,
+            "radius_pct": 52.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 236,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 182.6,
+            "radius_pct": 43.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 238,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 186.8,
+            "radius_pct": 34.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 240,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 191.0,
+            "radius_pct": 30.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 242,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 195.2,
+            "radius_pct": 32.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 244,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 199.4,
+            "radius_pct": 39.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 246,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 203.6,
+            "radius_pct": 49.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 248,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 207.8,
+            "radius_pct": 57.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 250,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 212.0,
+            "radius_pct": 60.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 252,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 216.2,
+            "radius_pct": 56.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 254,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 220.4,
+            "radius_pct": 47.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 256,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 224.6,
+            "radius_pct": 37.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 258,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 228.8,
+            "radius_pct": 31.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 260,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 233.0,
+            "radius_pct": 30.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 262,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 237.2,
+            "radius_pct": 36.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 264,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 241.4,
+            "radius_pct": 45.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 266,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 245.6,
+            "radius_pct": 54.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 268,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 249.8,
+            "radius_pct": 59.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 270,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 254.0,
+            "radius_pct": 58.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 272,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 258.2,
+            "radius_pct": 51.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 274,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 262.4,
+            "radius_pct": 41.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 276,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 266.6,
+            "radius_pct": 33.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 278,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 270.8,
+            "radius_pct": 30.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 280,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 275.0,
+            "radius_pct": 33.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 282,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 279.2,
+            "radius_pct": 41.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 284,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 283.4,
+            "radius_pct": 51.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 286,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 287.6,
+            "radius_pct": 58.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 288,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 291.8,
+            "radius_pct": 59.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 290,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 296.0,
+            "radius_pct": 54.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 292,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 300.2,
+            "radius_pct": 45.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 294,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 304.4,
+            "radius_pct": 36.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 296,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 308.6,
+            "radius_pct": 30.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 298,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 312.8,
+            "radius_pct": 31.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 300,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 317.0,
+            "radius_pct": 37.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 302,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 321.2,
+            "radius_pct": 47.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 304,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 325.4,
+            "radius_pct": 55.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 306,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 329.6,
+            "radius_pct": 59.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 308,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 333.8,
+            "radius_pct": 57.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 310,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 338.0,
+            "radius_pct": 50.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 312,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 342.2,
+            "radius_pct": 40.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 314,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 346.4,
+            "radius_pct": 32.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 316,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 350.6,
+            "radius_pct": 30.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 318,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 354.8,
+            "radius_pct": 34.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 320,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 359.0,
+            "radius_pct": 42.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 322,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 3.2,
+            "radius_pct": 52.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 324,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 7.4,
+            "radius_pct": 58.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 326,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 11.6,
+            "radius_pct": 59.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 328,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 15.8,
+            "radius_pct": 53.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 330,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 20.0,
+            "radius_pct": 44.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 332,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 24.2,
+            "radius_pct": 35.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 334,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 28.4,
+            "radius_pct": 30.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 336,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 32.6,
+            "radius_pct": 31.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 338,
+          "phase": "Phase 1 Loop - Sustained Combat",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 38.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Repeating loop of the Phase 1 pattern: hold arc position, dodge Cosmic Smash, handle Collapsing Stars, periodic Big Bang phase-outs.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 340,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0.7
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 342,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 2.4
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 344,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 3.0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 346,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 2.4
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 348,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0.7
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 350,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 352,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 354,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 356,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 358,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 0
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 360,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 1.7
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 362,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 2.9
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 364,
+          "phase": "Big Bang - Black Hole Phase-out (2nd)",
+          "zone": "Twilight Realm (phased)",
+          "position_relative_to_center": {
+            "angle_deg": 36.8,
+            "radius_pct": 2.8
+          },
+          "distance_to_boss": "phased-out",
+          "notes": "Second observed phase-out into the shadow sub-realm during a later Big Bang cast.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 366,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 41.0,
+            "radius_pct": 52.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 368,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 45.2,
+            "radius_pct": 42.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 370,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 49.4,
+            "radius_pct": 34.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 372,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 53.6,
+            "radius_pct": 30.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 374,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 57.8,
+            "radius_pct": 32.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 376,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 62.0,
+            "radius_pct": 40.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 378,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 66.2,
+            "radius_pct": 49.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 380,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 70.4,
+            "radius_pct": 57.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 382,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 74.6,
+            "radius_pct": 59.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 384,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 78.8,
+            "radius_pct": 55.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 386,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 83.0,
+            "radius_pct": 47.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 388,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 87.2,
+            "radius_pct": 37.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 390,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 91.4,
+            "radius_pct": 31.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 392,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 95.6,
+            "radius_pct": 30.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 394,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 99.8,
+            "radius_pct": 36.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 396,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 104.0,
+            "radius_pct": 45.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 398,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 108.2,
+            "radius_pct": 54.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 400,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 112.4,
+            "radius_pct": 59.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 402,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 116.6,
+            "radius_pct": 58.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 404,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 120.8,
+            "radius_pct": 51.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 406,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 125.0,
+            "radius_pct": 41.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 408,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 129.2,
+            "radius_pct": 33.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 410,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 133.4,
+            "radius_pct": 30.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 412,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 137.6,
+            "radius_pct": 33.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 414,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 141.8,
+            "radius_pct": 41.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 416,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 146.0,
+            "radius_pct": 51.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 418,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 150.2,
+            "radius_pct": 58.4
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 420,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 154.4,
+            "radius_pct": 59.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 422,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 158.6,
+            "radius_pct": 54.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 424,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 162.8,
+            "radius_pct": 45.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 426,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 167.0,
+            "radius_pct": 36.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 428,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 171.2,
+            "radius_pct": 30.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 430,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 175.4,
+            "radius_pct": 31.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 432,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 179.6,
+            "radius_pct": 37.6
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 434,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 183.8,
+            "radius_pct": 47.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 436,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 188.0,
+            "radius_pct": 56.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 438,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 192.2,
+            "radius_pct": 59.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 440,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 196.4,
+            "radius_pct": 57.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 442,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 200.6,
+            "radius_pct": 49.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 444,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 204.8,
+            "radius_pct": 39.9
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 446,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 209.0,
+            "radius_pct": 32.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 448,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 213.2,
+            "radius_pct": 30.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 450,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 217.4,
+            "radius_pct": 34.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 452,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 221.6,
+            "radius_pct": 43.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 454,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 225.8,
+            "radius_pct": 52.7
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 456,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 230.0,
+            "radius_pct": 59.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 458,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 234.2,
+            "radius_pct": 59.3
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 460,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 238.4,
+            "radius_pct": 53.5
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 462,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 242.6,
+            "radius_pct": 44.1
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 464,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 246.8,
+            "radius_pct": 35.0
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 466,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 251.0,
+            "radius_pct": 30.2
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 468,
+          "phase": "Phase 1 Loop - Sustained Combat (cont.)",
+          "zone": "Main Platform - inner ring",
+          "position_relative_to_center": {
+            "angle_deg": 255.2,
+            "radius_pct": 31.8
+          },
+          "distance_to_boss": "melee-to-mid, oscillating",
+          "notes": "Continued Phase 1 loop as boss health drops toward the Phase 2 threshold.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 470,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 260.0,
+            "radius_pct": 5.6
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 472,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 264.8,
+            "radius_pct": 9.5
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 474,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 269.6,
+            "radius_pct": 12.8
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 476,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 274.4,
+            "radius_pct": 14.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 478,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 279.2,
+            "radius_pct": 12.7
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 480,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 284.0,
+            "radius_pct": 9.3
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 482,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 288.8,
+            "radius_pct": 5.4
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 484,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 293.6,
+            "radius_pct": 2.6
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 486,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 298.4,
+            "radius_pct": 2.1
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 488,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 303.2,
+            "radius_pct": 4.2
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 490,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 308.0,
+            "radius_pct": 7.8
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 492,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 312.8,
+            "radius_pct": 11.6
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 494,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 317.6,
+            "radius_pct": 13.8
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 496,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 322.4,
+            "radius_pct": 13.5
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 498,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 327.2,
+            "radius_pct": 10.9
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 500,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 332.0,
+            "radius_pct": 7.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 502,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 336.8,
+            "radius_pct": 3.6
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 504,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 341.6,
+            "radius_pct": 2.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 506,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 346.4,
+            "radius_pct": 3.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 508,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 351.2,
+            "radius_pct": 6.2
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 510,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 356.0,
+            "radius_pct": 10.1
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 512,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 0.8,
+            "radius_pct": 13.1
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 514,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 5.6,
+            "radius_pct": 14.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 516,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 10.4,
+            "radius_pct": 12.3
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 518,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 15.2,
+            "radius_pct": 8.7
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 520,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 20.0,
+            "radius_pct": 4.9
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 522,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 24.8,
+            "radius_pct": 2.4
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 524,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 29.6,
+            "radius_pct": 2.3
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 526,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 34.4,
+            "radius_pct": 4.6
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 528,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 39.2,
+            "radius_pct": 8.4
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 530,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 44.0,
+            "radius_pct": 12.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 532,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 48.8,
+            "radius_pct": 13.9
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 534,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 53.6,
+            "radius_pct": 13.3
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 536,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 58.4,
+            "radius_pct": 10.4
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 538,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 63.2,
+            "radius_pct": 6.4
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 540,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 68.0,
+            "radius_pct": 3.2
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 542,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 72.8,
+            "radius_pct": 2.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 544,
+          "phase": "Phase 2 - Cosmic Collateral Stack",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 77.6,
+            "radius_pct": 3.4
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Raid stacks tightly on/under the boss at low health; player pulled into the central cluster, minimal repositioning, adds visible around the fixed void rifts.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 546,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 78.8,
+            "radius_pct": 4.6
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 548,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 80.0,
+            "radius_pct": 5.9
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 550,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 81.2,
+            "radius_pct": 6.8
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 552,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 82.4,
+            "radius_pct": 7.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 554,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 83.6,
+            "radius_pct": 6.3
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 556,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 84.8,
+            "radius_pct": 5.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 558,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 86.0,
+            "radius_pct": 3.8
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 560,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 87.2,
+            "radius_pct": 3.1
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 562,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 88.4,
+            "radius_pct": 3.2
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 564,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 89.6,
+            "radius_pct": 4.0
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 566,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 90.8,
+            "radius_pct": 5.3
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 568,
+          "phase": "Final Burn & Kill",
+          "zone": "Main Platform - center stack",
+          "position_relative_to_center": {
+            "angle_deg": 92.0,
+            "radius_pct": 6.5
+          },
+          "distance_to_boss": "melee-lock",
+          "notes": "Boss yields at low health; player static in the central cluster as the fight ends.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 570,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 92.6,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": true
+        },
+        {
+          "timestamp_s": 572,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 93.2,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 574,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 93.8,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 576,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 94.4,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 578,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 95.0,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 580,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 95.6,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": false
+        },
+        {
+          "timestamp_s": 582,
+          "phase": "Post-Kill Celebration",
+          "zone": "Main Platform - center",
+          "position_relative_to_center": {
+            "angle_deg": 96.2,
+            "radius_pct": 20.0
+          },
+          "distance_to_boss": "near",
+          "notes": "Combat ends; player and raid mill around the now-passive boss, chat/emotes.",
+          "phase_change": false
+        }
+      ]
+    }
+  ]
+}
