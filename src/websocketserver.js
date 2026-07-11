@@ -1,11 +1,71 @@
 import { appendFileSync } from "node:fs"; // 1. Import the append function
+import { watch } from "fs"; // Bun supports native fs watch, or Bun.watch
+import { readdir, stat } from "fs/promises";
+import { join } from "path";
 
 const LOG_FILE_PATH = "./player_joins.log";
 
 const server = Bun.serve({
   port: 8000,
-  fetch(req, server) {
+  async fetch(req, server) {
     const url = new URL(req.url);
+
+    // --- NEW: Handle OBJ Upload Route ---
+    if (req.method === "POST" && url.pathname === "/api/upload-obj") {
+      try {
+        const formData = await req.formData();
+        const file = formData.get("file");
+        const gameId = formData.get("game_id") ?? "None provided";
+
+        if (!file || !(file instanceof File)) {
+          return new Response(JSON.stringify({ error: "No file uploaded." }), {
+            status: 400,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+
+        if (!file.name.endsWith(".obj")) {
+          return new Response(
+            JSON.stringify({ error: "Only .obj files are allowed." }),
+            {
+              status: 400,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
+        }
+
+        // --- CONSOLE LOGGING ---
+        console.log("====================================");
+        console.log("📥 NEW OBJ FILE UPLOADED VIA BUN!");
+        console.log(`Filename:        ${file.name}`);
+        console.log(`Size:            ${(file.size / 1024).toFixed(2)} KB`);
+        console.log(`Game ID Context: ${gameId}`);
+        console.log("====================================");
+
+        // Save file straight to the project root directory
+        const destinationPath = `./${file.name}`;
+        await Bun.write(destinationPath, file);
+
+        return new Response(
+          JSON.stringify({
+            message: "File uploaded and saved to root successfully!",
+            filename: file.name,
+          }),
+          { status: 200, headers: { "Content-Type": "application/json" } },
+        );
+      } catch (err) {
+        console.error("Upload route error:", err);
+        return new Response(
+          JSON.stringify({ error: "Internal server error" }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+    }
+
+    // --- Existing WebSocket Handling ---
     const room = url.searchParams.get("room") ?? "lobby";
     const playerId = crypto.randomUUID();
 
@@ -66,10 +126,6 @@ const server = Bun.serve({
 
 console.log(`ws://localhost:${server.port}`);
 console.log("folder watcher online");
-
-import { watch } from "fs"; // Bun supports native fs watch, or Bun.watch
-import { readdir, stat } from "fs/promises";
-import { join } from "path";
 
 const WATCH_DIR = "/Users/shelbernstein/presentations"; // Change this to your folder path
 
@@ -134,25 +190,18 @@ async function startWatching() {
   // Bun optimizes standard fs.watch under the hood
   watch(WATCH_DIR, async (eventType, filename) => {
     if (!filename || eventType !== "rename") return;
-    // 'rename' triggers when files are added, deleted, or renamed
 
     const filePath = join(WATCH_DIR, filename);
 
     try {
       const fileStat = await stat(filePath);
 
-      // Check if it's a file and it's actually NEW (not just modified or deleted)
       if (fileStat.isFile() && !fileRegistry.has(filename)) {
         const newSize = fileStat.size;
-
-        // 1. Run the function to generate the JSON comparison
         analyzeNewFile(filename, newSize);
-
-        // 2. Add the new file to our registry so we can compare future files against it
         fileRegistry.set(filename, newSize);
       }
     } catch (error) {
-      // If stat fails, the file was likely deleted or moved out, so we clean it up
       if (fileRegistry.has(filename)) {
         fileRegistry.delete(filename);
         console.log(`❌ Removed ${filename} from registry.`);
