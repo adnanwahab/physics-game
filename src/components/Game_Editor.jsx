@@ -8,7 +8,7 @@ console.log("logScenes", logScenes);
 // Eagerly glob-import every JSON file under src/levels at build time.
 
 function findLevelData(gameId) {
-  const entry = Object.entries(levelModules).find(([path]) => {
+  const entry = Object.entries(logScenes).find(([path]) => {
     const filename = path.split("/").pop().replace(".json", "");
     return filename === gameId;
   });

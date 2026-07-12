@@ -37,6 +37,7 @@
     "@tweenjs/tween.js": "^25.0.0",
     "d3": "^7.9.0",
     "deck.gl": "^9.3.4",
+    "esbuild": "^0.28.1",
     "gsap": "^3.12.5",
     "lil-gui": "^0.19.2",
     "mapbox-gl": "^3.25.0",
@@ -47,6 +48,7 @@
     "react-dom": "^19.2.3",
     "react-map-gl": "^8.1.1",
     "react-router-dom": "^7.11.0",
+    "rollup": "^4.62.2",
     "three": "^0.172.0",
     "underscore": "^1.13.7",
     "vite-plugin-markdown": "^2.2.0"

@@ -244,26 +244,26 @@ export default function LogViewer() {
           participantMeshes[p.id] = mesh;
         });
         //console.log("mydata", myData.timeline, Array.isArray(myData.timeline));
-        myData.timeline
-          .forEach(function (event) {
-            if (event.cat_moves) {
-            }
-          })(
-            // Static level geometry, e.g. mission_control.json's "objects" array
-            myData.objects ?? [],
-          )
-          .forEach((obj) => {
-            const mesh = createPlaceholder(obj.type, obj.size);
-            if (obj.position) mesh.position.set(...obj.position);
-            if (obj.rotation) {
-              mesh.rotation.set(
-                THREE.MathUtils.degToRad(obj.rotation[0] || 0),
-                THREE.MathUtils.degToRad(obj.rotation[1] || 0),
-                THREE.MathUtils.degToRad(obj.rotation[2] || 0),
-              );
-            }
-            scene.add(mesh);
-          });
+        // myData.timeline
+        //   .forEach(function (event) {
+        //     if (event.cat_moves) {
+        //     }
+        //   })(
+        //     // Static level geometry, e.g. mission_control.json's "objects" array
+        //     myData.objects ?? [],
+        //   )
+        //   .forEach((obj) => {
+        //     const mesh = createPlaceholder(obj.type, obj.size);
+        //     if (obj.position) mesh.position.set(...obj.position);
+        //     if (obj.rotation) {
+        //       mesh.rotation.set(
+        //         THREE.MathUtils.degToRad(obj.rotation[0] || 0),
+        //         THREE.MathUtils.degToRad(obj.rotation[1] || 0),
+        //         THREE.MathUtils.degToRad(obj.rotation[2] || 0),
+        //       );
+        //     }
+        //     scene.add(mesh);
+        //   });
 
         targetsRef.current = scene.children.filter((obj) => obj.isMesh);
 

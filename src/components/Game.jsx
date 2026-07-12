@@ -69,6 +69,7 @@ export default function Game() {
     websocket_system.send(JSON.stringify({ type: "join", room: "lobby" }));
   websocket_system.onmessage = (e) => {
     console.log("onmessage", e);
+    //find the penguin with this ID and then edit their state
     penguinList.push({
       id: Math.random() * 100,
       x: 0,
@@ -286,15 +287,15 @@ export default function Game() {
         );
         gameStateRef.current.charBody = charBody;
 
-        loadLevelCuboids(game_id, Jolt, bodyInterface, scene, dynamicObjects)
-          .then(({ cheesePosition, effectUpdaters, effectDisposers }) => {
-            Object.assign(gameStateRef.current, {
-              cheesePosition,
-              effectUpdaters,
-              effectDisposers,
-            });
-          })
-          .catch((e) => console.error("Error loading level cuboids:", e));
+        // loadLevelCuboids(game_id, Jolt, bodyInterface, scene, dynamicObjects)
+        //   .then(({ cheesePosition, effectUpdaters, effectDisposers }) => {
+        //     Object.assign(gameStateRef.current, {
+        //       cheesePosition,
+        //       effectUpdaters,
+        //       effectDisposers,
+        //     });
+        //   })
+        //   .catch((e) => console.error("Error loading level cuboids:", e));
 
         handleUserInput(inputStateRef.current);
 

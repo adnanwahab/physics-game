@@ -1,0 +1,82 @@
+[
+  {
+    "mode": "3d Platformer",
+    "win-condition": {
+      "type": "proximity",
+      "target": "player",
+      "distance": 1.0
+    },
+    "camera": {
+      "rotation": [0, 180, 0]
+    },
+    "objects": [
+      {
+        "type": "penguin_0",
+        "position": [7.5, 0, 0],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 90.0, 0]
+      },
+      {
+        "type": "penguin_1",
+        "position": [7.498, 0, 0.157],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 91.2, 0]
+      },
+      {
+        "type": "penguin_2",
+        "position": [7.492, 0, 0.314],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 92.4, 0]
+      },
+      {
+        "type": "penguin_3",
+        "position": [7.482, 0, 0.471],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 93.6, 0]
+      },
+      {
+        "type": "penguin_4",
+        "position": [7.467, 0, 0.627],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 94.8, 0]
+      },
+      {
+        "type": "penguin_5",
+        "position": [7.449, 0, 0.784],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 96.0, 0]
+      },
+
+      {
+        "type": "penguin_295",
+        "position": [7.449, 0, -0.784],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 84.0, 0]
+      },
+      {
+        "type": "penguin_296",
+        "position": [7.467, 0, -0.627],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 85.2, 0]
+      },
+      {
+        "type": "penguin_297",
+        "position": [7.482, 0, -0.471],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 86.4, 0]
+      },
+      {
+        "type": "penguin_298",
+        "position": [7.492, 0, -0.314],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 87.6, 0]
+      },
+      {
+        "type": "penguin_299",
+        "position": [7.498, 0, -0.157],
+        "size": [0.5, 0.8, 0.5],
+        "rotation": [0, 88.8, 0]
+      }
+    ]
+  }
+]

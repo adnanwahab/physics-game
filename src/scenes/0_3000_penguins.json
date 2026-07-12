@@ -1,0 +1,47 @@
+{
+  "sceneId": "penguin_march_001",
+  "eventType": "multiplayer_game_lobby",
+  "setting": {
+    "location": "arctic_tundra_square",
+    "timeOfDay": "12:00",
+    "lighting": {
+      "keyLight": "harsh_sun_overhead",
+      "mood": "energetic",
+      "colorTemp": 5500
+    },
+    "environment": {
+      "props": ["ice_bergs", "snow_drifts", "fish_barrels"],
+      "roomTone": "wind_and_squawking"
+    }
+  },
+  "participants": [
+    {
+      "groupClass": "penguin_swarm",
+      "count": 300,
+      "appearance": {
+        "refModel": "avatar_penguin_basic",
+        "outfit": "default_tuxedo"
+      },
+      "baselineAffect": "playful",
+      "behaviorState": "walking_in_circles"
+    }
+  ],
+  "timeline": [
+    {
+      "t": 0.0,
+      "globalEvent": "march_commenced",
+      "camera": { "shot": "extreme_wide_birds_eye", "focus": "center_of_mass" },
+      "audioCue": "collective_squawk"
+    },
+    {
+      "t": 10.5,
+      "globalEvent": "circle_radius_expanding",
+      "camera": { "shot": "drone_orbit", "focus": "swarm_perimeter" }
+    }
+  ],
+  "continuity": {
+    "priorSessionRef": "lobby_instance_42",
+    "relationshipState": "chaotic_neutral",
+    "unresolvedThreads": ["server_latency_checks", "fish_spawn_timer"]
+  }
+}

@@ -57,5 +57,6 @@
     "priorSessionRef": "therapy_session_002",
     "relationshipState": "trust_building",
     "unresolvedThreads": ["sleep_issues", "work_stress"]
-  }
+  },
+  "timeline": []
 }
