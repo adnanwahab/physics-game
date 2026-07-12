@@ -1,36 +1,51 @@
-
-[{
+[
+  {
     "mode": "hub",
-    "win-condition": { 
-        "type": "proximity",
-        "target": "player",
-        "distance": 1.0
+    "win-condition": {
+      "type": "proximity",
+      "target": "player",
+      "distance": 1.0
     },
     "camera": {
-        "rotation": [0, 180, 0]
+      "rotation": [0, 180, 0]
     },
     "objects": [
-        {
-            "type": "desk",
-            "position": [0, 0.375, 3],
-            "size": [2, 0.75, 1],
-            "rotation": [0, 0, 0]
-        },
-        {
-            "type": "sensor",
-            "position": [0.85, 0.375, 2.15],
-            "rotation": [0, 0, 0]
-        },
-        {
-            "type": "sensor",
-            "position": [-0.85, 0.375, 2.15],
-            "rotation": [0, 0, 0]
-        },
-        {
-            "type": "sensor",
-            "position": [0, 0.375, 3.85],
-            "rotation": [0, 0, 0]
-        }
-   
+      {
+        "type": "desk",
+        "position": [0, 0.375, 3],
+        "size": [2, 0.75, 1],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "sensor",
+        "position": [0.85, 0.375, 2.15],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "sensor",
+        "position": [-0.85, 0.375, 2.15],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "sensor",
+        "position": [0, 0.375, 3.85],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "type": "cat",
+        "position": [-0.6, 0.75, 2.7],
+        "rotation": [0, 45, 0]
+      },
+      {
+        "type": "cat",
+        "position": [0.6, 0.75, 2.7],
+        "rotation": [0, -45, 0]
+      },
+      {
+        "type": "cat",
+        "position": [0.0, 0.75, 2.6],
+        "rotation": [0, 0, 0]
+      }
     ]
-}]
+  }
+]

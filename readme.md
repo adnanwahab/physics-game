@@ -61,3 +61,55 @@ before saving scene_data
 https://www.edx.org/xseries/stanfordonline-introduction-to-sql-databases
 
 all game_data available via inspector / api / map
+
+make cool stuff = spell_quest adventure
+    - cooperate + discuss puzzles with friends
+    - this generates data-gold
+    - observe datums -> used to make more sim scene + proceses which bring it closer to
+    reality's behavior
+
+
+make playing sim-game add circuits we need
+to get to the optimal state predicted from data we have now
+
+use those state+predictions to predict exactly what data is needed so we know how to make sim
+
+so we can plan intiatives in sim and watch them
+execute in realtime
+ -- we can make arcologies for closer and closer to free
+
+more data improves thinking because it allows
+collection of neurons to make better predictions abut the simulations it makes
+
+the more simulations we make the more data we have to update thinking exactly as wanted
+to get circuits we need
+
+circuit =
+  - repeatable path through which electrons flow
+  - network of boolean logic gates
+  - path with same start and end
+
+You can find feedback loops everywhere—from biology and engineering to economics and psychology
+
+feedbackloop is what updates the process
+ - this is the exact mechanic which updates reality "in ways we want"
+ - by observing this, we get data
+
+reality = list of feedbackloops
+sim = list of feedback loops
+
+need checks + balances to only make wanted circuits -> most direct path to optimal
+
+
+
+
+
+
+
+
+  - function which compute output
+thought from one nueron to another
+or electrons traveling from one axon to another
+
+
+add CDN to game that allows

@@ -17,11 +17,11 @@ import createRemotePenguinMesh from "../utils/createRemotePenguinMesh.js";
 import { colorFromId } from "../utils/colorFromId.js";
 import GameVideoSeekBar from "../components/GameVideoSeekBar.jsx";
 import ObservationsPanel from "../components/ObservationsPanel.jsx";
-
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 const SERVER = "http://localhost:3000";
 
 import { createPenguin } from "../utils/createPenguin.js";
-
+import catModelUrl from "../../public/cat.obj?url";
 // Define SlotButton here to avoid inline function in JSX
 function SlotButton({ slot }) {
   return (
@@ -173,6 +173,40 @@ export default function Game() {
       );
       scene.add(penguin);
     }
+
+    const loader = new OBJLoader();
+
+    loader.load(
+      "/cat.obj",
+      (obj) => {
+        scene.add(obj);
+      },
+      (xhr) => {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+      (error) => {
+        console.error("An error happened", error);
+      },
+    );
+    console.log("url");
+    loader.load(
+      catModelUrl,
+      (obj) => {
+        scene.add(obj);
+      },
+      (xhr) => {
+        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+      },
+      (error) => {
+        console.error("An error happened", error);
+      },
+    );
+
+    // scene.add(cat1);
+
+    // scene.add(cat2);
+
+    // scene.add(cat3);
 
     // ws.addEventListener('message', (event) => {
     //   const data = JSON.parse(event.data);

@@ -385,7 +385,31 @@ export default function LogViewer() {
       </div>
     );
   }
+  const handleTakeScreenshot = () => {
+    // 1. Get the canvas element created by Three.js inside the mount div
+    const canvas = mountRef.current?.querySelector("canvas");
+    if (!canvas) {
+      console.error("Canvas element not found.");
+      return;
+    }
 
+    try {
+      // 2. Convert the current frame on the canvas to a Data URL
+      const imgData = canvas.toDataURL("image/png");
+
+      // 3. Create a temporary anchor element to trigger the download
+      const link = document.createElement("a");
+
+      // Naming convention using the current route's log name and timestamp
+      link.download = `logview_${logName || "capture"}_${currentTime.toFixed(2)}s.png`;
+      link.href = imgData;
+
+      // 4. Force programmatic click to execute save dialog
+      link.click();
+    } catch (error) {
+      console.error("Failed to capture screenshot:", error);
+    }
+  };
   return (
     <div
       style={{
@@ -411,6 +435,23 @@ export default function LogViewer() {
             paddingTop: "100px",
           }}
         >
+          <input type="range" />
+          <button
+            onClick={handleTakeScreenshot}
+            style={{
+              background: "#4a6fa5",
+              color: "white",
+              border: "none",
+              padding: "6px 12px",
+              borderRadius: 4,
+              cursor: "pointer",
+              margin: "4px 0",
+            }}
+          >
+            📸 Export Screenshot
+          </button>
+          <button>associate</button>
+
           {Object.entries(levelModules).map(([key, value]) => (
             <div key={key} onMouseEnter={() => navigate(`/view/therapy`)}>
               {key}
