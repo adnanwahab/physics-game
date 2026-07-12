@@ -324,64 +324,75 @@
         "t": 0,
         "speaker": "System",
         "line": "A cat trots in, full of confidence.",
-        "camera": {
-          "shot": "wide",
-          "focus": "cat"
-        }
+        "camera": { "shot": "wide", "focus": "cat" }
       },
       {
         "t": 5,
         "speaker": "System",
         "line": "…thud.",
-        "camera": {
-          "shot": "close_up",
-          "focus": "cat"
-        }
+        "camera": { "shot": "close_up", "focus": "cat" }
       },
       {
         "t": 7,
         "speaker": "System",
         "line": "cat.exe has stopped responding",
-        "camera": {
-          "shot": "close_up",
-          "focus": "cat"
-        }
+        "camera": { "shot": "close_up", "focus": "cat" }
       },
       {
         "t": 9,
         "speaker": "Friend",
         "line": "You okay, buddy?",
-        "camera": {
-          "shot": "medium_two_shot",
-          "focus": "person"
-        }
+        "camera": { "shot": "medium_two_shot", "focus": "person" }
       },
       {
         "t": 12,
         "speaker": "System",
         "line": "Pets. All is forgiven.",
-        "camera": {
-          "shot": "close_up",
-          "focus": "cat"
-        }
+        "camera": { "shot": "close_up", "focus": "cat" }
+      },
+      {
+        "t": 15,
+        "speaker": "System",
+        "line": "Snack break. Priorities.",
+        "participant": "cat",
+        "move_position": [-6.25, 0.9, 3.2],
+        "camera": { "shot": "wide", "focus": "cat" }
       },
       {
         "t": 16,
         "speaker": "System",
         "line": "Off to explore the room together.",
-        "camera": {
-          "shot": "wide",
-          "focus": "person"
-        }
+        "camera": { "shot": "wide", "focus": "person" }
       },
       {
         "t": 20,
         "speaker": "System",
         "line": "Best friends. That was the whole story.",
-        "camera": {
-          "shot": "wide",
-          "focus": "cat"
-        }
+        "camera": { "shot": "wide", "focus": "cat" }
+      },
+      {
+        "t": 30,
+        "speaker": "System",
+        "line": "Back to the rug for a stretch.",
+        "participant": "cat",
+        "move_position": [0, 0.9, 0.6],
+        "camera": { "shot": "wide", "focus": "cat" }
+      },
+      {
+        "t": 45,
+        "speaker": "System",
+        "line": "Couch inspection. Everything checks out.",
+        "participant": "cat",
+        "move_position": [3.4, 0.9, 2.6],
+        "camera": { "shot": "medium_two_shot", "focus": "cat" }
+      },
+      {
+        "t": 60,
+        "speaker": "System",
+        "line": "One last patrol past the bookshelf.",
+        "participant": "cat",
+        "move_position": [-4.6, 0.9, -4.3],
+        "camera": { "shot": "wide", "focus": "cat" }
       }
     ]
   }
