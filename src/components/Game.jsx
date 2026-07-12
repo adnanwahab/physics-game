@@ -16,7 +16,7 @@ import { setupSelectionSystem } from "../utils/setupSelectionSystem.js";
 import createRemotePenguinMesh from "../utils/createRemotePenguinMesh.js";
 import { colorFromId } from "../utils/colorFromId.js";
 import GameVideoSeekBar from "../components/GameVideoSeekBar.jsx";
-import AnnotationsPanel from "../components/AnnotationsPanel.jsx";
+import ObservationsPanel from "../components/ObservationsPanel.jsx";
 
 const SERVER = "http://localhost:3000";
 
@@ -80,8 +80,6 @@ export default function Game() {
   websocket_system.onerror = (e) => console.error(e);
 
   let penguinList = [];
-  window.false_idol = penguinList;
-
   const { game_id } = useParams();
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
@@ -89,9 +87,10 @@ export default function Game() {
   const [showWinMessage, setShowWinMessage] = useState(false);
   const [pointCloudCount, setPointCloudCount] = useState(0);
   const [canvas2Visible, setCanvas2Visible] = useState(true);
-  const [annotationsPanelVisible, setAnnotationsPanelVisible] = useState(false);
+  const [observationsPanelVisible, setObservationsPanelVisible] =
+    useState(false);
   const [playerCount, setPlayerCount] = useState(0);
-  const [annotations, setAnnotations] = useState([
+  const [observations, setObservations] = useState([
     {
       title: "Golden Cheese",
       text: "Find and touch the golden cheese block to complete the level!",
@@ -195,8 +194,6 @@ export default function Game() {
     // ws.onclose = () => console.log("closed");
     // ws.onerror = (e) => console.error(e);
 
-    window.scene = scene;
-
     setupLighting(scene);
     const clock = new Clock();
     const onExampleUpdateRef = { fn: null };
@@ -213,7 +210,7 @@ export default function Game() {
     let isMounted = true;
     const isMountedRef = { current: true };
     const penguinMeshes = {};
-    window.penguins = penguinMeshes;
+
     let myPlayerId = null;
 
     function getServerUrl() {
@@ -366,7 +363,7 @@ export default function Game() {
     };
   }, [game_id]);
 
-  const handleAddAnnotation = useCallback(() => {
+  const handleAddObservation = useCallback(() => {
     const note = prompt("What would you like to note?");
     if (note?.trim()) {
       const pastelColors = [
@@ -378,7 +375,7 @@ export default function Game() {
         "#bdb2ff",
         "#f7a8b8",
       ];
-      setAnnotations((prev) => [
+      setObservations((prev) => [
         ...prev,
         {
           title: "Custom Note",
@@ -387,7 +384,7 @@ export default function Game() {
           color: pastelColors[Math.floor(Math.random() * pastelColors.length)],
         },
       ]);
-      setAnnotationsPanelVisible(true);
+      setObservationsPanelVisible(true);
     }
   }, []);
 
@@ -416,12 +413,12 @@ export default function Game() {
           >
             {canvas2Visible ? "Hide" : "Show"} Canvas2
           </button>
-          <GameVideoSeekBar annotations={annotations} />
+          <GameVideoSeekBar observations={observations} />
           <button
-            className={`ml-0 md:ml-2 ${annotationsPanelVisible ? "bg-[#ffd700] text-[#111]" : "bg-[#353535] text-[#ffd700]"} border-none rounded-lg px-4 py-2 font-bold text-sm md:text-base transition-colors`}
-            onClick={() => setAnnotationsPanelVisible((x) => !x)}
+            className={`ml-0 md:ml-2 ${observationsPanelVisible ? "bg-[#ffd700] text-[#111]" : "bg-[#353535] text-[#ffd700]"} border-none rounded-lg px-4 py-2 font-bold text-sm md:text-base transition-colors`}
+            onClick={() => setObservationsPanelVisible((x) => !x)}
           >
-            {annotationsPanelVisible ? "Hide" : "Show"} Annotations
+            {observationsPanelVisible ? "Hide" : "Show"} Observations
           </button>
         </div>
       </div>
@@ -447,7 +444,7 @@ export default function Game() {
           <canvas
             ref={canvasRef2}
             onClick={() => {}}
-            onMouseDown={handleAddAnnotation}
+            onMouseDown={handleAddObservation}
             id="canvas2"
             className="
                             absolute bg-black/50 border-4 md:border-6 border-dashed border-white
@@ -464,10 +461,10 @@ export default function Game() {
         )}
 
         <Dashboard penguinList={penguinList}></Dashboard>
-        <AnnotationsPanel
-          annotations={annotations}
-          visible={annotationsPanelVisible}
-          onClose={() => setAnnotationsPanelVisible(false)}
+        <ObservationsPanel
+          observations={observations}
+          visible={observationsPanelVisible}
+          onClose={() => setObservationssPanelVisible(false)}
         />
       </div>
       <div className="mt-6">
