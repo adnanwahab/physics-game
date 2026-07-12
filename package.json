@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "run_specs": "bun test specs/",
     "dev": "vite",
     "start": "bun run server.ts",
     "server_dev": "bun run --watch server.ts",
