@@ -48,51 +48,189 @@ export default class ViewerEngine {
   }
 
   async init(canvasRef, dalaranObj, myData) {
+    //debugger;
+    //
     this.renderer = new THREE.WebGPURenderer({ canvas: canvasRef });
-    //await renderer.init();
-    console.log(myData, "hi");
-    if (this.disposed || !canvasRef) return;
+    console.log("noContext", this.renderer.domElement);
+    await this.renderer.init();
+    const scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x0b0e14);
 
-    const width = 500;
-    const height = 500;
-    //this.renderer.setSize(width, height);
-    this.renderer.setPixelRatio(window.devicePixelRatio);
+    const camera = new THREE.PerspectiveCamera(
+      50,
+      window.innerWidth / window.innerHeight,
+      0.1,
+      500,
+    );
+    camera.position.set(0, 1.6, 6);
+    camera.lookAt(0, 0, 0);
 
-    this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x1a1a1a);
+    // Lights
+    const key = new THREE.DirectionalLight(0xffffff, 2.2);
+    key.position.set(3, 5, 4);
+    scene.add(key);
 
-    const initialCamPos = this.myData.camera?.position ?? [0, 1.6, 4];
-    const initialLookAt = this.myData.camera?.lookAt ?? [0, 1, 0];
+    const fill = new THREE.DirectionalLight(0x6688ff, 0.5);
+    fill.position.set(-4, 2, -3);
+    scene.add(fill);
 
-    this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
-    this.camera.position.set(...initialCamPos);
-    this.camera.lookAt(...initialLookAt);
+    scene.add(new THREE.AmbientLight(0xffffff, 0.15));
 
-    // this.controls = new OrbitControls(this.camera, canvasRef);
-    // this.controls.enableDamping = true;
-    // this.controls.dampingFactor = 0.05;
-    // this.controls.target.set(...initialLookAt);
+    // Ground grid for spatial reference
+    const grid = new THREE.GridHelper(20, 20, 0x2a3446, 0x1a2130);
+    grid.position.y = -1;
+    scene.add(grid);
 
-    // Setup Lighting
-    const { lighting } = this.myData.setting ?? {};
-    const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
-    keyLight.position.set(-3, 4, 2);
-    if (lighting?.colorTemp) keyLight.color = kelvinToColor(lighting.colorTemp);
-    this.scene.add(keyLight);
-    this.scene.add(new THREE.AmbientLight(0x404040, 0.6));
+    // Cube 1 — spinning
+    const spinningCube = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 1.4, 1.4),
+      new THREE.MeshStandardMaterial({
+        color: 0x6fe3b0,
+        roughness: 0.35,
+        metalness: 0.2,
+      }),
+    );
+    spinningCube.position.set(-1.5, 0, 0);
+    scene.add(spinningCube);
 
-    // Floor Grid
-    const gridHelper = new THREE.GridHelper(10, 10, 0x444444, 0x222222);
-    this.scene.add(gridHelper);
+    // Cube 2 — static
+    const staticCube = new THREE.Mesh(
+      new THREE.BoxGeometry(1.4, 1.4, 1.4),
+      new THREE.MeshStandardMaterial({
+        color: 0x5a7bd8,
+        roughness: 0.55,
+        metalness: 0.1,
+      }),
+    );
+    staticCube.position.set(1.5, 0, 0);
+    scene.add(staticCube);
 
-    const cubeGeo = new THREE.BoxGeometry(1, 1, 1);
-    const cubeMat = new THREE.MeshStandardMaterial({ color: 0x44aa88 });
-    this.cube = new THREE.Mesh(cubeGeo, cubeMat);
-    this.cube.position.set(0, 0.5, 0);
-    this.scene.add(this.cube);
-    this.renderer.init();
+    // Load ./dalaran.obj
+    //const objLoader = new OBJLoader();
+    // objLoader.load(
+    //     "./dalaran.obj",
+    //     (obj) => {
+    //         // OBJs usually arrive without PBR materials — give every mesh one
+    //         obj.traverse((child) => {
+    //             if (child.isMesh) {
+    //                 child.material = new THREE.MeshStandardMaterial({
+    //                     color: 0xc9c2b4,
+    //                     roughness: 0.85,
+    //                     metalness: 0.0,
+    //                 });
+    //             }
+    //         });
 
-    this.renderer.renderAsync(this.scene, this.camera);
+    //         // Normalize: center it and scale to a sane size for this scene
+    //         const box = new THREE.Box3().setFromObject(obj);
+    //         const size = box.getSize(new THREE.Vector3());
+    //         const center = box.getCenter(new THREE.Vector3());
+
+    //         const maxDim = Math.max(size.x, size.y, size.z);
+    //         const scale = 8 / maxDim; // fit largest dimension into ~8 units
+    //         obj.scale.setScalar(scale);
+
+    //         // Recenter so it sits on the grid, behind the cubes
+    //         obj.position.sub(center.multiplyScalar(scale));
+    //         obj.position.y += (size.y * scale) / 2 - 1; // rest on grid at y = -1
+    //         obj.position.z = -6;
+
+    //         scene.add(obj);
+    //     },
+    //     (xhr) => {
+    //         if (xhr.total) {
+    //             badge.textContent = `loading obj ${Math.round((xhr.loaded / xhr.total) * 100)}%`;
+    //         }
+    //     },
+    //     (err) => {
+    //         console.error("Failed to load dalaran.obj:", err);
+    //         badge.textContent = "obj load failed (see console)";
+    //     },
+    // );
+
+    // Resize handling
+    window.addEventListener("resize", () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      this.renderer.setSize(window.innerWidth, window.innerHeight);
+    });
+
+    // Animate
+    //await this.renderer.init();
+    // badge.textContent = renderer.backend.isWebGPUBackend
+    //   ? "WebGPU"
+    //   : "WebGL2 (fallback)";
+
+    this.renderer.setAnimationLoop((time) => {
+      const t = time * 0.001;
+      spinningCube.rotation.x = t * 0.8;
+      spinningCube.rotation.y = t * 1.2;
+      this.renderer.render(scene, camera);
+    });
+    // console.log(myData, "hi");
+    // if (this.disposed || !canvasRef) return;
+
+    // const width = 500;
+    // const height = 500;
+    // //this.renderer.setSize(width, height);
+    // this.renderer.setPixelRatio(window.devicePixelRatio);
+
+    // this.scene = new THREE.Scene();
+    // this.scene.background = new THREE.Color(0x1a1a1a);
+
+    // const initialCamPos = this.myData.camera?.position ?? [0, 1.6, 4];
+    // const initialLookAt = this.myData.camera?.lookAt ?? [0, 1, 0];
+
+    // this.camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 100);
+    // this.camera.position.set(...initialCamPos);
+    // this.camera.lookAt(...initialLookAt);
+
+    // // this.controls = new OrbitControls(this.camera, canvasRef);
+    // // this.controls.enableDamping = true;
+    // // this.controls.dampingFactor = 0.05;
+    // // this.controls.target.set(...initialLookAt);
+
+    // // Setup Lighting
+    // const { lighting } = this.myData.setting ?? {};
+    // const keyLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    // keyLight.position.set(-3, 4, 2);
+    // if (lighting?.colorTemp) keyLight.color = kelvinToColor(lighting.colorTemp);
+    // this.scene.add(keyLight);
+    // this.scene.add(new THREE.AmbientLight(0x404040, 0.6));
+
+    // // Floor Grid
+    // const gridHelper = new THREE.GridHelper(10, 10, 0x444444, 0x222222);
+    // this.scene.add(gridHelper);
+
+    // const cubeGeo = new THREE.BoxGeometry(1, 1, 1);
+    // const cubeMat = new THREE.MeshStandardMaterial({ color: 0x44aa88 });
+    // this.cube = new THREE.Mesh(cubeGeo, cubeMat);
+    // this.cube.position.set(0, 0.5, 0);
+    // this.scene.add(this.cube);
+    //this.renderer.renderAsync();
+    // await this.renderer.init(); // wait for backend
+    // this.renderer.setAnimationLoop(() => {
+    //   const delta = this.clock.getDelta();
+    //   const elapsed = this.clock.getElapsedTime();
+
+    //   // 1. Advance simulation / playback
+    //   if (this.playing) {
+    //     this.playbackTime += delta * this.playbackSpeed;
+    //     this.applyFrame(this.playbackTime); // sync object transforms from your log/scene data
+    //   }
+
+    //   // 2. Per-frame updates
+    //   this.controls?.update(delta); // OrbitControls etc. (needed if damping is on)
+    //   this.mixer?.update(delta); // if you use AnimationMixer
+    //   this.updateHelpers?.(); // gizmos, bounding boxes, debug overlays
+
+    //   // 3. Draw
+    //   this.renderer.render(this.scene, this.camera);
+    // });
+
+    // this.renderer.init();
+
+    // this.renderer.renderAsync(this.scene, this.camera);
 
     // (
     //     // Setup Participants

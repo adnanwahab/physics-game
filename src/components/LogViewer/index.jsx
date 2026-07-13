@@ -25,7 +25,7 @@ export default function LogViewe({ dalaran, myData }) {
       return console.log("no mydata/mountref!");
 
     const engine = new ViewerEngine(
-      canvasRef,
+      canvasRef.current,
       dalaran,
       {
         myData,
