@@ -113,3 +113,7 @@ or electrons traveling from one axon to another
 
 
 add CDN to game that allows
+
+playing game installs specific circuits
+which create infinite shared meaning
+https://sqlime.org/

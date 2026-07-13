@@ -7,6 +7,10 @@ const LOG_FILE_PATH = "./player_joins.log";
 
 const server = Bun.serve({
   port: 8000,
+  routes: {
+    "/dalaran.obj": new Response(Bun.file("./public/dalaran.obj")),
+    // ...your other routes
+  },
   async fetch(req, server) {
     const url = new URL(req.url);
 

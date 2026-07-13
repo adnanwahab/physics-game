@@ -1,0 +1,21 @@
+{
+  "name": "dalaran",
+  "description": "Cozy dusk living room: a cat trots in, faceplants, and is consoled by a friend. Geometry mapped to createPlaceholder types.",
+  "setting": {
+    "lighting": {
+      "colorTemp": 3400
+    }
+  },
+  "camera": {
+    "position": [7, 4.5, 9.5],
+    "lookAt": [0, 1, 0]
+  },
+  "objects": [
+    {
+      "type": "city",
+      "path": "/dalaran.obj",
+      "size": [16, 0.1, 12],
+      "position": [0, -0.05, 0]
+    }
+  ]
+}
