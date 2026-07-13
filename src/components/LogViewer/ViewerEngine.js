@@ -27,8 +27,7 @@ function kelvinToColor(kelvin) {
 }
 
 export default class ViewerEngine {
-  constructor(mountElement, options = {}) {
-    this.mount = mountElement;
+  constructor(canvasRef, dalaranObj, options = {}) {
     this.myData = options.myData;
     this.maxTime = options.maxTime || 10;
     this.onTimeUpdate = options.onTimeUpdate || (() => {});
@@ -45,21 +44,19 @@ export default class ViewerEngine {
     this.disposed = false;
     this.lastTimeStamp = performance.now();
     this.lastEntry = null;
-
-    this.init();
+    this.init(canvasRef, dalaranObj, options.myData);
   }
 
-  async init() {
-    this.renderer = new THREE.WebGPURenderer({ antialias: true });
-    await this.renderer.init();
+  async init(canvasRef, dalaranObj, myData) {
+    this.renderer = new THREE.WebGPURenderer({ canvas: canvasRef });
+    //await renderer.init();
+    console.log(myData, "hi");
+    if (this.disposed || !canvasRef) return;
 
-    if (this.disposed) return;
-
-    const width = this.mount.clientWidth || 1;
-    const height = this.mount.clientHeight || 1;
-    this.renderer.setSize(width, height);
+    const width = 500;
+    const height = 500;
+    //this.renderer.setSize(width, height);
     this.renderer.setPixelRatio(window.devicePixelRatio);
-    this.mount.appendChild(this.renderer.domElement);
 
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0x1a1a1a);
@@ -71,10 +68,10 @@ export default class ViewerEngine {
     this.camera.position.set(...initialCamPos);
     this.camera.lookAt(...initialLookAt);
 
-    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls.enableDamping = true;
-    this.controls.dampingFactor = 0.05;
-    this.controls.target.set(...initialLookAt);
+    // this.controls = new OrbitControls(this.camera, canvasRef);
+    // this.controls.enableDamping = true;
+    // this.controls.dampingFactor = 0.05;
+    // this.controls.target.set(...initialLookAt);
 
     // Setup Lighting
     const { lighting } = this.myData.setting ?? {};
@@ -88,31 +85,43 @@ export default class ViewerEngine {
     const gridHelper = new THREE.GridHelper(10, 10, 0x444444, 0x222222);
     this.scene.add(gridHelper);
 
-    // Setup Participants
-    (this.myData.participants ?? []).forEach((p, i) => {
-      const geo = new THREE.CapsuleGeometry(0.3, 1.2, 4, 8);
-      const mat = new THREE.MeshStandardMaterial({
-        color: p.role === "therapist" ? 0x5577aa : 0xaa7755,
-      });
-      const mesh = new THREE.Mesh(geo, mat);
-      mesh.position.set(i === 0 ? -1 : 1, 0.9, 0);
-      mesh.name = p.id;
-      this.scene.add(mesh);
-      this.participantMeshes[p.id] = mesh;
-    });
+    const cubeGeo = new THREE.BoxGeometry(1, 1, 1);
+    const cubeMat = new THREE.MeshStandardMaterial({ color: 0x44aa88 });
+    this.cube = new THREE.Mesh(cubeGeo, cubeMat);
+    this.cube.position.set(0, 0.5, 0);
+    this.scene.add(this.cube);
+    this.renderer.init();
+
+    this.renderer.render(this.scene, this.camera);
+
+    // (
+    //     // Setup Participants
+    //     this.myData.participants ?? [],
+    //   )
+    //   .forEach((p, i) => {
+    //     const geo = new THREE.CapsuleGeometry(0.3, 1.2, 4, 8);
+    //     const mat = new THREE.MeshStandardMaterial({
+    //       color: p.role === "therapist" ? 0x5577aa : 0xaa7755,
+    //     });
+    //     const mesh = new THREE.Mesh(geo, mat);
+    //     mesh.position.set(i === 0 ? -1 : 1, 0.9, 0);
+    //     mesh.name = p.id;
+    //     this.scene.add(mesh);
+    //     this.participantMeshes[p.id] = mesh;
+    //   });
 
     // Handle Resize
-    this.resizeObserver = new ResizeObserver((entries) => {
-      const { width, height } = entries[0].contentRect;
-      if (width === 0 || height === 0) return;
-      this.camera.aspect = width / height;
-      this.camera.updateProjectionMatrix();
-      this.renderer.setSize(width, height);
-    });
-    this.resizeObserver.observe(this.mount);
+    // this.resizeObserver = new ResizeObserver((entries) => {
+    //   const { width, height } = entries[0].contentRect;
+    //   if (width === 0 || height === 0) return;
+    //   this.camera.aspect = width / height;
+    //   this.camera.updateProjectionMatrix();
+    //   this.renderer.setSize(width, height);
+    // });
+    // this.resizeObserver.observe(this.mount);
 
     // Start Loop
-    this.animate();
+    //this.animate();
   }
 
   updateState(newState) {
@@ -208,10 +217,7 @@ export default class ViewerEngine {
     cancelAnimationFrame(this.frameId);
     if (this.controls) this.controls.dispose();
     if (this.renderer) {
-      this.renderer.dispose();
-      if (this.renderer.domElement.parentNode === this.mount) {
-        this.mount.removeChild(this.renderer.domElement);
-      }
+      //this.renderer.dispose();
     }
   }
 }

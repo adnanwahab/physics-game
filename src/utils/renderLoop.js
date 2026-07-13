@@ -83,17 +83,6 @@ export function renderLoop(
       );
     }
   });
-  if (window.false_idol) {
-    //debugger;
-    //debugger;
-    //otherPenguins.forEach((otherPenguin) => {});
-    //console.log("otherPenguins", otherPenguins.length);
-    // obj.position.set(
-    //   body.GetPosition().GetX(),
-    //   body.GetPosition().GetY(),
-    //   body.GetPosition().GetZ(),
-    // );
-  }
 
   sharedState.time += deltaTime;
 

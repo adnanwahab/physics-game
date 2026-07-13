@@ -117,3 +117,6 @@ add CDN to game that allows
 playing game installs specific circuits
 which create infinite shared meaning
 https://sqlime.org/
+
+made this editor / tools so that we could make games i want.
+now everyone can make them

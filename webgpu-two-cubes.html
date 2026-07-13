@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>WebGPU — Two Cubes + OBJ</title>
+        <style>
+            html,
+            body {
+                margin: 0;
+                height: 100%;
+                overflow: hidden;
+                background: #0b0e14;
+                font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+            }
+            #app {
+                position: fixed;
+                inset: 0;
+            }
+            #badge {
+                position: fixed;
+                top: 12px;
+                left: 12px;
+                padding: 6px 10px;
+                font-size: 12px;
+                letter-spacing: 0.06em;
+                color: #9fb4c7;
+                background: rgba(15, 20, 30, 0.7);
+                border: 1px solid rgba(159, 180, 199, 0.25);
+                border-radius: 6px;
+                user-select: none;
+            }
+            #badge b {
+                color: #6fe3b0;
+                font-weight: 600;
+            }
+        </style>
+        <script type="importmap">
+            {
+                "imports": {
+                    "three": "https://threejs.org/build/three.webgpu.js",
+                    "three/webgpu": "https://threejs.org/build/three.webgpu.js",
+                    "three/tsl": "https://threejs.org/build/three.tsl.js",
+                    "three/addons/": "https://threejs.org/examples/jsm/"
+                }
+            }
+        </script>
+    </head>
+    <body>
+        <div id="app"></div>
+        <div id="badge">backend: <b>initializing…</b></div>
+
+        <script type="module">
+            import * as THREE from "three";
+            import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
+
+            const container = document.getElementById("app");
+            const badge = document.querySelector("#badge b");
+
+            // Renderer — WebGPU with automatic WebGL2 fallback
+            const renderer = new THREE.WebGPURenderer({ antialias: true });
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            container.appendChild(renderer.domElement);
+
+            // Scene + camera
+            const scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x0b0e14);
+
+            const camera = new THREE.PerspectiveCamera(
+                50,
+                window.innerWidth / window.innerHeight,
+                0.1,
+                500,
+            );
+            camera.position.set(0, 1.6, 6);
+            camera.lookAt(0, 0, 0);
+
+            // Lights
+            const key = new THREE.DirectionalLight(0xffffff, 2.2);
+            key.position.set(3, 5, 4);
+            scene.add(key);
+
+            const fill = new THREE.DirectionalLight(0x6688ff, 0.5);
+            fill.position.set(-4, 2, -3);
+            scene.add(fill);
+
+            scene.add(new THREE.AmbientLight(0xffffff, 0.15));
+
+            // Ground grid for spatial reference
+            const grid = new THREE.GridHelper(20, 20, 0x2a3446, 0x1a2130);
+            grid.position.y = -1;
+            scene.add(grid);
+
+            // Cube 1 — spinning
+            const spinningCube = new THREE.Mesh(
+                new THREE.BoxGeometry(1.4, 1.4, 1.4),
+                new THREE.MeshStandardMaterial({
+                    color: 0x6fe3b0,
+                    roughness: 0.35,
+                    metalness: 0.2,
+                }),
+            );
+            spinningCube.position.set(-1.5, 0, 0);
+            scene.add(spinningCube);
+
+            // Cube 2 — static
+            const staticCube = new THREE.Mesh(
+                new THREE.BoxGeometry(1.4, 1.4, 1.4),
+                new THREE.MeshStandardMaterial({
+                    color: 0x5a7bd8,
+                    roughness: 0.55,
+                    metalness: 0.1,
+                }),
+            );
+            staticCube.position.set(1.5, 0, 0);
+            scene.add(staticCube);
+
+            // Load ./dalaran.obj
+            const objLoader = new OBJLoader();
+            objLoader.load(
+                "./dalaran.obj",
+                (obj) => {
+                    // OBJs usually arrive without PBR materials — give every mesh one
+                    obj.traverse((child) => {
+                        if (child.isMesh) {
+                            child.material = new THREE.MeshStandardMaterial({
+                                color: 0xc9c2b4,
+                                roughness: 0.85,
+                                metalness: 0.0,
+                            });
+                        }
+                    });
+
+                    // Normalize: center it and scale to a sane size for this scene
+                    const box = new THREE.Box3().setFromObject(obj);
+                    const size = box.getSize(new THREE.Vector3());
+                    const center = box.getCenter(new THREE.Vector3());
+
+                    const maxDim = Math.max(size.x, size.y, size.z);
+                    const scale = 8 / maxDim; // fit largest dimension into ~8 units
+                    obj.scale.setScalar(scale);
+
+                    // Recenter so it sits on the grid, behind the cubes
+                    obj.position.sub(center.multiplyScalar(scale));
+                    obj.position.y += (size.y * scale) / 2 - 1; // rest on grid at y = -1
+                    obj.position.z = -6;
+
+                    scene.add(obj);
+                },
+                (xhr) => {
+                    if (xhr.total) {
+                        badge.textContent = `loading obj ${Math.round((xhr.loaded / xhr.total) * 100)}%`;
+                    }
+                },
+                (err) => {
+                    console.error("Failed to load dalaran.obj:", err);
+                    badge.textContent = "obj load failed (see console)";
+                },
+            );
+
+            // Resize handling
+            window.addEventListener("resize", () => {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            });
+
+            // Animate
+            await renderer.init();
+            badge.textContent = renderer.backend.isWebGPUBackend
+                ? "WebGPU"
+                : "WebGL2 (fallback)";
+
+            renderer.setAnimationLoop((time) => {
+                const t = time * 0.001;
+                spinningCube.rotation.x = t * 0.8;
+                spinningCube.rotation.y = t * 1.2;
+                renderer.render(scene, camera);
+            });
+        </script>
+    </body>
+</html>

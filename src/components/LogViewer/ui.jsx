@@ -84,28 +84,6 @@ export default function UI() {
         setMaxTime(5);
       });
   }, [logName]);
-
-  // 2. Initialize 3D Engine Instance
-  useEffect(() => {
-    if (!myData || !mountRef.current) return;
-
-    const engine = new ViewerEngine(mountRef.current, {
-      myData,
-      maxTime,
-      onTimeUpdate: (time, activeLine) => {
-        setCurrentTime(time);
-        setCurrentLine(activeLine || null);
-      },
-    });
-
-    engineRef.current = engine;
-
-    return () => {
-      engine.dispose();
-      engineRef.current = null;
-    };
-  }, [myData, maxTime]);
-
   // 3. Sync State mutations downwards from React state panels down to engine ticking metrics
   useEffect(() => {
     if (engineRef.current) {

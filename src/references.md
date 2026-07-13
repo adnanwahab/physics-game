@@ -1,3 +1,4 @@
+http://lighttable.com/
 Crucial Conversations: Tools for Talking When Stakes Are High"
 Failure to Communicate: Why We Misunderstand What We Hear, Read, and See
 "Just Listen: Discover the Secret to Getting Through to Absolutely Anyone"
