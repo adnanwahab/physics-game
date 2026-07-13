@@ -14,7 +14,7 @@ import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 const objLoader = new OBJLoader();
 
 import UI from "./ui";
-import LogViewerRenderer from "./logViewerRenderer";
+import LogViewerRenderer from "./ViewerEngine";
 
 export default function LogViewer() {
   return (
