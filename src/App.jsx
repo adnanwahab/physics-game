@@ -2680,7 +2680,7 @@ function App() {
       </nav>
 
       {/* Main Content Area */}
-      <main className="pt-96" style={{ "padding-top": "250px" }}>
+      <main className="pt-96" style={{ paddingTop: "250px" }}>
         <Routes>
           <Route path="/" element={<LevelList />} />
           <Route path="/level-list" element={<LevelList />} />

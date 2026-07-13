@@ -1,3 +1,8 @@
+https://ludumdare.com/
+Orchestrating inenvitability of success by Kapil Gupta
+foundation's edge
+dune
+
 http://lighttable.com/
 Crucial Conversations: Tools for Talking When Stakes Are High"
 Failure to Communicate: Why We Misunderstand What We Hear, Read, and See

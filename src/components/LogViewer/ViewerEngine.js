@@ -92,7 +92,7 @@ export default class ViewerEngine {
     this.scene.add(this.cube);
     this.renderer.init();
 
-    this.renderer.render(this.scene, this.camera);
+    this.renderer.renderAsync(this.scene, this.camera);
 
     // (
     //     // Setup Participants
@@ -110,17 +110,6 @@ export default class ViewerEngine {
     //     this.participantMeshes[p.id] = mesh;
     //   });
 
-    // Handle Resize
-    // this.resizeObserver = new ResizeObserver((entries) => {
-    //   const { width, height } = entries[0].contentRect;
-    //   if (width === 0 || height === 0) return;
-    //   this.camera.aspect = width / height;
-    //   this.camera.updateProjectionMatrix();
-    //   this.renderer.setSize(width, height);
-    // });
-    // this.resizeObserver.observe(this.mount);
-
-    // Start Loop
     //this.animate();
   }
 
