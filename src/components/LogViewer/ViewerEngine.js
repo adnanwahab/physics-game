@@ -63,7 +63,7 @@ export default class ViewerEngine {
       0.1,
       500,
     );
-    camera.position.set(0, 1.6, 6);
+    camera.position.set(0, 1.6, -15);
     camera.lookAt(0, 0, 0);
 
     // Lights
@@ -325,6 +325,8 @@ export default class ViewerEngine {
     //   "location_context": "Autumn Shore Dr",
     //   "status": "Eating a burrito, heading to HEB for White Castle"
     // },
+
+    //TODO make dynamic -- obviously correct
 
     objects.forEach((object) => {
       const staticCube = new THREE.Mesh(
