@@ -51,7 +51,7 @@ export default function LogViewer({}) {
           // setCurrentLine(activeLine || null);
         },
       },
-      [levelModules, maxTime],
+      [levelModules, maxTime, log_id],
     );
 
     engineRef.current = engine;

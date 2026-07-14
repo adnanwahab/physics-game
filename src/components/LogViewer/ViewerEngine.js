@@ -337,7 +337,7 @@ export default class ViewerEngine {
           metalness: 0.1,
         }),
       );
-      console.log("object", object);
+      //console.log("object", object);
       staticCube.position.set(
         object.position[0],
         object.position[1],
