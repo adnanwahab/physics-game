@@ -174,11 +174,37 @@ export default function UI() {
           </button>
           <button>associate</button>
 
-          {Object.entries(levelModules).map(([key]) => (
-            <div key={key} onMouseEnter={() => navigate(`/view/therapy`)}>
-              {key}
-            </div>
-          ))}
+          {Object.entries(levelModules).map(([key]) => {
+            const name = key.split("/").pop().replace(".json", "");
+            const isSelected = (log_id || logName) === name;
+            return (
+              <div
+                key={key}
+                onClick={() => navigate(`/view/${name}`)}
+                onMouseEnter={(e) =>
+                  (e.currentTarget.style.background = "#2f2f2f")
+                }
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.background = "transparent")
+                }
+                style={{
+                  padding: "6px 10px",
+                  margin: "2px 4px",
+                  borderRadius: 4,
+                  cursor: "pointer",
+                  fontSize: 12,
+                  userSelect: "none",
+                  border: isSelected
+                    ? "1px dotted #4a6fa5"
+                    : "1px solid transparent",
+                  color: isSelected ? "#fff" : "#aaa",
+                  background: "transparent",
+                }}
+              >
+                {name}
+              </div>
+            );
+          })}
           <div style={{ flex: 1 }}>
             <Outlet />
           </div>

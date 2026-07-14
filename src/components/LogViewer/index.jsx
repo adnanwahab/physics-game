@@ -1,4 +1,6 @@
 import { useEffect, useRef, useState } from "react";
+import { Routes, Route, Link, useParams } from "react-router-dom";
+
 // Mock function for missing imports in the snippet
 async function getLogs(game_id) {
   return {};
@@ -12,7 +14,21 @@ const objLoader = new OBJLoader();
 import UI from "./ui";
 import ViewerEngine from "./ViewerEngine";
 
-export default function LogViewe({ dalaran, myData }) {
+const logs = import.meta.glob("../../logs/*.json");
+console.log("logs", logs);
+
+export default function LogViewer({}) {
+  let { log_id } = useParams();
+  console.log("log_id", log_id, logs);
+  async function getLogs(game_id) {
+    //console.log("logGetter", `../../logs/${game_id}.json`);
+    const levelModule = (await logs[`../../logs/${game_id}.json`])();
+    return levelModule;
+  }
+  let levelModules = getLogs(log_id).then((_) => console.log(_));
+  //let myData = levelModules; //levelModules[`./logs/${log_id}.json`];
+  //console.log("levelmod", levelModules);
+
   const engineRef = useRef(null);
   const canvasRef = useRef(null);
 
@@ -22,21 +38,20 @@ export default function LogViewe({ dalaran, myData }) {
   let maxTime = 10;
 
   useEffect(() => {
-    if (!myData || !canvasRef.current)
+    if (!levelModules || !canvasRef.current)
       return console.log("no mydata/mountref!");
 
     const engine = new ViewerEngine(
       canvasRef.current,
-      dalaran,
+      levelModules,
       {
-        myData,
         maxTime,
         onTimeUpdate: (time, activeLine) => {
           // setCurrentTime(time);
           // setCurrentLine(activeLine || null);
         },
       },
-      [myData, maxTime],
+      [levelModules, maxTime],
     );
 
     engineRef.current = engine;

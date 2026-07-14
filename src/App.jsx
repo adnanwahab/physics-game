@@ -17,10 +17,6 @@ import {
 const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_TOKEN;
 
 // 2. Fixed: Explicitly return the JSON data
-async function getLogs(game_id) {
-  const levelModule = await import(`./logs/${game_id}.json`);
-  return levelModule.default;
-}
 
 const DEUS_EX_DATA = {
   game: "Deus Ex",
@@ -2618,7 +2614,7 @@ f 1198 1199 1200 1201 1202 1203 1204
 `;
 //const levelModules = import.meta.glob("/src/logs/*.json", { eager: true });
 
-const levelModules = import.meta.glob("./logs/dalaran.json", {
+const levelModules = import.meta.glob("./logs/*.json", {
   eager: true,
 });
 
@@ -2634,9 +2630,14 @@ function findLevelData(gameId) {
 }
 
 function App() {
-  let myData = levelModules["./logs/dalaran.json"].default;
-  let { log_id } = useParams();
-  console.log("hi", myData);
+  //let { log_id } = useParams();
+  async function getLogs(game_id) {
+    const levelModule = await import(`./logs/${game_id}.json`);
+    return levelModule.default;
+  }
+  //console.log(log_id);
+  //let myData = levelModules[`./logs/${log_id}.json`].default;
+
   return (
     <div className="pt-100 min-h-screen bg-slate-900 text-white">
       {/* Navbar Container */}
@@ -2685,10 +2686,7 @@ function App() {
           <Route path="/" element={<LevelList />} />
           <Route path="/level-list" element={<LevelList />} />
           <Route path="/game/:game_id" element={<Game />} />
-          <Route
-            path="/view/:game_id"
-            element={<LogViewer dalaranOBJ={dalaranOBJ} myData={myData} />}
-          />
+          <Route path="/view/:log_id" element={<LogViewer />} />
           <Route path="/edit/:game_id" element={<Game_Editor />} />
           <Route path="/cube" element={<Cube />} />
           <Route path="/debug/:game_id" element={<Debugging />} />
