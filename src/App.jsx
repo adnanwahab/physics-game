@@ -2,6 +2,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import * as THREE from "three"; // 1. Import Three.js
 
+import Pensieve from "./components/Pensieve";
 import Game from "./components/Game";
 import LevelList from "./screens/LevelList";
 import Settings from "./screens/Settings";
@@ -2641,7 +2642,7 @@ function App() {
   return (
     <div className="pt-100 min-h-screen bg-slate-900 text-white">
       {/* Navbar Container */}
-      <nav className="hidden sticky h-32 top-0 left-0 w-full z-50 backdrop-blur-md bg-slate-900/40 py-4 px-6 flex flex-col items-center justify-center gap-3 border-b border-slate-800">
+      <nav className=" sticky h-32 bottom-0 left-0 w-full z-50 backdrop-blur-md bg-slate-900/40 py-4 px-6 flex flex-col items-center justify-center gap-3 border-b border-slate-800">
         {/* Main Logo */}
         <Link
           to="/"
@@ -2677,6 +2678,12 @@ function App() {
           >
             Magic Editor
           </Link>
+          <Link
+            to="/pensieve/0"
+            className="hover:text-yellow-400 transition-colors text-xs uppercase tracking-wider bg-purple-900/50 text-purple-300 border border-purple-700/50 px-2.5 py-1 rounded"
+          >
+            pensieve
+          </Link>
         </div>
       </nav>
 
@@ -2687,6 +2694,8 @@ function App() {
           <Route path="/level-list" element={<LevelList />} />
           <Route path="/game/:game_id" element={<Game />} />
           <Route path="/view/:log_id" element={<LogViewer />} />
+          <Route path="/pensieve/:fantasy_id" element={<Pensieve />} />
+
           <Route path="/edit/:game_id" element={<Game_Editor />} />
           <Route path="/cube" element={<Cube />} />
           <Route path="/debug/:game_id" element={<Debugging />} />

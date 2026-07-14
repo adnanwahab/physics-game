@@ -1,0 +1,62 @@
+{
+  "sceneId": "therapy_session_003",
+  "eventType": "therapy_session",
+  "setting": {
+    "location": "therapist_office_interior",
+    "timeOfDay": "16:30",
+    "lighting": {
+      "keyLight": "window_left_soft",
+      "mood": "warm_neutral",
+      "colorTemp": 3200
+    },
+    "environment": {
+      "props": ["armchair_pair", "side_table", "tissue_box", "bookshelf"],
+      "roomTone": "quiet_hum"
+    }
+  },
+  "participants": [
+    {
+      "id": "therapist_01",
+      "role": "therapist",
+      "appearance": {
+        "refModel": "avatar_therapist_v2",
+        "outfit": "cardigan_neutral"
+      },
+      "baselineAffect": "calm_attentive",
+      "posture": "seated_forward_lean"
+    },
+    {
+      "id": "client_07",
+      "role": "client",
+      "appearance": { "refModel": "avatar_client_v2", "outfit": "casual" },
+      "baselineAffect": "guarded",
+      "posture": "seated_arms_crossed"
+    }
+  ],
+  "timeline": [
+    {
+      "t": 0,
+      "speaker": "therapist_01",
+      "line": "How has this week been?",
+      "delivery": { "tone": "gentle", "pace": "slow" },
+      "camera": { "shot": "medium_two_shot", "focus": "therapist_01" },
+      "gesture": "open_palm_toward_client",
+      "gazeTarget": "client_07"
+    },
+    {
+      "t": 4.2,
+      "speaker": "client_07",
+      "line": "Honestly, kind of rough.",
+      "delivery": { "tone": "flat", "pace": "hesitant" },
+      "camera": { "shot": "close_up", "focus": "client_07" },
+      "gesture": "look_away",
+      "affectShift": { "from": "guarded", "to": "vulnerable" }
+    }
+  ],
+  "continuity": {
+    "priorSessionRef": "therapy_session_002",
+    "relationshipState": "trust_building",
+    "unresolvedThreads": ["sleep_issues", "work_stress"]
+  },
+  "timeline": []
+}
