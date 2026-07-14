@@ -1,5 +1,6 @@
 import * as THREE from "three/webgpu";
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 
 // Hardcoded fallback presets since they weren't fully defined in the UI
 const SHOT_PRESETS = {
@@ -105,49 +106,6 @@ export default class ViewerEngine {
     staticCube.position.set(1.5, 0, 0);
     scene.add(staticCube);
 
-    // Load ./dalaran.obj
-    //const objLoader = new OBJLoader();
-    // objLoader.load(
-    //     "./dalaran.obj",
-    //     (obj) => {
-    //         // OBJs usually arrive without PBR materials — give every mesh one
-    //         obj.traverse((child) => {
-    //             if (child.isMesh) {
-    //                 child.material = new THREE.MeshStandardMaterial({
-    //                     color: 0xc9c2b4,
-    //                     roughness: 0.85,
-    //                     metalness: 0.0,
-    //                 });
-    //             }
-    //         });
-
-    //         // Normalize: center it and scale to a sane size for this scene
-    //         const box = new THREE.Box3().setFromObject(obj);
-    //         const size = box.getSize(new THREE.Vector3());
-    //         const center = box.getCenter(new THREE.Vector3());
-
-    //         const maxDim = Math.max(size.x, size.y, size.z);
-    //         const scale = 8 / maxDim; // fit largest dimension into ~8 units
-    //         obj.scale.setScalar(scale);
-
-    //         // Recenter so it sits on the grid, behind the cubes
-    //         obj.position.sub(center.multiplyScalar(scale));
-    //         obj.position.y += (size.y * scale) / 2 - 1; // rest on grid at y = -1
-    //         obj.position.z = -6;
-
-    //         scene.add(obj);
-    //     },
-    //     (xhr) => {
-    //         if (xhr.total) {
-    //             badge.textContent = `loading obj ${Math.round((xhr.loaded / xhr.total) * 100)}%`;
-    //         }
-    //     },
-    //     (err) => {
-    //         console.error("Failed to load dalaran.obj:", err);
-    //         badge.textContent = "obj load failed (see console)";
-    //     },
-    // );
-
     // Resize handling
     window.addEventListener("resize", () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -163,8 +121,7 @@ export default class ViewerEngine {
 
     this.renderer.setAnimationLoop((time) => {
       const t = time * 0.001;
-      spinningCube.rotation.x = t * 0.8;
-      spinningCube.rotation.y = t * 1.2;
+
       this.renderer.render(scene, camera);
     });
     // console.log(myData, "hi");

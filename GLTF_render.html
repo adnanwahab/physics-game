@@ -1,0 +1,8 @@
+const loader = new GLTFLoader(); let penguinTemplate = null;
+loader.load("/public/penguin.glb", (gltf) => { penguinTemplate = gltf.scene; //
+Group containing all 12 parts scene.add(penguinTemplate); // local player, or
+just a demo instance }); // spawning additional penguins (e.g. in PenguinManager
+when a player joins) function spawnPenguin(position) { const p =
+penguinTemplate.clone(true); // deep clone; materials are shared, which is fine
+p.position.copy(position); scene.add(p); return p; // keep in your id -> mesh
+map for interpolation }
