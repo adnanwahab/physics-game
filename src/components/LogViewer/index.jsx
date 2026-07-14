@@ -4,7 +4,8 @@ async function getLogs(game_id) {
   return {};
 }
 
-import dalaranUrl from "../../../public/dalaran.obj?url";
+//FIXME
+//import dalaranUrl from "./therapy.obj";
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
 const objLoader = new OBJLoader();
 

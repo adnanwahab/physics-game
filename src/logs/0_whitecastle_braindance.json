@@ -9,6 +9,7 @@
     },
     "objects": [
       {
+        "id": "0",
         "type": "cuboid",
         "position": [0, 0.5, -15],
         "size": [6, 1, 6],

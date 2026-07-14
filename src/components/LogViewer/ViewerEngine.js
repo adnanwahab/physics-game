@@ -52,7 +52,7 @@ export default class ViewerEngine {
     //debugger;
     //
     this.renderer = new THREE.WebGPURenderer({ canvas: canvasRef });
-    console.log("noContext", this.renderer.domElement);
+    console.log("noContext", myData);
     await this.renderer.init();
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x0b0e14);
@@ -106,6 +106,245 @@ export default class ViewerEngine {
     staticCube.position.set(1.5, 0, 0);
     scene.add(staticCube);
 
+    //let objects = myData.objects;
+    let allDataShim = {
+      title: "bridge building",
+      mode: "3d Platformer",
+      "win-condition": {
+        type: "proximity",
+        target: "player",
+        distance: 1.0,
+      },
+      objects: [
+        {
+          id: "0",
+          type: "cuboid",
+          position: [0, 0.5, -15],
+          size: [6, 1, 6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 0.5, 15],
+          size: [6, 1, 6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 0.75, -12.5],
+          size: [2.5, 0.5, 2],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.0, -11.5],
+          size: [2.5, 0.5, 2],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, -10.5],
+          size: [2.5, 0.5, 2],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, -9],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, -7],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, -5],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, -3],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, -1],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, 1],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, 3],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, 5],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, 7],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, 9],
+          size: [2.5, 0.5, 1.6],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.25, 10.5],
+          size: [2.5, 0.5, 2],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 1.0, 11.5],
+          size: [2.5, 0.5, 2],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [0, 0.75, 12.5],
+          size: [2.5, 0.5, 2],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.0, 0.6, -9],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.0, 0.6, -9],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.0, 0.6, -5],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.0, 0.6, -5],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.0, 0.6, -1],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.0, 0.6, -1],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.0, 0.6, 3],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.0, 0.6, 3],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.0, 0.6, 7],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.0, 0.6, 7],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.0, 0.6, 9],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.0, 0.6, 9],
+          size: [0.4, 1.2, 0.4],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [-1.35, 1.7, 0],
+          size: [0.15, 0.6, 20],
+          rotation: [0, 0, 0],
+        },
+        {
+          type: "cuboid",
+          position: [1.35, 1.7, 0],
+          size: [0.15, 0.6, 20],
+          rotation: [0, 0, 0],
+        },
+      ],
+    };
+
+    let objects = allDataShim.objects;
+    // "title": "braindance mode",
+    //   "mode": "Braindance Editor",
+    // "win-condition": {
+    //   "type": "proximity",
+    //   "target": "player",
+    //   "distance": 1.0
+    // // },
+    // "metadata": {
+    //   "timestamp": "15:30",
+    //   "location_context": "Autumn Shore Dr",
+    //   "status": "Eating a burrito, heading to HEB for White Castle"
+    // },
+
+    objects.forEach((object) => {
+      const staticCube = new THREE.Mesh(
+        new THREE.BoxGeometry(1.4, 1.4, 1.4),
+        new THREE.MeshStandardMaterial({
+          color: 0xff0000,
+          roughness: 0.55,
+          metalness: 0.1,
+        }),
+      );
+      console.log("object", object);
+      staticCube.position.set(
+        object.position[0],
+        object.position[1],
+        object.position[2],
+      );
+
+      scene.add(staticCube);
+    });
+
     // Resize handling
     window.addEventListener("resize", () => {
       camera.aspect = window.innerWidth / window.innerHeight;
@@ -113,15 +352,10 @@ export default class ViewerEngine {
       this.renderer.setSize(window.innerWidth, window.innerHeight);
     });
 
-    // Animate
-    //await this.renderer.init();
-    // badge.textContent = renderer.backend.isWebGPUBackend
-    //   ? "WebGPU"
-    //   : "WebGL2 (fallback)";
-
     this.renderer.setAnimationLoop((time) => {
       const t = time * 0.001;
 
+      //update state of each object according to timeline / list of logs
       this.renderer.render(scene, camera);
     });
     // console.log(myData, "hi");
