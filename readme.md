@@ -123,6 +123,6 @@ now everyone can make them
 
 
 
-transparent logging helps with #1 problem of humanity
+transparent logging helps with a problem of humanity
 1. if someone does something we dont know what -- people only get mad if it happend multiple times
 2. now on, all "problems" are prevented or stopped once.
