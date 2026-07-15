@@ -4,21 +4,6 @@ a multiplayer game plus tooling for visualing logs
 2. [Slides](https://embed.figma.com/slides/m32R1HooMTzoAIrW3mn0ZS/Creating-an-optimal-world-with-data-presentation?node-id=160-97&embed-host=share)
 3. Live Demo = HappyBearlandia.net
 
-
-# Schema
-- participants = initial coordinates
-- state_updates = observed value at point in time
-
-
-CREATE TABLE game_logs (
-    id INTEGER PRIMARY KEY AUTOTION,
-    session_id TEXT NOT NULL,
-    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-    event_type TEXT NOT NULL, -- e.g., "player_death", "match_end", "cheat_detection"
-    player_id TEXT,           -- Indexed for quick player history lookups
-    payload JSON NOT NULL     -- The dynamic JSON data
-);
-
 # hypothesis
 game + tools for adding more data to functions
 
