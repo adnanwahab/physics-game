@@ -120,3 +120,9 @@ https://sqlime.org/
 
 made this editor / tools so that we could make games i want.
 now everyone can make them
+
+
+
+transparent logging helps with #1 problem of humanity
+1. if someone does something we dont know what -- people only get mad if it happend multiple times
+2. now on, all "problems" are prevented or stopped once.

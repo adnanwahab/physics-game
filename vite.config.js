@@ -12,18 +12,8 @@ export default defineConfig({
   build: {
     target: "esnext",
   },
-  // 	resolve: {
-  // 		alias: {
-  // 			'three/addons': 'three/examples/jsm',
-  // 			'three/tsl': 'three/webgpu',
-  // 			'three': 'three/webgpu'
-  // 		}
-  // 	},
+
   plugins: [
-    // topLevelAwait({
-    //   promiseExportName: "__tla",
-    //   promiseImportName: (i) => `__tla_${i}`,
-    // }),
     tailwindcss(),
     react(),
     markdown({ mode: ["html", "toc"] }), // 'html' gives us pre-rendered HTML strings
