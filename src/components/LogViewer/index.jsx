@@ -63,17 +63,16 @@ export default function LogViewer({}) {
   });
   return (
     <>
-      <div className="">
+      <div className="relative w-3/4 h-3/4"></div>
+      <UI>
+        {" "}
         <canvas
           width="500"
           height="500"
-          className="margin 0 auto bg-purple-500
-
-                  "
+          className="max-w-md mx-auto bg-purple-500-800 p-6 rounded-lg"
           ref={canvasRef}
         />
-      </div>
-      <UI></UI>
+      </UI>
     </>
   );
 }
