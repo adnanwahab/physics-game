@@ -2660,26 +2660,26 @@ function App() {
 
         {/* Navigation Links */}
         <div className="flex items-center justify-center gap-6 text-sm md:text-base font-medium tracking-wide text-slate-300">
-          <Link to="/" className="hover:text-yellow-400 transition-colors">
-            Play
+          <Link to="/game" className="hover:text-yellow-400 transition-colors">
+            Game
           </Link>
           <Link to="/blog" className="hover:text-yellow-400 transition-colors">
             Blog
           </Link>
           <Link
-            to="/view-logs/0"
+            to="/view-logs/"
             className="hover:text-yellow-400 transition-colors text-xs uppercase tracking-wider bg-slate-800 px-2.5 py-1 rounded"
           >
             Log Viewer
           </Link>
           <Link
-            to="/edit/1"
+            to="/edit/"
             className="hover:text-yellow-400 transition-colors text-xs uppercase tracking-wider bg-purple-900/50 text-purple-300 border border-purple-700/50 px-2.5 py-1 rounded"
           >
             Magic Editor
           </Link>
           <Link
-            to="/pensieve/0"
+            to="/pensieve/"
             className="hover:text-yellow-400 transition-colors text-xs uppercase tracking-wider bg-purple-900/50 text-purple-300 border border-purple-700/50 px-2.5 py-1 rounded"
           >
             pensieve
@@ -2691,6 +2691,8 @@ function App() {
       <main className="pt-96" style={{ paddingTop: "250px" }}>
         <Routes>
           <Route path="/" element={<LevelList />} />
+          <Route path="/game" element={<LevelList />} />
+
           <Route path="/level-list" element={<LevelList />} />
           <Route path="/game/:game_id" element={<Game />} />
           <Route path="/view-logs/:log_id" element={<LogViewer />} />
