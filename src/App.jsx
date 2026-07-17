@@ -2667,7 +2667,7 @@ function App() {
             Blog
           </Link>
           <Link
-            to="/view/0"
+            to="/view-logs/0"
             className="hover:text-yellow-400 transition-colors text-xs uppercase tracking-wider bg-slate-800 px-2.5 py-1 rounded"
           >
             Log Viewer
@@ -2693,7 +2693,7 @@ function App() {
           <Route path="/" element={<LevelList />} />
           <Route path="/level-list" element={<LevelList />} />
           <Route path="/game/:game_id" element={<Game />} />
-          <Route path="/view/:log_id" element={<LogViewer />} />
+          <Route path="/view-logs/:log_id" element={<LogViewer />} />
           <Route path="/pensieve/:fantasy_id" element={<Pensieve />} />
 
           <Route path="/edit/:game_id" element={<Game_Editor />} />
