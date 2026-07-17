@@ -9,6 +9,9 @@ import Settings from "./screens/Settings";
 import Game_Editor from "./components/Game_Editor";
 import Cube from "./components/Cube";
 import LogViewer from "./components/LogViewer";
+
+import Fantasy_Grid from "./components/Fantasy_Grid";
+
 import { Routes, Route, Link, useParams } from "react-router-dom";
 
 import {
@@ -2696,6 +2699,9 @@ function App() {
           <Route path="/level-list" element={<LevelList />} />
           <Route path="/game/:game_id" element={<Game />} />
           <Route path="/view-logs/:log_id" element={<LogViewer />} />
+
+          <Route path="/pensieve/" element={<Fantasy_Grid />} />
+
           <Route path="/pensieve/:fantasy_id" element={<Pensieve />} />
 
           <Route path="/edit/:game_id" element={<Game_Editor />} />
