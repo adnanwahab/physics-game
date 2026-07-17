@@ -180,7 +180,7 @@ export default function UI() {
             return (
               <div
                 key={key}
-                onClick={() => navigate(`/view/${name}`)}
+                onClick={() => navigate(`/view-logs/${name}`)}
                 onMouseEnter={(e) =>
                   (e.currentTarget.style.background = "#2f2f2f")
                 }
@@ -207,16 +207,6 @@ export default function UI() {
           })}
           <div style={{ flex: 1 }}>
             <Outlet />
-          </div>
-          <div
-            onMouseEnter={() =>
-              navigate(`/view/mission_control_initiative_space_force`)
-            }
-          >
-            scene 1
-          </div>
-          <div onMouseEnter={() => navigate(`/view/z__petting_cat`)}>
-            cat pet
           </div>
         </div>
       </div>
