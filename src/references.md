@@ -1,3 +1,5 @@
+minority report psychohistory = foundation =
+
 https://ludumdare.com/
 Orchestrating inenvitability of success by Kapil Gupta
 foundation's edge

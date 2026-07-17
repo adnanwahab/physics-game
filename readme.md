@@ -1,4 +1,5 @@
 # HappyBearLandia
+happy-landia.netlify.app
 a multiplayer game plus tooling for visualing logs
 1. [Summary](https://docs.google.com/document/d/e/2PACX-1vSgjtP1Kwa5kef_Nv3W9UDokKlmozpo9QHMHkyGJs7Xx7Qd2jFPD4DlLdmwttrHXxmRik0ztPHQuH2d/pub)
 2. [Slides](https://embed.figma.com/slides/m32R1HooMTzoAIrW3mn0ZS/Creating-an-optimal-world-with-data-presentation?node-id=160-97&embed-host=share)
@@ -113,4 +114,4 @@ now everyone can make them
 
 transparent logging helps with a problem of humanity
 1. if someone does something we dont know what -- people only get mad if it happend multiple times
-2. now on, all "problems" are prevented or stopped once.
+2. now on, all "problems" are prevented or stopped asap.
