@@ -88,11 +88,12 @@ export default function LogViewer({}) {
 
   return (
     <>
-      <div className="relative w-3/4 h-3/4"></div>
+      <div className="relative w-full h-full min-h-[500px]"></div>
       <canvas
         width="500"
         height="500"
-        className="max-w-md mx-auto bg-purple-500-800 p-6 rounded-lg"
+        className="absolute inset-0 w-full h-full bg-purple-900
+         z-30"
         ref={canvasRef}
       />
       <UI></UI>

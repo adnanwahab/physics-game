@@ -134,8 +134,9 @@ export default function UI() {
 
   return (
     <div
+      className="absolute inset-0 pointer-events-none"
       style={{
-        position: "relative",
+        // position: "relative",
         width: "100vw",
         height: "100vh",
         background: "#111",
