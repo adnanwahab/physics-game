@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Routes, Route, Link, useParams } from "react-router-dom";
 
-// Mock function for missing imports in the snippet
-async function getLogs(game_id) {
-  return {};
-}
-
 //FIXME
 //import dalaranUrl from "./therapy.obj";
 import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
@@ -20,12 +15,13 @@ console.log("logs", logs);
 export default function LogViewer({}) {
   let { log_id } = useParams();
   console.log("log_id", log_id, logs);
-  async function getLogs(game_id) {
+  async function getLogs(log_id) {
     //console.log("logGetter", `../../logs/${game_id}.json`);
-    const levelModule = (await logs[`../../logs/${game_id}.json`])();
+    const levelModule = (await logs[`../../logs/${log_id}.json`])();
+    console.log("pls work", levelModule);
     return levelModule;
   }
-  let levelModules = getLogs(log_id).then((_) => console.log(_));
+  let levelModules = getLogs(log_id).then((_) => console.log("promise", _));
   //let myData = levelModules; //levelModules[`./logs/${log_id}.json`];
   //console.log("levelmod", levelModules);
 
@@ -38,8 +34,15 @@ export default function LogViewer({}) {
   let maxTime = 10;
 
   useEffect(() => {
+    levelModules.then((data) => console.log("data", data));
+
     if (!levelModules || !canvasRef.current)
-      return console.log("no mydata/mountref!");
+      return console.log(
+        "no mydata/mountref!",
+        levelModules,
+        log_id,
+        canvasRef.current,
+      );
 
     const engine = new ViewerEngine(
       canvasRef.current,
@@ -51,7 +54,7 @@ export default function LogViewer({}) {
           // setCurrentLine(activeLine || null);
         },
       },
-      [levelModules, maxTime, log_id],
+      [log_id],
     );
 
     engineRef.current = engine;
