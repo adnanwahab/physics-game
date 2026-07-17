@@ -2697,15 +2697,21 @@ function App() {
           <Route path="/game" element={<LevelList />} />
 
           <Route path="/level-list" element={<LevelList />} />
+
+          {/* list views*/}
+          <Route path="/pensieve/" element={<Fantasy_Grid />} />
+          <Route path="/game/" element={<Game />} />
+          <Route path="/view-logs/" element={<LogViewer />} />
+
+          {/* detail views*/}
           <Route path="/game/:game_id" element={<Game />} />
           <Route path="/view-logs/:log_id" element={<LogViewer />} />
-
-          <Route path="/pensieve/" element={<Fantasy_Grid />} />
-
           <Route path="/pensieve/:fantasy_id" element={<Pensieve />} />
 
+          <Route path="/edit/" element={<Game_Editor />} />
           <Route path="/edit/:game_id" element={<Game_Editor />} />
-          <Route path="/cube" element={<Cube />} />
+          {/* <Route path="/cube" element={<Cube />} />*/}
+
           <Route path="/debug/:game_id" element={<Debugging />} />
           <Route path="/blog" element={<Blog />} />
         </Routes>
