@@ -9,6 +9,7 @@ import Settings from "./screens/Settings";
 import Game_Editor from "./components/Game_Editor";
 import Cube from "./components/Cube";
 import LogViewer from "./components/LogViewer";
+import Blog from "./components/Blog";
 
 import Fantasy_Grid from "./components/Fantasy_Grid";
 
@@ -2721,22 +2722,3 @@ function App() {
 }
 
 export default App;
-import { html, attributes } from "./references.md";
-function Blog() {
-  //console.log(referenceText.split("\n"));
-  return (
-    <div>
-      <iframe
-        width="800"
-        height="450"
-        src="https://embed.figma.com/slides/m32R1HooMTzoAIrW3mn0ZS/Creating-an-optimal-world-with-data-presentation?node-id=160-97&embed-host=share"
-        allowFullScreen
-      ></iframe>
-
-      <div>
-        <h7>References</h7>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </div>
-    </div>
-  );
-}

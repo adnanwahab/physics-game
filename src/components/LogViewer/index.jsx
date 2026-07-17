@@ -92,8 +92,7 @@ export default function LogViewer({}) {
       <canvas
         width="500"
         height="500"
-        className="absolute inset-0 w-full h-full bg-purple-900
-         z-30"
+        className="absolute top-0  -translate-x-1/2 z-30 bg-purple-900"
         ref={canvasRef}
       />
       <UI></UI>
