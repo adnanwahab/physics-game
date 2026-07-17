@@ -29,6 +29,7 @@ function kelvinToColor(kelvin) {
 
 export default class ViewerEngine {
   constructor(canvasRef, dalaranObj, options = {}) {
+    //debugger;
     this.myData = options.myData;
     this.maxTime = options.maxTime || 10;
     this.onTimeUpdate = options.onTimeUpdate || (() => {});

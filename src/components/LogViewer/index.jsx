@@ -1,81 +1,101 @@
 import { useEffect, useRef, useState } from "react";
-import { Routes, Route, Link, useParams } from "react-router-dom";
-
-//FIXME
-//import dalaranUrl from "./therapy.obj";
-import { OBJLoader } from "three/addons/loaders/OBJLoader.js";
-const objLoader = new OBJLoader();
-
+import { useParams } from "react-router-dom";
 import UI from "./ui";
 import ViewerEngine from "./ViewerEngine";
 
+// Dynamically grab all static json files via Vite glob
 const logs = import.meta.glob("../../logs/*.json");
-console.log("logs", logs);
 
 export default function LogViewer({}) {
-  let { log_id } = useParams();
-  console.log("log_id", log_id, logs);
-  async function getLogs(log_id) {
-    //console.log("logGetter", `../../logs/${game_id}.json`);
-    const levelModule = (await logs[`../../logs/${log_id}.json`])();
-    console.log("pls work", levelModule);
-    return levelModule;
-  }
-  let levelModules = getLogs(log_id).then((_) => console.log("promise", _));
-  //let myData = levelModules; //levelModules[`./logs/${log_id}.json`];
-  //console.log("levelmod", levelModules);
-
+  const { log_id } = useParams();
   const engineRef = useRef(null);
   const canvasRef = useRef(null);
 
-  const [currentTime, setCurrentTime] = useState(0);
-  const [currentLine, setCurrentLine] = useState(0);
+  // 1. Keep track of the loaded JSON data in state
+  const [logData, setLogData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  let maxTime = 10;
+  const maxTime = 10;
 
+  // 2. Effect for fetching the JSON data based on log_id
   useEffect(() => {
-    levelModules.then((data) => console.log("data", data));
+    const logPath = `../../logs/${log_id}.json`;
 
-    if (!levelModules || !canvasRef.current)
-      return console.log(
-        "no mydata/mountref!",
-        levelModules,
-        log_id,
-        canvasRef.current,
-      );
+    if (!logs[logPath]) {
+      console.error(`Log file not found: ${logPath}`);
+      setLoading(false);
+      return;
+    }
 
-    const engine = new ViewerEngine(
-      canvasRef.current,
-      levelModules,
-      {
-        maxTime,
-        onTimeUpdate: (time, activeLine) => {
-          // setCurrentTime(time);
-          // setCurrentLine(activeLine || null);
-        },
-      },
-      [log_id],
-    );
+    setLoading(true);
+    if (!canvasRef.current) return;
+    // Resolve the glob function to import the static JSON file
+    logs[logPath]()
+      .then((module) => {
+        console.log("getting static json", module);
+        // Vite imports JSON with the data as the default export
+        setLogData(module.default || module);
+        setLoading(false);
 
-    engineRef.current = engine;
+        //console.log("canvasREF", canvasRef);
+
+        const engine = new ViewerEngine(
+          canvasRef.current,
+          logData, // Now passing the actual object data, not a Promise!
+          {
+            maxTime,
+            onTimeUpdate: (time, activeLine) => {
+              // React to time changes here
+            },
+          },
+          [log_id],
+        );
+
+        engineRef.current = engine;
+      })
+      .catch((err) => {
+        console.error("Error loading log data:", err);
+        setLoading(false);
+      });
+  }, [log_id]); // Only re-run if the URL log_id changes
+
+  // 3. Effect for instantiating your ViewerEngine once data AND canvas are ready
+  useEffect(() => {
+    if (!logData || !canvasRef.current) return console.log("no canvas");
+
+    // const engine = new ViewerEngine(
+    //   canvasRef.current,
+    //   logData, // Now passing the actual object data, not a Promise!
+    //   {
+    //     maxTime,
+    //     onTimeUpdate: (time, activeLine) => {
+    //       // React to time changes here
+    //     },
+    //   },
+    //   [log_id],
+    // );
+
+    // engineRef.current = engine;
 
     return () => {
       engine.dispose();
       engineRef.current = null;
     };
-  });
+  }, [logData]); // Re-instantiate engine only when logData settles
+
+  //if (loading) return <div>Loading log data...</div>;
+  //if (!logData) return <div>Log file data could not be resolved.</div>;
+
   return (
     <>
       <div className="relative w-3/4 h-3/4"></div>
-      <UI>
-        {" "}
-        <canvas
-          width="500"
-          height="500"
-          className="max-w-md mx-auto bg-purple-500-800 p-6 rounded-lg"
-          ref={canvasRef}
-        />
-      </UI>
+      <canvas
+        width="500"
+        height="500"
+        className="max-w-md mx-auto bg-purple-500-800 p-6 rounded-lg"
+        ref={canvasRef}
+      />
+      <UI></UI>
     </>
   );
 }
