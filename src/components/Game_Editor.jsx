@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 import { useParams } from "react-router-dom";
-
+import Nav from "./Nav";
 const logScenes = import.meta.glob("../logs/*.json");
 console.log("logScenes", logScenes);
 
@@ -237,6 +237,7 @@ function Game_Editor() {
   return (
     <div className="relative h-screen w-screen flex flex-col bg-slate-950 text-white font-sans antialiased">
       {/* HEADER CONTROL CONSOLE BAR */}
+      <Nav></Nav>
       <header className="p-4 bg-slate-900 border-b border-slate-800 flex flex-wrap items-center justify-between gap-4 shrink-0 shadow-md">
         <div className="flex items-center gap-3">
           <h1 className="text-lg font-bold tracking-wider text-purple-400 uppercase">

@@ -1,3 +1,21 @@
+1. Algorithmic Behavioral Dynamics & Gottman Modeling
+"From Dynamic Equations to Behavioral Interventions" by J. M. Gottman, J. D. Murray, et al.
+
+Why it fits: This establishes the literal mathematical basis for the "Sound Relationship House" mentioned in your slides. It treats interpersonal interactions as deterministic, coupled differential equations—perfectly matching your "Game Systems: Dynamical Model" themes.
+
+"Computational Psychopathology: From Mechanism to Clinical Strategy" by Maia & Frank (2011).
+
+Why it fits: It breaks down traditional Cognitive Behavioral Therapy (CBT) into reinforcement learning circuits, analyzing exactly how biological neural networks fail or get trapped in maladaptive feedback loops.
+
+2. Neurocircuit Rewiring & Circuit Removal (Blameless Systems)
+"Deep Neurocognitive Models of Synaptic Elimination and Neuroplasticity"
+
+Why it fits: Your talk highlights "removing a circuit in weeks, not years." Research into computational models of targeted synaptic pruning and unlearning in artificial neural networks provides scientific precedence for this paradigm.
+
+"The Brain as a Prediction Machine: Cognitive Behavioral Modification via Predictive Coding" by Clark (2013).
+
+Why it fits: Explores the theory that the human brain acts as a localized simulation machine. Modifying the internal simulation modifies behavior—aligning with your slide's concept of "binding fantasy to reaity"
+
 minority report psychohistory = foundation =
 
 https://ludumdare.com/
