@@ -2658,7 +2658,7 @@ function App() {
 
           {/* list views*/}
           <Route path="/pensieve/" element={<Fantasy_Grid />} />
-          <Route path="/game/" element={<Game />} />
+          <Route path="/game/" element={<LevelList />} />
           <Route path="/view-logs/" element={<LogViewer />} />
 
           {/* detail views*/}

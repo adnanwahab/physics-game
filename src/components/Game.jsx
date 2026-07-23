@@ -63,6 +63,7 @@ function Dashboard(penguinList) {
 }
 
 export default function Game() {
+  //console.log("game_id", game_id);
   let websocket_system = new WebSocket("ws://localhost:8000");
   let lobby = [];
   websocket_system.onopen = () =>
