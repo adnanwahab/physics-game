@@ -167,17 +167,31 @@ export default function Game() {
     let scene_2 = getJson(game_id);
     //jsonModules["../scenes/3.json"].default[0];
     //debugger;
+    //
     scene_2.objects.forEach(function (data) {
       const geometry = new THREE.BoxGeometry(1, 1, 1);
       const material = new THREE.MeshBasicMaterial({
         color: 0x00ff88,
         wireframe: false,
       });
+      const loader = new THREE.TextureLoader();
+
+      const materials = [
+        new THREE.MeshBasicMaterial({ map: loader.load("right.jpg") }),
+        new THREE.MeshBasicMaterial({ map: loader.load("left.jpg") }),
+        new THREE.MeshBasicMaterial({ map: loader.load("top.jpg") }),
+        new THREE.MeshBasicMaterial({ map: loader.load("bottom.jpg") }),
+        new THREE.MeshBasicMaterial({ map: loader.load("front.jpg") }),
+        new THREE.MeshBasicMaterial({ map: loader.load("back.jpg") }),
+      ];
       const cube = new THREE.Mesh(geometry, material);
       let x = data.position[0];
       let y = data.position[1];
       let z = data.position[2];
       cube.position.set(x, y, z);
+
+      // Load 6 separate images
+
       scene.add(cube);
     });
 

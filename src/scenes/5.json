@@ -1,1 +1,24 @@
-{"n": 5}
+{
+  "name": "Capture the Flag",
+  "description": "Explore a playable Warsong Gulch battleground. Find the right scale and camera position for the best experience.",
+
+  "objects": [
+    {
+      "type": "cuboid",
+      "position": [0, 0, 0],
+      "size": [320, 1, 320],
+      "rotation": [0, 0, 0]
+    }
+  ],
+  "startPosition": { "x": 0, "y": 30, "z": 110 },
+  "startRotation": { "x": 0, "y": 0, "z": 0 },
+  "scale": 6.6,
+  "floor": {
+    "size": 320,
+    "position": { "x": 0, "y": -3, "z": 0 }
+  },
+  "spawnPenguin": true,
+  "extras": {
+    "note": "Adjusted scale and start/y for the map mesh. If the player spawns under/over terrain, tweak 'startPosition.y' or 'scale'."
+  }
+}

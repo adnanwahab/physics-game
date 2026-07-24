@@ -2,7 +2,6 @@
   "name": "Capture the Flag",
   "description": "Explore a playable Warsong Gulch battleground. Find the right scale and camera position for the best experience.",
 
-
   "objects": [
     {
       "type": "cuboid",
