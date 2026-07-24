@@ -1,18 +1,75 @@
-
-[{
-    "mode": "2d Platformer",
-    "win-condition": { 
-        "type": "proximity",
-        "target": "player",
-        "distance": 1.0
+[
+  {
+    "mode": "3d Platformer",
+    "win-condition": {
+      "type": "proximity",
+      "target": "finish_flag",
+      "distance": 1.5
     },
     "objects": [
-        {
-            "type": "cat",
-            "position": [0.618, 0.5, 1.902],
-            "size": [1, 1, 1],
-            "rotation": [0, 0, 0]                   
-        }
-            
+      {
+        "id": "spawn_platform",
+        "type": "platform",
+        "position": [0.0, 0.0, 0.0],
+        "size": [5.0, 0.5, 5.0],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "id": "player_start",
+        "type": "player",
+        "position": [0.0, 0.5, 0.0],
+        "size": [1.0, 1.0, 1.0],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "id": "stepping_stone_1",
+        "type": "platform",
+        "position": [0.0, 0.5, 6.0],
+        "size": [2.5, 0.5, 2.5],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "id": "stepping_stone_2",
+        "type": "platform",
+        "position": [3.0, 1.25, 10.0],
+        "size": [2.0, 0.5, 2.0],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "id": "goal_platform",
+        "type": "platform",
+        "position": [0.0, 2.5, 15.0],
+        "size": [4.0, 0.5, 4.0],
+        "rotation": [0, 0, 0]
+      },
+      {
+        "id": "coin_1",
+        "type": "collectible_coin",
+        "position": [0.0, 1.5, 6.0],
+        "size": [0.5, 0.5, 0.5],
+        "rotation": [0, 45, 0]
+      },
+      {
+        "id": "coin_2",
+        "type": "collectible_coin",
+        "position": [3.0, 2.25, 10.0],
+        "size": [0.5, 0.5, 0.5],
+        "rotation": [0, 45, 0]
+      },
+      {
+        "id": "cat_companion",
+        "type": "cat",
+        "position": [0.618, 3.25, 15.0],
+        "size": [1.0, 1.0, 1.0],
+        "rotation": [0, 180, 0]
+      },
+      {
+        "id": "finish_flag",
+        "type": "finish_flag",
+        "position": [-1.0, 3.25, 15.0],
+        "size": [1.0, 2.0, 1.0],
+        "rotation": [0, 0, 0]
+      }
     ]
-}]
+  }
+]
