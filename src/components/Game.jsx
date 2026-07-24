@@ -19,9 +19,11 @@ import GameVideoSeekBar from "../components/GameVideoSeekBar.jsx";
 import ObservationsPanel from "../components/ObservationsPanel.jsx";
 import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader.js";
 const SERVER = "http://localhost:3000";
-
+import * as THREE from "three";
 import { createPenguin } from "../utils/createPenguin.js";
 import catModelUrl from "../../public/cat.obj?url";
+const jsonModules = import.meta.glob("../scenes/*.json", { eager: true });
+console.log(jsonModules, "jsonModules");
 // Define SlotButton here to avoid inline function in JSX
 function SlotButton({ slot }) {
   return (
@@ -83,6 +85,7 @@ export default function Game() {
 
   let penguinList = [];
   const { game_id } = useParams();
+
   const containerRef = useRef(null);
   const canvasRef = useRef(null);
   const canvasRef2 = useRef(null);
@@ -158,6 +161,26 @@ export default function Game() {
     );
     let id_pool = {};
 
+    function getJson(num) {
+      return jsonModules[`../scenes/${num}.json`].default[0];
+    }
+    let scene_2 = getJson(game_id);
+    //jsonModules["../scenes/3.json"].default[0];
+    //debugger;
+    scene_2.objects.forEach(function (data) {
+      const geometry = new THREE.BoxGeometry(1, 1, 1);
+      const material = new THREE.MeshBasicMaterial({
+        color: 0x00ff88,
+        wireframe: false,
+      });
+      const cube = new THREE.Mesh(geometry, material);
+      let x = data.position[0];
+      let y = data.position[1];
+      let z = data.position[2];
+      cube.position.set(x, y, z);
+      scene.add(cube);
+    });
+
     for (let i = 0; i < 100; i++) {
       let newPenguin = { scale: 0, x: 0, y: 0, z: 0, id: i };
       id_pool[i] = newPenguin;
@@ -176,59 +199,6 @@ export default function Game() {
     }
 
     const loader = new OBJLoader();
-
-    loader.load(
-      "/cat.obj",
-      (obj) => {
-        scene.add(obj);
-      },
-      (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-      (error) => {
-        console.error("An error happened", error);
-      },
-    );
-    console.log("url");
-    loader.load(
-      catModelUrl,
-      (obj) => {
-        scene.add(obj);
-      },
-      (xhr) => {
-        console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-      },
-      (error) => {
-        console.error("An error happened", error);
-      },
-    );
-
-    // scene.add(cat1);
-
-    // scene.add(cat2);
-
-    // scene.add(cat3);
-
-    // ws.addEventListener('message', (event) => {
-    //   const data = JSON.parse(event.data);
-
-    //   if (data.type === 'penguinAdded') {
-    //     scene.add(createPenguin())
-    //   }
-    //   if (data.type === 'penguinMoved') {
-
-    //     scene.traverse((object) => {
-    //       let {x,y,z} = data
-    //       object.setPosition(x,y,z)
-    //     })
-    //   }
-    // });
-
-    // const ws = new WebSocket("ws://localhost:8000");
-    // ws.onopen = () => ws.send(JSON.stringify({ type: "join", room: "lobby" }));
-
-    // ws.onclose = () => console.log("closed");
-    // ws.onerror = (e) => console.error(e);
 
     setupLighting(scene);
     const clock = new Clock();
